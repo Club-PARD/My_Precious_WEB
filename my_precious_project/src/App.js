@@ -4,6 +4,7 @@ import HomePage from "./Page/HomePage";
 import ScrollToTop from "./ScrollToTop";
 import { ThemeProvider } from "./contexts/ThemeContext.js";
 import { theme } from "./Style/theme";
+import TwilioExampleComponent from "./Page/loginPage.js";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <ScrollToTop />
         <Routes>
           {/* 기본 화면 설정 */}
+          <Route path="/twilio" element={<TwilioExampleComponent />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>
