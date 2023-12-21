@@ -21,7 +21,6 @@ function Phone() {
       console.log("+82" + numericOnly.slice(1));
       return "+82" + numericOnly.slice(1);
     }
-    // return "+821094355819"; // 여러분의 번호 또는 보낼 번호를 국제번호를 붙여서 써줍니다!
     //  +821012345679 ( 010-1234-5678을 왼쪽과 같이, +82를 붙이고 010에서 0 하나 뺍니다)
   }
 
