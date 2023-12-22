@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { Link } from "react-router-dom";
-import { useTheme } from "../../../contexts/ThemeContext.js"; // Context APi 적용
+import { useTheme } from "../../../contexts/ThemeContext.js.js"; // Context APi 적용
 
 // theme 파일 폰트 적용 방법 + style-components 사용
 const Header1 = styled.div`
@@ -20,18 +20,14 @@ const Header2 = styled.div`
   font-family: "Pretendard";
 `;
 
-const WebLogin = () => {
+const WebLogin_1 = () => {
   const theme = useTheme();
 
   return (
     <ThemeProvider theme={theme}>
-      <Header1>홈 로그인 페이지</Header1>
-      <Header2>
-        이 화면에서는 context api를 통해 theme data를 전달하였습니다.
-      </Header2>
-      <Link to="/about">로그인 페이지</Link>
+      <div></div>
     </ThemeProvider>
   );
 };
 
-export default WebLogin;
+export default WebLogin_1;

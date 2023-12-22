@@ -1,6 +1,6 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import WebLogin from "../Components/Web/Web_Home_Components/Weblogin";
+import WebLogin_1 from "../Components/Web/Web_Login_Components/Weblogin_1";
 import AppHome from "../Components/App/App_Home_Components/AppHome";
 
 const LoginPage = () => {
@@ -14,7 +14,7 @@ const LoginPage = () => {
         </div>
       ) : (
         <div>
-          <WebLogin />
+          <WebLogin_1 />
         </div>
       )}
     </>
