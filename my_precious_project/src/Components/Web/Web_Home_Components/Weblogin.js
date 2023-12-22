@@ -25,11 +25,7 @@ const WebLogin = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header1>홈 로그인 페이지</Header1>
-      <Header2>
-        이 화면에서는 context api를 통해 theme data를 전달하였습니다.
-      </Header2>
-      <Link to="/about">로그인 페이지</Link>
+      <div></div>
     </ThemeProvider>
   );
 };
