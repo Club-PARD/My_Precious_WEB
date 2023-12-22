@@ -13,7 +13,7 @@ function App() {
         <ScrollToTop />
         <Routes>
           {/* 기본 화면 설정 */}
-          <Route path="/twilio" element={<FirebaseContainer />} />
+          <Route path="/login" element={<FirebaseContainer />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>
