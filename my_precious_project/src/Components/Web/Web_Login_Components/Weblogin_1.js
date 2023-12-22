@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { Link } from "react-router-dom";
-import { useTheme } from "../../../contexts/ThemeContext.js"; // Context APi 적용
+import { useTheme } from "../../../contexts/ThemeContext.js.js"; // Context APi 적용
 
 // theme 파일 폰트 적용 방법 + style-components 사용
 const Header1 = styled.div`
@@ -20,7 +20,7 @@ const Header2 = styled.div`
   font-family: "Pretendard";
 `;
 
-const WebLogin = () => {
+const WebLogin_1 = () => {
   const theme = useTheme();
 
   return (
@@ -30,4 +30,4 @@ const WebLogin = () => {
   );
 };
 
-export default WebLogin;
+export default WebLogin_1;
