@@ -5,7 +5,9 @@ import ScrollToTop from "./ScrollToTop";
 import { ThemeProvider } from "./contexts/ThemeContext.js";
 import { theme } from "./Style/theme";
 import FirebaseContainer from "./Page/loginfeat.js";
-import LoginPage from "./Page/LoginPage";
+import LoginPage1 from "./Page/LoginPage1";
+import LoginPage2 from "./Page/LoginPage2.js";
+import LoginPage3 from "./Page/LoginPage3.js";
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
         <Routes>
           {/* 기본 화면 설정 */}
           <Route path="/phone" element={<FirebaseContainer />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login1" element={<LoginPage1 />} />
+          <Route path="/login2" element={<LoginPage2 />} />
+          <Route path="/login3" element={<LoginPage3 />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>
