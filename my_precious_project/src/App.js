@@ -15,7 +15,7 @@ function App() {
                 <Routes>
                     {/* 기본 화면 설정 */}
                     <Route path="/phone" element={<FirebaseContainer />} />
-                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/login/*" element={<LoginPage />} />
                     <Route path="/" element={<HomePage />} />
                     <Route path="/about" element={<AboutPage />} />
                 </Routes>
