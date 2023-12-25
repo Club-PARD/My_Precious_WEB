@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
-import { Link } from "react-router-dom";
-import { useTheme } from "../../../contexts/ThemeContext.js.js"; // Context APi 적용
+import { useTheme } from "../../../contexts/ThemeContext.js"; // Context APi 적용
 import DotButton from "./DotButton.js";
 
 const Container = styled.div`
@@ -11,6 +10,36 @@ const Container = styled.div`
   padding: 0;
   height: 100vh;
   justify-content: center;
+`;
+
+const LayoutDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ContentDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 157px;
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ExplainDiv = styled.div`
+  color: #000;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 51px;
+
+  width: 400px;
+  height: 102px;
+  margin-top: 45.26px;
 `;
 
 const InputDiv = styled.div`
@@ -167,56 +196,6 @@ const InputDate = styled.input`
   }
 `;
 
-const LayoutDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  //width: 60%;
-  background-color: red; //크기 확인용- 지워야함
-  align-items: center;
-`;
-
-const ContentDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: blue; //크기확인용2 -지워야함
-  //height: 40%;
-  //width: 60%;
-  align-items: center;
-  margin-top: 157px;
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const DotRow = styled(Row)`
-  width: 94.573px;
-  height: 15.537px;
-  flex-shrink: 0;
-  justify-content: space-between;
-`;
-
-const DotButton = styled.div`
-  width: 14.86px;
-  height: 15.54px;
-  background-color: #d9d9d9;
-  //border: 0px solid #D9D9D9;
-  border-radius: 50%;
-`;
-
-const ExplainDiv = styled.div`
-  color: #000;
-  text-align: center;
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 51px;
-
-  width: 355px;
-  height: 102px;
-  margin-top: 45.26px;
-`;
-
 const WebLogin_1 = () => {
   const theme = useTheme();
 
@@ -227,7 +206,7 @@ const WebLogin_1 = () => {
           <ContentDiv>
             <DotButton dotColor={1} />
             <ExplainDiv>
-              고객님의 소중한 거래를 위해 추가 정보를 기입해주세요.
+              고객님의 소중한 거래를 위해<br></br> 추가 정보를 기입해주세요.
             </ExplainDiv>
             <InputDiv>
               <InputNameDiv>
