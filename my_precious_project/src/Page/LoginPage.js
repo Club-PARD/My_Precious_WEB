@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import WebLogin_1 from "../Components/Web/Web_Login_Components/Weblogin_1";
-import WebLogin_2 from "../Components/Web/Web_Login_Components/Weblogin_2";
-import WebLogin_3 from "../Components/Web/Web_Login_Components/Weblogin_3";
+import WebLogin1 from "../Components/Web/Web_Login_Components/Weblogin_1";
+import WebLogin2 from "../Components/Web/Web_Login_Components/Weblogin_2";
+import WebLogin3 from "../Components/Web/Web_Login_Components/Weblogin_3";
 import AppHome from "../Components/App/App_Home_Components/AppHome";
 
 // /login으로 접속하면 /login/1로 자동으로 로그인 첫 페이지로 넘어가게
@@ -33,7 +33,7 @@ const LoginPage = () => {
               path="1"
               element={
                 <>
-                  <WebLogin_1 />
+                  <WebLogin1 />
                 </>
               }
             />
@@ -41,7 +41,7 @@ const LoginPage = () => {
               path="2"
               element={
                 <>
-                  <WebLogin_2 />
+                  <WebLogin2 />
                 </>
               }
             />
@@ -49,7 +49,7 @@ const LoginPage = () => {
               path="3"
               element={
                 <>
-                  <WebLogin_3 />
+                  <WebLogin3 />
                 </>
               }
             />
