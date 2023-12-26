@@ -51,7 +51,7 @@ const InnerRow1 = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 127px;
+    margin-top: 157px;
     margin-bottom: 50px;
 `;
 
