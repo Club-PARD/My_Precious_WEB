@@ -1,7 +1,7 @@
-import React, {useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { useTheme } from "../../../contexts/ThemeContext.js"; // Context APi 적용
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import DotButton from "./DotButton.js";
 
 const Container = styled.div`
@@ -33,15 +33,15 @@ const ExplainDiv = styled.div`
   font-weight: 600;
   line-height: 51px;
 
-    //width: 400px;
-    height: 102px;
-    margin-top: 45.26px;
+  //width: 400px;
+  height: 102px;
+  margin-top: 45.26px;
 `;
 
 const InputForm = styled.form`
-    display: flex;
-    flex-direction: row;
-    margin-top: 116.87px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 116.87px;
 `;
 
 const InputNameDiv = styled.div`
@@ -55,12 +55,12 @@ const InputNameDiv = styled.div`
 `;
 
 const GrayText = styled.div`
-    color: #6B6A6A;;
-    font-size: 20px;
-    margin-bottom: 26.77px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 31.074px;
+  color: #6b6a6a;
+  font-size: 20px;
+  margin-bottom: 26.77px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 31.074px;
 `;
 
 const InputName = styled.input`
@@ -74,17 +74,17 @@ const InputName = styled.input`
   font-size: 20px;
   text-align: center;
 
-    &::placeholder {
-      color: #D9D9D9;
-      font-size: 20px;
-      text-align: center;
-      margin-right: 11px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 31.074px;  
-    }
+  &::placeholder {
+    color: #d9d9d9;
+    font-size: 20px;
+    text-align: center;
+    margin-right: 11px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 31.074px;
+  }
 
-    /* &:focus {
+  /* &:focus {
         border-color: #00ff00;
         outline: none;
     } */
@@ -119,7 +119,6 @@ const InputYearDiv = styled.div`
   font-size: 20px;
   text-align: center;
   //align-items: center;
-
 `;
 
 const InputMonthDiv = styled.div`
@@ -135,7 +134,6 @@ const InputMonthDiv = styled.div`
 
   font-size: 20px;
   text-align: center;
-
 `;
 
 const InputDateDiv = styled.div`
@@ -153,36 +151,36 @@ const InputDateDiv = styled.div`
   text-align: center;
 `;
 
-const StyleInput =styled.input`
+const StyleInput = styled.input`
   display: flex;
   padding: 0;
   margin: 0;
   width: 120px;
   border: none;
   border-radius: 6.755px;
-  color: #6B6A6A;
+  color: #6b6a6a;
   font-size: 20px;
   text-align: right;
   font-style: normal;
   font-weight: 500;
   line-height: 31.074px;
 
-    //스피너를 감춤
-    appearance: textfield; /* Firefox */
-    &::-webkit-inner-spin-button,
-    &::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+  //스피너를 감춤
+  appearance: textfield; /* Firefox */
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
-    &:focus {
-        outline: none;
-    }
+  &:focus {
+    outline: none;
+  }
 `;
 
 const StyleInputLabel = styled.label`
   display: flex;
-  color: #D9D9D9;
+  color: #d9d9d9;
   text-align: center;
   font-size: 20px;
   font-style: normal;
@@ -192,26 +190,32 @@ const StyleInputLabel = styled.label`
   padding-bottom: 5px;
   margin: 0;
   align-items: center;
-
 `;
 
-const CheckBtn =styled.button`
-    width: 63.499px;
-    height: 55.393px;
-    flex-shrink: 0;
-    border-radius: 6.755px;
-    background: #FF3D00;
-    border: #FF3D00;
+const CheckBtn = styled.button`
+  width: 63.499px;
+  height: 55.393px;
+  flex-shrink: 0;
+  border-radius: 6.755px;
+  background: #ff3d00;
+  border: #ff3d00;
 
-    color: #F5F5F5;
+  color: #f5f5f5;
 
-    text-align: center;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 31.074px;
-    cursor: pointer;
+  text-align: center;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 31.074px;
+  cursor: pointer;
 
+  text-align: center;
+  //font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 31.074px;
+  cursor: pointer;
 `;
 
 const WebLogin_1 = () => {
@@ -245,18 +249,23 @@ const WebLogin_1 = () => {
     event.preventDefault();
 
     //인풋 값 로컬스토리지에 저장
-    localStorage.setItem('name', name);
-    localStorage.setItem('year', year.toString());
-    localStorage.setItem('month', month.toString());
-    localStorage.setItem('day', day.toString());
+    localStorage.setItem("name", name);
+    localStorage.setItem("year", year.toString());
+    localStorage.setItem("month", month.toString());
+    localStorage.setItem("day", day.toString());
 
-    console.log(name,year, month,day);
+    console.log(name, year, month, day);
     navigate("/Login/2");
   };
 
   // 모든 인풋 값이 비어있지 않은지 확인하는 함수
   const areInputsFilled = useCallback(() => {
-    return name.trim() !== "" && year.trim() !== "" && month.trim() !== "" && day.trim() !== "";
+    return (
+      name.trim() !== "" &&
+      year.trim() !== "" &&
+      month.trim() !== "" &&
+      day.trim() !== ""
+    );
   }, [name, year, month, day]);
 
   // 입력값이 변경될 때마다 버튼 상태 업데이트
@@ -268,59 +277,64 @@ const WebLogin_1 = () => {
     <ThemeProvider theme={theme}>
       <Container>
         <LayoutDiv>
-            <ContentDiv>
-              <DotButton dotColor={1} />
-              <ExplainDiv>
-                고객님의 소중한 거래를 위해<br></br> 추가 정보를 기입해주세요.
-              </ExplainDiv>
-              <InputForm onSubmit={handleConfirmation}>
-                <InputNameDiv>
-                  <GrayText>이름</GrayText>
-                  <InputName 
-                  type="text" 
+          <ContentDiv>
+            <DotButton dotColor={1} />
+            <ExplainDiv>
+              고객님의 소중한 거래를 위해<br></br> 추가 정보를 기입해주세요.
+            </ExplainDiv>
+            <InputForm onSubmit={handleConfirmation}>
+              <InputNameDiv>
+                <GrayText>이름</GrayText>
+                <InputName
+                  type="text"
                   placeholder="홍길동"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  ></InputName>
-                </InputNameDiv>
-                <InputBirthDiv>
-                  <GrayText>생년월일</GrayText>
-                  <InputBirthSpace>
-                      <InputYearDiv>
-                        <StyleInput 
-                        id="year"
-                        type="number"
-                        value={year}
-                        onChange={(e) => setYear(e.target.value)}></StyleInput>
-                        <StyleInputLabel for="year">년</StyleInputLabel>
-                      </InputYearDiv>
-                      <InputMonthDiv >
-                      <StyleInput 
-                        id="month" 
-                        type="number" 
-                        style={{width:"34px"}}
-                        value={month}
-                        onChange={(e) => setMonth(e.target.value)}></StyleInput>
-                        <StyleInputLabel for="month">월</StyleInputLabel>
-                      </InputMonthDiv>
-                      <InputDateDiv >
-                      <StyleInput 
-                        id="day" 
-                        type="number" 
-                        style={{width:"34px"}}
-                        value={day}
-                        onChange={(e) => setDay(e.target.value)}></StyleInput>
-                        <StyleInputLabel for="day">일</StyleInputLabel>
-                      </InputDateDiv>
-                      <CheckBtn type='submit' disabled={isButtonDisabled}>확인</CheckBtn>
-                  </InputBirthSpace>
+                ></InputName>
+              </InputNameDiv>
+              <InputBirthDiv>
+                <GrayText>생년월일</GrayText>
+                <InputBirthSpace>
+                  <InputYearDiv>
+                    <StyleInput
+                      id="year"
+                      type="number"
+                      value={year}
+                      onChange={(e) => setYear(e.target.value)}
+                    ></StyleInput>
+                    <StyleInputLabel for="year">년</StyleInputLabel>
+                  </InputYearDiv>
+                  <InputMonthDiv>
+                    <StyleInput
+                      id="month"
+                      type="number"
+                      style={{ width: "34px" }}
+                      value={month}
+                      onChange={(e) => setMonth(e.target.value)}
+                    ></StyleInput>
+                    <StyleInputLabel for="month">월</StyleInputLabel>
+                  </InputMonthDiv>
+                  <InputDateDiv>
+                    <StyleInput
+                      id="day"
+                      type="number"
+                      style={{ width: "34px" }}
+                      value={day}
+                      onChange={(e) => setDay(e.target.value)}
+                    ></StyleInput>
+                    <StyleInputLabel for="day">일</StyleInputLabel>
+                  </InputDateDiv>
+                  <CheckBtn type="submit" disabled={isButtonDisabled}>
+                    확인
+                  </CheckBtn>
+                </InputBirthSpace>
               </InputBirthDiv>
-                    </InputForm>
-                </ContentDiv>
-            </LayoutDiv>
-        </Container>
+            </InputForm>
+          </ContentDiv>
+        </LayoutDiv>
+      </Container>
     </ThemeProvider>
-    );
+  );
 };
 
 export default WebLogin_1;
