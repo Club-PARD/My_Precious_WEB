@@ -1,14 +1,39 @@
-import { React, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import DotButton from './DotButton.js';
 import { handlePhoneButtonClick, handleAuthButtonClick } from '../../../API/phoneAuth';
+import WebLogin_2_checked from './Weblogin_2_checked.js';
+import Modal from './Modal/Modal.js';
 
 const WebLogin_2 = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [authNumber, setAuthNumber] = useState('');
+    const [isAuthenticated, setIsAuthenticated] = useState(false); // 인증 상태
+    const [modalShow, setModalShow] = useState(false);
 
     const theme = useTheme();
+
+    const authInputRef = useRef(null); // 인증번호 입력 필드에 대한 참조 생성
+
+    const resetAuthNumber = () => {
+        setAuthNumber(''); // AuthNumber 초기화
+        if (authInputRef.current) {
+            authInputRef.current.value = '';
+        }
+    };
+
+    useEffect(() => {
+        if (!modalShow) {
+            // 모달이 닫힐 때마다 인증번호 입력 필드에 포커스를 줍니다.
+            authInputRef.current.focus();
+        }
+    }, [modalShow]);
+
+    if (isAuthenticated) {
+        return <WebLogin_2_checked />; // 인증이 완료되면, 해당 컴포넌트를 렌더링
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <Container>
@@ -37,15 +62,34 @@ const WebLogin_2 = () => {
                             </Label1>
                             <Label2>
                                 <input
+                                    ref={authInputRef}
                                     type="text"
                                     placeholder="인증번호 입력"
                                     onChange={(e) => setAuthNumber(e.target.value)}
                                 ></input>
-                                <button onClick={() => handleAuthButtonClick(authNumber)}>확인</button>
+                                <button
+                                    onClick={() =>
+                                        handleAuthButtonClick(
+                                            authNumber,
+                                            (user) => {
+                                                console.log('성공!', user);
+                                                setIsAuthenticated(true);
+                                            },
+                                            (error) => {
+                                                console.log('실패', error);
+                                                setModalShow(true);
+                                            }
+                                        )
+                                    }
+                                >
+                                    확인
+                                </button>
                             </Label2>
                         </form>
                     </InnerRow3>
                 </ContentBox>
+                <div id="modal"></div>
+                {modalShow && <Modal setModalShow={setModalShow} resetAuthNumber={resetAuthNumber} />}
             </Container>
         </ThemeProvider>
     );
