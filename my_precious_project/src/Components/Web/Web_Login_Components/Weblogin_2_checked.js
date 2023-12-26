@@ -1,30 +1,27 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
-import { useTheme } from "../../../contexts/ThemeContext.js"; // Context APi 적용
+import { useTheme } from "../../../contexts/ThemeContext.js.js"; // Context APi 적용
 import DotButton from "./DotButton.js";
-import loginImage from "../../../Assets/img/LoginImage.png";
+import { Checkmark } from "react-checkmark";
 
 const WebLogin_3 = () => {
   const theme = useTheme();
-
   return (
     <ThemeProvider theme={theme}>
       <Container>
         <ContentBox>
           <InnerRow1>
-            <DotButton dotColor={3} />
+            <DotButton  />
           </InnerRow1>
-          <InnerRow2>
-            너무 환영합니다! <br />
-            우리 머니글러브의 45번째 머글이 되어주셔서 감사해요.
-          </InnerRow2>
+          <InnerRow2>휴대폰 인증이 완료되었어요!</InnerRow2>
           <InnerRow3>
-            <ImageDiv>
-              <Img src={loginImage} alt="로그인페이지 기본 이미지"></Img>
-              <NameDiv>김현지님</NameDiv>
-            </ImageDiv>
+            <Checkmark size="xLarge" color="#ff3d00"></Checkmark>
+            <Div>
+              등록하신 휴대폰 인증을 통해<br></br>전자서명을 따로 하시지 않아도
+              되는 편리함이 생겼어요.
+            </Div>
             <form>
-              <Button>시작하기</Button>
+              <Button>확인</Button>
             </form>
           </InnerRow3>
         </ContentBox>
@@ -46,24 +43,24 @@ const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  //width: 500px;
+  width: 500px;
 `;
 const InnerRow1 = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 127px;
+  margin-top: 155px;
   margin-bottom: 50px;
 `;
 
 const InnerRow2 = styled.div`
-  color: #0f0f0f;
+  color: #000;
   text-align: center;
   font-size: 32px;
   font-weight: 600;
   line-height: 50px;
   width: 100%;
-  white-space: pre-wrap;
+  margin-bottom: 100px;
 `;
 
 const InnerRow3 = styled.div`
@@ -77,39 +74,12 @@ const InnerRow3 = styled.div`
   color: #d9d9d9;
 `;
 
-const ImageDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 39px;
-  width: 250px;
-  height: 292px;
-  flex-shrink: 0;
-
-  border-radius: 20px;
-  border: 2px solid #ff3d00;
-  align-items: center;
-`;
-
-const Img = styled.img`
+const Div = styled.div`
   margin-top: 50px;
 `;
 
-const NameDiv = styled.div`
-  width: 155px;
-  height: 44px;
-  flex-shrink: 0;
-  margin-top: 43.71px;
-  color: #ff3d00;
-  text-align: center;
-  //font-family: Pretendard;
-  font-size: 32.886px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-`;
-
 const Button = styled.button`
-  margin-top: 49px;
+  margin-top: 100px;
   width: 450px;
   height: 55px;
   border-radius: 6.5px;
