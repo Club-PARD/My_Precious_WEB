@@ -1,6 +1,6 @@
 // 구글로그인, 휴대폰 인증은 위한 코드입니다.
 
-import { app, auth } from '../API/googleLogin';
+import { auth } from '../API/firebaseAPI';
 import { GoogleAuthProvider, signInWithPopup, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import { useState } from 'react';
 

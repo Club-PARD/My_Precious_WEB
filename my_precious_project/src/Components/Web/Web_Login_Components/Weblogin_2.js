@@ -1,9 +1,13 @@
-import React from 'react';
+import { React, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import DotButton from './DotButton.js';
+import { handlePhoneButtonClick, handleAuthButtonClick } from '../../../API/phoneAuth';
 
 const WebLogin_2 = () => {
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [authNumber, setAuthNumber] = useState('');
+
     const theme = useTheme();
     return (
         <ThemeProvider theme={theme}>
@@ -17,14 +21,27 @@ const WebLogin_2 = () => {
                     </InnerRow2>
                     <InnerRow3>
                         전화번호<br></br>
-                        <form>
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                            }}
+                        >
                             <Label1>
-                                <input type="text" placeholder="010-xxxx-xxxx"></input>
-                                <button>인증번호 받기</button>
+                                <input
+                                    id="recaptcha-container"
+                                    type="text"
+                                    placeholder="010-xxxx-xxxx"
+                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                ></input>
+                                <button onClick={() => handlePhoneButtonClick(phoneNumber)}>인증번호 받기</button>
                             </Label1>
                             <Label2>
-                                <input type="text" placeholder="인증번호 입력"></input>
-                                <button>확인</button>
+                                <input
+                                    type="text"
+                                    placeholder="인증번호 입력"
+                                    onChange={(e) => setAuthNumber(e.target.value)}
+                                ></input>
+                                <button onClick={() => handleAuthButtonClick(authNumber)}>확인</button>
                             </Label2>
                         </form>
                     </InnerRow3>
