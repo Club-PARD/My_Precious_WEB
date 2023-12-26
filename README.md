@@ -12,16 +12,16 @@
 |종류|소개|소개|소개|소개|소개|소개|
 |:------:|:---:|:---:|:---:|:---:|:---:|:---:|
 |**프로필**|🤖|🦊|🦄|😸|🐼|🍩|
-|**이름**|김현중|박민지|김현지|김채린|장동원|이유현|
-|**역할**|WEB|WEB|DESIGN|SEVER|PM|WEB|
-|**나이**|26|25|25|24|23|23|
+|**이름**|김현중|박민지|이유현|김채린|장동원|김현지|
+|**역할**|WEB|WEB|WEB|SEVER|PM|DESIGN|
+|**나이**|26|25|23|24|23|25|
 
 ## 📄 Stack
 
 ## 💻 개발환경 및 언어 
 ![React](https://img.shields.io/badge/react-444444?style=for-the-badge&logo=react) 
 
-## 라이브러리
+## 📥 라이브러리
 - npm install react-router-dom
 - npm install styled-components
 - npm install axios
