@@ -4,8 +4,8 @@ import HomePage from "./Page/HomePage";
 import ScrollToTop from "./ScrollToTop";
 import { ThemeProvider } from "./contexts/ThemeContext.js";
 import { theme } from "./Style/theme";
-import FirebaseContainer from "./Page/loginfeat.js";
 import LoginPage from "./Page/LoginPage";
+import RequestPage from "./Page/RequestPage.js";
 
 function App() {
   return (
@@ -13,10 +13,9 @@ function App() {
       <Router>
         <ScrollToTop />
         <Routes>
-          {/* 기본 화면 설정 */}
-          <Route path="/phone" element={<FirebaseContainer />} />
           <Route path="/login/*" element={<LoginPage />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/request" element={<RequestPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>
       </Router>
