@@ -4,7 +4,11 @@ import { useTheme } from "../../../contexts/ThemeContext.js.js"; // Context APi 
 import DotButton from "./DotButton.js";
 import { Checkmark } from "react-checkmark";
 
+<<<<<<< HEAD
+const WebLogin_2_checked = () => {
+=======
 const WebLogin_3 = () => {
+>>>>>>> main
   const theme = useTheme();
   return (
     <ThemeProvider theme={theme}>
@@ -91,4 +95,8 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+<<<<<<< HEAD
+export default WebLogin_2_checked;
+=======
 export default WebLogin_3;
+>>>>>>> main
