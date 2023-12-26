@@ -4,18 +4,14 @@ import { useTheme } from "../../../contexts/ThemeContext.js.js"; // Context APi 
 import DotButton from "./DotButton.js";
 import { Checkmark } from "react-checkmark";
 
-<<<<<<< HEAD
-const WebLogin_2_checked = () => {
-=======
 const WebLogin_3 = () => {
->>>>>>> main
   const theme = useTheme();
   return (
     <ThemeProvider theme={theme}>
       <Container>
         <ContentBox>
           <InnerRow1>
-            <DotButton  />
+            <DotButton />
           </InnerRow1>
           <InnerRow2>휴대폰 인증이 완료되었어요!</InnerRow2>
           <InnerRow3>
@@ -95,8 +91,4 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-<<<<<<< HEAD
-export default WebLogin_2_checked;
-=======
 export default WebLogin_3;
->>>>>>> main

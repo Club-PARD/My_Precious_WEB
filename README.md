@@ -26,3 +26,4 @@
 - npm install styled-components
 - npm install axios
 - npm i react-checkmark
+- npm install react-transition-group
