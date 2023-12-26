@@ -6,6 +6,7 @@ import { ThemeProvider } from "./contexts/ThemeContext.js";
 import { theme } from "./Style/theme";
 import LoginPage from "./Page/LoginPage";
 import RequestPage from "./Page/RequestPage.js";
+import DashboardPage from "./Page/DashboardPage.js"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/request" element={<RequestPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
         </Routes>
       </Router>
     </ThemeProvider>
