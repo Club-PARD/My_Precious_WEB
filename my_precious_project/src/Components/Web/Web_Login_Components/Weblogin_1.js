@@ -25,11 +25,6 @@ const ContentDiv = styled.div`
     margin-top: 157px;
 `;
 
-const Row = styled.div`
-    display: flex;
-    flex-direction: row;
-`;
-
 const ExplainDiv = styled.div`
     color: #000;
     text-align: center;
