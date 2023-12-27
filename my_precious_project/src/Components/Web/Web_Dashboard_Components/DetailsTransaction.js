@@ -1,29 +1,77 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
+import { useTheme } from '../../../contexts/ThemeContext.js';
 import CircleProgressbar from './CircleProgressbar.js';
 
+const DetailsTransaction = ({ dataSet }) => {
+    const theme = useTheme();
+
+    return (
+        <div>
+            {dataSet.map((data, index) => {
+                const setDateTime = new Date(data.setYear, data.setMonth - 1, data.setDay);
+                const payDateTime = new Date();
+                const differenceTime = Math.abs(setDateTime - payDateTime);
+                const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
+
+                return (
+                    <Container key={index}>
+                        <StyleCircleProgressbar>
+                            <CircleProgressbar totalMoney={data.borrowMoney} debtMoney={data.payBack} index={index} />
+                        </StyleCircleProgressbar>
+                        <DisplayBorderBottom>
+                            <DetialsExplain>
+                                <ExplainTextDiv>
+                                    <div>빌린 이유</div>
+                                    <div>총 빌릴 금액</div>
+                                    <div>갚아야 할 약속 날짜</div>
+                                </ExplainTextDiv>
+                                <UserDateTextDiv>
+                                    <ReasonText>{data.title}</ReasonText>
+                                    <Row style={{ gap: '8px' }}>
+                                        <UserDataText>{data.borrowMoney}</UserDataText>
+                                        <GrayText>원</GrayText>
+                                    </Row>
+                                    <Row style={{ gap: '3px' }}>
+                                        <UserDataText>
+                                            {`${data.setYear}.${String(data.setMonth).padStart(2, '0')}.${String(
+                                                data.setDay
+                                            ).padStart(2, '0')}`}
+                                        </UserDataText>
+                                        <GrayText>일</GrayText>
+                                    </Row>
+                                </UserDateTextDiv>
+                            </DetialsExplain>
+                            <DisplayDday>{`D-${differenceDays}`}</DisplayDday>
+                        </DisplayBorderBottom>
+                    </Container>
+                );
+            })}
+        </div>
+    );
+};
+
 const Container = styled.div`
+    margin-top: 50px;
+    margin-bottom: 5rem;
     display: flex;
     flex-direction: row;
-    width: 721px;
+    width: 100%;
     height: 120px;
-    background-color: #FAFAFA;
-    align-items: center;
+    justify-content: center;
 `;
 
 const StyleCircleProgressbar = styled.div`
-    width: 106.44px;
-    height: 106.44px;
-    padding-right: 63px;
+    width: 23%;
+    height: 100%;
 `;
 
-const DisplayBorderBottom =styled.div`
+const DisplayBorderBottom = styled.div`
     display: flex;
-    flex-direction: row;
-    border-bottom: 2px solid #F5F5F5;
     align-items: end;
-    padding-right: 99.56px;
+    justify-content: start;
+    border-bottom: 2px solid #f5f5f5;
+    width: 77%;
 `;
 
 const Row = styled.div`
@@ -58,10 +106,10 @@ const UserDateTextDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: end;
-    //padding-left: 20px;
     padding-top: 16px;
     padding-bottom: 16px;
     gap: 11px;
+    width: 10rem;
 `;
 
 const UserDataText = styled.div`
@@ -73,10 +121,23 @@ const UserDataText = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-`
-const GrayText =styled.div`
+`;
+
+const ReasonText = styled.div`
     display: flex;
-    color: #9E9E9E;
+    color: #707070;
+    justify-content: right;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    width: 15rem;
+`;
+
+const GrayText = styled.div`
+    display: flex;
+    color: #9e9e9e;
 
     font-family: Pretendard;
     font-size: 16px;
@@ -84,55 +145,21 @@ const GrayText =styled.div`
     font-weight: 600;
     line-height: normal;
 `;
-const DisplayDday =styled.div`
+const DisplayDday = styled.div`
     display: flex;
     width: 61px;
     height: 19px;
     border-radius: 20px;
-    background: #FF3D00;
+    background-color: #ff3d00;
     margin-left: 41px;
     margin-bottom: 16px;
-
-    color: #FFEFEF;
+    color: #ffefef;
     font-family: Pretendard;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    //line-height: normal
     justify-content: center;
+    align-items: end;
 `;
-
-
-const DetailsTransaction = () => {
-    const theme = useTheme();
-    return (
-    <Container>
-        <StyleCircleProgressbar>
-          <CircleProgressbar totalMoney={10000} debtMoney={12000}/>
-        </StyleCircleProgressbar>
-        <DisplayBorderBottom>
-            <DetialsExplain>
-                <ExplainTextDiv>
-                    <div>빌린 이유</div>
-                    <div>총 빌린 금액</div>
-                    <div>갚아야 할 약속 날짜</div>
-                </ExplainTextDiv>
-                <UserDateTextDiv>
-                    <UserDataText>어머니 수술비용</UserDataText>
-                    <Row style={{gap: "8px"}}>
-                        <UserDataText>100,000,000</UserDataText>
-                        <GrayText>원</GrayText>
-                    </Row>
-                    <Row style={{gap:"3px"}}>
-                        <UserDataText>2024.10.01</UserDataText>
-                        <GrayText>일</GrayText>
-                    </Row>
-                </UserDateTextDiv>
-            </DetialsExplain>
-            <DisplayDday>D-20</DisplayDday>
-        </DisplayBorderBottom>
-    </Container>
-    );
-};
 
 export default DetailsTransaction;

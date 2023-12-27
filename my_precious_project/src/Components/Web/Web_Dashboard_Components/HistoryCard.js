@@ -4,6 +4,8 @@ import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import CountUpAnimation from './CountUpAnimation.js';
 
+//윗 부분 총 계산
+
 const CardContiner = styled.button`
     display: flex;
     flex-direction: column;
@@ -28,7 +30,7 @@ const Transactionlabel = styled.div`
     display: flex;
     padding-left: 16px;
     padding-top: 14px;
-    color: #FFF;
+    color: #fff;
     height: 19px;
     width: 20%;
     font-family: Pretendard;
@@ -40,7 +42,7 @@ const Transactionlabel = styled.div`
 
 const TransactionCount = styled.div`
     display: flex;
-    color: #FAFFBE;
+    color: #faffbe;
     padding-top: 14px;
     width: 80%;
     font-family: Pretendard;
@@ -50,11 +52,11 @@ const TransactionCount = styled.div`
     line-height: normal;
 `;
 
-const TotalMoney =styled.div`
+const TotalMoney = styled.div`
     display: flex;
     padding-top: 24px;
     padding-left: 16px;
-    color: #FFF;
+    color: #fff;
     width: 90%;
     height: 38px;
 
@@ -62,7 +64,7 @@ const TotalMoney =styled.div`
     font-size: 32px;
     font-style: normal;
     font-weight: 700;
-    line-height: normal; 
+    line-height: normal;
 `;
 
 const Dday = styled.div`
@@ -75,7 +77,7 @@ const Dday = styled.div`
 
     flex-shrink: 0;
     border-radius: 4px;
-    background: #F0F0F0;
+    background: #f0f0f0;
     align-items: center;
 
     color: ${(props) => (props.state ? '#FF3D00' : '#504F4F')};
@@ -89,18 +91,29 @@ const Dday = styled.div`
 const HistoryCard = (props) => {
     const theme = useTheme();
 
-return (
-<ThemeProvider theme={theme}>
-    <CardContiner state={props.state === "on"} onClick={props.onClick}>
-        <Row>
-            <Transactionlabel >{props.position === "left"? "빌린 돈" : "받을 돈"}</Transactionlabel>
-            <TransactionCount>{props.position === "left"? props.cardInfo.CardCount : props.cardInfo.CardCount}</TransactionCount>
-        </Row>
-        <TotalMoney><CountUpAnimation end={props.position === "left"? props.cardInfo.CardTotal: props.cardInfo.CardTotal} start="0" duration={1000} />원</TotalMoney>
-        <Dday state={props.state === "on"}>{props.position === "left"? "갚을 날짜까지" : "받을 날짜까지"} {props.cardInfo.CardDate}</Dday>
-    </CardContiner>
-</ThemeProvider>
-);
+    return (
+        <ThemeProvider theme={theme}>
+            <CardContiner state={props.state === 'on'} onClick={props.onClick}>
+                <Row>
+                    <Transactionlabel>{props.position === 'left' ? '빌린 돈' : '받을 돈'}</Transactionlabel>
+                    <TransactionCount>
+                        {props.position === 'left' ? props.cardInfo.CardCount : props.cardInfo.CardCount}
+                    </TransactionCount>
+                </Row>
+                <TotalMoney>
+                    <CountUpAnimation
+                        end={props.position === 'left' ? props.cardInfo.CardTotal : props.cardInfo.CardTotal}
+                        start="0"
+                        duration={1000}
+                    />
+                    원
+                </TotalMoney>
+                <Dday state={props.state === 'on'}>
+                    {props.position === 'left' ? '갚을 날짜까지' : '받을 날짜까지'} {props.cardInfo.CardDate}
+                </Dday>
+            </CardContiner>
+        </ThemeProvider>
+    );
 };
 
 export default HistoryCard;
