@@ -6,6 +6,34 @@ import CountUpAnimation from './CountUpAnimation.js';
 
 //윗 부분 총 계산
 
+const HistoryCard = (props) => {
+    const theme = useTheme();
+
+    return (
+        <ThemeProvider theme={theme}>
+            <CardContiner state={props.state === 'on'} onClick={props.onClick}>
+                <Row>
+                    <Transactionlabel>{props.position === 'left' ? '빌린 돈' : '받을 돈'}</Transactionlabel>
+                    <TransactionCount>
+                        {props.position === 'left' ? props.cardInfo.CardCount : props.cardInfo.CardCount}건
+                    </TransactionCount>
+                </Row>
+                <TotalMoney>
+                    <CountUpAnimation
+                        end={props.position === 'left' ? props.cardInfo.CardTotal : props.cardInfo.CardTotal}
+                        start="0"
+                        duration={1000}
+                    />
+                    원
+                </TotalMoney>
+                <Dday state={props.state === 'on'}>
+                    {props.position === 'left' ? '갚을 날짜까지' : '받을 날짜까지'} {props.cardInfo.CardDate}
+                </Dday>
+            </CardContiner>
+        </ThemeProvider>
+    );
+};
+
 const CardContiner = styled.button`
     display: flex;
     flex-direction: column;
@@ -95,33 +123,5 @@ const Dday = styled.div`
     font-weight: 600;
     line-height: normal;
 `;
-
-const HistoryCard = (props) => {
-    const theme = useTheme();
-
-    return (
-        <ThemeProvider theme={theme}>
-            <CardContiner state={props.state === 'on'} onClick={props.onClick}>
-                <Row>
-                    <Transactionlabel>{props.position === 'left' ? '빌린 돈' : '받을 돈'}</Transactionlabel>
-                    <TransactionCount>
-                        {props.position === 'left' ? props.cardInfo.CardCount : props.cardInfo.CardCount}건
-                    </TransactionCount>
-                </Row>
-                <TotalMoney>
-                    <CountUpAnimation
-                        end={props.position === 'left' ? props.cardInfo.CardTotal : props.cardInfo.CardTotal}
-                        start="0"
-                        duration={1000}
-                    />
-                    원
-                </TotalMoney>
-                <Dday state={props.state === 'on'}>
-                    {props.position === 'left' ? '갚을 날짜까지' : '받을 날짜까지'} {props.cardInfo.CardDate}
-                </Dday>
-            </CardContiner>
-        </ThemeProvider>
-    );
-};
 
 export default HistoryCard;

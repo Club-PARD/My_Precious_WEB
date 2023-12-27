@@ -1,6 +1,42 @@
 import React, { useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
+function ButtonMenu({ handleMenuChange }) {
+    const [marginLeft, setMarginLeft] = useState(0);
+    const [isMoving, setIsMoving] = useState(false);
+
+    const handleClick = (newMargin) => {
+        setIsMoving(true);
+        setTimeout(() => {
+            setMarginLeft(newMargin);
+            handleMenuChange(newMargin); // 클릭된 메뉴에 따라 부모 컴포넌트에 알림
+        }, 250);
+        setTimeout(() => {
+            setIsMoving(false);
+        }, 750);
+    };
+
+    return (
+        <Container>
+            <StyledUl>
+                <StyledLi onClick={() => handleClick(0)}>
+                    <StyledA href="#">전체</StyledA>
+                </StyledLi>
+                <StyledLi onClick={() => handleClick(25)}>
+                    <StyledA href="#">진행 중</StyledA>
+                </StyledLi>
+                <StyledLi onClick={() => handleClick(50)}>
+                    <StyledA href="#">연체 중</StyledA>
+                </StyledLi>
+                <StyledLi onClick={() => handleClick(75)}>
+                    <StyledA href="#">완료</StyledA>
+                </StyledLi>
+            </StyledUl>
+            <StyledHr marginLeft={marginLeft} isMoving={isMoving} />
+        </Container>
+    );
+}
+
 const Container = styled.div`
     width: 100%;
     margin-top: 40px;
@@ -44,7 +80,7 @@ const StyledHr = styled.hr`
     margin: 0;
     background: #ff3d00;
     border: none;
-    transition: margin-left 2s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: margin-left 1s cubic-bezier(0.23, 1, 0.32, 1);
     margin-left: ${(props) => props.marginLeft}%;
 
     ${(props) =>
@@ -53,40 +89,5 @@ const StyledHr = styled.hr`
             animation: ${shrink} 0.5s linear;
         `}
 `;
-
-function ButtonMenu() {
-    const [marginLeft, setMarginLeft] = useState(0);
-    const [isMoving, setIsMoving] = useState(false);
-
-    const handleClick = (newMargin) => {
-        setIsMoving(true);
-        setTimeout(() => {
-            setMarginLeft(newMargin);
-        }, 250);
-        setTimeout(() => {
-            setIsMoving(false);
-        }, 750);
-    };
-
-    return (
-        <Container>
-            <StyledUl>
-                <StyledLi onClick={() => handleClick(0)}>
-                    <StyledA href="#">전체</StyledA>
-                </StyledLi>
-                <StyledLi onClick={() => handleClick(25)}>
-                    <StyledA href="#">진행 중</StyledA>
-                </StyledLi>
-                <StyledLi onClick={() => handleClick(50)}>
-                    <StyledA href="#">연체 중</StyledA>
-                </StyledLi>
-                <StyledLi onClick={() => handleClick(75)}>
-                    <StyledA href="#">완료</StyledA>
-                </StyledLi>
-            </StyledUl>
-            <StyledHr marginLeft={marginLeft} isMoving={isMoving} />
-        </Container>
-    );
-}
 
 export default ButtonMenu;

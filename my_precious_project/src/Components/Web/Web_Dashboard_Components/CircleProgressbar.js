@@ -10,6 +10,11 @@ function CircleProgressbar({ totalMoney, debtMoney, index }) {
     const updatePercent = (newPercent) => {
         setPercent(newPercent);
     };
+    // totalMoney와 debtMoney가 변경될 때마다 startValue와 inputValue 상태를 업데이트
+    useEffect(() => {
+        setStartValue(totalMoney);
+        setInputValue(debtMoney);
+    }, [totalMoney, debtMoney]);
 
     useEffect(() => {
         const startPercent = 0;

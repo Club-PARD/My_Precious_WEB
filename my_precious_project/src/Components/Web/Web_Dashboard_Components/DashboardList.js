@@ -2,74 +2,77 @@ import React, { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 //import { Link } from 'react-router-dom';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
-import DetailsTransaction from './DetailsTransaction.js';
-import List from './ButtonMenu.js';
+import DetailsBorrowMoney from './DetailsBorrowMoney.js';
+import DetailsReceiveMoney from './DetailsReceiveMoney.js';
+import ButtonMenu from './ButtonMenu.js';
 
 //밑에
-const dataSet = [
-    {
-        title: '엄마가 많이 아파요...',
-        borrowMoney: '1000000',
-        payBack: '5000',
-        payYear: 2025,
-        payMonth: 3,
-        payDay: 31,
-        setYear: 2026,
-        setMonth: 3,
-        setDay: 31,
-        situation: '엄마가 블라블라 병원에 블라블라 수술을 블라블라',
-        payWay: '계좌이체로 꼭 드릴게요..!!',
-        bank: '국민은행',
-        bankAccount: '164502-04-123456',
-        status: false,
-    },
-    {
-        title: '당장 내야하는 월세가 부족해요....',
-        borrowMoney: '350000',
-        payBack: '400000',
-        payYear: 2024,
-        payMonth: 12,
-        payDay: 25,
-        setYear: 2025,
-        setMonth: 3,
-        setDay: 31,
-        situation: '월세를 내야하는데 돈이 부족해요.. 3달째 못내고 있는데.. 도와주실 수 있나요?',
-        payWay: '계좌이체로 꼭 드리겠습니다.. 도와주세요',
-        bank: '기업은행',
-        bankAccount: '158-124212-11-123',
-        status: true,
-    },
-    {
-        title: '동생 생일선물을 사주고 싶어요..',
-        borrowMoney: '100000',
-        payBack: '70000',
-        payYear: 2024,
-        payMonth: 12,
-        payDay: 25,
-        setYear: 2024,
-        setMonth: 12,
-        setDay: 1,
-        situation: '월세를 내야하는데 돈이 부족해요.. 3달째 못내고 있는데.. 도와주실 수 있나요?',
-        payWay: '계좌이체로 꼭 드리겠습니다.. 도와주세요',
-        bank: '기업은행',
-        bankAccount: '158-124212-11-123',
-        status: false,
-    },
-];
 
-const DashboardList = () => {
+const DashboardList = ({ dataSet, rightCard }) => {
     const theme = useTheme();
+    const [selectedMenu, setSelectedMenu] = useState(0); // 초기값은 전체
 
+    // 메뉴가 변경되었을 때 실행되는 콜백
+    const handleMenuChange = (newMargin) => {
+        setSelectedMenu(newMargin);
+    };
+
+    // selectedMenu에 따라서 필터링된 데이터 반환
+    const getFilteredData = () => {
+        const currentDate = new Date(); // 현재 날짜를 가져옴
+        let percentage;
+
+        // if (rightCard === 'on') {
+        //     percentage = (data) => (data.payBack / data.receiveMoney) * 100;
+        // } else {
+        //     percentage = (data) => (data.payBack / data.borrowMoney) * 100;
+        // }
+        percentage = (data) => (data.payBack / data.borrowMoney) * 100;
+        if (selectedMenu === 25) {
+            // 진행 중
+            return dataSet.filter((data) => {
+                const setDateTime = new Date(data.setYear, data.setMonth - 1, data.setDay);
+                const differenceTime = setDateTime - currentDate;
+                const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
+
+                // TODO: 조건에 따라 필터링
+                return differenceDays > 0 && percentage(data) < 100;
+            });
+        } else if (selectedMenu === 50) {
+            // 연체 중
+            return dataSet.filter((data) => {
+                const setDateTime = new Date(data.setYear, data.setMonth - 1, data.setDay);
+                const differenceTime = setDateTime - currentDate;
+                const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
+
+                // TODO: 조건에 따라 필터링
+                return differenceDays <= 0 && percentage(data) < 100;
+            });
+        } else if (selectedMenu === 75) {
+            // 완료
+            return dataSet.filter((data) => {
+                // TODO: 조건에 따라 필터링
+                return percentage(data) >= 100;
+            });
+        } else {
+            // 전체
+            return dataSet;
+        }
+    };
     return (
         <ThemeProvider theme={theme}>
-            <List />
+            <ButtonMenu handleMenuChange={handleMenuChange} />
             <InnerRow1>
                 <ListTitle>최근 빌린 거래 전체 목록</ListTitle>
                 <AddButtonDiv>
                     <TransactionAddButton>+ 새 거래 추가하기</TransactionAddButton>
                 </AddButtonDiv>
             </InnerRow1>
-            <DetailsTransaction dataSet={dataSet} />
+            {rightCard === 'on' ? (
+                <DetailsReceiveMoney dataSet={getFilteredData()} />
+            ) : (
+                <DetailsBorrowMoney dataSet={getFilteredData()} />
+            )}
         </ThemeProvider>
     );
 };

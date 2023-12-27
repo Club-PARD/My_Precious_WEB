@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { useTheme } from '../../../contexts/ThemeContext.js';
+import { useTheme } from '../../../contexts/ThemeContext.js.js';
 import CircleProgressbar from './CircleProgressbar.js';
 
-const DetailsTransaction = ({ dataSet }) => {
+const DetailsBorrowMoney = ({ dataSet = [] }) => {
     const theme = useTheme();
+    const [payDateTime, setPayDateTime] = useState(new Date());
+
+    useEffect(() => {
+        setPayDateTime(new Date());
+    }, []);
 
     return (
         <div>
             {dataSet.map((data, index) => {
                 const setDateTime = new Date(data.setYear, data.setMonth - 1, data.setDay);
                 const payDateTime = new Date();
-                const differenceTime = Math.abs(setDateTime - payDateTime);
+                const differenceTime = payDateTime - setDateTime;
                 const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
 
                 return (
@@ -42,7 +47,9 @@ const DetailsTransaction = ({ dataSet }) => {
                                     </Row>
                                 </UserDateTextDiv>
                             </DetialsExplain>
-                            <DisplayDday>{`D-${differenceDays}`}</DisplayDday>
+                            <DisplayDday>
+                                {differenceDays >= 0 ? `D+${differenceDays}` : `D${differenceDays}`}
+                            </DisplayDday>
                         </DisplayBorderBottom>
                     </Container>
                 );
@@ -162,4 +169,4 @@ const DisplayDday = styled.div`
     align-items: end;
 `;
 
-export default DetailsTransaction;
+export default DetailsBorrowMoney;
