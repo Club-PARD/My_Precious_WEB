@@ -5,6 +5,7 @@ import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적
 import Header from '../Layout_Components/Mypage_header.js';
 import HistoryCard from './HistoryCard.js';
 import DashboardList from './DashboardList.js';
+import DetailsTransaction from './DetailsTransaction.js';
 
 const Container = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ const Container = styled.div`
   padding: 0;
   height: 100vh;
   align-items: center;
-  background: #F1F1F1;
+  background: #FAFAFA;
 `;
 
 const ContentsDiv = styled.div`
@@ -100,6 +101,7 @@ return (
                 <HistoryCard state={rightCard} position={"right"} cardInfo={rightCardInfo} onClick={handleRightCardClick}/>
             </CardDiv>
             <DashboardList/>
+            <DetailsTransaction/>
         </ContentsDiv>
     </Container>
 </ThemeProvider>
