@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js.js';
 import CircleProgressbar from './CircleProgressbar.js';
 
-const DetailsBorrowMoney = ({ dataSet = [] }) => {
+const DetailsBorrowMoney = ({ BorrowDataSet = [] }) => {
     const theme = useTheme();
     const [payDateTime, setPayDateTime] = useState(new Date());
 
@@ -13,7 +13,7 @@ const DetailsBorrowMoney = ({ dataSet = [] }) => {
 
     return (
         <div>
-            {dataSet.map((data, index) => {
+            {BorrowDataSet.map((data, index) => {
                 const setDateTime = new Date(data.setYear, data.setMonth - 1, data.setDay);
                 const payDateTime = new Date();
                 const differenceTime = payDateTime - setDateTime;

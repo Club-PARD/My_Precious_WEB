@@ -8,7 +8,7 @@ import ButtonMenu from './ButtonMenu.js';
 
 //밑에
 
-const DashboardList = ({ dataSet, rightCard }) => {
+const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
     const theme = useTheme();
     const [selectedMenu, setSelectedMenu] = useState(0); // 초기값은 전체
 
@@ -21,13 +21,16 @@ const DashboardList = ({ dataSet, rightCard }) => {
     const getFilteredData = () => {
         const currentDate = new Date(); // 현재 날짜를 가져옴
         let percentage;
+        let dataSet;
 
-        // if (rightCard === 'on') {
-        //     percentage = (data) => (data.payBack / data.receiveMoney) * 100;
-        // } else {
-        //     percentage = (data) => (data.payBack / data.borrowMoney) * 100;
-        // }
-        percentage = (data) => (data.payBack / data.borrowMoney) * 100;
+        if (rightCard === 'on') {
+            percentage = (data) => (data.payBack / data.receiveMoney) * 100;
+            dataSet = ReceiveDataSet;
+        } else {
+            percentage = (data) => (data.payBack / data.borrowMoney) * 100;
+            dataSet = BorrowDataSet;
+        }
+
         if (selectedMenu === 25) {
             // 진행 중
             return dataSet.filter((data) => {
@@ -69,9 +72,9 @@ const DashboardList = ({ dataSet, rightCard }) => {
                 </AddButtonDiv>
             </InnerRow1>
             {rightCard === 'on' ? (
-                <DetailsReceiveMoney dataSet={getFilteredData()} />
+                <DetailsReceiveMoney ReceiveDataSet={getFilteredData()} />
             ) : (
-                <DetailsBorrowMoney dataSet={getFilteredData()} />
+                <DetailsBorrowMoney BorrowDataSet={getFilteredData()} />
             )}
         </ThemeProvider>
     );

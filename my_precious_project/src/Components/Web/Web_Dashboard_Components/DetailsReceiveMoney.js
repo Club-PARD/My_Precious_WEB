@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js.js';
 import CircleProgressbar from './CircleProgressbar.js';
 
-const DetailsReceiveMoney = ({ dataSet }) => {
+const DetailsReceiveMoney = ({ ReceiveDataSet = [] }) => {
     const theme = useTheme();
     const [payDateTime, setPayDateTime] = useState(new Date());
 
@@ -13,7 +13,7 @@ const DetailsReceiveMoney = ({ dataSet }) => {
 
     return (
         <div>
-            {dataSet.map((data, index) => {
+            {ReceiveDataSet.map((data, index) => {
                 const setDateTime = new Date(data.setYear, data.setMonth - 1, data.setDay);
                 const payDateTime = new Date();
                 const differenceTime = payDateTime - setDateTime;
@@ -22,7 +22,7 @@ const DetailsReceiveMoney = ({ dataSet }) => {
                 return (
                     <Container key={index}>
                         <StyleCircleProgressbar>
-                            <CircleProgressbar totalMoney={data.borrowMoney} debtMoney={data.payBack} index={index} />
+                            <CircleProgressbar totalMoney={data.receiveMoney} debtMoney={data.payBack} index={index} />
                         </StyleCircleProgressbar>
                         <DisplayBorderBottom>
                             <DetialsExplain>
@@ -34,7 +34,7 @@ const DetailsReceiveMoney = ({ dataSet }) => {
                                 <UserDateTextDiv>
                                     <ReasonText>{data.title}</ReasonText>
                                     <Row style={{ gap: '8px' }}>
-                                        <UserDataText>{data.borrowMoney}</UserDataText>
+                                        <UserDataText>{data.receiveMoney}</UserDataText>
                                         <GrayText>원</GrayText>
                                     </Row>
                                     <Row style={{ gap: '3px' }}>
