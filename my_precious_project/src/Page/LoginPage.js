@@ -5,6 +5,7 @@ import WebLogin1 from '../Components/Web/Web_Login_Components/Weblogin_1';
 import WebLogin2 from '../Components/Web/Web_Login_Components/Weblogin_2';
 import WebLogin3 from '../Components/Web/Web_Login_Components/Weblogin_3';
 import AppHome from '../Components/App/App_Home_Components/AppHome';
+import Googlelogin from '../Components/Web/Web_Login_Components/Googlelogin';
 
 // /login으로 접속하면 /login/1로 자동으로 로그인 첫 페이지로 넘어가게
 const RedirectLogin = () => {
@@ -33,7 +34,7 @@ const LoginPage = () => {
                             path="1"
                             element={
                                 <>
-                                    <WebLogin1 />
+                                    <Googlelogin />
                                 </>
                             }
                         />
@@ -41,12 +42,20 @@ const LoginPage = () => {
                             path="2"
                             element={
                                 <>
-                                    <WebLogin2 />
+                                    <WebLogin1 />
                                 </>
                             }
                         />
                         <Route
                             path="3"
+                            element={
+                                <>
+                                    <WebLogin2 />
+                                </>
+                            }
+                        />
+                        <Route
+                            path="4"
                             element={
                                 <>
                                     <WebLogin3 />
