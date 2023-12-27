@@ -17,6 +17,14 @@ const CardContiner = styled.button`
     border: none;
     padding: 0;
     cursor: pointer;
+
+    &:hover {
+        background: ${(props) => (props.state === 'on' ? '#504F4F' : '#FF3D00')};
+
+        & > :last-child {
+            color: ${(props) => (props.state === 'on' ? '#504F4F' : '#FF3D00')};
+        }
+    }
 `;
 
 const Row = styled.div`
@@ -97,7 +105,7 @@ const HistoryCard = (props) => {
                 <Row>
                     <Transactionlabel>{props.position === 'left' ? '빌린 돈' : '받을 돈'}</Transactionlabel>
                     <TransactionCount>
-                        {props.position === 'left' ? props.cardInfo.CardCount : props.cardInfo.CardCount}
+                        {props.position === 'left' ? props.cardInfo.CardCount : props.cardInfo.CardCount}건
                     </TransactionCount>
                 </Row>
                 <TotalMoney>

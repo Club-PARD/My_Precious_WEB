@@ -26,7 +26,7 @@ const ContentsDiv = styled.div`
 
 const NameGreeting = styled.div`
     color: #3e3e3e;
-    margin-top: 56px;
+    margin-top: 61px;
     font-family: Pretendard;
     font-size: 32px;
     font-style: normal;

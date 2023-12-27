@@ -3,9 +3,19 @@ import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js.js'; // Context APi 적용
 import DotButton from './DotButton.js';
 import { Checkmark } from 'react-checkmark';
+import { useNavigate } from 'react-router-dom';
 
 const WebLogin_2_checked = () => {
     const theme = useTheme();
+    const navigate = useNavigate();
+
+    const handleConfirmation = (event) => {
+      // 기본 양식 제출 동작 방지
+      event.preventDefault();
+
+      navigate('/Login/4');
+  };
+
     return (
         <ThemeProvider theme={theme}>
             <Container>
@@ -20,7 +30,7 @@ const WebLogin_2_checked = () => {
                             등록하신 휴대폰 인증을 통해<br></br>전자서명을 따로 하시지 않아도 되는 편리함이 생겼어요.
                         </Div>
                         <form>
-                            <Button>확인</Button>
+                            <Button onClick={handleConfirmation}>확인</Button>
                         </form>
                     </InnerRow3>
                 </ContentBox>

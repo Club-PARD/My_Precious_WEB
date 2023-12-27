@@ -30,15 +30,15 @@ function DotButton(props) {
         switch (dotColor) {
             case 1:
                 // 첫 번째 버튼을 클릭했을 때의 동작
-                navigate('/Login/1');
+                navigate('/Login/2');
                 break;
             case 2:
                 // 두 번째 버튼을 클릭했을 때의 동작
-                navigate('/Login/2');
+                navigate('/Login/3');
                 break;
             case 3:
                 // 세 번째 버튼을 클릭했을 때의 동작
-                navigate('/Login/3');
+                navigate('/Login/4');
                 break;
             default:
                 break;

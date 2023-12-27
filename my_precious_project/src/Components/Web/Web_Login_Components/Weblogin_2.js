@@ -16,6 +16,23 @@ const WebLogin_2 = () => {
 
     const authInputRef = useRef(null); // 인증번호 입력 필드에 대한 참조 생성
 
+    const handlePress = (e) => {
+        const regex = /^[0-9\b -]{0,13}$/;
+        if (regex.test(e.target.value)) {
+            setPhoneNumber(e.target.value);
+        }
+      };
+
+      useEffect(() => {
+        if (phoneNumber.length === 10) {
+            setPhoneNumber(phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3'));
+        }
+        if (phoneNumber.length === 13) {
+            setPhoneNumber(phoneNumber.replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
+        }
+      }, [phoneNumber]);
+
+
     const resetAuthNumber = () => {
         setAuthNumber(''); // AuthNumber 초기화
         if (authInputRef.current) {
@@ -29,6 +46,7 @@ const WebLogin_2 = () => {
             authInputRef.current.focus();
         }
     }, [modalShow]);
+    
 
     if (isAuthenticated) {
         return <WebLogin_2_checked />; // 인증이 완료되면, 해당 컴포넌트를 렌더링
@@ -55,8 +73,9 @@ const WebLogin_2 = () => {
                                 <input
                                     id="recaptcha-container"
                                     type="text"
+                                    value={phoneNumber}
                                     placeholder="010-xxxx-xxxx"
-                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                    onChange={handlePress}
                                 ></input>
                                 <button onClick={() => handlePhoneButtonClick(phoneNumber)}>인증번호 받기</button>
                             </Label1>
