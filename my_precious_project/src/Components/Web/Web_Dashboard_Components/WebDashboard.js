@@ -24,7 +24,7 @@ const BorrowDataSet = [
         title: '당장 내야하는 월세가 부족해요....',
         borrowMoney: '350000',
         payBack: '400000',
-        setYear: 2025,
+        setYear: 2023,
         setMonth: 3,
         setDay: 31,
         situation: '월세를 내야하는데 돈이 부족해요.. 3달째 못내고 있는데.. 도와주실 수 있나요?',
@@ -49,38 +49,38 @@ const BorrowDataSet = [
 //전체페이지
 const ReceiveDataSet = [
     {
-        title: '엄마가 많이 아파요...',
-        receiveMoney: '1000000',
-        payBack: '5000',
-        setYear: 2026,
-        setMonth: 5,
-        setDay: 31,
-        situation: '엄마가 블라블라 병원에 블라블라 수술을 블라블라',
-        payWay: '계좌이체로 꼭 드릴게요..!!',
+        title: '친구 월세 빌려줌',
+        receiveMoney: '450000',
+        payBack: '150000',
+        setYear: 2024,
+        setMonth: 1,
+        setDay: 1,
+        situation: '친구가 월세돈이 없다.',
+        payWay: '계좌이체로 준다 했음',
         bank: '국민은행',
         bankAccount: '164502-04-123456',
     },
     {
-        title: '당장 내야하는 월세가 부족해요....',
-        receiveMoney: '15650000',
-        payBack: '400000',
-        setYear: 2025,
-        setMonth: 3,
-        setDay: 31,
-        situation: '월세를 내야하는데 돈이 부족해요.. 3달째 못내고 있는데.. 도와주실 수 있나요?',
-        payWay: '계좌이체로 꼭 드리겠습니다.. 도와주세요',
+        title: '교수님 노트북 비용 빌려줌',
+        receiveMoney: '2800000',
+        payBack: '100000',
+        setYear: 2023,
+        setMonth: 12,
+        setDay: 25,
+        situation: '교수님이랑 같이 매장갔는데 돈이 없다해서 빌려줌',
+        payWay: '현금으로 준다고 함',
         bank: '기업은행',
         bankAccount: '158-124212-11-123',
     },
     {
-        title: '동생 생일선물을 사주고 싶어요..',
-        receiveMoney: '100000',
-        payBack: '70000',
-        setYear: 2023,
+        title: '남자친구 케이크값 빌려줌',
+        receiveMoney: '200000',
+        payBack: '200000',
+        setYear: 2024,
         setMonth: 10,
         setDay: 1,
-        situation: '월세를 내야하는데 돈이 부족해요.. 3달째 못내고 있는데.. 도와주실 수 있나요?',
-        payWay: '계좌이체로 꼭 드리겠습니다.. 도와주세요',
+        situation: '남자친구 지갑 잃어버림',
+        payWay: '카페로 받을거임',
         bank: '기업은행',
         bankAccount: '158-124212-11-123',
     },
@@ -95,17 +95,18 @@ const WebDashboard = () => {
 
     // dataSet에 따른 카드 정보를 계산하는 함수
     const LeftCalculateCardInfo = (BorrowDataSet) => {
-        const CardCount = BorrowDataSet.length;
-        const CardTotal = BorrowDataSet.reduce((acc, data) => acc + Number(data.borrowMoney), 0);
+        const filteredDataSet = BorrowDataSet.filter((data) => (data.payBack / data.borrowMoney) * 100 < 100);
+        const CardCount = filteredDataSet.length;
+        const CardTotal = filteredDataSet.reduce((acc, data) => acc + Number(data.borrowMoney), 0);
 
         let minNegativeDDay = Number.MAX_SAFE_INTEGER;
         let maxPositiveDDay = Number.MIN_SAFE_INTEGER;
 
-        for (let i = 0; i < BorrowDataSet.length; i++) {
+        for (let i = 0; i < filteredDataSet.length; i++) {
             const setDateTime = new Date(
-                BorrowDataSet[i].setYear,
-                BorrowDataSet[i].setMonth - 1,
-                BorrowDataSet[i].setDay
+                filteredDataSet[i].setYear,
+                filteredDataSet[i].setMonth - 1,
+                filteredDataSet[i].setDay
             );
             const payDateTime = new Date();
             const differenceTime = payDateTime - setDateTime;
@@ -128,17 +129,18 @@ const WebDashboard = () => {
     };
 
     const RightCalculateCardInfo = (ReceiveDataSet) => {
-        const CardCount = ReceiveDataSet.length;
-        const CardTotal = ReceiveDataSet.reduce((acc, data) => acc + Number(data.receiveMoney), 0);
+        const filteredDataSet = ReceiveDataSet.filter((data) => (data.payBack / data.receiveMoney) * 100 < 100);
+        const CardCount = filteredDataSet.length;
+        const CardTotal = filteredDataSet.reduce((acc, data) => acc + Number(data.receiveMoney), 0);
 
         let minNegativeDDay = Number.MAX_SAFE_INTEGER;
         let maxPositiveDDay = Number.MIN_SAFE_INTEGER;
 
-        for (let i = 0; i < ReceiveDataSet.length; i++) {
+        for (let i = 0; i < filteredDataSet.length; i++) {
             const setDateTime = new Date(
-                ReceiveDataSet[i].setYear,
-                ReceiveDataSet[i].setMonth - 1,
-                ReceiveDataSet[i].setDay
+                filteredDataSet[i].setYear,
+                filteredDataSet[i].setMonth - 1,
+                filteredDataSet[i].setDay
             );
             const payDateTime = new Date();
             const differenceTime = payDateTime - setDateTime;
