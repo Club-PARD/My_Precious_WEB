@@ -7,39 +7,40 @@ const Navigation = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 51px;
+  padding-top: 23px;
   flex-shrink: 0;
-  background: #D9D9D9;
+  background: #FAFAFA;
   justify-content: space-between;
+  align-items: start;
 `;
 
 const LogoBtn =styled.button`
   color: #FF3D00;
   padding: 0;
   margin: 0;
-  margin-left: 39px;
+  margin-left: 47px;
   border: none;
-  background-color: #D9D9D9;
+  background-color: #FAFAFA;
  
   font-family: Quanta Grotesk Pro;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
-  line-height: 43.305px;
+  line-height: normal;
   cursor: pointer;
 `;
 
 const NavRightSideDiv = styled.div`
   display: flex;
-  background-color: #D9D9D9;
+  background-color: #FAFAFA;
   border: none;
   width: 204px;
-  margin-right: 114px;
-  align-items: center;
+  margin-right: 47px;
+  align-items: start;
 `
 const AboutBtn =styled.button`
   display: flex;
-  background-color: #D9D9D9;
+  background-color: #FAFAFA;
   border: none;
   padding: 0;
   margin: 0;
@@ -50,18 +51,17 @@ const AboutBtn =styled.button`
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
-  line-height: 43.305px; 
+  line-height: normal;
   cursor: pointer;
 `;
 
 const DashboardBtn = styled.button`
   display: flex;
-  background-color: #D9D9D9;
+  background-color: #FAFAFA;
   border: none;
   padding: 0;
-  padding: 10px 0 10px;
   margin: 0;
-  margin-left: 45px;
+  margin-left: 41px;
 
   color: #FF3D00;
 

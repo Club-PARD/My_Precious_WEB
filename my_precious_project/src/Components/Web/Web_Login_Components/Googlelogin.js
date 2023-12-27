@@ -3,6 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import { useNavigate } from 'react-router-dom';
 import Userheart from '../../../Assets/img/Userheart.png';
+import {handleGoogleLogin} from "../../../API/googleLogin.js"
 
 const Container = styled.div`
     display: flex;
@@ -87,6 +88,7 @@ const GoogleLoginBtn = styled.button`
     font-style: normal;
     font-weight: 800;
     line-height: normal;
+    cursor: pointer;
 `;
 
 const GuideText = styled.div`
@@ -117,7 +119,7 @@ const Googlelogin = () => {
                         </IntroDiv>
                     <IntroductionText>여러분의 돈과 관계를 소중히 지켜드립니다. 함께 해주시겠어요?</IntroductionText>
                     <img src={Userheart} alt='유저와 하트 이미지' style={{marginTop:"10px"}}></img>
-                    <GoogleLoginBtn>Google로 로그인</GoogleLoginBtn>
+                    <GoogleLoginBtn onClick={handleGoogleLogin}>Google로 로그인</GoogleLoginBtn>
                     <GuideText>구글 로그인과 간단한 3가지 추가 정보만<br></br> 입력하면 회원가입이 완료되어요.</GuideText>
                 </ContentDiv>
             </LayoutDiv>

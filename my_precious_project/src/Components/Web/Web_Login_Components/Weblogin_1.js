@@ -224,9 +224,9 @@ const WebLogin_1 = () => {
 
     //임의로 지정한 인풋 값 변수
     const [name, setName] = useState('');
-    const [year, setYear] = useState('');
-    const [month, setMonth] = useState('');
-    const [day, setDay] = useState('');
+    const [year, setYear] = useState(0);
+    const [month, setMonth] = useState(0);
+    const [day, setDay] = useState(0);
 
     // 버튼 활성화 여부를 결정할 상태 추가
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -245,6 +245,7 @@ const WebLogin_1 = () => {
     }, []);
 
     const handleConfirmation = (event) => {
+        console.log('확인 함수 호출됨');
         // 기본 양식 제출 동작 방지
         event.preventDefault();
 
@@ -255,12 +256,14 @@ const WebLogin_1 = () => {
         localStorage.setItem('day', day.toString());
 
         console.log(name, year, month, day);
-        navigate('/Login/2');
+        navigate('/Login/3');
     };
 
     // 모든 인풋 값이 비어있지 않은지 확인하는 함수
     const areInputsFilled = useCallback(() => {
-        return name.trim() !== '' && year.trim() !== '' && month.trim() !== '' && day.trim() !== '';
+        const result =  name.trim() !== '' && year.trim() !== '' && month.trim() !== '' && day.trim() !== '';
+        console.log('입력값이 채워졌는지:', result);
+        return result;
     }, [name, year, month, day]);
 
     // 입력값이 변경될 때마다 버튼 상태 업데이트
@@ -293,29 +296,32 @@ const WebLogin_1 = () => {
                                     <InputYearDiv>
                                         <StyleInput
                                             id="year"
-                                            type="number"
+                                            type='text'
+                                            maxLength="4"
                                             value={year}
-                                            onChange={(e) => setYear(e.target.value)}
+                                            onChange={(e) => setYear(e.target.value.replace(/\D/, ''))}
                                         ></StyleInput>
                                         <StyleInputLabel for="year">년</StyleInputLabel>
                                     </InputYearDiv>
                                     <InputMonthDiv>
                                         <StyleInput
                                             id="month"
-                                            type="number"
+                                            type="text"
+                                            maxLength="2"
                                             style={{ width: '34px' }}
                                             value={month}
-                                            onChange={(e) => setMonth(e.target.value)}
+                                            onChange={(e) => setMonth(e.target.value.replace(/\D/, ''))}
                                         ></StyleInput>
                                         <StyleInputLabel for="month">월</StyleInputLabel>
                                     </InputMonthDiv>
                                     <InputDateDiv>
                                         <StyleInput
                                             id="day"
-                                            type="number"
+                                            type="text"
+                                            maxLength="2"
                                             style={{ width: '34px' }}
                                             value={day}
-                                            onChange={(e) => setDay(e.target.value)}
+                                            onChange={(e) => setDay(e.target.value.replace(/\D/, ''))}
                                         ></StyleInput>
                                         <StyleInputLabel for="day">일</StyleInputLabel>
                                     </InputDateDiv>
