@@ -33,3 +33,4 @@
 - npm install axios
 - npm i react-checkmark
 - npm install react-transition-group
+- npm install --save rc-progress
