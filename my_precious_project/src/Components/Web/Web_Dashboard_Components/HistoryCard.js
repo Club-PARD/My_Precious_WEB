@@ -15,6 +15,15 @@ const CardContiner = styled.button`
     border: none;
     padding: 0;
     cursor: pointer;
+
+    &:hover {
+    background: ${(props) => (props.state==="on"? '#504F4F' : '#FF3D00')};
+        
+        & > :last-child {
+            color: ${(props) => (props.state === "on" ? '#504F4F' : '#FF3D00')};
+        }
+    }
+  
 `;
 
 const Row = styled.div`
@@ -84,6 +93,7 @@ const Dday = styled.div`
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+
 `;
 
 const HistoryCard = (props) => {
@@ -94,7 +104,7 @@ return (
     <CardContiner state={props.state === "on"} onClick={props.onClick}>
         <Row>
             <Transactionlabel >{props.position === "left"? "빌린 돈" : "받을 돈"}</Transactionlabel>
-            <TransactionCount>{props.position === "left"? props.cardInfo.CardCount : props.cardInfo.CardCount}</TransactionCount>
+            <TransactionCount>{props.position === "left"? props.cardInfo.CardCount : props.cardInfo.CardCount}건</TransactionCount>
         </Row>
         <TotalMoney><CountUpAnimation end={props.position === "left"? props.cardInfo.CardTotal: props.cardInfo.CardTotal} start="0" duration={1000} />원</TotalMoney>
         <Dday state={props.state === "on"}>{props.position === "left"? "갚을 날짜까지" : "받을 날짜까지"} {props.cardInfo.CardDate}</Dday>
