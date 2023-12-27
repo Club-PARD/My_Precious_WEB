@@ -4,6 +4,7 @@ import { useTheme } from '../../../contexts/ThemeContext.js.js'; // Context APi 
 import DotButton from './DotButton.js';
 import { Checkmark } from 'react-checkmark';
 
+<<<<<<< HEAD
 const WebLogin_2_checked = () => {
     const theme = useTheme();
     return (
@@ -27,6 +28,36 @@ const WebLogin_2_checked = () => {
             </Container>
         </ThemeProvider>
     );
+=======
+<<<<<<< HEAD
+const WebLogin_2_checked = () => {
+=======
+const WebLogin_3 = () => {
+>>>>>>> main
+  const theme = useTheme();
+  return (
+    <ThemeProvider theme={theme}>
+      <Container>
+        <ContentBox>
+          <InnerRow1>
+            <DotButton  />
+          </InnerRow1>
+          <InnerRow2>휴대폰 인증이 완료되었어요!</InnerRow2>
+          <InnerRow3>
+            <Checkmark size="xLarge" color="#ff3d00"></Checkmark>
+            <Div>
+              등록하신 휴대폰 인증을 통해<br></br>전자서명을 따로 하시지 않아도
+              되는 편리함이 생겼어요.
+            </Div>
+            <form>
+              <Button>확인</Button>
+            </form>
+          </InnerRow3>
+        </ContentBox>
+      </Container>
+    </ThemeProvider>
+  );
+>>>>>>> main
 };
 
 const Container = styled.div`
@@ -90,4 +121,12 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
+<<<<<<< HEAD
 export default WebLogin_2_checked;
+=======
+<<<<<<< HEAD
+export default WebLogin_2_checked;
+=======
+export default WebLogin_3;
+>>>>>>> main
+>>>>>>> main
