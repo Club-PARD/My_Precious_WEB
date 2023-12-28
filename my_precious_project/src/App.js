@@ -7,12 +7,10 @@ import { theme } from './Style/theme';
 import LoginPage from './Page/LoginPage';
 import RequestPage from './Page/RequestPage.js';
 import DashboardPage from './Page/DashboardPage.js';
-import styled, { createGlobalStyle } from 'styled-components';
 
 function App() {
     return (
         <ThemeProvider theme={theme}>
-            <GlobalStyle />
             <Router>
                 <ScrollToTop />
                 <Routes>
@@ -26,15 +24,5 @@ function App() {
         </ThemeProvider>
     );
 }
-
-const GlobalStyle = createGlobalStyle`
-body {
-    max-width: 100vw;
-    background-color: #FAFAFA;
-}
-body::-webkit-scrollbar {
-    display: none;
-}
-`;
 
 export default App;

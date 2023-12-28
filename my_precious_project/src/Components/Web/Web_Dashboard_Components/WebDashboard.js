@@ -12,9 +12,7 @@ const BorrowDataSet = [
         title: '엄마가 많이 아파요...',
         borrowMoney: '1000000',
         payBack: '5000',
-        setYear: 2026,
-        setMonth: 3,
-        setDay: 31,
+        setDate: '20260331',
         situation: '엄마가 블라블라 병원에 블라블라 수술을 블라블라',
         payWay: '계좌이체로 꼭 드릴게요..!!',
         bank: '국민은행',
@@ -24,9 +22,7 @@ const BorrowDataSet = [
         title: '당장 내야하는 월세가 부족해요....',
         borrowMoney: '350000',
         payBack: '400000',
-        setYear: 2023,
-        setMonth: 3,
-        setDay: 31,
+        setDate: '20230331',
         situation: '월세를 내야하는데 돈이 부족해요.. 3달째 못내고 있는데.. 도와주실 수 있나요?',
         payWay: '계좌이체로 꼭 드리겠습니다.. 도와주세요',
         bank: '기업은행',
@@ -36,9 +32,7 @@ const BorrowDataSet = [
         title: '동생 생일선물을 사주고 싶어요..',
         borrowMoney: '100000',
         payBack: '70000',
-        setYear: 2023,
-        setMonth: 10,
-        setDay: 1,
+        setDate: '20231001',
         situation: '월세를 내야하는데 돈이 부족해요.. 3달째 못내고 있는데.. 도와주실 수 있나요?',
         payWay: '계좌이체로 꼭 드리겠습니다.. 도와주세요',
         bank: '기업은행',
@@ -52,9 +46,7 @@ const ReceiveDataSet = [
         title: '친구 월세 빌려줌',
         receiveMoney: '450000',
         payBack: '150000',
-        setYear: 2024,
-        setMonth: 1,
-        setDay: 1,
+        setDate: '20240101',
         situation: '친구가 월세돈이 없다.',
         payWay: '계좌이체로 준다 했음',
         bank: '국민은행',
@@ -64,9 +56,7 @@ const ReceiveDataSet = [
         title: '교수님 노트북 비용 빌려줌',
         receiveMoney: '2800000',
         payBack: '100000',
-        setYear: 2023,
-        setMonth: 12,
-        setDay: 29,
+        setDate: '20231229',
         situation: '교수님이랑 같이 매장갔는데 돈이 없다해서 빌려줌',
         payWay: '현금으로 준다고 함',
         bank: '기업은행',
@@ -76,9 +66,7 @@ const ReceiveDataSet = [
         title: '남자친구 케이크값 빌려줌',
         receiveMoney: '200000',
         payBack: '200000',
-        setYear: 2024,
-        setMonth: 10,
-        setDay: 1,
+        setDate: '20241001',
         situation: '남자친구 지갑 잃어버림',
         payWay: '카페로 받을거임',
         bank: '기업은행',
@@ -103,11 +91,13 @@ const WebDashboard = () => {
         let maxPositiveDDay = Number.MIN_SAFE_INTEGER;
 
         for (let i = 0; i < filteredDataSet.length; i++) {
-            const setDateTime = new Date(
-                filteredDataSet[i].setYear,
-                filteredDataSet[i].setMonth - 1,
-                filteredDataSet[i].setDay
-            );
+            const setDate = filteredDataSet[i].setDate.toString();
+            const setYear = parseInt(setDate.slice(0, 4));
+            const setMonth = parseInt(setDate.slice(4, 6));
+            const setDay = parseInt(setDate.slice(6, 8));
+
+            const setDateTime = new Date(setYear, setMonth - 1, setDay);
+
             const payDateTime = new Date();
             const differenceTime = payDateTime - setDateTime;
             const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
@@ -146,11 +136,12 @@ const WebDashboard = () => {
         let maxPositiveDDay = Number.MIN_SAFE_INTEGER;
 
         for (let i = 0; i < filteredDataSet.length; i++) {
-            const setDateTime = new Date(
-                filteredDataSet[i].setYear,
-                filteredDataSet[i].setMonth - 1,
-                filteredDataSet[i].setDay
-            );
+            const setDate = filteredDataSet[i].setDate.toString();
+            const setYear = parseInt(setDate.slice(0, 4));
+            const setMonth = parseInt(setDate.slice(4, 6));
+            const setDay = parseInt(setDate.slice(6, 8));
+
+            const setDateTime = new Date(setYear, setMonth - 1, setDay);
             const payDateTime = new Date();
             const differenceTime = payDateTime - setDateTime;
             const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
@@ -237,6 +228,7 @@ const Container = styled.div`
     padding: 0;
     align-items: center;
     background: #fafafa;
+    height: 100vh;
 `;
 
 const ContentsDiv = styled.div`

@@ -14,7 +14,12 @@ const DetailsBorrowMoney = ({ BorrowDataSet = [] }) => {
     return (
         <div>
             {BorrowDataSet.map((data, index) => {
-                const setDateTime = new Date(data.setYear, data.setMonth - 1, data.setDay);
+                const setDate = data.setDate.toString();
+                const setYear = parseInt(setDate.slice(0, 4));
+                const setMonth = parseInt(setDate.slice(4, 6));
+                const setDay = parseInt(setDate.slice(6, 8));
+
+                const setDateTime = new Date(setYear, setMonth - 1, setDay);
                 const payDateTime = new Date();
                 const differenceTime = payDateTime - setDateTime;
                 const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
@@ -39,9 +44,10 @@ const DetailsBorrowMoney = ({ BorrowDataSet = [] }) => {
                                     </Row>
                                     <Row style={{ gap: '3px' }}>
                                         <UserDataText>
-                                            {`${data.setYear}.${String(data.setMonth).padStart(2, '0')}.${String(
-                                                data.setDay
-                                            ).padStart(2, '0')}`}
+                                            {`${setYear}.${String(setMonth).padStart(2, '0')}.${String(setDay).padStart(
+                                                2,
+                                                '0'
+                                            )}`}
                                         </UserDataText>
                                         <GrayText>일</GrayText>
                                     </Row>
@@ -63,7 +69,6 @@ const DetailsBorrowMoney = ({ BorrowDataSet = [] }) => {
 };
 
 const Container = styled.div`
-    margin-top: 50px;
     margin-bottom: 5rem;
     display: flex;
     flex-direction: row;

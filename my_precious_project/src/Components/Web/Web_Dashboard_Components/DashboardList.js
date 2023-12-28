@@ -71,14 +71,22 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
                     <TransactionAddButton>+ 새 거래 추가하기</TransactionAddButton>
                 </AddButtonDiv>
             </InnerRow1>
-            {rightCard === 'on' ? (
-                <DetailsReceiveMoney ReceiveDataSet={getFilteredData()} />
-            ) : (
-                <DetailsBorrowMoney BorrowDataSet={getFilteredData()} />
-            )}
+            <TransactionComponent>
+                {rightCard === 'on' ? (
+                    <DetailsReceiveMoney ReceiveDataSet={getFilteredData()} />
+                ) : (
+                    <DetailsBorrowMoney BorrowDataSet={getFilteredData()} />
+                )}
+            </TransactionComponent>
         </ThemeProvider>
     );
 };
+
+const TransactionComponent = styled.div`
+    margin-top: 50px;
+    overflow: auto; /* 내용이 넘칠 경우 스크롤바 표시 */
+    height: 40vh;
+`;
 
 const InnerRow1 = styled.div`
     width: 100%;
