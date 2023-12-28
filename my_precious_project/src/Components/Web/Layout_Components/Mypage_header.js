@@ -9,7 +9,7 @@ const Navigation = styled.div`
   width: 100%;
   padding-top: 1.4375rem;
   flex-shrink: 0;
-  background: #FAFAFA;
+  background: ${(props) => (props.bgcolor === "gray" ? "#FAFAFA" : "#E5E5E5")};
   justify-content: space-between;
   align-items: start;
 `;
@@ -20,7 +20,7 @@ const LogoBtn =styled.button`
   margin: 0;
   margin-left: 2.9375rem;
   border: none;
-  background-color: #FAFAFA;
+  background-color: ${(props) => (props.bgcolor === "gray" ? "#FAFAFA" : "#E5E5E5")};
  
   font-family: Quanta Grotesk Pro;
   font-size: 1.25rem;
@@ -32,7 +32,7 @@ const LogoBtn =styled.button`
 
 const NavRightSideDiv = styled.div`
   display: flex;
-  background-color: #FAFAFA;
+  background-color: ${(props) => (props.bgcolor === "gray" ? "#FAFAFA" : "#E5E5E5")};
   border: none;
   width: 12.75rem;
   margin-right: 2.9375rem;
@@ -40,7 +40,7 @@ const NavRightSideDiv = styled.div`
 `
 const AboutBtn =styled.button`
   display: flex;
-  background-color: #FAFAFA;
+  background-color: ${(props) => (props.bgcolor === "gray" ? "#FAFAFA" : "#E5E5E5")};
   border: none;
   padding: 0;
   margin: 0;
@@ -57,7 +57,7 @@ const AboutBtn =styled.button`
 
 const DashboardBtn = styled.button`
   display: flex;
-  background-color: #FAFAFA;
+  background-color: ${(props) => (props.bgcolor === "gray" ? "#FAFAFA" : "#E5E5E5")};
   border: none;
   padding: 0;
   margin: 0;

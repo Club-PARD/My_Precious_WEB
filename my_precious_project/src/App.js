@@ -7,6 +7,7 @@ import { theme } from './Style/theme';
 import LoginPage from './Page/LoginPage';
 import RequestPage from './Page/RequestPage.js';
 import DashboardPage from './Page/DashboardPage.js';
+import RequestDetailPage from './Page/RequestDetailPage.js';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/request" element={<RequestPage />} />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/requestdetail" element={<RequestDetailPage />} />
                 </Routes>
             </Router>
         </ThemeProvider>
