@@ -229,6 +229,7 @@ const Container = styled.div`
     align-items: center;
     background: #fafafa;
     height: 100vh;
+    overflow-y: hidden;
 `;
 
 const ContentsDiv = styled.div`

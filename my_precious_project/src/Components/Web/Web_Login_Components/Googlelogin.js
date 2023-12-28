@@ -1,9 +1,42 @@
-//import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import { useNavigate } from 'react-router-dom';
 import Userheart from '../../../Assets/img/Userheart.png';
-import {handleGoogleLogin} from "../../../API/googleLogin.js"
+import { handleGoogleLogin } from '../../../API/googleLogin.js';
+import { UserContext } from '../../../contexts/userContext';
+
+const Googlelogin = () => {
+    const [logInData, setLogInData] = useContext(UserContext);
+    const theme = useTheme();
+    const googleLogin = () => {
+        handleGoogleLogin(setLogInData);
+    };
+    return (
+        <ThemeProvider theme={theme}>
+            <Container>
+                <LayoutDiv>
+                    <ContentDiv>
+                        <WelcomeText>환영합니다.</WelcomeText>
+                        <IntroDiv>
+                            <IntroductionText>지금 함께 하면 머니글러브의 </IntroductionText>
+                            <MuggleCount> 7,942번째 머글</MuggleCount>
+                            <IntroductionText>이 되어요!</IntroductionText>
+                        </IntroDiv>
+                        <IntroductionText>
+                            여러분의 돈과 관계를 소중히 지켜드립니다. 함께 해주시겠어요?
+                        </IntroductionText>
+                        <img src={Userheart} alt="유저와 하트 이미지" style={{ marginTop: '10px' }}></img>
+                        <GoogleLoginBtn onClick={googleLogin}>Google로 로그인</GoogleLoginBtn>
+                        <GuideText>
+                            구글 로그인과 간단한 3가지 추가 정보만<br></br> 입력하면 회원가입이 완료되어요.
+                        </GuideText>
+                    </ContentDiv>
+                </LayoutDiv>
+            </Container>
+        </ThemeProvider>
+    );
+};
 
 const Container = styled.div`
     display: flex;
@@ -29,7 +62,7 @@ const ContentDiv = styled.div`
 
 const WelcomeText = styled.div`
     display: flex;
-    color: #FF3D00;
+    color: #ff3d00;
 
     text-align: center;
     font-family: Pretendard;
@@ -48,7 +81,7 @@ const IntroDiv = styled.div`
 
 const IntroductionText = styled.div`
     display: flex;
-    color: #0F0F0F;
+    color: #0f0f0f;
 
     text-align: center;
     font-family: Pretendard;
@@ -60,7 +93,7 @@ const IntroductionText = styled.div`
 
 const MuggleCount = styled.span`
     display: flex;
-    color: #0F0F0F;
+    color: #0f0f0f;
     height: 32px;
     font-family: Pretendard;
     font-size: 20px;
@@ -76,13 +109,13 @@ const GoogleLoginBtn = styled.button`
     height: 63px;
     flex-shrink: 0;
     border-radius: 11px;
-    background: var(--primary_orange, #FF3D00);
+    background: var(--primary_orange, #ff3d00);
     border: none;
     justify-content: center;
     align-items: center;
     margin-top: 27px;
 
-    color: #F5F5F5;
+    color: #f5f5f5;
     font-family: Pretendard;
     font-size: 22px;
     font-style: normal;
@@ -93,7 +126,7 @@ const GoogleLoginBtn = styled.button`
 
 const GuideText = styled.div`
     display: flex;
-    color: #BFB9B9;
+    color: #bfb9b9;
     padding-top: 15px;
 
     text-align: center;
@@ -103,29 +136,5 @@ const GuideText = styled.div`
     font-weight: 600;
     line-height: 22px;
 `;
-
-const Googlelogin = () => {
-    const theme = useTheme();
-    return (
-        <ThemeProvider theme={theme}>
-            <Container>
-            <LayoutDiv>
-                <ContentDiv>
-                    <WelcomeText>환영합니다.</WelcomeText>
-                        <IntroDiv>
-                            <IntroductionText>지금 함께 하면 머니글러브의 </IntroductionText>
-                            <MuggleCount> 7,942번째 머글</MuggleCount>
-                            <IntroductionText>이 되어요!</IntroductionText>
-                        </IntroDiv>
-                    <IntroductionText>여러분의 돈과 관계를 소중히 지켜드립니다. 함께 해주시겠어요?</IntroductionText>
-                    <img src={Userheart} alt='유저와 하트 이미지' style={{marginTop:"10px"}}></img>
-                    <GoogleLoginBtn onClick={handleGoogleLogin}>Google로 로그인</GoogleLoginBtn>
-                    <GuideText>구글 로그인과 간단한 3가지 추가 정보만<br></br> 입력하면 회원가입이 완료되어요.</GuideText>
-                </ContentDiv>
-            </LayoutDiv>
-            </Container>
-        </ThemeProvider>
-    );
-};
 
 export default Googlelogin;
