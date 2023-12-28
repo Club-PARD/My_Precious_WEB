@@ -9,9 +9,17 @@ const Navigation = styled.div`
   width: 100%;
   padding-top: 1.4375rem;
   flex-shrink: 0;
-  background: ${(props) => (props.bgcolor === "gray" ? "#FAFAFA" : "#E5E5E5")};
+  background: ${(props) => (props.bgcolor === 1 ? "#E5E5E5" : "#FAFAFA")};
   justify-content: space-between;
   align-items: start;
+
+  & button {
+    background: ${(props) => (props.bgcolor === 1 ? "#E5E5E5" : "#FAFAFA")};
+  }
+
+  & div {
+    background: ${(props) => (props.bgcolor === 1 ? "#E5E5E5" : "#FAFAFA")};
+  }
 `;
 
 const LogoBtn =styled.button`
@@ -20,7 +28,6 @@ const LogoBtn =styled.button`
   margin: 0;
   margin-left: 2.9375rem;
   border: none;
-  background-color: ${(props) => (props.bgcolor === "gray" ? "#FAFAFA" : "#E5E5E5")};
  
   font-family: Quanta Grotesk Pro;
   font-size: 1.25rem;
@@ -32,7 +39,6 @@ const LogoBtn =styled.button`
 
 const NavRightSideDiv = styled.div`
   display: flex;
-  background-color: ${(props) => (props.bgcolor === "gray" ? "#FAFAFA" : "#E5E5E5")};
   border: none;
   width: 12.75rem;
   margin-right: 2.9375rem;
@@ -40,7 +46,6 @@ const NavRightSideDiv = styled.div`
 `
 const AboutBtn =styled.button`
   display: flex;
-  background-color: ${(props) => (props.bgcolor === "gray" ? "#FAFAFA" : "#E5E5E5")};
   border: none;
   padding: 0;
   margin: 0;
@@ -57,7 +62,6 @@ const AboutBtn =styled.button`
 
 const DashboardBtn = styled.button`
   display: flex;
-  background-color: ${(props) => (props.bgcolor === "gray" ? "#FAFAFA" : "#E5E5E5")};
   border: none;
   padding: 0;
   margin: 0;
@@ -73,12 +77,12 @@ const DashboardBtn = styled.button`
   cursor: pointer;
 `;
 
-const Header = () => {
+const Header = (props) => {
     const theme = useTheme();
 
     return (
         <ThemeProvider theme={theme}>
-           <Navigation>
+           <Navigation bgcolor={props.color}>
               <LogoBtn>MONEY GLOVE!</LogoBtn>
               <NavRightSideDiv>
                 <AboutBtn>ABOUT US</AboutBtn>

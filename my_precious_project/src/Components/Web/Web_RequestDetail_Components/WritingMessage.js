@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 //import { Link } from 'react-router-dom';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
+import BankSelect from './BankSelect.js';
 
 const Container = styled.div`
     display: flex;
@@ -36,25 +37,27 @@ const Form =styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 1.5rem;
+    padding-top: 1.5rem;
 `;
 
-const Input1 = styled.input`
-display: flex;
-    width: 28.125rem;
-    height: 5.875rem;
+const Input1 = styled.textarea`
+    display: flex;
+    width: 25.4375rem;
+    height: 3.875rem;
     flex-shrink: 0;
     overflow: auto;
     border-radius: 0.625rem;
     border: 0.0625rem solid var(--grey-Grey_2, #D9D9D9);
+    padding: 1rem 1.31rem 1rem 1.31rem;
+    resize: none; 
 
     &::placeholder {
         color: var(--grey-Grey_3, #B3B3B3);
-    font-family: Pretendard;
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1.25rem;
+        font-family: Pretendard;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.25rem; 
     }
 `;
 
@@ -87,6 +90,7 @@ const InputBoxDiv = styled.div`
     flex-shrink: 0;
     border-radius:  0.625rem;
     border: 0.0625rem solid var(--grey-Grey_2, #D9D9D9);
+    padding: 0;
 
     color: var(--grey-Grey_4, #8E8E8E);
     font-family: Pretendard;
@@ -102,7 +106,7 @@ const GaryText = styled.div`
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 600;
-    line-height:  2.4375rem; /* 278.571% */
+    line-height: 2.4375rem; 
     padding-left: 0.9375rem;
 `;
 
@@ -117,7 +121,7 @@ const Input2 = styled.input`
         font-size: 0.75rem;
         font-style: normal;
         font-weight: 500;
-        line-height: 2.4375rem; /* 325% */
+        line-height: 2.4375rem;
     }
 
 `;
@@ -133,8 +137,9 @@ const SelectBank = styled.div`
 `;
 
 const Input3 =styled.input`
-    width: 18.005rem;
+    width: 16rem;
     border: none;
+    margin-left: 0.5rem;
 
     &::placeholder {
         color: var(--grey-Grey_3, #B3B3B3);
@@ -150,23 +155,55 @@ const Input3 =styled.input`
 function WritingMessage() {
     const theme = useTheme();
 
+    //임의로 지정한 인풋 값 변수
+    const [input1, setInput1] = useState('');
+    const [input2, setInput2] = useState('');
+    const [input3, setInput3] = useState("");
+    const [selectedBank, setSelectedBank] = useState(null);
+
+    // 버튼 활성화 여부를 결정할 상태 추가
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+    const handleSubmit = (event) => {
+        console.log('확인 함수 호출됨');
+        // 기본 양식 제출 동작 방지
+        event.preventDefault();
+    };
+
+    // 모든 인풋 값이 비어있지 않은지 확인하는 함수
+    const areInputsFilled = useCallback(() => {
+        const result =  input1.trim() !== '' && input2.trim() !== '' && input3.trim() !== ''&& selectedBank !== null;
+        console.log('입력값이 채워졌는지:', result);
+        return result;
+    }, [input1, input2, input3, selectedBank]);
+
+    // 입력값이 변경될 때마다 버튼 상태 업데이트
+    useEffect(() => {
+        setIsButtonDisabled(!areInputsFilled());
+    }, [input1, input2, input3,selectedBank, areInputsFilled]);
 
     return (
         <ThemeProvider theme={theme}>
             <Container>
                 <TitleText>꼭 송금한 이후 작성해주세요.</TitleText>
-                <Form>
-                    <Input1 type='text' placeholder='친구에게 간단한 응원 메세지를 함께 남겨보세요. 머니글러브가 도움을 잘 \n 간직하고 있을게요. 해당글은 현지님이 계속해서 볼 수 있어요.'></Input1>
-                        <InputBoxDiv  style={{marginTop:"1.5rem"}} >
+                <Form onSubmit={handleSubmit}>
+                    <Input1 type='text' placeholder='친구에게 간단한 응원 메세지를 함께 남겨보세요. 머니글러브가 도움을 잘 간직하고 있을게요. 해당글은 현지님이 계속해서 볼 수 있어요.'
+                    onChange={(e) => setInput1(e.target.value)}></Input1>
+                        <InputBoxDiv style={{marginTop:"1.31rem"}} >
                             <GaryText>빌려준 금액</GaryText>
-                            <Input2 type='text' placeholder='금액을 선정할 때, 절대 무리해서  빌려주지 않도록 유의해주세요!'></Input2>
+                            <Input2 type='text' placeholder='금액을 선정할 때, 절대 무리해서 빌려주지 않도록 유의해주세요!'
+                            value={input2}
+                            onChange={(e) => setInput2(e.target.value.replace(/\D/, ''))}></Input2>
                         </InputBoxDiv>
                         <InputBoxDiv style={{marginTop: "0.5rem"}}>
-                            <GaryText>돌려받을 계좌</GaryText>
-                            <SelectBank>은행명</SelectBank>
-                            <Input3 type='text' placeholder='계좌번호'></Input3>
+                            <GaryText style={{paddingRight: "0.88rem"}}>돌려받을 계좌</GaryText>
+                            <BankSelect setSelectedBank={setSelectedBank} />
+                            <Input3 type='text' placeholder='계좌번호'
+                            value={input3}
+                            onChange={(e) => setInput3(e.target.value.replace(/\D/, ''))}
+                            ></Input3>
                         </InputBoxDiv>
-                    <SaveButton>저장하기</SaveButton>
+                    <SaveButton disabled={isButtonDisabled} >저장하기</SaveButton>
                 </Form>
             </Container>
         </ThemeProvider>

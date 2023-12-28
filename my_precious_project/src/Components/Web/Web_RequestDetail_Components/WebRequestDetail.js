@@ -15,6 +15,7 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   height: 100vh;
+  width: 100%;
   align-items: center;
   background:  #E5E5E5; 
 `;
@@ -32,7 +33,7 @@ function WebRequestDetail() {
     return (
         <ThemeProvider theme={theme}>
             <Container>
-                <Header bgColor="gray"/>
+                <Header color={1}/>
                 <Div>
                     <LeftSide/>
                     <RightSide/>

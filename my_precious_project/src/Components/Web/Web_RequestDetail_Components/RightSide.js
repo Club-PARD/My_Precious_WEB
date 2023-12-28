@@ -47,7 +47,7 @@ function RightSide(props) {
 
     return (
         <ThemeProvider theme={theme}>
-            {clickstate ===true ? (
+            {clickstate ===false ? (
             <BorrowButton onClick={handleBurrowConfirmation}>빌려주기</BorrowButton> ): (<WritingMessage/>)}
         </ThemeProvider>
     );
