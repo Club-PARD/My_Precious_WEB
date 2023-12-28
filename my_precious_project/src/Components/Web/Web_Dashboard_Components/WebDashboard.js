@@ -66,7 +66,7 @@ const ReceiveDataSet = [
         payBack: '100000',
         setYear: 2023,
         setMonth: 12,
-        setDay: 25,
+        setDay: 29,
         situation: '교수님이랑 같이 매장갔는데 돈이 없다해서 빌려줌',
         payWay: '현금으로 준다고 함',
         bank: '기업은행',
@@ -119,7 +119,16 @@ const WebDashboard = () => {
             }
         }
 
-        const CardDate = minNegativeDDay !== Number.MAX_SAFE_INTEGER ? `D+${maxPositiveDDay}` : `D${minNegativeDDay}`;
+        const CardDate =
+            minNegativeDDay !== Number.MAX_SAFE_INTEGER
+                ? maxPositiveDDay > 0
+                    ? `D+${maxPositiveDDay}`
+                    : maxPositiveDDay === 0
+                    ? 'D-Day'
+                    : `D${maxPositiveDDay}`
+                : minNegativeDDay === 0
+                ? 'D-Day'
+                : `D${minNegativeDDay}`;
 
         return {
             CardCount,
@@ -153,7 +162,16 @@ const WebDashboard = () => {
             }
         }
 
-        const CardDate = minNegativeDDay !== Number.MAX_SAFE_INTEGER ? `D+${maxPositiveDDay}` : `D${minNegativeDDay}`;
+        const CardDate =
+            minNegativeDDay !== Number.MAX_SAFE_INTEGER
+                ? maxPositiveDDay > 0
+                    ? `D+${maxPositiveDDay}`
+                    : maxPositiveDDay === 0
+                    ? 'D-Day'
+                    : `D${maxPositiveDDay}`
+                : minNegativeDDay === 0
+                ? 'D-Day'
+                : `D${minNegativeDDay}`;
 
         return {
             CardCount,

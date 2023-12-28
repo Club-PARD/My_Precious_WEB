@@ -19,7 +19,7 @@ function CircleProgressbar({ totalMoney, debtMoney, index }) {
     useEffect(() => {
         const startPercent = 0;
         const endPercent = (inputValue / startValue) * 100;
-        const duration = 1000;
+        const duration = 2000;
         let startTime;
         let animationFrame;
 

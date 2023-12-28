@@ -48,7 +48,11 @@ const DetailsBorrowMoney = ({ BorrowDataSet = [] }) => {
                                 </UserDateTextDiv>
                             </DetialsExplain>
                             <DisplayDday>
-                                {differenceDays >= 0 ? `D+${differenceDays}` : `D${differenceDays}`}
+                                {differenceDays > 0
+                                    ? `D+${differenceDays}`
+                                    : differenceDays === 0
+                                    ? 'D-Day'
+                                    : `D${differenceDays}`}
                             </DisplayDday>
                         </DisplayBorderBottom>
                     </Container>

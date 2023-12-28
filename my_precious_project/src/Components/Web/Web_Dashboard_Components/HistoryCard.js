@@ -46,6 +46,8 @@ const CardContiner = styled.button`
     padding: 0;
     cursor: pointer;
 
+    transition: background 0.3s ease-in-out;
+
     &:hover {
         background: ${(props) => (props.state === 'on' ? '#504F4F' : '#FF3D00')};
 
@@ -95,7 +97,6 @@ const TotalMoney = styled.div`
     color: #fff;
     width: 90%;
     height: 38px;
-
     font-family: Pretendard;
     font-size: 32px;
     font-style: normal;
@@ -110,7 +111,6 @@ const Dday = styled.div`
     margin-top: 39px;
     margin-left: 17px;
     padding: 6px 9px 6px 9px;
-
     flex-shrink: 0;
     border-radius: 4px;
     background: #f0f0f0;
@@ -122,6 +122,8 @@ const Dday = styled.div`
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+
+    transition: color 0.3s ease-in-out;
 `;
 
 export default HistoryCard;

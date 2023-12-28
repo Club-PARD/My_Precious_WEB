@@ -20,16 +20,16 @@ function ButtonMenu({ handleMenuChange }) {
         <Container>
             <StyledUl>
                 <StyledLi onClick={() => handleClick(0)}>
-                    <StyledA href="#">전체</StyledA>
+                    <StyledButton href="#">전체</StyledButton>
                 </StyledLi>
                 <StyledLi onClick={() => handleClick(25)}>
-                    <StyledA href="#">진행 중</StyledA>
+                    <StyledButton href="#">진행 중</StyledButton>
                 </StyledLi>
                 <StyledLi onClick={() => handleClick(50)}>
-                    <StyledA href="#">연체 중</StyledA>
+                    <StyledButton href="#">연체 중</StyledButton>
                 </StyledLi>
                 <StyledLi onClick={() => handleClick(75)}>
-                    <StyledA href="#">완료</StyledA>
+                    <StyledButton href="#">완료</StyledButton>
                 </StyledLi>
             </StyledUl>
             <StyledHr marginLeft={marginLeft} isMoving={isMoving} />
@@ -57,12 +57,16 @@ const StyledLi = styled.li`
     width: 25%;
 `;
 
-const StyledA = styled.a`
+const StyledButton = styled.button`
     display: inline-block;
     width: 100%;
     margin: 0;
     text-decoration: none;
     color: #333;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
 `;
 
 const shrink = keyframes`
