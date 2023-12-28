@@ -7,7 +7,7 @@ const Navigation = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding-top: 23px;
+  padding-top: 1.4375rem;
   flex-shrink: 0;
   background: #FAFAFA;
   justify-content: space-between;
@@ -18,12 +18,12 @@ const LogoBtn =styled.button`
   color: #FF3D00;
   padding: 0;
   margin: 0;
-  margin-left: 47px;
+  margin-left: 2.9375rem;
   border: none;
   background-color: #FAFAFA;
  
   font-family: Quanta Grotesk Pro;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -34,8 +34,8 @@ const NavRightSideDiv = styled.div`
   display: flex;
   background-color: #FAFAFA;
   border: none;
-  width: 204px;
-  margin-right: 47px;
+  width: 12.75rem;
+  margin-right: 2.9375rem;
   align-items: start;
 `
 const AboutBtn =styled.button`
@@ -48,7 +48,7 @@ const AboutBtn =styled.button`
   color: #504F4F;
 
   font-family: Work Sans;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -61,12 +61,12 @@ const DashboardBtn = styled.button`
   border: none;
   padding: 0;
   margin: 0;
-  margin-left: 41px;
+  margin-left: 2.5625rem;
 
   color: #FF3D00;
 
   font-family: Work Sans;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;

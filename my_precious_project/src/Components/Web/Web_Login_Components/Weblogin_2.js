@@ -127,24 +127,24 @@ const ContentBox = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 400px;
+    width: 25rem;
 `;
 const InnerRow1 = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 155px;
-    margin-bottom: 50px;
+    margin-top: 9.6875rem;
+    margin-bottom: 3.125rem;
 `;
 
 const InnerRow2 = styled.div`
     color: #000;
     text-align: center;
-    font-size: 32px;
+    font-size: 2rem;
     font-weight: 600;
-    line-height: 50px;
+    line-height: 3.125rem;
     width: 100%;
-    margin-bottom: 100px;
+    margin-bottom: 6.25rem;
 `;
 
 const InnerRow3 = styled.div`
@@ -152,7 +152,7 @@ const InnerRow3 = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 500;
     color: #d9d9d9;
 `;
@@ -161,17 +161,17 @@ const Label1 = styled.label`
     position: relative;
     width: 100%;
     input {
-        margin-top: 30px;
-        width: 400px;
-        height: 55px;
-        border: 1.5px solid #ff3d00;
-        border-radius: 6.5px;
-        text-indent: 55px;
-        font-size: 20px;
+        margin-top: 1.875rem;
+        width: 25rem;
+        height: 3.4375rem;
+        border: 0.09375rem solid #ff3d00;
+        border-radius:  0.40625rem;
+        text-indent: 3.4375rem;
+        font-size: 1.25rem;
         font-weight: 500;
         &::placeholder {
             color: #d9d9d9;
-            font-size: 20px;
+            font-size: 1.25rem;
             font-weight: 500;
         }
     }
@@ -180,14 +180,14 @@ const Label1 = styled.label`
     }
     button {
         position: absolute;
-        margin-top: 31px;
+        margin-top: 1.9375rem;
         right: 0;
-        width: 150px;
-        height: 58px;
-        border-radius: 6.5px;
+        width: 9.375rem;
+        height: 3.625rem;
+        border-radius: 0.40625rem;
         border: none;
         color: white;
-        font-size: 20px;
+        font-size: 1.25rem;
         font-weight: 500;
         background-color: #ff3d00;
         cursor: pointer;
@@ -198,17 +198,17 @@ const Label2 = styled.label`
     position: relative;
     width: 100%;
     input {
-        margin-top: 30px;
-        width: 400px;
-        height: 55px;
-        border: 1.5px solid #ff3d00;
-        border-radius: 6.5px;
-        text-indent: 55px;
-        font-size: 20px;
+        margin-top:  1.875rem;
+        width: 25rem;
+        height: 3.4375rem;
+        border:  0.09375rem solid #ff3d00;
+        border-radius: 0.40625rem;
+        text-indent: 3.4375rem;
+        font-size: 1.25rem;
         font-weight: 500;
         &::placeholder {
             color: #d9d9d9;
-            font-size: 20px;
+            font-size: 1.25rem;
             font-weight: 500;
         }
     }
@@ -217,14 +217,14 @@ const Label2 = styled.label`
     }
     button {
         position: absolute;
-        margin-top: 31px;
+        margin-top: 1.9375rem;
         right: 0;
-        width: 150px;
-        height: 58px;
-        border-radius: 6.5px;
+        width: 9.375rem;
+        height: 3.625rem;
+        border-radius: 0.40625rem;
         border: none;
         color: white;
-        font-size: 20px;
+        font-size: 1.25rem;
         font-weight: 500;
         background-color: #ff3d00;
         cursor: pointer;
