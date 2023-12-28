@@ -17,8 +17,6 @@
 |**나이**|26|25|23|24|23|25|
 
 ## 📄 Stack
-
-## 💻 개발환경 및 언어 
 ![React](https://img.shields.io/badge/react-444444?style=for-the-badge&logo=react) 
 <img src="https://img.shields.io/badge/html5-E34F26?style=flat-square&logo=html5&logoColor=white"> 
 ![css3](https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3) 
