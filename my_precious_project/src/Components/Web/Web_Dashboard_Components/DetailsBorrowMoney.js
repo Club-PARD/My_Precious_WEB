@@ -39,7 +39,7 @@ const DetailsBorrowMoney = ({ BorrowDataSet = [] }) => {
                                 <UserDateTextDiv>
                                     <ReasonText>{data.title}</ReasonText>
                                     <Row style={{ gap: '8px' }}>
-                                        <UserDataText>{data.borrowMoney}</UserDataText>
+                                        <UserDataText>{Number(data.borrowMoney).toLocaleString()}</UserDataText>
                                         <GrayText>원</GrayText>
                                     </Row>
                                     <Row style={{ gap: '3px' }}>
@@ -49,7 +49,6 @@ const DetailsBorrowMoney = ({ BorrowDataSet = [] }) => {
                                                 '0'
                                             )}`}
                                         </UserDataText>
-                                        <GrayText>일</GrayText>
                                     </Row>
                                 </UserDateTextDiv>
                             </DetialsExplain>

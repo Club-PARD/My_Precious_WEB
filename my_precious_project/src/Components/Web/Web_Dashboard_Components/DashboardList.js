@@ -18,8 +18,8 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
     };
 
     // selectedMenu에 따라서 필터링된 데이터 반환
-    const getFilteredData = () => {
-        const currentDate = new Date(); // 현재 날짜를 가져옴
+    const getFilteredData = (selectedMenu) => {
+        const currentDate = new Date();
         let percentage;
         let dataSet;
 
@@ -34,48 +34,68 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
         if (selectedMenu === 25) {
             // 진행 중
             return dataSet.filter((data) => {
-                const setDateTime = new Date(data.setYear, data.setMonth - 1, data.setDay);
+                const setDate = data.setDate.toString();
+                const setYear = parseInt(setDate.slice(0, 4));
+                const setMonth = parseInt(setDate.slice(4, 6));
+                const setDay = parseInt(setDate.slice(6, 8));
+                const setDateTime = new Date(setYear, setMonth - 1, setDay);
                 const differenceTime = setDateTime - currentDate;
                 const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
-
-                // TODO: 조건에 따라 필터링
                 return differenceDays > 0 && percentage(data) < 100;
             });
         } else if (selectedMenu === 50) {
             // 연체 중
             return dataSet.filter((data) => {
-                const setDateTime = new Date(data.setYear, data.setMonth - 1, data.setDay);
+                const setDate = data.setDate.toString();
+                const setYear = parseInt(setDate.slice(0, 4));
+                const setMonth = parseInt(setDate.slice(4, 6));
+                const setDay = parseInt(setDate.slice(6, 8));
+                const setDateTime = new Date(setYear, setMonth - 1, setDay);
                 const differenceTime = setDateTime - currentDate;
                 const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
-
-                // TODO: 조건에 따라 필터링
                 return differenceDays <= 0 && percentage(data) < 100;
             });
         } else if (selectedMenu === 75) {
             // 완료
-            return dataSet.filter((data) => {
-                // TODO: 조건에 따라 필터링
-                return percentage(data) >= 100;
-            });
+            return dataSet.filter((data) => percentage(data) >= 100);
         } else {
             // 전체
             return dataSet;
         }
     };
+
+    // 각 메뉴에 대한 데이터 수를 계산하는 함수
+    const getMenuDataCounts = () => {
+        let dataSet;
+        if (rightCard === 'on') {
+            dataSet = ReceiveDataSet;
+        } else {
+            dataSet = BorrowDataSet;
+        }
+
+        // 이 부분은 실제 데이터 수를 계산하는 로직에 맞게 수정해야 합니다.
+        const allCount = dataSet.length;
+        const inProgressCount = getFilteredData(25).length;
+        const overdueCount = getFilteredData(50).length;
+        const doneCount = getFilteredData(75).length;
+
+        return [allCount, inProgressCount, overdueCount, doneCount];
+    };
+
     return (
         <ThemeProvider theme={theme}>
-            <ButtonMenu handleMenuChange={handleMenuChange} />
+            <ButtonMenu handleMenuChange={handleMenuChange} dataCounts={getMenuDataCounts()} />
             <InnerRow1>
-                <ListTitle>최근 빌린 거래 전체 목록</ListTitle>
+                <ListTitle>{rightCard === 'on' ? '최근 빌려준 거래 전체 목록' : '최근 빌린 거래 전체 목록'}</ListTitle>
                 <AddButtonDiv>
                     <TransactionAddButton>+ 새 거래 추가하기</TransactionAddButton>
                 </AddButtonDiv>
             </InnerRow1>
             <TransactionComponent>
                 {rightCard === 'on' ? (
-                    <DetailsReceiveMoney ReceiveDataSet={getFilteredData()} />
+                    <DetailsReceiveMoney ReceiveDataSet={getFilteredData(selectedMenu)} />
                 ) : (
-                    <DetailsBorrowMoney BorrowDataSet={getFilteredData()} />
+                    <DetailsBorrowMoney BorrowDataSet={getFilteredData(selectedMenu)} />
                 )}
             </TransactionComponent>
         </ThemeProvider>

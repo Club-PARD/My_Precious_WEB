@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import Cash from '../../../Assets/img/Money.svg';
 
-function ButtonMenu({ handleMenuChange }) {
+function ButtonMenu({ handleMenuChange, dataCounts }) {
     const [marginLeft, setMarginLeft] = useState(0);
     const [isMoving, setIsMoving] = useState(false);
 
@@ -20,16 +21,41 @@ function ButtonMenu({ handleMenuChange }) {
         <Container>
             <StyledUl>
                 <StyledLi onClick={() => handleClick(0)}>
-                    <StyledButton href="#">전체</StyledButton>
+                    <StyledButton href="#">
+                        <FirstMenu>
+                            <ButtonImgContainer>
+                                <MoneyImg src={Cash} alt="돈 아이콘" />
+                            </ButtonImgContainer>
+                            <MenuContainer>
+                                <MenuName>전체</MenuName>
+                                <MenuCount>{dataCounts[0]}건</MenuCount>
+                            </MenuContainer>
+                        </FirstMenu>
+                    </StyledButton>
                 </StyledLi>
                 <StyledLi onClick={() => handleClick(25)}>
-                    <StyledButton href="#">진행 중</StyledButton>
+                    <StyledButton href="#">
+                        <MenuContainer>
+                            <SameMenuName>진행 중</SameMenuName>
+                            <SameMenuCount>{dataCounts[1]}건</SameMenuCount>
+                        </MenuContainer>
+                    </StyledButton>
                 </StyledLi>
                 <StyledLi onClick={() => handleClick(50)}>
-                    <StyledButton href="#">연체 중</StyledButton>
+                    <StyledButton href="#">
+                        <MenuContainer>
+                            <SameMenuName>연체 중</SameMenuName>
+                            <SameMenuCount>{dataCounts[2]}건</SameMenuCount>
+                        </MenuContainer>
+                    </StyledButton>
                 </StyledLi>
                 <StyledLi onClick={() => handleClick(75)}>
-                    <StyledButton href="#">완료</StyledButton>
+                    <StyledButton href="#">
+                        <MenuContainer>
+                            <SameMenuName>완료</SameMenuName>
+                            <SameMenuCount>{dataCounts[3]}건</SameMenuCount>
+                        </MenuContainer>
+                    </StyledButton>
                 </StyledLi>
             </StyledUl>
             <StyledHr marginLeft={marginLeft} isMoving={isMoving} />
@@ -92,6 +118,51 @@ const StyledHr = styled.hr`
         css`
             animation: ${shrink} 0.5s linear;
         `}
+`;
+const MenuContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+`;
+const ButtonImgContainer = styled.div`
+    margin-left: 30px;
+`;
+
+const MoneyImg = styled.img`
+    width: 22px;
+    height: 22px;
+`;
+
+const MenuName = styled.div`
+    color: #676767;
+    font-weight: 600;
+    font-size: 16px;
+    margin-right: 10px;
+`;
+const MenuCount = styled.div`
+    color: #494949;
+    font-weight: 600;
+    font-size: 16px;
+    margin-right: 30px;
+`;
+
+const SameMenuName = styled.div`
+    color: #676767;
+    font-weight: 600;
+    font-size: 16px;
+    margin-right: 13px;
+`;
+const SameMenuCount = styled.div`
+    color: #494949;
+    font-weight: 600;
+    font-size: 16px;
+`;
+
+const FirstMenu = styled.div`
+    display: flex;
+    flex-direction: row;
 `;
 
 export default ButtonMenu;

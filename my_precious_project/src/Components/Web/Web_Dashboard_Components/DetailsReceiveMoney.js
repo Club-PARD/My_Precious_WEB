@@ -39,7 +39,7 @@ const DetailsReceiveMoney = ({ ReceiveDataSet = [] }) => {
                                 <UserDateTextDiv>
                                     <ReasonText>{data.title}</ReasonText>
                                     <Row style={{ gap: '8px' }}>
-                                        <UserDataText>{data.receiveMoney}</UserDataText>
+                                        <UserDataText>{Number(data.receiveMoney).toLocaleString()}</UserDataText>
                                         <GrayText>원</GrayText>
                                     </Row>
                                     <Row style={{ gap: '3px' }}>
@@ -49,7 +49,6 @@ const DetailsReceiveMoney = ({ ReceiveDataSet = [] }) => {
                                                 '0'
                                             )}`}
                                         </UserDataText>
-                                        <GrayText>일</GrayText>
                                     </Row>
                                 </UserDateTextDiv>
                             </DetialsExplain>
