@@ -126,20 +126,11 @@ const Input2 = styled.input`
 
 `;
 
-const SelectBank = styled.div`
-    color: var(--grey-Grey_3, #B3B3B3);
-    text-align: right;
-    font-family: Pretendard;
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 2.4375rem; /* 325% */
-`;
-
 const Input3 =styled.input`
-    width: 16rem;
+    width: 15rem;
     border: none;
     margin-left: 0.5rem;
+    border-radius:  0.625rem;
 
     &::placeholder {
         color: var(--grey-Grey_3, #B3B3B3);
@@ -168,6 +159,11 @@ function WritingMessage() {
         console.log('확인 함수 호출됨');
         // 기본 양식 제출 동작 방지
         event.preventDefault();
+
+        // input2에서 컴마 제거하고 숫자로 변환
+        const numericInput2 = parseFloat(input2.replace(/,/g, ''));
+
+        console.log(input1, numericInput2, input3, selectedBank);
     };
 
     // 모든 인풋 값이 비어있지 않은지 확인하는 함수
@@ -182,17 +178,33 @@ function WritingMessage() {
         setIsButtonDisabled(!areInputsFilled());
     }, [input1, input2, input3,selectedBank, areInputsFilled]);
 
+    //빌려준 금액 세자리마다 컴마 추가 함수
+    const formatAmount = (value) => {
+        // 비숫자 문자 제거하고 숫자로 변환
+        const numericValue = parseFloat(value.replace(/[^\d]/g, ''));
+
+        // 유효한 숫자인지 확인
+        if (!isNaN(numericValue)) {
+            // 세 자리 수마다 쉼표를 추가하여 숫자 형식화
+            const formattedValue = numericValue.toLocaleString('en-US');
+            return formattedValue;
+        }
+
+        return value;
+    };
+    
+
     return (
         <ThemeProvider theme={theme}>
             <Container>
                 <TitleText>꼭 송금한 이후 작성해주세요.</TitleText>
                 <Form onSubmit={handleSubmit}>
-                    <Input1 type='text' placeholder='친구에게 간단한 응원 메세지를 함께 남겨보세요. 머니글러브가 도움을 잘 간직하고 있을게요. 해당글은 현지님이 계속해서 볼 수 있어요.'
+                    <Input1 type='text' placeholder='친구에게 간단한 응원 메세지를 함께 남겨보세요. 머니글러브가 도움을 잘 간직하고 있을게요. 해당글은 머글님이 계속해서 볼 수 있어요.'
                     onChange={(e) => setInput1(e.target.value)}></Input1>
                         <InputBoxDiv style={{marginTop:"1.31rem"}} >
                             <GaryText>빌려준 금액</GaryText>
                             <Input2 type='text' placeholder='금액을 선정할 때, 절대 무리해서 빌려주지 않도록 유의해주세요!'
-                            value={input2}
+                            value={formatAmount(input2)}
                             onChange={(e) => setInput2(e.target.value.replace(/\D/, ''))}></Input2>
                         </InputBoxDiv>
                         <InputBoxDiv style={{marginTop: "0.5rem"}}>

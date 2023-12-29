@@ -3,20 +3,32 @@ import Select from 'react-select';
 //npm i react-select
 
 const options = [
-  { value: 'KB국민', label: 'KB국민' },
-  { value: '신한', label: '신한' },
-  { value: 'NH농협', label: 'NH농협' },
-  { value: '하나', label: '하나' },
-  { value: '우리', label: '우리' },
-  { value: 'IBK기업', label: 'IBK기업' },
-  { value: '대구', label: '대구' },
+  { value: '농협 은행', label: '농협 은행' },
+  { value: '카카오뱅크', label: '카카오뱅크' },
+  { value: '국민 은행', label: '국민 은행' },
+  { value: '신한 은행', label: '신한 은행' },
+  { value: '우리 은행', label: '우리 은행' },
+  { value: 'IBK기업 은행', label: 'IBK기업 은행' },
+  { value: '하나 은행 ', label: '하나 은행 ' },
+  { value: '새마을 은행', label: '새마을 은행' },
+  { value: '부산 은행', label: '부산 은행' },
+  { value: '대구 은행', label: '대구 은행' },
+  { value: '케이뱅크', label: '케이뱅크' },
+  { value: '신협 은행', label: '신협 은행' },
+  { value: '우체국 은행', label: '우체국 은행' },
+  { value: '경남 은행', label: '경남 은행' },
+  { value: '광주 은행', label: '광주 은행' },
+  { value: '수협 은행', label: '수협 은행' },
+  { value: '전북 은행', label: '전북 은행' },
+  { value: '저축 은행', label: '저축 은행' },
+  { value: '제주 은행', label: '제주 은행' },
 ];
 
 const customStyles = {
   control: (provided) => ({
     ...provided,
     padding: 0,
-    width: '3.75rem',
+    width: '5rem',
     //color: "#B3B3B3",
     border:"none",
     textAlign: "left",
@@ -26,6 +38,7 @@ const customStyles = {
     fontWeight: "500",
     lineHeight: '2.4375rem',
     magin: 0,
+    cursor: 'pointer'
   }),
   indicatorsContainer: (provided) => ({
     ...provided,
@@ -35,7 +48,7 @@ const customStyles = {
     ...provided,
     padding: 0,
     magin: 0,
-    width: ' 6.25rem',
+    width: '8rem',
     color: "#B3B3B3",
     textAlign: "left",
     fontFamily: "Pretendard",
@@ -62,7 +75,8 @@ const customStyles = {
     background: state.isSelected ? '#FF3D00' : 'white', // 선택된 목록의 배경색만 변경
     color: state.isSelected ? 'white' : 'black', // 선택된 목록의 글자색만 변경
     '&:hover': {
-        background: '#FFA500', // 호버 시 배경색 변경
+        background: '#D9D9D9', // 호버 시 배경색 변경
+        cursor: 'pointer',
       },
   }),
 };
