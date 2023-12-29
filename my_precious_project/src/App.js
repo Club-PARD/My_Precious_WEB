@@ -7,17 +7,13 @@ import { theme } from './Style/theme';
 import LoginPage from './Page/LoginPage';
 import RequestPage from './Page/RequestPage.js';
 import DashboardPage from './Page/DashboardPage.js';
-<<<<<<< HEAD
 import RequestDetailPage from './Page/RequestDetailPage.js';
-=======
->>>>>>> main
 import UserProvider from './contexts/userContext.js';
 
 function App() {
     return (
         <ThemeProvider theme={theme}>
             <UserProvider>
-<<<<<<< HEAD
             <Router>
                 <ScrollToTop />
                 
@@ -30,18 +26,6 @@ function App() {
                     <Route path="/requestdetail" element={<RequestDetailPage />} />
                 </Routes>
             </Router>
-=======
-                <Router>
-                    <ScrollToTop />
-                    <Routes>
-                        <Route path="/login/*" element={<LoginPage />} />
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="/request" element={<RequestPage />} />
-                        <Route path="/about" element={<AboutPage />} />
-                        <Route path="/dashboard" element={<DashboardPage />} />
-                    </Routes>
-                </Router>
->>>>>>> main
             </UserProvider>
         </ThemeProvider>
     );
