@@ -5,6 +5,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import LineProgress from './LineProgress.js';
 import Talk from '../../../Assets/img/Talk.svg';
+import CheckBox from '../../../Assets/img/CheckBox.svg';
 
 const Container = styled.div`
     position: relative;
@@ -16,7 +17,7 @@ const Container = styled.div`
     height: 47.8125rem;
     background: #FAFAFA;
     box-shadow: 0px  0.25rem  0.25rem 0px rgba(0, 0, 0, 0.25);
-    margin-top: 2.625rem;
+    margin-top: 2.6rem;
 `;
 
 const TotalColletMoney =styled.div`
@@ -43,6 +44,7 @@ const Image = styled.div`
     z-index: 1;
     display: flex;
     justify-content: center;
+    //align-items: center;
 `;
 
 const ImageText = styled.div`
@@ -54,7 +56,9 @@ const ImageText = styled.div`
     font-weight: 600;
     line-height: normal;
     width: 9.375rem;
+    //height: 2.125rem;
     padding-top: 0.75rem;
+    padding-left: 0.3rem;
 `;
 
 const StyleLineProgress =styled.div`
@@ -93,14 +97,15 @@ const DisplayBoxDiv =styled.div`
     flex-direction: column;
     width:  42.375rem;
     height: 29.1875rem;
-    border: 0.0625rem solid red;
+    //border: 0.0625rem solid red;
     margin-left:  2.375rem;
+    margin-top: 1.64rem;
 `;
 
 const Line = styled.div`
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: start;
 `;
 
 const DarkGrayText = styled.div`
@@ -135,6 +140,79 @@ const DisplayDataText =styled.div`
     font-weight: 600;
     line-height: 1.25rem;
     margin: 0.875rem 2.25rem 0.875rem 1.3125rem;
+    //align-items: center;
+    //overflow: auto;
+
+`;
+
+const DisplayDataTitleDiv = styled(DisplayDataDiv)`
+    height: 3.1875rem;
+    
+`;
+
+const DisplayDataTitleText = styled(DisplayDataText)`
+    display: flex;
+    //margin: 0.31rem 2.25rem 0.31rem 1.3125rem;
+    //margin: 0rem 2.25rem 0rem 1.3125rem;
+    width: 100%;
+`;
+
+const DisplayDataReasonDiv =styled(DisplayDataDiv)`
+    height: 7.9375rem;
+`;
+
+const DisplayDataReasonText =styled(DisplayDataText)`
+    color: #696666;
+    font-weight: 500;
+    //height: 100%;
+    width: 100%;
+`;
+
+const DisplayDataPlanDiv =styled(DisplayDataDiv)`
+    height: 5.3125rem;
+    //overflow-y: auto; 
+`;
+
+const DisplayDataPlanText = styled(DisplayDataText)`
+    //height: 100%;
+    color: #696969;
+    font-weight: 500;
+    width: 100%;
+`;
+
+const DisplayDataTotalDiv =styled(DisplayDataDiv)`
+    height: 2.4375rem;
+    justify-content: end;
+    align-items: center;
+`;
+const DisplayDataTotalText =styled.div`
+    color: #696969;
+    text-align: right;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.4375rem; /* 243.75% */
+    padding-right: 2.69rem;
+`;
+
+const SignDiv =styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 1.25rem;
+    padding-left: 4rem;
+    padding-top: 2.19rem;
+    align-items: center;
+`;
+
+const SignText = styled.div`
+    display: flex;
+    color: #A5A5A5;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.4375rem; /* 243.75% */
 `;
 
 function LeftSide() {
@@ -153,6 +231,13 @@ function LeftSide() {
         helpFriendCount: 2
     };
 
+    //받은 돈 숫자에서 문자 -> 컴마 추가
+    var receiveNumber = userData.receive;
+    var formattedNumber = receiveNumber.toLocaleString();
+    //필요한 돈 숫자에서 문자 -> 컴마 추가
+    var totaleNumber = userData.total;
+    var formattedNumber2 = totaleNumber.toLocaleString();
+
     return (
         <ThemeProvider theme={theme}>
             <Container>
@@ -167,17 +252,52 @@ function LeftSide() {
                 </StyleLineProgress>
                 <Row>
                     <Circle></Circle>
-                    <ReceivedMoney>{userData.receive}원 모였어요</ReceivedMoney>
+                    <ReceivedMoney>{formattedNumber}원 모였어요</ReceivedMoney>
                 </Row>
 
                 <DisplayBoxDiv>
                     <Line>
                         <DarkGrayText>제목</DarkGrayText>
-                        <DisplayDataDiv>
-                            <DisplayDataText>{userData.title}</DisplayDataText>
-                        </DisplayDataDiv>
+                        <DisplayDataTitleDiv >
+                            <DisplayDataTitleText>{userData.title}</DisplayDataTitleText>
+                        </DisplayDataTitleDiv>
+                    </Line>
+                    <Line style={{marginTop:"0.56rem"}}>
+                        <DarkGrayText>사유</DarkGrayText>
+                        <DisplayDataReasonDiv>
+                            <DisplayDataReasonText>{userData.reason}</DisplayDataReasonText>
+                        </DisplayDataReasonDiv>
+                    </Line>
+                    <Line style={{marginTop:"0.56rem"}}>
+                        <DarkGrayText style={{marginRight:"0.8rem"}}>상환 계획</DarkGrayText>
+                        <DisplayDataPlanDiv>
+                            <DisplayDataPlanText >{userData.plan}</DisplayDataPlanText>
+                        </DisplayDataPlanDiv>
+                    </Line>
+                    <Line style={{marginTop:"3.19rem"}}>
+                        <DarkGrayText style={{marginRight:"0.8rem"}}>필요 금액</DarkGrayText>
+                        <DisplayDataTotalDiv>
+                            <DisplayDataTotalText>{formattedNumber2} 원</DisplayDataTotalText>
+                        </DisplayDataTotalDiv>
+                    </Line>
+                    <Line style={{marginTop:"0.56rem"}}>
+                        <DarkGrayText style={{marginRight:"0.8rem"}}>갚을 날짜</DarkGrayText>
+                        <DisplayDataTotalDiv>
+                            <DisplayDataTotalText>{userData.date} </DisplayDataTotalText>
+                        </DisplayDataTotalDiv>
+                    </Line>
+                    <Line style={{marginTop:"0.56rem"}}>
+                        <DarkGrayText style={{marginRight:"0.8rem"}}>갚을 날짜</DarkGrayText>
+                        <DisplayDataTotalDiv>
+                            <DisplayDataTotalText>{userData.bank} {userData.account} </DisplayDataTotalText>
+                        </DisplayDataTotalDiv>
                     </Line>
                 </DisplayBoxDiv>
+                <SignDiv>
+                    <SignText>서약</SignText>
+                    <SignText>나 김현지는 2024년 02월 24일까지 돈을 갚을 것을 약속합니다.  감사합니다.</SignText>
+                    <img src={CheckBox} alt='체크박스 이미지'></img>
+                </SignDiv>
             </Container>
         </ThemeProvider>
     );

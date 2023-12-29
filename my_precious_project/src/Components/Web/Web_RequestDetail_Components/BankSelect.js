@@ -25,7 +25,7 @@ const customStyles = {
     fontStyle: "normal",
     fontWeight: "500",
     lineHeight: '2.4375rem',
-    magin: 0
+    magin: 0,
   }),
   indicatorsContainer: (provided) => ({
     ...provided,
@@ -62,7 +62,7 @@ const customStyles = {
     background: state.isSelected ? '#FF3D00' : 'white', // 선택된 목록의 배경색만 변경
     color: state.isSelected ? 'white' : 'black', // 선택된 목록의 글자색만 변경
     '&:hover': {
-        background: '#	#FFA500', // 호버 시 배경색 변경
+        background: '#FFA500', // 호버 시 배경색 변경
       },
   }),
 };

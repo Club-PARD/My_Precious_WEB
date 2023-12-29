@@ -18,14 +18,23 @@ const Container = styled.div`
   width: 100%;
   align-items: center;
   background:  #E5E5E5; 
+  overflow: hidden;
 `;
 
 const Div =styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 100%;
+    justify-content: center;
 
 `;
+
+const Test = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
 
 function WebRequestDetail() {
     const theme = useTheme();

@@ -29,7 +29,8 @@ const BorrowButton = styled.button`
     line-height: 1.375rem;
     border: none;
     cursor: pointer; 
-    margin-left: 10.6875rem;
+    //margin-left: 10.6875rem;
+    margin-left: 17.6875rem;
 `;
 
 
