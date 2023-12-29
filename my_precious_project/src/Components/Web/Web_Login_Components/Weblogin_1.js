@@ -307,7 +307,11 @@ const WebLogin_1 = () => {
                                             id="month"
                                             type="text"
                                             maxLength="2"
+<<<<<<< HEAD
                                             style={{ width: '2.125rem' }}
+=======
+                                            style={{ width: '34px' }}
+>>>>>>> main
                                             value={month}
                                             onChange={(e) => setMonth(e.target.value.replace(/\D/, ''))}
                                         ></StyleInput>
@@ -318,7 +322,11 @@ const WebLogin_1 = () => {
                                             id="day"
                                             type="text"
                                             maxLength="2"
+<<<<<<< HEAD
                                             style={{ width: ' 2.125rem' }}
+=======
+                                            style={{ width: '34px' }}
+>>>>>>> main
                                             value={day}
                                             onChange={(e) => setDay(e.target.value.replace(/\D/, ''))}
                                         ></StyleInput>
