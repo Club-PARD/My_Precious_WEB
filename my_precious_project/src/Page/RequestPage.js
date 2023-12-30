@@ -76,6 +76,7 @@ const RequestPage = () => {
   };
 
   const onChangePoints = (e) => {
+    // setForm({ ...form, borrowMoney: e.target.value });
     const { value } = e.target;
     let str = value.replaceAll(",", "");
     setForm({ ...form, borrowMoney: str });
