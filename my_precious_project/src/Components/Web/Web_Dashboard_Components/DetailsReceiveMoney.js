@@ -14,12 +14,13 @@ const DetailsReceiveMoney = ({ ReceiveDataSet = [] }) => {
     return (
         <div>
             {ReceiveDataSet.map((data, index) => {
-                const setDate = data.setDate.toString();
-                const setYear = parseInt(setDate.slice(0, 4));
-                const setMonth = parseInt(setDate.slice(4, 6));
-                const setDay = parseInt(setDate.slice(6, 8));
+                const payDate = data.board.payDate.toString();
+                const setYear = parseInt(payDate.slice(0, 4));
+                const setMonth = parseInt(payDate.slice(4, 6));
+                const setDay = parseInt(payDate.slice(6, 8));
 
                 const setDateTime = new Date(setYear, setMonth - 1, setDay);
+                setDateTime.setDate(setDateTime.getDate() + 1);
                 const payDateTime = new Date();
                 const differenceTime = payDateTime - setDateTime;
                 const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
@@ -27,7 +28,11 @@ const DetailsReceiveMoney = ({ ReceiveDataSet = [] }) => {
                 return (
                     <Container key={index}>
                         <StyleCircleProgressbar>
-                            <CircleProgressbar totalMoney={data.receiveMoney} debtMoney={data.payBack} index={index} />
+                            <CircleProgressbar
+                                totalMoney={data.board.borrowMoney}
+                                debtMoney={data.lendMoney}
+                                index={index}
+                            />
                         </StyleCircleProgressbar>
                         <DisplayBorderBottom>
                             <DetialsExplain>
@@ -38,10 +43,10 @@ const DetailsReceiveMoney = ({ ReceiveDataSet = [] }) => {
                                     <div>받아야 할 약속 날짜</div>
                                 </ExplainTextDiv>
                                 <UserDateTextDiv>
-                                    <ReasonText>{data.author}</ReasonText>
-                                    <ReasonText>{data.title}</ReasonText>
+                                    <ReasonText>{data.user.name}</ReasonText>
+                                    <ReasonText>{data.board.title}</ReasonText>
                                     <Row style={{ gap: '8px' }}>
-                                        <UserDataText>{Number(data.receiveMoney).toLocaleString()}</UserDataText>
+                                        <UserDataText>{Number(data.lendMoney).toLocaleString()}</UserDataText>
                                         <GrayText>원</GrayText>
                                     </Row>
                                     <Row style={{ gap: '3px' }}>

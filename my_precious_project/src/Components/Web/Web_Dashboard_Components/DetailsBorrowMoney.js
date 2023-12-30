@@ -14,20 +14,23 @@ const DetailsBorrowMoney = ({ BorrowDataSet = [] }) => {
     return (
         <div>
             {BorrowDataSet.map((data, index) => {
-                const setDate = data.setDate.toString();
-                const setYear = parseInt(setDate.slice(0, 4));
-                const setMonth = parseInt(setDate.slice(4, 6));
-                const setDay = parseInt(setDate.slice(6, 8));
+                const payDate = data.payDate.toString();
+                const setYear = parseInt(payDate.slice(0, 4));
+                const setMonth = parseInt(payDate.slice(4, 6));
+                const setDay = parseInt(payDate.slice(6, 8));
 
                 const setDateTime = new Date(setYear, setMonth - 1, setDay);
+                setDateTime.setDate(setDateTime.getDate() + 1);
                 const payDateTime = new Date();
                 const differenceTime = payDateTime - setDateTime;
                 const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
 
+                // debts 배열의 lendMoney 값들을 합치기
+                const totalDebtMoney = data.debts.reduce((acc, debt) => acc + Number(debt.lendMoney), 0);
                 return (
                     <Container key={index}>
                         <StyleCircleProgressbar>
-                            <CircleProgressbar totalMoney={data.borrowMoney} debtMoney={data.payBack} index={index} />
+                            <CircleProgressbar totalMoney={data.borrowMoney} debtMoney={totalDebtMoney} index={index} />
                         </StyleCircleProgressbar>
                         <DisplayBorderBottom>
                             <DetialsExplain>
@@ -38,7 +41,7 @@ const DetailsBorrowMoney = ({ BorrowDataSet = [] }) => {
                                     <div>갚아야 할 약속 날짜</div>
                                 </ExplainTextDiv>
                                 <UserDateTextDiv>
-                                    <ReasonText>{data.author}</ReasonText>
+                                    <ReasonText>{data.user.name}</ReasonText>
                                     <ReasonText>{data.title}</ReasonText>
                                     <Row style={{ gap: '8px' }}>
                                         <UserDataText>{Number(data.borrowMoney).toLocaleString()}</UserDataText>
