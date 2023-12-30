@@ -1,17 +1,50 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { useTheme } from "../../../contexts/ThemeContext.js.js"; // Context APi 적용
 import DotButton from "./DotButton.js";
 import { Checkmark } from "react-checkmark";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { UserDataContext } from "../../../contexts/userContext";
 
 const WebLogin_2_checked = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const [userData, setUserData] = useContext(UserDataContext);
+  const userKey = userData.id;
+
+  const handleConfirmation = async (event) => {
+    // 기본 양식 제출 동작 방지
+    event.preventDefault();
+
+    try {
+      const response = await axios.patch(
+        `http://172.30.1.64:8080/api/users/${userKey}`,
+        {
+          name: userData.name,
+          birth: userData.birthDate,
+          phoneNum: userData.phoneNumber,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      // 응답 데이터를 useState를 통해 상태 관리
+      setUserData(response.data.data);
+      navigate("/Login/4");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container>
         <ContentBox>
           <InnerRow1>
-            <DotButton />
+            <DotButton dotColor={2} />
           </InnerRow1>
           <InnerRow2>휴대폰 인증이 완료되었어요!</InnerRow2>
           <InnerRow3>
@@ -21,7 +54,7 @@ const WebLogin_2_checked = () => {
               되는 편리함이 생겼어요.
             </Div>
             <form>
-              <Button>확인</Button>
+              <Button onClick={handleConfirmation}>확인</Button>
             </form>
           </InnerRow3>
         </ContentBox>
@@ -43,24 +76,24 @@ const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px;
+  width: 31.25rem;
 `;
 const InnerRow1 = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 155px;
-  margin-bottom: 50px;
+  margin-top: 9.6875rem;
+  margin-bottom: 3.125rem;
 `;
 
 const InnerRow2 = styled.div`
   color: #000;
   text-align: center;
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: 600;
-  line-height: 50px;
+  line-height: 3.125rem;
   width: 100%;
-  margin-bottom: 100px;
+  margin-bottom: 6.25rem;
 `;
 
 const InnerRow3 = styled.div`
@@ -69,23 +102,23 @@ const InnerRow3 = styled.div`
   align-items: center;
   text-align: center;
   width: 100%;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 500;
   color: #d9d9d9;
 `;
 
 const Div = styled.div`
-  margin-top: 50px;
+  margin-top: 3.125rem;
 `;
 
 const Button = styled.button`
   margin-top: 100px;
-  width: 450px;
-  height: 55px;
-  border-radius: 6.5px;
+  width: 28.125rem;
+  height: 3.4375rem;
+  border-radius: 0.40625rem;
   border: none;
   color: white;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 500;
   background-color: #ff3d00;
   cursor: pointer;

@@ -17,9 +17,16 @@
 |**나이**|26|25|23|24|23|25|
 
 ## 📄 Stack
-
-## 💻 개발환경 및 언어 
 ![React](https://img.shields.io/badge/react-444444?style=for-the-badge&logo=react) 
+<img src="https://img.shields.io/badge/html5-E34F26?style=flat-square&logo=html5&logoColor=white"> 
+![css3](https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3) 
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
+<img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white"> 
+<img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
+<img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=spring boot&logoColor=white"> 
+<img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
 
 ## 📥 라이브러리
 - npm install react-router-dom
@@ -27,3 +34,5 @@
 - npm install axios
 - npm i react-checkmark
 - npm install react-transition-group
+- npm install --save rc-progress
+- npm install @mui/lab @mui/material
