@@ -230,7 +230,7 @@ function WritingMessage() {
           }
         //서버에 유저 데이터 보내기
         axios
-        .post(`http://192.168.0.94/api/debts/boards/${boardId}/users/${uId}`, Data)
+        .post(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/debts/boards/${boardId}/users/${uId}`, Data)
         .then((response) => {
           console.log("데이터가 전송되었습니다: ", response.data);
           //서버에서의 응답을 처리합니다.

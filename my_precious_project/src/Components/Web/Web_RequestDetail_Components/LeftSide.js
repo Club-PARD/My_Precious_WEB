@@ -32,7 +32,7 @@ function LeftSide() {
     useEffect(() => {
         //GET 요청 보내기
         axios
-          .get(`http://192.168.0.94:8080/api/boards/${boardId}`)
+          .get(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/:8080/api/boards/${boardId}`)
           .then((response) => {
             console.log("response: " + JSON.stringify(response.data.data));
     

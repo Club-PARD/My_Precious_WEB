@@ -204,10 +204,9 @@ const InputName = styled.input`
         line-height: 1.942125rem;
     }
 
-    /* &:focus {
-        border-color: #00ff00;
+    &:focus {
         outline: none;
-    } */
+    }
 `;
 
 const InputBirthDiv = styled.div`
@@ -233,12 +232,12 @@ const InputYearDiv = styled.div`
     flex-shrink: 0;
     border-radius: 0.4221875rem;
     border: 0.0844375rem solid #ff3d00;
+    align-items: center;
     margin-right: 0.633125rem;
     padding: 0;
 
     font-size: 1.25rem;
     text-align: center;
-    //align-items: center;
 `;
 
 const InputMonthDiv = styled.div`
@@ -251,6 +250,7 @@ const InputMonthDiv = styled.div`
     border: 0.0844375rem solid #ff3d00;
     margin-right: 0.633125rem;
     padding: 0;
+    align-items: center;
 
     font-size: 1.25rem;
     text-align: center;
@@ -266,6 +266,7 @@ const InputDateDiv = styled.div`
     border: 0.0844375rem solid #ff3d00;
     margin-right: 0.633125rem;
     padding: 0;
+    align-items: center;
 
     font-size: 1.25rem;
     text-align: center;
@@ -307,10 +308,10 @@ const StyleInputLabel = styled.label`
     font-weight: 500;
     line-height: 1.942125rem;
     padding: 0;
-    padding-bottom: 0.3125rem;
     margin: 0;
     align-items: center;
     height: 100%;
+    padding-bottom: 0.26rem; 
 `;
 
 const CheckBtn = styled.button`
