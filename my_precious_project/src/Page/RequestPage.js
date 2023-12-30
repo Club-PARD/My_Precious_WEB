@@ -25,7 +25,7 @@ const RequestPage = () => {
   const [userData, setUserData] = useContext(UserDataContext);
   const userName = userData.name;
   const uid = userData.uid;
-  console.log(uid);
+  // console.log(uid);
 
   const [form, setForm] = useState({
     title: "",
@@ -40,6 +40,9 @@ const RequestPage = () => {
   const [check, setCheck] = useState(false);
   const [money, setMoney] = useState();
   const navigate = useNavigate();
+  const navigateToDashboard = () => {
+    navigate("/dashboard");
+  };
 
   useEffect(() => {
     // 모든 입력 필드의 변경 여부를 모니터링
@@ -178,7 +181,7 @@ const RequestPage = () => {
           ></MainImage>
           <CloseButton
             src={process.env.PUBLIC_URL + "/img/CloseButton.svg"}
-            // onClick={navigate("/dashboard")}
+            onClick={navigateToDashboard}
           ></CloseButton>
           <MainText>
             친구에게 돈을 빌리는 것은 당연한 게 아니에요! <br />
