@@ -6,7 +6,7 @@ function LineProgress(props) {
   // 시작 값 설정 (예: 10000)
   const [startValue,setStartValue] = useState(props.total);
   // 입력 값 설정 (예: 1000)
-  const [inputValue, setInputValue] = useState(props.receive);
+  const [inputValue, setInputValue] = useState(props.total);
 
   // 현재 진행률 상태 변수
   const [percent, setPercent] = useState(0);
@@ -23,7 +23,7 @@ function LineProgress(props) {
     const endPercent = (inputValue / startValue) * 100;
 
     // 애니메이션 지속 시간 (밀리초)
-    const duration = 1000;
+    const duration = 2000;
     let startTime;
     let animationFrame;
 
