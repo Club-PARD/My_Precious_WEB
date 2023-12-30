@@ -106,7 +106,7 @@ const ImageDiv = styled.div`
     height: 18.25rem;
     flex-shrink: 0;
 
-    border-radius:  18.25rem;
+    border-radius: 1.25rem;
     border: 0.125rem solid #ff3d00;
     align-items: center;
 `;

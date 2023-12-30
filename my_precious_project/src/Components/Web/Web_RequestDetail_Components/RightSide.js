@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider, keyframes } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context API 적용
 import WritingMessage from './WritingMessage.js';
+import Character from '../../../Assets/img/Character.png';
 
 const fadeIn = keyframes`
   from {

@@ -128,7 +128,7 @@ const Input2 = styled.input`
     border: none;
     border-radius: 0.625rem;
     padding: 0;
-    padding-left: 0.5rem;
+    padding-left: 1.1rem;
     height: 2rem;
     &::placeholder {
         color: var(--grey-Grey_3, #B3B3B3);
@@ -230,7 +230,7 @@ function WritingMessage() {
           }
         //서버에 유저 데이터 보내기
         axios
-        .post(`http://172.18.140.44:8080/api/debts/boards/${boardId}/users/${uId}`, Data)
+        .post(`http://192.168.0.94/api/debts/boards/${boardId}/users/${uId}`, Data)
         .then((response) => {
           console.log("데이터가 전송되었습니다: ", response.data);
           //서버에서의 응답을 처리합니다.
@@ -289,12 +289,12 @@ function WritingMessage() {
                             <GaryText>돌려받을 계좌</GaryText>
                             <FormControl
                                 sx={{
-                                width: "9rem",
+                                width: "5.2rem",
                                 height: "3.2rem",
                                 padding: "1rem",
                                 paddingRight: "0",
-                                paddingLeft: "0",
-                                margin: "0 auto",
+                                paddingLeft: "0.3rem",
+                                margin: "0",
                                 "& .MuiOutlinedInput-root": {
                                     "&:hover > fieldset": { borderColor: "#E0E0E0" },
                                     fieldset: { borderColor: "#E0E0E0", border: "none" },
@@ -332,10 +332,11 @@ function WritingMessage() {
                                 fontSize: "0.75rem",
                                 fontStyle: "normal",
                                 fontWeight: "500",
+                                width: "5rem",
                                 "& .MuiSelect-icon": {
                                     display: "none", 
                                   },
-                                "&.MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input": {
+                                "#demo-simple-select-autowidth": {
                                     paddingRight: '0 !important',
                                 },
                                 }}

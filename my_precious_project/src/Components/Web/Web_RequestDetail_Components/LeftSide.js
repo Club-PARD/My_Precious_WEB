@@ -7,7 +7,7 @@ import LineProgress from './LineProgress.js';
 import Talk from '../../../Assets/img/Talk.svg';
 import CheckBox from '../../../Assets/img/CheckBox.svg';
 import axios from 'axios';
-
+import Character from '../../../Assets/img/Character.png';
 
 
 const boardId = 1
@@ -32,7 +32,7 @@ function LeftSide() {
     useEffect(() => {
         //GET 요청 보내기
         axios
-          .get(`http://172.18.140.44:8080/api/boards/${boardId}`)
+          .get(`http://192.168.0.94:8080/api/boards/${boardId}`)
           .then((response) => {
             console.log("response: " + JSON.stringify(response.data.data));
     
@@ -94,6 +94,7 @@ function LeftSide() {
         <ThemeProvider theme={theme}>
             <Container>
                 <TotalColletMoney>현재까지 모인 금액</TotalColletMoney> 
+                <ImageCharacter/>
                 <Image> 
                     <ImageText>
                     현재까지 {detailData.lendMoneyCount}명의 친구가 함께 도와주고 있어요.
@@ -195,6 +196,21 @@ const Image = styled.div`
     //align-items: center;
 `;
 
+const ImageCharacter = styled.div`
+    position: absolute;
+    width: 7rem;
+    height: 7rem;
+    background-image:url(${Character});
+    background-repeat:no-repeat;
+    background-size: contain;
+    top: 1%;
+    left: 35%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    //align-items: center;
+`;
+
 const ImageText = styled.div`
     color: #5B5B5B;
 
@@ -247,6 +263,7 @@ const DisplayBoxDiv =styled.div`
     width:  42.375rem;
     height: 29.1875rem;
     //border: 0.0625rem solid red;
+    margin-right: 1.44rem;
     margin-left:  2.375rem;
     margin-top: 1.64rem;
 `;
