@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import * as React from "react";
 import { useMediaQuery } from "react-responsive";
 import AppHome from "../Components/App/App_Home_Components/AppHome";
@@ -10,7 +10,6 @@ import axios from "axios";
 /****  MUI Libraries  *****/
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -27,7 +26,39 @@ const RequestPage = () => {
     bank: "은행 선택",
     bankAccount: "",
   });
-  const [submitDisabled, setSubmitDisabled] = useState(true);
+  const [active, setActive] = useState(false);
+  const [check, setCheck] = useState(false);
+  const [money, setMoney] = useState();
+
+  useEffect(() => {
+    // 모든 입력 필드의 변경 여부를 모니터링
+    const fields = [
+      form.title,
+      form.borrowMoney,
+      form.payDate,
+      form.situation,
+      form.payWay,
+      form.bank,
+      form.bankAccount,
+    ];
+    const originalFields = ["", "", "", "", "", "은행 선택", ""];
+
+    const hasChanged = fields.every(
+      (field, index) => field !== originalFields[index]
+    );
+
+    // console.log(hasChanged);
+
+    setActive(hasChanged);
+  }, [
+    form.title,
+    form.borrowMoney,
+    form.payDate,
+    form.situation,
+    form.payWay,
+    form.bank,
+    form.bankAccount,
+  ]);
 
   /*
 	오늘 날짜 선택 부분
@@ -42,6 +73,14 @@ const RequestPage = () => {
   const addComma = (price) => {
     let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return returnString;
+  };
+
+  const onChangePoints = (e) => {
+    // setForm({ ...form, borrowMoney: e.target.value });
+    const { value } = e.target;
+    let str = value.replaceAll(",", "");
+    setForm({ ...form, borrowMoney: str });
+    setMoney(str);
   };
 
   const handleDateFormat = (originalDate) => {
@@ -97,8 +136,20 @@ const RequestPage = () => {
 
   /***** 데이터 전송 *****/
   const handleSubmit = () => {
+    console.log(form);
     axios
-      .post("http://172.20.10.3:8080/api/boards/{uid}", form)
+      .post(
+        "http://172.18.140.44:8080/api/boards/hbsNHR1qz9erDBjFQUZpyHhrVRG3",
+        {
+          title: form.title,
+          borrowMoney: form.borrowMoney,
+          payDate: form.payDate,
+          situation: form.situation,
+          payWay: form.payWay,
+          bank: form.bank,
+          bankAccount: form.bankAccount,
+        }
+      )
       .then((response) => {
         console.log("요청데이터가 저장되었습니다.", response.data);
         // 서버에서의 응답을 처리
@@ -168,10 +219,10 @@ const RequestPage = () => {
               <input
                 type="text"
                 placeholder=""
-                onChange={(e) =>
-                  setForm({ ...form, borrowMoney: e.target.value })
-                }
-                value={addComma(form.borrowMoney) || ""}
+                onChange={(e) => {
+                  onChangePoints(e);
+                }}
+                value={addComma(money)}
                 onFocus={() => setIsInputFocused4(true)}
                 onBlur={() => setIsInputFocused4(false)}
               ></input>
@@ -199,9 +250,14 @@ const RequestPage = () => {
                     );
                   }}
                   sx={{
-                    width: "36.2525rem",
-                    "& .MuiInputLabel-root.Mui-focused": {
-                      color: "#E0E0E0",
+                    width: "100%",
+                    "& .MuiInputLabel-root.Mui-focused": { color: "#FF3D00" },
+                    "& .toolbar": {
+                      color: "white",
+                      backgroundColor: "#FF3D00",
+                      "& .MuiTypography-root ": {
+                        color: "white",
+                      },
                     },
                     "& .MuiOutlinedInput-root": {
                       "&:hover > fieldset": { borderColor: "#E0E0E0" },
@@ -233,6 +289,10 @@ const RequestPage = () => {
                     "&:hover > fieldset": { borderColor: "#E0E0E0" },
                     fieldset: { borderColor: "#E0E0E0", border: "none" },
                     borderRadius: "10px",
+                  },
+                  "& .MuiSvgIcon-root": {
+                    width: "0rem",
+                    height: "0rem",
                   },
                 }}
               >
@@ -272,7 +332,11 @@ const RequestPage = () => {
               />
             </div>
           </InputBankInfo>
-          <Button disabled={true} onClick={handleSubmit} type="submit">
+          <Button
+            type="button"
+            onClick={handleSubmit}
+            disabled={active ? false : true}
+          >
             요청하기
           </Button>
         </Container>
@@ -423,7 +487,7 @@ const InputReason = styled.div`
   textarea {
     box-sizing: border-box;
     width: 36.2525rem;
-    height: 6.875rem;
+    height: 6.4rem;
     flex-shrink: 0;
     border-radius: 0.625rem;
     background: #fff;
@@ -780,6 +844,9 @@ const Button = styled.button`
   margin-top: 0.81rem;
   color: white;
   border: 1px;
+  &:disabled {
+    background: #d9d9d9;
+  }
 `;
 
 export default RequestPage;
