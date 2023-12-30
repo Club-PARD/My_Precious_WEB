@@ -10,7 +10,7 @@ import axios from 'axios';
 import Character from '../../../Assets/img/Character.png';
 
 
-const boardId = 1
+const boardId = 1;
 
 function LeftSide() {
     const theme = useTheme();
@@ -50,7 +50,7 @@ function LeftSide() {
             //빌려준 친구 수 가져옴
             const lendMoneyCount =parseFloat(lendMoneydata.length);
 
-            console.log(lendMoneydata[1].lendMoney)
+            //console.log(lendMoneydata[1].lendMoney)
             
             // 빌린돈 더하기
             const maplend =lendMoneydata.map((value, index) =>{
@@ -59,6 +59,8 @@ function LeftSide() {
             const totalLendmoney = maplend.reduce((accumulator, currentValue) => {
                 return accumulator + currentValue;
             }, 0);
+
+            console.log("빌린돈 총합" , totalLendmoney)
 
             //날짜처리
             const formatted_date =payDate.substring(0, 4) + '년 ' + payDate.substring(4, 6) + '월 ' + payDate.substring(6)+'일';

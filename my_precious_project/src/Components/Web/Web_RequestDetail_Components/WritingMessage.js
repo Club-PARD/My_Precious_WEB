@@ -234,6 +234,7 @@ function WritingMessage() {
         axios
         .post(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/debts/boards/${boardId}/users/${uid}`, Data)
         .then((response) => {
+            console.log(Data);
           console.log("데이터가 전송되었습니다: ", response.data);
           //서버에서의 응답을 처리합니다.
         })
@@ -247,9 +248,8 @@ function WritingMessage() {
 
     // 모든 인풋 값이 비어있지 않은지 확인하는 함수
     const areInputsFilled = useCallback(() => {
-        const result =  form.lendMoney.trim() !== '' && form.message.trim() !== '' && form.bank.trim() !== ''&& form.bankAccount !== null;
+        const result =  form.lendMoney.trim() !== '' && form.message.trim() !== '' && form.bank.trim() !== '은행 선택'&& form.bankAccount !== '';
         console.log('입력값이 채워졌는지:', result);
-        console.log("dddddddddddddddddddd",form.lendMoney) ;
         return result;
     }, [form.lendMoney, form.message, form.bank, form.bankAccount]);
 
