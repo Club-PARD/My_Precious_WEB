@@ -127,10 +127,19 @@ const RequestPage = () => {
 
   /***** 데이터 전송 *****/
   const handleSubmit = () => {
+    console.log(form);
     axios
       .post(
-        "http://172.20.10.3:8080/api/boards/hbsNHR1qz9erDBjFQUZpyHhrVRG3",
-        form
+        "http://172.18.140.44:8080/api/boards/hbsNHR1qz9erDBjFQUZpyHhrVRG3",
+        {
+          title: form.title,
+          borrowMoney: form.borrowMoney,
+          payDate: form.payDate,
+          situation: form.situation,
+          payWay: form.payWay,
+          bank: form.bank,
+          bankAccount: form.bankAccount,
+        }
       )
       .then((response) => {
         console.log("요청데이터가 저장되었습니다.", response.data);
