@@ -47,6 +47,7 @@ function LeftSide() {
             const name = response.data.data.user.name;
             const lendMoneydata = response.data.data.debts;
 
+            console.log(lendMoneydata)
             //빌려준 친구 수 가져옴
             const lendMoneyCount =parseFloat(lendMoneydata.length);
 
@@ -185,7 +186,7 @@ const TotalColletMoney =styled.div`
 
 const Image = styled.div`
     position: absolute;
-    width: 10.375rem;
+    width: 11.875rem;
     height: 4.4375rem;
     background-image:url(${Talk});
     background-repeat:no-repeat;
@@ -194,7 +195,7 @@ const Image = styled.div`
     left: 45%;
     z-index: 1;
     display: flex;
-    justify-content: center;
+    //justify-content: center;
     //align-items: center;
 `;
 
@@ -209,22 +210,22 @@ const ImageCharacter = styled.div`
     left: 35%;
     z-index: 1;
     display: flex;
-    justify-content: center;
+    //justify-content: center;
     //align-items: center;
 `;
 
 const ImageText = styled.div`
     color: #5B5B5B;
-
+    display: flex;
     font-family: Pretendard;
     font-size:  0.875rem;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    width: 9.375rem;
-    //height: 2.125rem;
-    padding-top: 0.75rem;
-    padding-left: 0.3rem;
+    width: 10rem;
+    height: 2.125rem;
+    padding-top: 0.55rem;
+    padding-left: 0.5rem;
 `;
 
 const StyleLineProgress =styled.div`
