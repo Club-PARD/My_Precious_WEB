@@ -1,20 +1,43 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js.js'; // Context APi 적용
 import DotButton from './DotButton.js';
 import { Checkmark } from 'react-checkmark';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { UserDataContext } from '../../../contexts/userContext';
 
 const WebLogin_2_checked = () => {
     const theme = useTheme();
     const navigate = useNavigate();
+    const [userData, setUserData] = useContext(UserDataContext);
+    const userKey = userData.id;
 
-    const handleConfirmation = (event) => {
-      // 기본 양식 제출 동작 방지
-      event.preventDefault();
+    const handleConfirmation = async (event) => {
+        // 기본 양식 제출 동작 방지
+        event.preventDefault();
 
-      navigate('/Login/4');
-  };
+        try {
+            const response = await axios.patch(
+                `http://172.30.1.64:8080/api/users/${userKey}`,
+                {
+                    name: userData.name,
+                    birth: userData.birthDate,
+                    phoneNum: userData.phoneNumber,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+            // 응답 데이터를 useState를 통해 상태 관리
+            setUserData(response.data.data);
+            navigate('/Login/4');
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <ThemeProvider theme={theme}>
