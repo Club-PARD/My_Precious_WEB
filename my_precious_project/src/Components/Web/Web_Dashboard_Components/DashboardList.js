@@ -5,12 +5,10 @@ import { useTheme } from "../../../contexts/ThemeContext.js"; // Context APi 적
 import DetailsBorrowMoney from "./DetailsBorrowMoney.js";
 import DetailsReceiveMoney from "./DetailsReceiveMoney.js";
 import ButtonMenu from "./ButtonMenu.js";
-import { useNavigate } from "react-router-dom";
 
 //밑에
 
 const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
-  const navigate = useNavigate();
   const theme = useTheme();
   const [selectedMenu, setSelectedMenu] = useState(0); // 초기값은 전체
 
@@ -118,9 +116,7 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
             : "최근 빌린 거래 전체 목록"}
         </ListTitle>
         <AddButtonDiv>
-          <TransactionAddButton onClick={navigate("/request")}>
-            + 새 거래 추가하기
-          </TransactionAddButton>
+          <TransactionAddButton>+ 새 거래 추가하기</TransactionAddButton>
         </AddButtonDiv>
       </InnerRow1>
       <TransactionComponent>
@@ -136,8 +132,7 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
 
 const TransactionComponent = styled.div`
   margin-top: 50px;
-  overflow: auto; /* 내용이 넘칠 경우 스크롤바 표시 */
-  height: 40vh;
+  height: 100%;
 `;
 
 const InnerRow1 = styled.div`
