@@ -1,7 +1,5 @@
-import { createContext, useMemo, useContext } from 'react';
-import { useState } from 'react';
+import { createContext, useMemo, useContext, useEffect, useState } from 'react';
 
-/* 유저 데이터용 컨텍스트 생성 */
 export const UserContext = createContext();
 export const UserDataContext = createContext();
 
@@ -12,18 +10,28 @@ export const useUserData = () => {
     }
     return context;
 };
-/* 유저 데이터 프로바이더 생성 */
-export default function UserProvider({ children }) {
-    const [logInData, setLogInData] = useState({});
-    const [userData, setUserData] = useState({});
-    console.log(logInData.uid);
-    console.log(logInData.name);
-    console.log(logInData.birthDate);
-    console.log(logInData.phoneNumber);
 
-    /* 프로바이더로 넘겨줄 변수 구성 */
-    const logInValue = useMemo(() => [logInData, setLogInData], [logInData, setLogInData]);
-    const userValue = useMemo(() => [userData, setUserData], [userData, setUserData]);
+export default function UserProvider({ children }) {
+    const [logInData, setLogInData] = useState(() => {
+        const storedLogInData = JSON.parse(localStorage.getItem('logInData'));
+        return storedLogInData || {};
+    });
+
+    const [userData, setUserData] = useState(() => {
+        const storedUserData = JSON.parse(localStorage.getItem('userData'));
+        return storedUserData || {};
+    });
+
+    useEffect(() => {
+        localStorage.setItem('logInData', JSON.stringify(logInData));
+    }, [logInData]);
+
+    useEffect(() => {
+        localStorage.setItem('userData', JSON.stringify(userData));
+    }, [userData]);
+
+    const logInValue = useMemo(() => [logInData, setLogInData], [logInData]);
+    const userValue = useMemo(() => [userData, setUserData], [userData]);
 
     return (
         <UserContext.Provider value={logInValue}>
