@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 //import { Link } from 'react-router-dom';
@@ -9,10 +9,10 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import axios from 'axios';
+import { UserDataContext } from '../../../contexts/userContext';
 
 //돈 빌려달라고 하는 사람이 게시한 게시글
 const boardId = 1;
-const uId = "string";
 
 const Container = styled.div`
     display: flex;
@@ -169,6 +169,8 @@ const Input3 =styled.input`
 
 function WritingMessage() {
     const theme = useTheme();
+    const [userData, setUserData] = useContext(UserDataContext);
+    const uid = userData.uid;
 
     //임의로 지정한 인풋 값 변수
     const [form, setForm] = useState({
@@ -230,7 +232,7 @@ function WritingMessage() {
           }
         //서버에 유저 데이터 보내기
         axios
-        .post(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/debts/boards/${boardId}/users/${uId}`, Data)
+        .post(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/debts/boards/${boardId}/users/${uid}`, Data)
         .then((response) => {
           console.log("데이터가 전송되었습니다: ", response.data);
           //서버에서의 응답을 처리합니다.

@@ -43,7 +43,6 @@ const WebLogin_3 = () => {
                     <InnerRow3>
                         <ImageDiv>
                             <Img src={loginImage} alt="로그인페이지 기본 이미지"></Img>
-                            <NameDiv>{userData.name}님</NameDiv>
                         </ImageDiv>
                         <form>
                             <Button onClick={navigateToDashboard}>시작하기</Button>
@@ -78,13 +77,13 @@ const InnerRow1 = styled.div`
 `;
 
 const InnerRow2 = styled.div`
-    color: #0f0f0f;
+    color:  #1A1A1A;
     text-align: center;
-    font-size: 2rem;
+    font-family: Pretendard;
+    font-size: 1.75rem;
+    font-style: normal;
     font-weight: 600;
-    line-height: 3.125rem;
-    width: 100%;
-    white-space: pre-wrap;
+    line-height: 2.625rem; 
 `;
 
 const InnerRow3 = styled.div`
@@ -101,18 +100,19 @@ const InnerRow3 = styled.div`
 const ImageDiv = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 2.4375rem;
+    margin-top: 2.48rem;
     width: 15.625rem;
-    height: 18.25rem;
+    height: 13.1875rem;
     flex-shrink: 0;
 
     border-radius: 1.25rem;
     border: 0.125rem solid #ff3d00;
     align-items: center;
+    justify-content: center;
 `;
 
 const Img = styled.img`
-    margin-top: 3.125rem;
+    //margin-top: 3.125rem;
 `;
 
 const NameDiv = styled.div`
@@ -130,14 +130,18 @@ const NameDiv = styled.div`
 `;
 
 const Button = styled.button`
-    margin-top: 3.0625rem;
-    width: 28.125rem;
-    height: 3.4375rem;
-    border-radius: 0.40625rem;
+    margin-top: 3.13rem;
+    width: 27.125rem;
+    height: 3.46206rem;
+    border-radius: 0.42219rem;
     border: none;
-    color: white;
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
     font-size: 1.25rem;
-    font-weight: 500;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.94213rem;
     background-color: #ff3d00;
     cursor: pointer;
 `;

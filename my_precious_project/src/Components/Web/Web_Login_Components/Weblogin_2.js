@@ -226,15 +226,16 @@ const Label2 = styled.label`
     }
     input:focus {
         outline: none;
+        border: 0.09375rem solid #ff3d00;
     }
     button {
         position: absolute;
-        margin-top:  2rem;
+        margin-top:  1.98rem;
         right: 0;
         width: 9.375rem;
-        height: 3.625rem;
+        height: 3.72rem;
         border-radius: 0.40625rem;
-        border: none;
+        border: none; 
         color: white;
         font-size: 1.25rem;
         font-weight: 500;
