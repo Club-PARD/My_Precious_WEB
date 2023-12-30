@@ -46,7 +46,7 @@ const CardContiner = styled.button`
     padding: 0;
     cursor: pointer;
 
-    transition: background 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
 
     &:hover {
         background: ${(props) => (props.state === 'on' ? '#504F4F' : '#FF3D00')};

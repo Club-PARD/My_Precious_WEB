@@ -5,13 +5,32 @@ import { useNavigate } from 'react-router-dom';
 import Userheart from '../../../Assets/img/Userheart.png';
 import { handleGoogleLogin } from '../../../API/googleLogin.js';
 import { UserContext } from '../../../contexts/userContext';
+import { UserDataContext } from '../../../contexts/userContext';
+import axios from 'axios';
 
 const Googlelogin = () => {
     const [logInData, setLogInData] = useContext(UserContext);
+    const [userData, setUserData] = useContext(UserDataContext);
     const theme = useTheme();
+    const navigate = useNavigate();
+
     const googleLogin = () => {
-        handleGoogleLogin(setLogInData);
+        handleGoogleLogin(setLogInData, setUserData, navigate);
     };
+    const [total, setTotal] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://172.30.1.64:8080/api/users');
+                setTotal(response.data.total);
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+            }
+        };
+        fetchData();
+    }, []);
+
     return (
         <ThemeProvider theme={theme}>
             <Container>
@@ -20,7 +39,7 @@ const Googlelogin = () => {
                         <WelcomeText>환영합니다.</WelcomeText>
                         <IntroDiv>
                             <IntroductionText>지금 함께 하면 머니글러브의 </IntroductionText>
-                            <MuggleCount> 7,942번째 머글</MuggleCount>
+                            <MuggleCount> {total + 1}번째 머글</MuggleCount>
                             <IntroductionText>이 되어요!</IntroductionText>
                         </IntroDiv>
                         <IntroductionText>

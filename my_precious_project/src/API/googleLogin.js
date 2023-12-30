@@ -1,31 +1,49 @@
 import { app, auth } from './firebaseAPI';
-import { GoogleAuthProvider, signInWithPopup, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import axios from 'axios';
 
-export function handleGoogleLogin(setLogInData) {
-    const provider = new GoogleAuthProvider(); // provider를 구글로 설정
-    signInWithPopup(auth, provider) // popup을 이용한 signup
-        .then((data) => {
-            const userData = {
-                uid: data.user.uid,
-                name: data.user.displayName,
-                emailVerified: data._tokenResponse.emailVerified,
-            };
-            setLogInData(userData); // user data 설정
+export async function handleGoogleLogin(setLogInData, setUserData, navigate) {
+    const provider = new GoogleAuthProvider();
 
-            // axios를 이용한 POST 요청
-            axios
-                .post('http://3.35.43.42/moneyglove/user/join', userData)
-                .then((response) => {
-                    console.log(response.data);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+    try {
+        const data = await signInWithPopup(auth, provider);
+        const userData = {
+            name: data.user.displayName,
+            gmailId: data.user.email,
+            uid: data.user.uid,
+        };
+        setLogInData(userData);
 
-            console.log(data); // console로 들어온 데이터 표시
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+        // axios를 이용한 POST 요청
+        const response = await axios.post('http://172.30.1.64:8080/api/users', userData);
+        console.log(response.data);
+
+        // POST 요청 후 받은 id 값을 UserDataContext에 저장
+        const id = response.data.data?.id;
+        setUserData((prevUserData) => ({
+            ...prevUserData,
+            id,
+        }));
+
+        // 응답을 받아와서 email, birth, phoneNum 값을 확인
+        const userEmail = response.data.data?.gmailId;
+        const userBirth = response.data.data?.birth;
+        const userPhoneNum = response.data.data?.phoneNum;
+
+        // email이 존재하는 경우
+        if (userEmail) {
+            // birth와 phoneNum이 모두 존재하는 경우 Dashboard로 이동
+            if (userBirth && userPhoneNum) {
+                navigate('/dashboard');
+            } else {
+                // 하나라도 존재하지 않는 경우 Login으로 이동
+                navigate('/login/2');
+            }
+        } else {
+            // email이 존재하지 않는 경우 Login으로 이동
+            navigate('/login');
+        }
+    } catch (error) {
+        console.log(error);
+    }
 }
