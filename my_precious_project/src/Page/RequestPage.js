@@ -28,6 +28,7 @@ const RequestPage = () => {
   });
   const [active, setActive] = useState(false);
   const [check, setCheck] = useState(false);
+  const [money, setMoney] = useState();
 
   useEffect(() => {
     // 모든 입력 필드의 변경 여부를 모니터링
@@ -72,6 +73,13 @@ const RequestPage = () => {
   const addComma = (price) => {
     let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return returnString;
+  };
+
+  const onChangePoints = (e) => {
+    const { value } = e.target;
+    let str = value.replaceAll(",", "");
+    setForm({ ...form, borrowMoney: str });
+    setMoney(str);
   };
 
   const handleDateFormat = (originalDate) => {
@@ -210,10 +218,10 @@ const RequestPage = () => {
               <input
                 type="text"
                 placeholder=""
-                onChange={(e) =>
-                  setForm({ ...form, borrowMoney: e.target.value })
-                }
-                value={addComma(form.borrowMoney) || ""}
+                onChange={(e) => {
+                  onChangePoints(e);
+                }}
+                value={addComma(money)}
                 onFocus={() => setIsInputFocused4(true)}
                 onBlur={() => setIsInputFocused4(false)}
               ></input>
