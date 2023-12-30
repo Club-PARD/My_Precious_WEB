@@ -43,7 +43,7 @@ const DetailsReceiveMoney = ({ ReceiveDataSet = [] }) => {
                                     <div>받아야 할 약속 날짜</div>
                                 </ExplainTextDiv>
                                 <UserDateTextDiv>
-                                    <ReasonText>{data.user.name}</ReasonText>
+                                    <ReasonText>{data.board?.userSimpleResponse?.name}</ReasonText>
                                     <ReasonText>{data.board.title}</ReasonText>
                                     <Row style={{ gap: '8px' }}>
                                         <UserDataText>{Number(data.lendMoney).toLocaleString()}</UserDataText>

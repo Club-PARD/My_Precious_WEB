@@ -89,11 +89,11 @@ const WebDashboard = () => {
                         payDate: item.board?.payDate,
                         bank: item.board?.bank,
                         bankAccount: item.board?.bankAccount,
-                    },
-                    userSimpleResponse: {
-                        name: item.board?.userSimpleResponse?.name,
-                        gmailId: item.board?.userSimpleResponse?.gmailId,
-                        uid: item.board?.userSimpleResponse?.uid,
+                        userSimpleResponse: {
+                            name: item.board?.userSimpleResponse?.name,
+                            gmailId: item.board?.userSimpleResponse?.gmailId,
+                            uid: item.board?.userSimpleResponse?.uid,
+                        },
                     },
                 }));
 
@@ -106,8 +106,6 @@ const WebDashboard = () => {
             console.error('API에서 데이터를 가져오는데 실패했습니다:', error);
         }
     };
-
-    console.log(ReceiveDataSet[0]);
 
     // 컴포넌트가 마운트될 때 API에서 데이터를 가져옴
     useEffect(() => {
@@ -138,8 +136,7 @@ const WebDashboard = () => {
         const CardCount = filteredDataSet.length;
         const CardTotal = filteredDataSet.reduce((acc, data) => acc + Number(data.borrowMoney), 0);
 
-        let minNegativeDDay = Number.MAX_SAFE_INTEGER;
-        let maxPositiveDDay = Number.MIN_SAFE_INTEGER;
+        let maxDifferenceDays = Number.MIN_SAFE_INTEGER;
 
         for (let i = 0; i < filteredDataSet.length; i++) {
             const payDate = filteredDataSet[i].payDate.toString();
@@ -153,24 +150,14 @@ const WebDashboard = () => {
             const differenceTime = payDateTime - setDateTime;
             const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
 
-            if (differenceDays < 0) {
-                minNegativeDDay = Math.min(minNegativeDDay, differenceDays);
-            } else {
-                maxPositiveDDay = Math.max(maxPositiveDDay, differenceDays);
-            }
+            maxDifferenceDays = Math.max(maxDifferenceDays, differenceDays);
         }
-
         const CardDate =
-            minNegativeDDay !== Number.MAX_SAFE_INTEGER
-                ? maxPositiveDDay > 0
-                    ? `D+${maxPositiveDDay}`
-                    : maxPositiveDDay === 0
-                    ? 'D-Day'
-                    : `D${maxPositiveDDay}`
-                : minNegativeDDay === 0
+            maxDifferenceDays < 0
+                ? `D${maxDifferenceDays}`
+                : maxDifferenceDays === 0
                 ? 'D-Day'
-                : `D${minNegativeDDay}`;
-
+                : `D+${maxDifferenceDays}`;
         return {
             CardCount,
             CardTotal,
@@ -193,9 +180,7 @@ const WebDashboard = () => {
         const CardCount = filteredDataSet.length;
         const CardTotal = filteredDataSet.reduce((acc, data) => acc + Number(data.board.borrowMoney), 0);
 
-        let minNegativeDDay = Number.MAX_SAFE_INTEGER;
-        // let maxPositiveDDay = 0;
-        let maxPositiveDDay = Number.MIN_SAFE_INTEGER;
+        let maxDifferenceDays = Number.MIN_SAFE_INTEGER;
 
         for (let i = 0; i < filteredDataSet.length; i++) {
             const payDate = filteredDataSet[i].board.payDate.toString();
@@ -209,23 +194,15 @@ const WebDashboard = () => {
             const differenceTime = payDateTime - setDateTime;
             const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
 
-            if (differenceDays < 0) {
-                minNegativeDDay = Math.min(minNegativeDDay, differenceDays);
-            } else {
-                maxPositiveDDay = Math.max(maxPositiveDDay, differenceDays);
-            }
+            maxDifferenceDays = Math.max(maxDifferenceDays, differenceDays);
         }
 
         const CardDate =
-            minNegativeDDay !== Number.MAX_SAFE_INTEGER
-                ? maxPositiveDDay > 0
-                    ? `D+${maxPositiveDDay}`
-                    : maxPositiveDDay === 0
-                    ? 'D-Day'
-                    : `D${maxPositiveDDay}`
-                : minNegativeDDay === 0
+            maxDifferenceDays < 0
+                ? `D${maxDifferenceDays}`
+                : maxDifferenceDays === 0
                 ? 'D-Day'
-                : `D${minNegativeDDay}`;
+                : `D+${maxDifferenceDays}`;
 
         return {
             CardCount,
@@ -298,8 +275,7 @@ const Container = styled.div`
     padding: 0;
     align-items: center;
     background: #fafafa;
-    height: 100vh;
-    overflow-y: hidden;
+    height: 100%;
 `;
 
 const ContentsDiv = styled.div`
