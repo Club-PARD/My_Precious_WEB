@@ -155,7 +155,7 @@ const ExplainDiv = styled.div`
     line-height: 2.625rem; 
 
     height: 6.375rem;
-    margin-top: 2.83rem;
+    margin-top: 2.82875rem;
 `;
 
 const InputForm = styled.form`
