@@ -26,18 +26,25 @@ function DotButton(props) {
     const navigate = useNavigate();
 
     const handleDotClick = (dotColor) => {
-        // Dot 버튼을 클릭했을 때의 처리
         switch (dotColor) {
             case 1:
                 // 첫 번째 버튼을 클릭했을 때의 동작
-                navigate('/Login/2');
+                if (props.dotColor !== 3) {
+                    navigate('/Login/2');
+                }
                 break;
             case 2:
                 // 두 번째 버튼을 클릭했을 때의 동작
-                navigate('/Login/3');
+                if (props.dotColor !== 3) {
+                    navigate('/Login/3');
+                }
                 break;
             case 3:
                 // 세 번째 버튼을 클릭했을 때의 동작
+                if (props.dotColor === 1 || props.dotColor === 2) {
+                    // 이미 세 번째 버튼이 눌러져 있는 경우에는 동작하지 않는다.
+                    break;
+                }
                 navigate('/Login/4');
                 break;
             default:

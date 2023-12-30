@@ -32,11 +32,13 @@ const DetailsBorrowMoney = ({ BorrowDataSet = [] }) => {
                         <DisplayBorderBottom>
                             <DetialsExplain>
                                 <ExplainTextDiv>
+                                    <div>작성자</div>
                                     <div>빌린 이유</div>
                                     <div>총 빌릴 금액</div>
                                     <div>갚아야 할 약속 날짜</div>
                                 </ExplainTextDiv>
                                 <UserDateTextDiv>
+                                    <ReasonText>{data.author}</ReasonText>
                                     <ReasonText>{data.title}</ReasonText>
                                     <Row style={{ gap: '8px' }}>
                                         <UserDataText>{Number(data.borrowMoney).toLocaleString()}</UserDataText>
@@ -87,6 +89,8 @@ const DisplayBorderBottom = styled.div`
     justify-content: start;
     border-bottom: 2px solid #f5f5f5;
     width: 77%;
+    height: 100%;
+    padding-bottom: 10px;
 `;
 
 const Row = styled.div`
@@ -98,7 +102,9 @@ const DetialsExplain = styled(Row)`
     display: flex;
     //border-bottom: 2px solid #F5F5F5;
     justify-content: space-between;
+    align-items: center;
     width: 350px;
+    height: 100%;
 `;
 
 const ExplainTextDiv = styled.div`
@@ -167,7 +173,7 @@ const DisplayDday = styled.div`
     border-radius: 20px;
     background-color: #ff3d00;
     margin-left: 41px;
-    margin-bottom: 16px;
+    margin-bottom: 7px;
     color: #ffefef;
     font-family: Pretendard;
     font-size: 14px;

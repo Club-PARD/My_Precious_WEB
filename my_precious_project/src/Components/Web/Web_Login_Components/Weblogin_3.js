@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import DotButton from './DotButton.js';
 import loginImage from '../../../Assets/img/LoginImage.png';
+import { UserDataContext } from '../../../contexts/userContext';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const WebLogin_3 = () => {
     const theme = useTheme();
+    const [userData, setUserData] = useContext(UserDataContext);
+    const [total, setTotal] = useState(null);
 
+    const navigate = useNavigate();
+
+    const navigateToDashboard = () => {
+        navigate('/dashboard');
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://172.30.1.64:8080/api/users');
+                setTotal(response.data.total);
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+            }
+        };
+        fetchData();
+    }, []);
     return (
         <ThemeProvider theme={theme}>
             <Container>
@@ -16,15 +38,15 @@ const WebLogin_3 = () => {
                     </InnerRow1>
                     <InnerRow2>
                         너무 환영합니다! <br />
-                        우리 머니글러브의 45번째 머글이 되어주셔서 감사해요.
+                        우리 머니글러브의 {total}번째 머글이 되어주셔서 감사해요.
                     </InnerRow2>
                     <InnerRow3>
                         <ImageDiv>
                             <Img src={loginImage} alt="로그인페이지 기본 이미지"></Img>
-                            <NameDiv>김현지님</NameDiv>
+                            <NameDiv>{userData.name}님</NameDiv>
                         </ImageDiv>
                         <form>
-                            <Button>시작하기</Button>
+                            <Button onClick={navigateToDashboard}>시작하기</Button>
                         </form>
                     </InnerRow3>
                 </ContentBox>

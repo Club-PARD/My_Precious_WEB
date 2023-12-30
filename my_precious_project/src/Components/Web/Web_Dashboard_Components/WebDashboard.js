@@ -9,6 +9,7 @@ import DashboardList from './DashboardList.js';
 //전체페이지
 const BorrowDataSet = [
     {
+        author: '김현중',
         title: '엄마가 많이 아파요...',
         borrowMoney: '1000000',
         payBack: '5000',
@@ -19,6 +20,7 @@ const BorrowDataSet = [
         bankAccount: '164502-04-123456',
     },
     {
+        author: '이유현',
         title: '당장 내야하는 월세가 부족해요....',
         borrowMoney: '350000',
         payBack: '400000',
@@ -29,6 +31,7 @@ const BorrowDataSet = [
         bankAccount: '158-124212-11-123',
     },
     {
+        author: '박민지',
         title: '동생 생일선물을 사주고 싶어요..',
         borrowMoney: '100000',
         payBack: '70000',
@@ -43,6 +46,7 @@ const BorrowDataSet = [
 //전체페이지
 const ReceiveDataSet = [
     {
+        author: '김채린',
         title: '친구 월세 빌려줌',
         receiveMoney: '450000',
         payBack: '150000',
@@ -53,6 +57,7 @@ const ReceiveDataSet = [
         bankAccount: '164502-04-123456',
     },
     {
+        author: '김현지',
         title: '교수님 노트북 비용 빌려줌',
         receiveMoney: '2800000',
         payBack: '100000',
@@ -63,6 +68,7 @@ const ReceiveDataSet = [
         bankAccount: '158-124212-11-123',
     },
     {
+        author: '장동원',
         title: '남자친구 케이크값 빌려줌',
         receiveMoney: '200000',
         payBack: '200000',
