@@ -142,65 +142,64 @@ const ContentDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 157px;
+    margin-top: 9.8125rem;
 `;
 
 const ExplainDiv = styled.div`
     color: #000;
     text-align: center;
-    font-size: 32px;
+    font-size: 2rem;
     font-weight: 600;
-    line-height: 51px;
+    line-height: 3.1875rem;
 
-    //width: 400px;
-    height: 102px;
-    margin-top: 45.26px;
+    height: 6.375rem;
+    margin-top: 2.82875rem;
 `;
 
 const InputForm = styled.form`
     display: flex;
     flex-direction: row;
-    margin-top: 116.87px;
+    margin-top: 7.304375rem;
 `;
 
 const InputNameDiv = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
-    width: 269.533px;
-    height: 55.393px;
+    width: 16.8458125rem;
+    height: 3.4620625rem;
     background-color: #fff;
-    margin-right: 114.17px;
+    margin-right: 7.135625rem;
 `;
 
 const GrayText = styled.div`
     color: #6b6a6a;
-    font-size: 20px;
-    margin-bottom: 26.77px;
+    font-size: 1.25rem;
+    margin-bottom: 1.673125rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 31.074px;
+    line-height: 1.942125rem;
 `;
 
 const InputName = styled.input`
-    width: 268.182px;
-    height: 55.393px;
+    width: 16.761375rem;
+    height: 3.4620625rem;
     flex-shrink: 0;
-    border-radius: 6.755px;
-    border: 1.351px solid #ff3d00;
+    border-radius: 0.4221875rem;
+    border: 0.0844375rem solid #ff3d00;
     padding: 0;
 
-    font-size: 20px;
+    font-size: 1.25rem;
     text-align: center;
 
     &::placeholder {
         color: #d9d9d9;
-        font-size: 20px;
+        font-size: 1.25rem;
         text-align: center;
-        margin-right: 11px;
+        margin-right: 0.6875rem;
         font-style: normal;
         font-weight: 500;
-        line-height: 31.074px;
+        line-height: 1.942125rem;
     }
 
     /* &:focus {
@@ -213,8 +212,8 @@ const InputBirthDiv = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
-    width: 299.926px;
-    height: 55.393px;
+    width: 18.745375rem;
+    height: 3.4620625rem;
     background-color: #fff;
 `;
 
@@ -227,15 +226,15 @@ const InputBirthSpace = styled.div`
 const InputYearDiv = styled.div`
     display: flex;
     flex-direction: row;
-    width: 151.317px;
-    height: 55.393px;
+    width: 9.4573125rem;
+    height: 3.4620625rem;
     flex-shrink: 0;
-    border-radius: 6.755px;
-    border: 1.351px solid #ff3d00;
-    margin-right: 10.13px;
+    border-radius: 0.4221875rem;
+    border: 0.0844375rem solid #ff3d00;
+    margin-right: 0.633125rem;
     padding: 0;
 
-    font-size: 20px;
+    font-size: 1.25rem;
     text-align: center;
     //align-items: center;
 `;
@@ -243,30 +242,30 @@ const InputYearDiv = styled.div`
 const InputMonthDiv = styled.div`
     display: flex;
     flex-direction: row;
-    width: 62.148px;
-    height: 55.393px;
+    width: 3.88425rem;
+    height: 3.4620625rem;
     flex-shrink: 0;
-    border-radius: 6.755px;
-    border: 1.351px solid #ff3d00;
-    margin-right: 10.13px;
+    border-radius: 0.4221875rem;
+    border: 0.0844375rem solid #ff3d00;
+    margin-right: 0.633125rem;
     padding: 0;
 
-    font-size: 20px;
+    font-size: 1.25rem;
     text-align: center;
 `;
 
 const InputDateDiv = styled.div`
     display: flex;
     flex-direction: row;
-    width: 62.148px;
-    height: 55.393px;
+    width: 3.88425rem;
+    height: 3.4620625rem;
     flex-shrink: 0;
-    border-radius: 6.755px;
-    border: 1.351px solid #ff3d00;
-    margin-right: 10.13px;
+    border-radius: 0.4221875rem;
+    border: 0.0844375rem solid #ff3d00;
+    margin-right: 0.633125rem;
     padding: 0;
 
-    font-size: 20px;
+    font-size: 1.25rem;
     text-align: center;
 `;
 
@@ -274,15 +273,15 @@ const StyleInput = styled.input`
     display: flex;
     padding: 0;
     margin: 0;
-    width: 120px;
+    width: 7.5rem;
     border: none;
-    border-radius: 6.755px;
+    border-radius: 0.4221875em;
     color: #6b6a6a;
-    font-size: 20px;
+    font-size: 1.25rem;
     text-align: right;
     font-style: normal;
     font-weight: 500;
-    line-height: 31.074px;
+    line-height: 1.942125rem;
 
     //스피너를 감춤
     appearance: textfield; /* Firefox */
@@ -301,40 +300,40 @@ const StyleInputLabel = styled.label`
     display: flex;
     color: #d9d9d9;
     text-align: center;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 31.074px;
+    line-height: 1.942125rem;
     padding: 0;
-    padding-bottom: 5px;
+    padding-bottom: 0.3125rem;
     margin: 0;
     align-items: center;
     height: 100%;
 `;
 
 const CheckBtn = styled.button`
-    width: 63.499px;
-    height: 55.393px;
+    width: 3.9686875rem;
+    height: 3.4620625rem;
     flex-shrink: 0;
-    border-radius: 6.755px;
+    border-radius: 0.4221875rem;
     background: #ff3d00;
     border: #ff3d00;
 
     color: #f5f5f5;
 
     text-align: center;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 31.074px;
+    line-height: 1.942125rem;
     cursor: pointer;
 
     text-align: center;
     //font-family: Pretendard;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 31.074px;
+    line-height: 1.942125rem;
     cursor: pointer;
 `;
 

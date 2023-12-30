@@ -8,15 +8,15 @@ const Row = styled.div`
 `;
 
 const DotRow = styled(Row)`
-    width: 90px;
-    height: 15px;
+    width: 5.625rem;
+    height: 0.9375rem;
     flex-shrink: 0;
     justify-content: space-between;
 `;
 
 const DotBtn = styled.div`
-    width: 14px;
-    height: 15px;
+    width: 0.875rem;
+    height: 0.9375rem;
     background-color: ${(props) => (props.bgcolor ? '#FF3D00' : '#D9D9D9')};
     border-radius: 50%;
     cursor: pointer;
