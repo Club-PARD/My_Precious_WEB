@@ -5,9 +5,9 @@ import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적
 import DetailsBorrowMoney from './DetailsBorrowMoney.js';
 import DetailsReceiveMoney from './DetailsReceiveMoney.js';
 import ButtonMenu from './ButtonMenu.js';
+import { useNavigate } from 'react-router-dom';
 
 //밑에
-
 const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
     const theme = useTheme();
     const [selectedMenu, setSelectedMenu] = useState(0); // 초기값은 전체
@@ -48,7 +48,7 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
                 const setDateTime = new Date(setYear, setMonth - 1, setDay);
                 const differenceTime = setDateTime - currentDate;
                 const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
-                return differenceDays > 0 && percentage(data) < 100;
+                return differenceDays >= 0 && percentage(data) < 100;
             });
         } else if (selectedMenu === 50) {
             // 연체 중
@@ -60,7 +60,7 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
                 const setDateTime = new Date(setYear, setMonth - 1, setDay);
                 const differenceTime = setDateTime - currentDate;
                 const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
-                return differenceDays <= 0 && percentage(data) < 100;
+                return differenceDays < 0 && percentage(data) < 100;
             });
         } else if (selectedMenu === 75) {
             // 완료
