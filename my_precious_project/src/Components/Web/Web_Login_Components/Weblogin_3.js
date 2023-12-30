@@ -21,7 +21,7 @@ const WebLogin_3 = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://172.30.1.64:8080/api/users');
+                const response = await axios.get('http://172.18.140.44:8080/api/users');
                 setTotal(response.data.total);
             } catch (error) {
                 console.error('Error fetching data: ', error);
@@ -106,13 +106,13 @@ const ImageDiv = styled.div`
     height: 18.25rem;
     flex-shrink: 0;
 
-    border-radius:  18.25rem;
+    border-radius: 18.25rem;
     border: 0.125rem solid #ff3d00;
     align-items: center;
 `;
 
 const Img = styled.img`
-    margin-top:  3.125rem;
+    margin-top: 3.125rem;
 `;
 
 const NameDiv = styled.div`
@@ -136,7 +136,7 @@ const Button = styled.button`
     border-radius: 0.40625rem;
     border: none;
     color: white;
-    font-size:  1.25rem;
+    font-size: 1.25rem;
     font-weight: 500;
     background-color: #ff3d00;
     cursor: pointer;

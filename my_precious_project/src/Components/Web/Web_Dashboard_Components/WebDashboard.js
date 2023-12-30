@@ -1,47 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 //import { Link } from 'react-router-dom';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import Header from '../Layout_Components/Mypage_header.js';
 import HistoryCard from './HistoryCard.js';
 import DashboardList from './DashboardList.js';
-
-//전체페이지
-const BorrowDataSet = [
-    {
-        author: '김현중',
-        title: '엄마가 많이 아파요...',
-        borrowMoney: '1000000',
-        payBack: '5000',
-        setDate: '20260331',
-        situation: '엄마가 블라블라 병원에 블라블라 수술을 블라블라',
-        payWay: '계좌이체로 꼭 드릴게요..!!',
-        bank: '국민은행',
-        bankAccount: '164502-04-123456',
-    },
-    {
-        author: '이유현',
-        title: '당장 내야하는 월세가 부족해요....',
-        borrowMoney: '350000',
-        payBack: '400000',
-        setDate: '20230331',
-        situation: '월세를 내야하는데 돈이 부족해요.. 3달째 못내고 있는데.. 도와주실 수 있나요?',
-        payWay: '계좌이체로 꼭 드리겠습니다.. 도와주세요',
-        bank: '기업은행',
-        bankAccount: '158-124212-11-123',
-    },
-    {
-        author: '박민지',
-        title: '동생 생일선물을 사주고 싶어요..',
-        borrowMoney: '100000',
-        payBack: '70000',
-        setDate: '20231001',
-        situation: '월세를 내야하는데 돈이 부족해요.. 3달째 못내고 있는데.. 도와주실 수 있나요?',
-        payWay: '계좌이체로 꼭 드리겠습니다.. 도와주세요',
-        bank: '기업은행',
-        bankAccount: '158-124212-11-123',
-    },
-];
+import { UserDataContext } from '../../../contexts/userContext';
+import axios from 'axios';
 
 //전체페이지
 const ReceiveDataSet = [
@@ -82,6 +47,32 @@ const ReceiveDataSet = [
 
 const WebDashboard = () => {
     const theme = useTheme();
+    const [BorrowDataSet, setBorrowDataSet] = useState([]);
+    const [userData, setUserData] = useContext(UserDataContext);
+    const uid = userData.uid;
+    const restOfName = userData && userData.name ? userData.name.slice(1) : '';
+    console.log(userData);
+
+    // 페이지가 로드되었을 때 로컬 스토리지에 userData 저장
+    useEffect(() => {
+        localStorage.setItem('userData', JSON.stringify(userData));
+    }, []);
+
+    // API에서 데이터 가져오기
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`http://172.18.140.44:8080/api/boards/users//${uid}`);
+            setBorrowDataSet(response.data.data);
+            console.log(response);
+        } catch (error) {
+            console.error('API에서 데이터를 가져오는데 실패했습니다:', error);
+        }
+    };
+
+    // 컴포넌트가 마운트될 때 API에서 데이터를 가져옴
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     //거래 내역 카드의 상태를 관리한다(왼쪽: 빌린돈/ 오른쪽: 받을돈)
     const [leftCard, setLeftCard] = useState('on');
@@ -200,7 +191,7 @@ const WebDashboard = () => {
             <Container>
                 <Header />
                 <ContentsDiv>
-                    <NameGreeting>현지님 안녕하세요!</NameGreeting>
+                    <NameGreeting>{restOfName}님 안녕하세요!</NameGreeting>
                     <MyHistory>내 거래 내역</MyHistory>
                     <CardDiv>
                         <HistoryCard
