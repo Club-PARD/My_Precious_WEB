@@ -11,7 +11,7 @@ const WebLogin_2_checked = () => {
     const theme = useTheme();
     const navigate = useNavigate();
     const [userData, setUserData] = useContext(UserDataContext);
-    const userKey = userData.id;
+    const userKey = userData.uid;
 
     const handleConfirmation = async (event) => {
         // 기본 양식 제출 동작 방지
@@ -19,7 +19,7 @@ const WebLogin_2_checked = () => {
 
         try {
             const response = await axios.patch(
-                `http://172.30.1.64:8080/api/users/${userKey}`,
+                `http://172.18.140.44:8080/api/users/${userKey}`,
                 {
                     name: userData.name,
                     birth: userData.birthDate,
@@ -114,7 +114,7 @@ const Button = styled.button`
     margin-top: 100px;
     width: 28.125rem;
     height: 3.4375rem;
-    border-radius:  0.40625rem;
+    border-radius: 0.40625rem;
     border: none;
     color: white;
     font-size: 1.25rem;
