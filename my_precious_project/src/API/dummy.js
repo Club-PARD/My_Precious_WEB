@@ -1,0 +1,40 @@
+const dataSet = [
+  {
+    title: "엄마가 많이 아파요...",
+    borrowMoney: "1000000",
+    payYear: 2025,
+    payMonth: 3,
+    payDay: 31,
+    situation: "엄마가 블라블라 병원에 블라블라 수술을 블라블라",
+    payWay: "계좌이체로 꼭 드릴게요..!!",
+    bank: "국민은행",
+    bankAccount: "164502-04-123456",
+    status: false,
+  },
+  {
+    title: "당장 내야하는 월세가 부족해요....",
+    borrowMoney: "350000",
+    payYear: 2024,
+    payMonth: 12,
+    payDay: 25,
+    situation:
+      "월세를 내야하는데 돈이 부족해요.. 3달째 못내고 있는데.. 도와주실 수 있나요?",
+    payWay: "계좌이체로 꼭 드리겠습니다.. 도와주세요",
+    bank: "기업은행",
+    bankAccount: "158-124212-11-123",
+    status: true,
+  },
+  {
+    title: "동생 생일선물을 사주고 싶어요..",
+    borrowMoney: "100000",
+    payYear: 2024,
+    payMonth: 12,
+    payDay: 25,
+    situation:
+      "월세를 내야하는데 돈이 부족해요.. 3달째 못내고 있는데.. 도와주실 수 있나요?",
+    payWay: "계좌이체로 꼭 드리겠습니다.. 도와주세요",
+    bank: "기업은행",
+    bankAccount: "158-124212-11-123",
+    status: false,
+  },
+];
