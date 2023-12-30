@@ -31,34 +31,36 @@ const WebDashboard = () => {
         `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/boards/users/${uid}`
       );
       const borrowData = borrowResponse.data.data;
-      let transformeddBorrowData = [];
+      // let transformeddBorrowData = [];
 
       // 데이터를 BorrowDataSet 형식으로 변환
-      const transformedBorrowData = borrowData.map((item) => {
-        const debts = item.debts.map((debt) => ({
-          lendMoney: debt.lendMoney,
-        }));
+      if (borrowData) {
+        const transformedBorrowData = borrowData.map((item) => {
+          const debts = item.debts.map((debt) => ({
+            lendMoney: debt.lendMoney,
+          }));
 
-        return {
-          id: item.id,
-          title: item.title,
-          borrowMoney: item.borrowMoney,
-          payDate: item.payDate,
-          situation: item.situation,
-          payWay: item.payWay,
-          bank: item.bank,
-          bankAccount: item.bankAccount,
-          user: {
-            name: item.user.name,
-            gmailId: item.user.gmailId,
-            uid: item.user.uid,
-          },
-          debts: debts,
-        };
-      });
+          return {
+            id: item.id,
+            title: item.title,
+            borrowMoney: item.borrowMoney,
+            payDate: item.payDate,
+            situation: item.situation,
+            payWay: item.payWay,
+            bank: item.bank,
+            bankAccount: item.bankAccount,
+            user: {
+              name: item.user.name,
+              gmailId: item.user.gmailId,
+              uid: item.user.uid,
+            },
+            debts: debts,
+          };
+        });
 
-      setBorrowDataSet(transformedBorrowData);
-      console.log(transformedBorrowData);
+        setBorrowDataSet(transformedBorrowData);
+        console.log(transformedBorrowData);
+      }
 
       // 받을 돈 데이터 가져오기
       // 받을 돈 데이터 가져오기
@@ -66,7 +68,7 @@ const WebDashboard = () => {
         `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/debts/users/${uid}`
       );
       const receiveData = receiveResponse.data.data;
-      let transformedReceiveData = [];
+      // let transformedReceiveData = [];
 
       if (receiveData) {
         // 데이터를 ReceiveDataSet 형식으로 변환
@@ -98,7 +100,7 @@ const WebDashboard = () => {
         }));
 
         setReceiveDataSet(transformedReceiveData);
-        console.log(transformedReceiveData);
+        console.log("받을 돈 :", transformedReceiveData);
       } else {
         console.error(
           "API에서 받을 돈 데이터를 가져오는데 실패했습니다: 데이터가 존재하지 않습니다."

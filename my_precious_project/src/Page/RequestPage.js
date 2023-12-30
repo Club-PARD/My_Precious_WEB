@@ -24,6 +24,8 @@ const RequestPage = () => {
 
   const [userData, setUserData] = useContext(UserDataContext);
   const userName = userData.name;
+  const uid = userData.uid;
+  console.log(uid);
 
   const [form, setForm] = useState({
     title: "",
@@ -142,7 +144,7 @@ const RequestPage = () => {
     console.log(form);
     axios
       .post(
-        "http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/boards/hbsNHR1qz9erDBjFQUZpyHhrVRG3",
+        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/boards/${uid}`,
         {
           title: form.title,
           borrowMoney: form.borrowMoney,
