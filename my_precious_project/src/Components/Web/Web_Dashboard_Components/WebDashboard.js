@@ -31,36 +31,34 @@ const WebDashboard = () => {
         `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/boards/users/${uid}`
       );
       const borrowData = borrowResponse.data.data;
-      // let transformeddBorrowData = [];
+      let transformeddBorrowData = [];
 
       // 데이터를 BorrowDataSet 형식으로 변환
-      if (borrowData) {
-        const transformedBorrowData = borrowData.map((item) => {
-          const debts = item.debts.map((debt) => ({
-            lendMoney: debt.lendMoney,
-          }));
+      const transformedBorrowData = borrowData.map((item) => {
+        const debts = item.debts.map((debt) => ({
+          lendMoney: debt.lendMoney,
+        }));
 
-          return {
-            id: item.id,
-            title: item.title,
-            borrowMoney: item.borrowMoney,
-            payDate: item.payDate,
-            situation: item.situation,
-            payWay: item.payWay,
-            bank: item.bank,
-            bankAccount: item.bankAccount,
-            user: {
-              name: item.user.name,
-              gmailId: item.user.gmailId,
-              uid: item.user.uid,
-            },
-            debts: debts,
-          };
-        });
+        return {
+          id: item.id,
+          title: item.title,
+          borrowMoney: item.borrowMoney,
+          payDate: item.payDate,
+          situation: item.situation,
+          payWay: item.payWay,
+          bank: item.bank,
+          bankAccount: item.bankAccount,
+          user: {
+            name: item.user.name,
+            gmailId: item.user.gmailId,
+            uid: item.user.uid,
+          },
+          debts: debts,
+        };
+      });
 
-        setBorrowDataSet(transformedBorrowData);
-        console.log(transformedBorrowData);
-      }
+      setBorrowDataSet(transformedBorrowData);
+      console.log(transformedBorrowData);
 
       // 받을 돈 데이터 가져오기
       // 받을 돈 데이터 가져오기
@@ -68,7 +66,7 @@ const WebDashboard = () => {
         `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/debts/users/${uid}`
       );
       const receiveData = receiveResponse.data.data;
-      // let transformedReceiveData = [];
+      let transformedReceiveData = [];
 
       if (receiveData) {
         // 데이터를 ReceiveDataSet 형식으로 변환
@@ -91,16 +89,16 @@ const WebDashboard = () => {
             payDate: item.board?.payDate,
             bank: item.board?.bank,
             bankAccount: item.board?.bankAccount,
-          },
-          userSimpleResponse: {
-            name: item.board?.userSimpleResponse?.name,
-            gmailId: item.board?.userSimpleResponse?.gmailId,
-            uid: item.board?.userSimpleResponse?.uid,
+            userSimpleResponse: {
+              name: item.board?.userSimpleResponse?.name,
+              gmailId: item.board?.userSimpleResponse?.gmailId,
+              uid: item.board?.userSimpleResponse?.uid,
+            },
           },
         }));
 
         setReceiveDataSet(transformedReceiveData);
-        console.log("받을 돈 :", transformedReceiveData);
+        console.log(transformedReceiveData);
       } else {
         console.error(
           "API에서 받을 돈 데이터를 가져오는데 실패했습니다: 데이터가 존재하지 않습니다."
@@ -110,8 +108,6 @@ const WebDashboard = () => {
       console.error("API에서 데이터를 가져오는데 실패했습니다:", error);
     }
   };
-
-  console.log(ReceiveDataSet[0]);
 
   // 컴포넌트가 마운트될 때 API에서 데이터를 가져옴
   useEffect(() => {
@@ -149,8 +145,7 @@ const WebDashboard = () => {
       0
     );
 
-    let minNegativeDDay = Number.MAX_SAFE_INTEGER;
-    let maxPositiveDDay = Number.MIN_SAFE_INTEGER;
+    let maxDifferenceDays = Number.MIN_SAFE_INTEGER;
 
     for (let i = 0; i < filteredDataSet.length; i++) {
       const payDate = filteredDataSet[i].payDate.toString();
@@ -164,24 +159,14 @@ const WebDashboard = () => {
       const differenceTime = payDateTime - setDateTime;
       const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
 
-      if (differenceDays < 0) {
-        minNegativeDDay = Math.min(minNegativeDDay, differenceDays);
-      } else {
-        maxPositiveDDay = Math.max(maxPositiveDDay, differenceDays);
-      }
+      maxDifferenceDays = Math.max(maxDifferenceDays, differenceDays);
     }
-
     const CardDate =
-      minNegativeDDay !== Number.MAX_SAFE_INTEGER
-        ? maxPositiveDDay > 0
-          ? `D+${maxPositiveDDay}`
-          : maxPositiveDDay === 0
-          ? "D-Day"
-          : `D${maxPositiveDDay}`
-        : minNegativeDDay === 0
+      maxDifferenceDays < 0
+        ? `D${maxDifferenceDays}`
+        : maxDifferenceDays === 0
         ? "D-Day"
-        : `D${minNegativeDDay}`;
-
+        : `D+${maxDifferenceDays}`;
     return {
       CardCount,
       CardTotal,
@@ -208,9 +193,7 @@ const WebDashboard = () => {
       0
     );
 
-    let minNegativeDDay = Number.MAX_SAFE_INTEGER;
-    // let maxPositiveDDay = 0;
-    let maxPositiveDDay = Number.MIN_SAFE_INTEGER;
+    let maxDifferenceDays = Number.MIN_SAFE_INTEGER;
 
     for (let i = 0; i < filteredDataSet.length; i++) {
       const payDate = filteredDataSet[i].board.payDate.toString();
@@ -224,23 +207,15 @@ const WebDashboard = () => {
       const differenceTime = payDateTime - setDateTime;
       const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
 
-      if (differenceDays < 0) {
-        minNegativeDDay = Math.min(minNegativeDDay, differenceDays);
-      } else {
-        maxPositiveDDay = Math.max(maxPositiveDDay, differenceDays);
-      }
+      maxDifferenceDays = Math.max(maxDifferenceDays, differenceDays);
     }
 
     const CardDate =
-      minNegativeDDay !== Number.MAX_SAFE_INTEGER
-        ? maxPositiveDDay > 0
-          ? `D+${maxPositiveDDay}`
-          : maxPositiveDDay === 0
-          ? "D-Day"
-          : `D${maxPositiveDDay}`
-        : minNegativeDDay === 0
+      maxDifferenceDays < 0
+        ? `D${maxDifferenceDays}`
+        : maxDifferenceDays === 0
         ? "D-Day"
-        : `D${minNegativeDDay}`;
+        : `D+${maxDifferenceDays}`;
 
     return {
       CardCount,
@@ -317,8 +292,7 @@ const Container = styled.div`
   padding: 0;
   align-items: center;
   background: #fafafa;
-  height: 100vh;
-  overflow-y: hidden;
+  height: 100%;
 `;
 
 const ContentsDiv = styled.div`

@@ -178,7 +178,7 @@ const RequestPage = () => {
           ></MainImage>
           <CloseButton
             src={process.env.PUBLIC_URL + "/img/CloseButton.svg"}
-            onClick={navigate("/dashboard")}
+            // onClick={navigate("/dashboard")}
           ></CloseButton>
           <MainText>
             친구에게 돈을 빌리는 것은 당연한 게 아니에요! <br />
