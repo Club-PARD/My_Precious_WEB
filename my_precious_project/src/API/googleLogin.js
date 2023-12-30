@@ -15,7 +15,10 @@ export async function handleGoogleLogin(setLogInData, setUserData, navigate) {
         setLogInData(userData);
 
         // axios를 이용한 POST 요청
-        const response = await axios.post('http://172.18.140.44:8080/api/users', userData);
+        const response = await axios.post(
+            'http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/users',
+            userData
+        );
         console.log(response.data);
 
         // POST 요청 후 받은 id 값을 UserDataContext에 저장

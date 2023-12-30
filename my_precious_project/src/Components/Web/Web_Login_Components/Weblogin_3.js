@@ -21,7 +21,7 @@ const WebLogin_3 = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://172.18.140.44:8080/api/users');
+                const response = await axios.get('http://192.168.0.94:8080/api/users');
                 setTotal(response.data.total);
             } catch (error) {
                 console.error('Error fetching data: ', error);

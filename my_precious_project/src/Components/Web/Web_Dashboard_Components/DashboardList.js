@@ -24,20 +24,27 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
         let dataSet;
 
         if (rightCard === 'on') {
-            percentage = (data) => (data.payBack / data.receiveMoney) * 100;
+            percentage = (data) => {
+                const totalLendMoney = data.debts?.reduce((acc, debt) => acc + Number(debt.lendMoney), 0) ?? 0;
+                const borrowMoney = data.board?.borrowMoney ?? 0;
+                return (totalLendMoney / borrowMoney) * 100;
+            };
             dataSet = ReceiveDataSet;
         } else {
-            percentage = (data) => (data.payBack / data.borrowMoney) * 100;
+            percentage = (data) => {
+                const totalLendMoney = data.debts?.reduce((acc, debt) => acc + Number(debt.lendMoney), 0) ?? 0;
+                const borrowMoney = data.borrowMoney ?? 0;
+                return (totalLendMoney / borrowMoney) * 100;
+            };
             dataSet = BorrowDataSet;
         }
-
         if (selectedMenu === 25) {
             // 진행 중
             return dataSet.filter((data) => {
-                const setDate = data.setDate.toString();
-                const setYear = parseInt(setDate.slice(0, 4));
-                const setMonth = parseInt(setDate.slice(4, 6));
-                const setDay = parseInt(setDate.slice(6, 8));
+                const payDate = rightCard === 'on' ? data.board.payDate.toString() : data.payDate.toString();
+                const setYear = parseInt(payDate.slice(0, 4));
+                const setMonth = parseInt(payDate.slice(4, 6));
+                const setDay = parseInt(payDate.slice(6, 8));
                 const setDateTime = new Date(setYear, setMonth - 1, setDay);
                 const differenceTime = setDateTime - currentDate;
                 const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
@@ -46,10 +53,10 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
         } else if (selectedMenu === 50) {
             // 연체 중
             return dataSet.filter((data) => {
-                const setDate = data.setDate.toString();
-                const setYear = parseInt(setDate.slice(0, 4));
-                const setMonth = parseInt(setDate.slice(4, 6));
-                const setDay = parseInt(setDate.slice(6, 8));
+                const payDate = rightCard === 'on' ? data.board.payDate.toString() : data.payDate.toString();
+                const setYear = parseInt(payDate.slice(0, 4));
+                const setMonth = parseInt(payDate.slice(4, 6));
+                const setDay = parseInt(payDate.slice(6, 8));
                 const setDateTime = new Date(setYear, setMonth - 1, setDay);
                 const differenceTime = setDateTime - currentDate;
                 const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
