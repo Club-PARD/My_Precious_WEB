@@ -127,19 +127,19 @@ function LeftSide() {
                         </DisplayDataPlanDiv>
                     </Line>
                     <Line style={{marginTop:"3.19rem"}}>
-                        <DarkGrayText style={{marginRight:"0.8rem" , height: "2.4375rem"}}>필요 금액</DarkGrayText>
+                        <DarkGrayText style={{ height: "2.4375rem"}}>필요 금액</DarkGrayText>
                         <DisplayDataTotalDiv>
                             <DisplayDataTotalText>{formattedNumber2} 원</DisplayDataTotalText>
                         </DisplayDataTotalDiv>
                     </Line>
                     <Line style={{marginTop:"0.56rem" , height: "2.4375rem"}}>
-                        <DarkGrayText style={{marginRight:"0.8rem"}}>갚을 날짜</DarkGrayText>
+                        <DarkGrayText >갚을 날짜</DarkGrayText>
                         <DisplayDataTotalDiv>
                             <DisplayDataTotalText>{detailData.date} </DisplayDataTotalText>
                         </DisplayDataTotalDiv>
                     </Line>
                     <Line style={{marginTop:"0.56rem"}}>
-                        <DarkGrayText style={{marginRight:"0.8rem" , height: "2.4375rem"}}>받을 계좌</DarkGrayText>
+                        <DarkGrayText style={{ height: "2.4375rem"}}>받을 계좌</DarkGrayText>
                         <DisplayDataTotalDiv>
                             <DisplayDataTotalText>{detailData.bank} {detailData.account} </DisplayDataTotalText>
                         </DisplayDataTotalDiv>
@@ -210,6 +210,7 @@ const ImageText = styled.div`
 `;
 
 const StyleLineProgress =styled.div`
+    //max-width: 43.375rem;
     margin-left: 1.375rem;
     margin-top:  0.75rem;
 `;
@@ -253,6 +254,7 @@ const DisplayBoxDiv =styled.div`
 const Line = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: start;
 `;
 
@@ -265,7 +267,7 @@ const DarkGrayText = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 2.4375rem;
-    margin-right: 2.9375rem;
+    //margin-right: 2.9375rem;
 `;
 
 const DisplayDataDiv = styled.div`

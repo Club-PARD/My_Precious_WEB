@@ -3,6 +3,7 @@ import { Line } from 'rc-progress';
 import styled from 'styled-components';
 
 function LineProgress(props) {
+
   // 시작 값 설정 (예: 10000)
   const [startValue,setStartValue] = useState(props.total);
   // 입력 값 설정 (예: 1000)
