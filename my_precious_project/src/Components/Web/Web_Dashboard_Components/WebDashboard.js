@@ -9,45 +9,10 @@ import { UserDataContext } from '../../../contexts/userContext';
 import axios from 'axios';
 
 //전체페이지
-const ReceiveDataSet = [
-    {
-        author: '김채린',
-        title: '친구 월세 빌려줌',
-        receiveMoney: '450000',
-        payBack: '150000',
-        setDate: '20240101',
-        situation: '친구가 월세돈이 없다.',
-        payWay: '계좌이체로 준다 했음',
-        bank: '국민은행',
-        bankAccount: '164502-04-123456',
-    },
-    {
-        author: '김현지',
-        title: '교수님 노트북 비용 빌려줌',
-        receiveMoney: '2800000',
-        payBack: '100000',
-        setDate: '20231229',
-        situation: '교수님이랑 같이 매장갔는데 돈이 없다해서 빌려줌',
-        payWay: '현금으로 준다고 함',
-        bank: '기업은행',
-        bankAccount: '158-124212-11-123',
-    },
-    {
-        author: '장동원',
-        title: '남자친구 케이크값 빌려줌',
-        receiveMoney: '200000',
-        payBack: '200000',
-        setDate: '20241001',
-        situation: '남자친구 지갑 잃어버림',
-        payWay: '카페로 받을거임',
-        bank: '기업은행',
-        bankAccount: '158-124212-11-123',
-    },
-];
-
 const WebDashboard = () => {
     const theme = useTheme();
     const [BorrowDataSet, setBorrowDataSet] = useState([]);
+    const [ReceiveDataSet, setReceiveDataSet] = useState([]);
     const [userData, setUserData] = useContext(UserDataContext);
     const uid = userData.uid;
     const restOfName = userData && userData.name ? userData.name.slice(1) : '';
@@ -61,18 +26,97 @@ const WebDashboard = () => {
     // API에서 데이터 가져오기
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://172.18.140.44:8080/api/boards/users//${uid}`);
-            setBorrowDataSet(response.data.data);
-            console.log(response);
+            // 빌린 돈 데이터 가져오기
+            const borrowResponse = await axios.get(
+                `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/boards/users/${uid}`
+            );
+            const borrowData = borrowResponse.data.data;
+            let transformeddBorrowData = [];
+
+            // 데이터를 BorrowDataSet 형식으로 변환
+            const transformedBorrowData = borrowData.map((item) => {
+                const debts = item.debts.map((debt) => ({
+                    lendMoney: debt.lendMoney,
+                }));
+
+                return {
+                    id: item.id,
+                    title: item.title,
+                    borrowMoney: item.borrowMoney,
+                    payDate: item.payDate,
+                    situation: item.situation,
+                    payWay: item.payWay,
+                    bank: item.bank,
+                    bankAccount: item.bankAccount,
+                    user: {
+                        name: item.user.name,
+                        gmailId: item.user.gmailId,
+                        uid: item.user.uid,
+                    },
+                    debts: debts,
+                };
+            });
+
+            setBorrowDataSet(transformedBorrowData);
+            console.log(transformedBorrowData);
+
+            // 받을 돈 데이터 가져오기
+            // 받을 돈 데이터 가져오기
+            const receiveResponse = await axios.get(
+                `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/debts/users/${uid}`
+            );
+            const receiveData = receiveResponse.data.data;
+            let transformedReceiveData = [];
+
+            if (receiveData) {
+                // 데이터를 ReceiveDataSet 형식으로 변환
+                const transformedReceiveData = receiveData.map((item) => ({
+                    id: item.id,
+                    lendMoney: item.lendMoney,
+                    message: item.message,
+                    bank: item.bank,
+                    bankAccount: item.bankAccount,
+                    debtStatus: item.debtStatus,
+                    repaymentStatus: item.repaymentStatus,
+                    user: {
+                        name: item.user?.name,
+                        gmailId: item.user?.gmailId,
+                        uid: item.user?.uid,
+                    },
+                    board: {
+                        title: item.board?.title,
+                        borrowMoney: item.board?.borrowMoney,
+                        payDate: item.board?.payDate,
+                        bank: item.board?.bank,
+                        bankAccount: item.board?.bankAccount,
+                    },
+                    userSimpleResponse: {
+                        name: item.board?.userSimpleResponse?.name,
+                        gmailId: item.board?.userSimpleResponse?.gmailId,
+                        uid: item.board?.userSimpleResponse?.uid,
+                    },
+                }));
+
+                setReceiveDataSet(transformedReceiveData);
+                console.log(transformedReceiveData);
+            } else {
+                console.error('API에서 받을 돈 데이터를 가져오는데 실패했습니다: 데이터가 존재하지 않습니다.');
+            }
         } catch (error) {
             console.error('API에서 데이터를 가져오는데 실패했습니다:', error);
         }
     };
 
+    console.log(ReceiveDataSet[0]);
+
     // 컴포넌트가 마운트될 때 API에서 데이터를 가져옴
     useEffect(() => {
         fetchData();
     }, []);
+    BorrowDataSet.map((data, index) => {
+        console.log(`Data at index ${index}:`, data.debts);
+        return null; // React에서 map 함수를 사용할 때는 반드시 JSX나 null을 반환해야 합니다.
+    });
 
     //거래 내역 카드의 상태를 관리한다(왼쪽: 빌린돈/ 오른쪽: 받을돈)
     const [leftCard, setLeftCard] = useState('on');
@@ -80,7 +124,17 @@ const WebDashboard = () => {
 
     // dataSet에 따른 카드 정보를 계산하는 함수
     const LeftCalculateCardInfo = (BorrowDataSet) => {
-        const filteredDataSet = BorrowDataSet.filter((data) => (data.payBack / data.borrowMoney) * 100 < 100);
+        if (!BorrowDataSet || BorrowDataSet.length === 0) {
+            return {
+                CardCount: 0,
+                CardTotal: 0,
+                CardDate: '0',
+            };
+        }
+        const filteredDataSet = BorrowDataSet.filter(
+            (data) => (data.debts.reduce((acc, debt) => acc + Number(debt.lendMoney), 0) / data.borrowMoney) * 100 < 100
+        );
+        console.log(filteredDataSet);
         const CardCount = filteredDataSet.length;
         const CardTotal = filteredDataSet.reduce((acc, data) => acc + Number(data.borrowMoney), 0);
 
@@ -88,13 +142,13 @@ const WebDashboard = () => {
         let maxPositiveDDay = Number.MIN_SAFE_INTEGER;
 
         for (let i = 0; i < filteredDataSet.length; i++) {
-            const setDate = filteredDataSet[i].setDate.toString();
-            const setYear = parseInt(setDate.slice(0, 4));
-            const setMonth = parseInt(setDate.slice(4, 6));
-            const setDay = parseInt(setDate.slice(6, 8));
+            const payDate = filteredDataSet[i].payDate.toString();
+            const setYear = parseInt(payDate.slice(0, 4));
+            const setMonth = parseInt(payDate.slice(4, 6));
+            const setDay = parseInt(payDate.slice(6, 8));
 
             const setDateTime = new Date(setYear, setMonth - 1, setDay);
-
+            setDateTime.setDate(setDateTime.getDate() + 1);
             const payDateTime = new Date();
             const differenceTime = payDateTime - setDateTime;
             const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
@@ -125,20 +179,32 @@ const WebDashboard = () => {
     };
 
     const RightCalculateCardInfo = (ReceiveDataSet) => {
-        const filteredDataSet = ReceiveDataSet.filter((data) => (data.payBack / data.receiveMoney) * 100 < 100);
+        if (!ReceiveDataSet || ReceiveDataSet.length === 0) {
+            return {
+                CardCount: 0,
+                CardTotal: 0,
+                CardDate: '0',
+            };
+        }
+        const filteredDataSet = ReceiveDataSet.filter(
+            (data) => (Number(data.lendMoney) / Number(data.board.borrowMoney)) * 100 < 100
+        );
+        console.log(filteredDataSet);
         const CardCount = filteredDataSet.length;
-        const CardTotal = filteredDataSet.reduce((acc, data) => acc + Number(data.receiveMoney), 0);
+        const CardTotal = filteredDataSet.reduce((acc, data) => acc + Number(data.board.borrowMoney), 0);
 
         let minNegativeDDay = Number.MAX_SAFE_INTEGER;
+        // let maxPositiveDDay = 0;
         let maxPositiveDDay = Number.MIN_SAFE_INTEGER;
 
         for (let i = 0; i < filteredDataSet.length; i++) {
-            const setDate = filteredDataSet[i].setDate.toString();
-            const setYear = parseInt(setDate.slice(0, 4));
-            const setMonth = parseInt(setDate.slice(4, 6));
-            const setDay = parseInt(setDate.slice(6, 8));
+            const payDate = filteredDataSet[i].board.payDate.toString();
+            const setYear = parseInt(payDate.slice(0, 4));
+            const setMonth = parseInt(payDate.slice(4, 6));
+            const setDay = parseInt(payDate.slice(6, 8));
 
             const setDateTime = new Date(setYear, setMonth - 1, setDay);
+            setDateTime.setDate(setDateTime.getDate() + 1);
             const payDateTime = new Date();
             const differenceTime = payDateTime - setDateTime;
             const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
@@ -170,9 +236,16 @@ const WebDashboard = () => {
 
     //왼쪽 카드(빌린 돈) props 정리(서버랑 연결 필요)
     const [leftCardInfo, setLeftCardInfo] = useState(LeftCalculateCardInfo(BorrowDataSet));
+    // useEffect를 사용하여 BorrowDataSet이 변경될 때마다 LeftCalculateCardInfo를 호출
+    useEffect(() => {
+        setLeftCardInfo(LeftCalculateCardInfo(BorrowDataSet));
+    }, [BorrowDataSet]);
 
     //오른쪽 카드(빌린 돈) props 정리(서버랑 연결 필요)
     const [rightCardInfo, setRightCardInfo] = useState(RightCalculateCardInfo(ReceiveDataSet));
+    useEffect(() => {
+        setRightCardInfo(RightCalculateCardInfo(ReceiveDataSet));
+    }, [ReceiveDataSet]);
 
     //거래 내역 왼쪽(빌린 돈) 클릭시
     const handleLeftCardClick = () => {

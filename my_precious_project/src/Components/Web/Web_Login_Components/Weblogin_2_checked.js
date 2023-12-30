@@ -19,7 +19,7 @@ const WebLogin_2_checked = () => {
 
         try {
             const response = await axios.patch(
-                `http://172.18.140.44:8080/api/users/${userKey}`,
+                `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/users/${userKey}`,
                 {
                     name: userData.name,
                     birth: userData.birthDate,

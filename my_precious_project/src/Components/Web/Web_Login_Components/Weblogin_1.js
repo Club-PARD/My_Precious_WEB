@@ -47,15 +47,6 @@ const WebLogin_1 = () => {
         setIsButtonDisabled(!areInputsFilled());
     }, [name, year, month, day, areInputsFilled]);
 
-    useEffect(() => {
-        if (userData) {
-            setName(userData.name || '');
-            setYear(userData.year || '');
-            setMonth(userData.month || '');
-            setDay(userData.day || '');
-        }
-    }, [userData]);
-
     return (
         <ThemeProvider theme={theme}>
             <Container>
