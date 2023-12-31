@@ -12,7 +12,7 @@ import Character from '../../../Assets/img/Character.png';
 
 const boardId = 1;
 
-function LeftSide() {
+function LeftSide({under100, setUnder100}) {
     const theme = useTheme();
 
     const [detailData, setDetailData] = useState({
@@ -92,6 +92,19 @@ function LeftSide() {
     //필요한 돈 숫자에서 문자 -> 컴마 추가
     var totaleNumber = detailData.total;
     var formattedNumber2 = totaleNumber.toLocaleString();
+
+    //모은 돈이 받길 원하는 돈을 넘었을 때 돈 빌려주기 작성 버튼 비활성화를 위한 상태 설정
+    useEffect(() => {
+        // total과 collect을 이용하여 퍼센트 계산
+        const percent = (detailData.receive / detailData.total) * 100;
+    
+        // 100% 이상인 경우
+        if (percent >= 100) {
+          setUnder100(true);
+        } else {
+        setUnder100(false);
+        }
+      }, [detailData.total, detailData.receive]);
 
     return (
         <ThemeProvider theme={theme}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider, keyframes } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context API 적용
@@ -58,9 +58,17 @@ const WritingMessageContainer = styled.div`
     animation: ${fadeIn} 0.8s ease;
 `;
 
-function RightSide(props) {
+function RightSide({under100}) {
     const theme = useTheme();
     const [clickstate, setClickstate] = useState(false);
+
+    // 버튼 활성화 여부를 결정할 상태 추가
+    const [isButtonDisabled, setIsButtonDisabled] = useState(under100);
+    useEffect(() => {
+        setIsButtonDisabled(under100);
+      }, [under100]);
+
+    console.log("빌려주기 버튼 상태",isButtonDisabled)
 
     const handleBurrowConfirmation = (event) => {
         // 기본 양식 제출 동작 방지
@@ -75,7 +83,8 @@ function RightSide(props) {
                 {clickstate === false ? (
                     <>
                     <ImageCharacter/>
-                    <BorrowButton onClick={handleBurrowConfirmation}>도와주기</BorrowButton>
+                    <BorrowButton onClick={handleBurrowConfirmation} 
+                    disabled={isButtonDisabled}>도와주기</BorrowButton>
                     </>
                 ) : (
                     <WritingMessageContainer>

@@ -255,7 +255,7 @@ function WritingMessage() {
 
     // 입력값이 변경될 때마다 버튼 상태 업데이트
     useEffect(() => {
-        setIsButtonDisabled(!areInputsFilled());
+        setIsButtonDisabled(!(areInputsFilled()));
     }, [form.lendMoney, form.message, form.bank, form.bankAccount, areInputsFilled]);
 
     //빌려준 금액 세자리마다 컴마 추가 함수
@@ -326,7 +326,6 @@ function WritingMessage() {
                                 autoWidth
                                 label=""
                                 MenuProps={MenuProps}
-                                indicator
                                 sx ={{padding: "0",  
                                 color:  "#B3B3B3",
                                 textAlign: "left",
