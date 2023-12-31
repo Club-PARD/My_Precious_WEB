@@ -57,9 +57,8 @@ function CheckedMessage() {
                     </DetailDiv>
                 </ContentsDiv>
                 <Div>
+                    <CheckBtn>갚은 것을 확인했어요</CheckBtn>
                     <SentToEmailModal props= {Modal_Chaseup}/>
-                    <CheckText> 갚은 것이 확인되면 체크해주세요</CheckText>
-                    <CheckBoxdiv type='checkbox'></CheckBoxdiv>
                 </Div>
             </Container>
         </ThemeProvider>
@@ -186,18 +185,20 @@ const Div =styled.div`
     display: flex;
     flex-direction: row;
     width: 30rem;
-    justify-content: space-evenly;
+    justify-content: space-between;
     padding-top: 1.94rem;
     align-items:center;
+    width: 23.5rem;
 `;
 
-const ChaseUpBtn =styled.button`
+
+const CheckBtn =styled.button  `
     display: flex;
-    width: 9.875rem;
+    width: 10.9375rem;
     height: 2.5rem;
     flex-shrink: 0;
     border-radius: 0.375rem;
-    background: var(--primary_orange, #FF3D00);
+    background:  #FF3D00;
     border: none;
     align-items: center;
     justify-content: center;
@@ -209,33 +210,6 @@ const ChaseUpBtn =styled.button`
     line-height: 2.4375rem;
     padding: 0;
     cursor: pointer;
-`;
-
-const CheckText = styled.div`
-    display: flex;
-    color: #A5A5A5;
-    font-family: Pretendard;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 2.4375rem; 
-`;
-
-const CheckBoxdiv = styled.input`
-    display: flex;
-    appearance: none;
-    width: 1.5rem;
-    height: 1.5rem;
-    flex-shrink: 0;
-    border: 0.1rem solid #A5A5A5;
-    border-radius: 0.2rem;
-    background-color: #FAFAFA; 
-    cursor: pointer;
-    &:checked {
-        border: none;
-        background-color: #FAFAFA;
-        background-image:url(${CheckBox});
-    }
 `;
 
 export default CheckedMessage;

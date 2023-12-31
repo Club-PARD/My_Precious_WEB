@@ -81,11 +81,11 @@ const customModalStyles = {
 
 const ChaseUpBtn =styled.button`
     display: flex;
-    width: 9.875rem;
+    width: 10.9375rem;
     height: 2.5rem;
     flex-shrink: 0;
     border-radius: 0.375rem;
-    background: var(--primary_orange, #FF3D00);
+    background:  #B3B3B3;
     border: none;
     align-items: center;
     justify-content: center;
@@ -97,6 +97,9 @@ const ChaseUpBtn =styled.button`
     line-height: 2.4375rem;
     padding: 0;
     cursor: pointer;
+    &:hover {
+      background:  #FF3D00;
+    }
 `;
 
 const ContextDiv =styled.div`
