@@ -172,7 +172,6 @@ function WritingMessage() {
     const [userData, setUserData] = useContext(UserDataContext);
     const uid = userData.uid;
 
-
     //임의로 지정한 인풋 값 변수
     const [form, setForm] = useState({
         lendMoney: "",

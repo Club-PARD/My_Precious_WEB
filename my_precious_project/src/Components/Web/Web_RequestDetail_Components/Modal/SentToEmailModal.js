@@ -7,6 +7,50 @@ import { UserDataContext } from '../../../../contexts/userContext';
 
 //npm i react-modal
 
+function SentToEmailModal({props}) {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [userData, setUserData] = useContext(UserDataContext);
+  const uid = userData.uid;
+
+  const openModal = () => {
+    //스크롤 비활성화
+    document.body.style.overflow = 'hidden'; 
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    //스크롤 활성화
+    document.body.style.overflow = 'auto'; 
+    setModalIsOpen(false);
+  };
+
+
+  return (
+    <div>
+      <ChaseUpBtn onClick={openModal}>{props.function} 작성</ChaseUpBtn>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        ariaHideApp={false}
+        style={customModalStyles}
+      >
+        
+        <ContextDiv>
+          <ImageXBtn onClick={closeModal}/>
+          <HeaderText>머니글러브에서 <HeaderOrange> {props.function}</HeaderOrange>를 작성해보세요!</HeaderText>
+          <GuideText>{props.subHeader}</GuideText>
+          <Form>
+            <Input1 placeholder='제목을 작성하는 곳'></Input1>
+            <Input2 placeholder= {props.longplacehorder}></Input2>
+            <SubmitBtn onClick={closeModal}>보내기</SubmitBtn>
+          </Form>
+        </ContextDiv>
+      </Modal>
+
+    </div>
+  );
+}
+
 //overlay는 모달 창 바깥 부분, content는 모달 창부분
 const customModalStyles = {
   overlay: {
@@ -120,7 +164,7 @@ const GuideText =styled.div`
 const Form =styled.form`
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     padding-top: 1.19rem;
 `;
 
@@ -188,49 +232,5 @@ const SubmitBtn =styled.div`
   margin-top: 1rem;
   margin-left: 25rem;
 `;
-
-function SentToEmailModal() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [userData, setUserData] = useContext(UserDataContext);
-  const uid = userData.uid;
-
-  const openModal = () => {
-    //스크롤 비활성화
-    document.body.style.overflow = 'hidden'; 
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    //스크롤 활성화
-    document.body.style.overflow = 'auto'; 
-    setModalIsOpen(false);
-  };
-
-
-  return (
-    <div>
-      <ChaseUpBtn onClick={openModal}>재촉편지 작성</ChaseUpBtn>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        ariaHideApp={false}
-        style={customModalStyles}
-      >
-        
-        <ContextDiv>
-          <ImageXBtn onClick={closeModal}/>
-          <HeaderText>머니글러브에서 <HeaderOrange> 재촉편지</HeaderOrange>를 작성해보세요!</HeaderText>
-          <GuideText>과격한 재촉 편지는 법적 문제가 될 수 있으니 주의해주세요.</GuideText>
-          <Form>
-            <Input1 placeholder='제목을 작성하는 곳'></Input1>
-            <Input2 placeholder= "머글님께서 힘들 때 도움을 준 친구에게 감사함을 전해보세요. MoneyGlove를 통해 돈을 빌려준 친구는 이자율도 없으며 금전적 이득을 위함이 아닌, 오로지 머글님을 걱정하는 마음을 가지고 도와주는 우정이 넘치는 친구입니다. 금액은 중요하지 않습니다. 자신의 상황에 최대의 금액을 보내준 친구에게 감사함을 전해주세요."></Input2>
-            <SubmitBtn onClick={closeModal}>보내기</SubmitBtn>
-          </Form>
-        </ContextDiv>
-      </Modal>
-
-    </div>
-  );
-}
 
 export default SentToEmailModal;

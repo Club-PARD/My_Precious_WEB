@@ -15,6 +15,20 @@ function CheckedMessage() {
     const [userData, setUserData] = useContext(UserDataContext);
     const uid = userData.uid;
 
+    //모달에 보낼 props값 - 재촉편지
+    const Modal_Chaseup ={
+        function : "재촉편지",
+        subHeader: "과격한 재촉 편지는 법적 문제가 될 수 있으니 주의해주세요.",
+        longplacehorder: "기간내에 돈을 돌려받지 못했다면, 재촉편지를 작성해 볼 수 있습니다. 과격한 재촉은 오히려 상대방이 돈을 갚기에 반감을 살 수 있습니다. 상대방이 돈을 못 갚고 있는 상황에 대해 이해하려고 노력해보세요. 그리고 이후에 지금 돈을 돌려 받아야 하는 이유에 대해 설명하세요. 우정을 지키기 위해 따뜻한 말로 작성해주세요."
+    }
+
+    //모달에 보낼 props값 - 감사편지
+    const Modal_ThankU ={
+        function : "감사편지",
+        subHeader: "당신이 힘들 때 도움 준 친구에게 감사한 마음을 전해보아요.",
+        longplacehorder: "머글님께서 힘들 때 도움을 준 친구에게 감사함을 전해보세요. MoneyGlove를 통해 돈을 빌려준 친구는 이자율도 없으며 금전적 이득을 위함이 아닌, 오로지 머글님을 걱정하는 마음을 가지고 도와주는 우정이 넘치는 친구입니다. 금액은 중요하지 않습니다. 자신의 상황에 최대의 금액을 보내준 친구에게 감사함을 전해주세요."
+    }
+
     //1. 서버에서 빌려준 메시지 get
     //2. 서버로 체크박스 값 patch or post
 
@@ -43,7 +57,7 @@ function CheckedMessage() {
                     </DetailDiv>
                 </ContentsDiv>
                 <Div>
-                    <SentToEmailModal/>
+                    <SentToEmailModal props= {Modal_Chaseup}/>
                     <CheckText> 갚은 것이 확인되면 체크해주세요</CheckText>
                     <CheckBoxdiv type='checkbox'></CheckBoxdiv>
                 </Div>
