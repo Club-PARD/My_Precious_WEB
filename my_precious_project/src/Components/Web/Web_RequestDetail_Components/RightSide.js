@@ -101,8 +101,8 @@ function RightSide({under100}) {
                     </>
                 ) : (
                     <WritingMessageContainer>
-                         <WritingMessage /> 
-                        {/* <CheckedMessage/> */}
+                         {/* <WritingMessage />  */}
+                        <CheckedMessage/> 
                     </WritingMessageContainer>
                 )}
             </Container>
