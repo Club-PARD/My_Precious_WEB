@@ -19,7 +19,7 @@ function LineProgress(props) {
     const endPercent = (props.receive / props.total) * 100;
 
     // 애니메이션 지속 시간 (밀리초)
-    const duration = 6000000;
+    const duration = 70000;
     let startTime;
     let animationFrame;
 

@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate} from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 //import { Link } from 'react-router-dom';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
@@ -38,15 +38,14 @@ const Test = styled.div`
 
 function WebRequestDetail() {
     const theme = useTheme();
-
     return (
         <ThemeProvider theme={theme}>
             <Container>
                 <Header color={1}/>
                 <Div>
-                    <LeftSide/>
-                    <RightSide/>
-                </Div>
+                    <LeftSide />
+                    <RightSide />
+                </Div> 
             </Container>
         </ThemeProvider>
     );
