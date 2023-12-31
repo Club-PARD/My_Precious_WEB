@@ -166,5 +166,8 @@ export const theme = {
     Caption3: "14px",
     Caption4: "20px",
   },
+  FontFamily : {
+    Pretendard : "Pretendard",
+  }
 
 };
