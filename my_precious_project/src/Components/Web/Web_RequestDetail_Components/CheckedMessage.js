@@ -3,14 +3,54 @@ import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 //import { Link } from 'react-router-dom';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
-/****  MUI Libraries  *****/
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import axios from 'axios';
 import { UserDataContext } from '../../../contexts/userContext';
 import CheckBox from '../../../Assets/img/CheckBox.svg';
+import SentToEmailModal from './Modal/SentToEmailModal.js';
+
+
+// 글읽기 페이지에서 채권자 입장(로그인 상태-> 빌려준 상태)
+function CheckedMessage() {
+    const theme = useTheme();
+    const [userData, setUserData] = useContext(UserDataContext);
+    const uid = userData.uid;
+
+    //1. 서버에서 빌려준 메시지 get
+    //2. 서버로 체크박스 값 patch or post
+
+    return (
+        <ThemeProvider theme={theme}>
+            <Container>
+                <ContentsDiv>
+                    <HeaderDiv>
+                        <Name>김현지 님</Name>
+                        <BorrowMoney>1,000,000 원</BorrowMoney>
+                    </HeaderDiv>
+                    <DetailDiv>
+                        <GrayText>응원메시지</GrayText>
+                        <DisplayBorrowDiv>
+                            <DisplayBorrowText>머글이 많이 힘들겠다... 화이팅하고 얼마 안되지만 도움이 되길 바라!!
+                            </DisplayBorrowText>
+                        </DisplayBorrowDiv>
+                    </DetailDiv>
+                    <DetailDiv style={{marginTop: "0.56rem"}}>
+                        <GrayText>빌려준 금액</GrayText>
+                        <DisplayBorderText>100,000 원</DisplayBorderText>
+                    </DetailDiv>
+                    <DetailDiv style={{marginTop: "0.56rem"}}>
+                        <GrayText>돌려받을 계좌</GrayText>
+                        <DisplayBorderText>수협은행   001096172521</DisplayBorderText>
+                    </DetailDiv>
+                </ContentsDiv>
+                <Div>
+                    <SentToEmailModal/>
+                    <CheckText> 갚은 것이 확인되면 체크해주세요</CheckText>
+                    <CheckBoxdiv type='checkbox'></CheckBoxdiv>
+                </Div>
+            </Container>
+        </ThemeProvider>
+    );
+}
 
 const Container = styled.div`
     display: flex;
@@ -183,48 +223,5 @@ const CheckBoxdiv = styled.input`
         background-image:url(${CheckBox});
     }
 `;
-
-// 글읽기 페이지에서 채권자 입장(로그인 상태-> 빌려준 상태)
-function CheckedMessage() {
-    const theme = useTheme();
-    const [userData, setUserData] = useContext(UserDataContext);
-    const uid = userData.uid;
-
-    //1. 서버에서 빌려준 메시지 get
-    //2. 서버로 체크박스 값 patch or post
-
-    return (
-        <ThemeProvider theme={theme}>
-            <Container>
-                <ContentsDiv>
-                    <HeaderDiv>
-                        <Name>김현지 님</Name>
-                        <BorrowMoney>1,000,000 원</BorrowMoney>
-                    </HeaderDiv>
-                    <DetailDiv>
-                        <GrayText>응원메시지</GrayText>
-                        <DisplayBorrowDiv>
-                            <DisplayBorrowText>머글이 많이 힘들겠다... 화이팅하고 얼마 안되지만 도움이 되길 바라!!
-                            </DisplayBorrowText>
-                        </DisplayBorrowDiv>
-                    </DetailDiv>
-                    <DetailDiv style={{marginTop: "0.56rem"}}>
-                        <GrayText>빌려준 금액</GrayText>
-                        <DisplayBorderText>100,000 원</DisplayBorderText>
-                    </DetailDiv>
-                    <DetailDiv style={{marginTop: "0.56rem"}}>
-                        <GrayText>돌려받을 계좌</GrayText>
-                        <DisplayBorderText>수협은행   001096172521</DisplayBorderText>
-                    </DetailDiv>
-                </ContentsDiv>
-                <Div>
-                    <ChaseUpBtn>재촉편지 작성</ChaseUpBtn>
-                    <CheckText> 갚은 것이 확인되면 체크해주세요</CheckText>
-                    <CheckBoxdiv type='checkbox'></CheckBoxdiv>
-                </Div>
-            </Container>
-        </ThemeProvider>
-    );
-}
 
 export default CheckedMessage;

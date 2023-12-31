@@ -6,6 +6,7 @@ import WritingMessage from './WritingMessage.js';
 import Character from '../../../Assets/img/Character.png';
 import CheckedMessage from './CheckedMessage.js';
 import { UserDataContext } from '../../../contexts/userContext';
+import axios from 'axios';
 
 const fadeIn = keyframes`
   from {
@@ -64,6 +65,7 @@ function RightSide({under100}) {
     const theme = useTheme();
     const [userData, setUserData] = useContext(UserDataContext);
     const uid = userData.uid;
+    const debtId =uid;
     const [clickstate, setClickstate] = useState(false);
 
     const navigate = useNavigate();
