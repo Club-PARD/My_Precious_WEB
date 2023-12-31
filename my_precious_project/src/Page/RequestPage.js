@@ -54,8 +54,9 @@ const RequestPage = () => {
       form.payWay,
       form.bank,
       form.bankAccount,
+      check,
     ];
-    const originalFields = ["", "", "", "", "", "은행 선택", ""];
+    const originalFields = ["", "", "", "", "", "은행 선택", "", false];
 
     const hasChanged = fields.every(
       (field, index) => field !== originalFields[index]
@@ -69,6 +70,7 @@ const RequestPage = () => {
     form.payWay,
     form.bank,
     form.bankAccount,
+    check,
   ]);
 
   /*
@@ -77,11 +79,14 @@ const RequestPage = () => {
   const dateNow = new Date();
   const today = dateNow.toISOString().slice(0, 10);
   const [date, setDate] = useState(today);
+  const [printDate, setPrintDate] = useState("");
 
   const handleDateFormat = (originalDate) => {
     const year = originalDate.getFullYear();
     const month = (originalDate.getMonth() + 1).toString().padStart(2, "0");
     const day = originalDate.getDate().toString().padStart(2, "0");
+    const printedDate = `${year}년 ${month}월 ${day}일`;
+    setPrintDate(printedDate);
 
     const formattedDate = `${year}${month}${day}`;
     setForm({ ...form, payDate: formattedDate });
@@ -347,9 +352,22 @@ const RequestPage = () => {
           <CheckContainer>
             <div className="title">서약</div>
             <p>
-              나 {userName}는 {form.payDate}까지 돈을 갚을 것을 약속합니다.
+              나 {userName}(은)는 {printDate}까지 돈을 갚을 것을 약속합니다.
               고맙습니다.
             </p>
+            {check ? (
+              <img
+                className="checkbox"
+                src={process.env.PUBLIC_URL + "/img/checkbox.svg"}
+                onClick={(e) => setCheck(!check)}
+              ></img>
+            ) : (
+              <img
+                className="box"
+                src={process.env.PUBLIC_URL + "/img/box.svg"}
+                onClick={(e) => setCheck(!check)}
+              ></img>
+            )}
           </CheckContainer>
           <Button
             type="button"
@@ -870,10 +888,13 @@ const Button = styled.button`
 
 const CheckContainer = styled.div`
   width: 90rem;
+  height: 2.4375rem;
   display: flex;
   flex-direction: row;
-  margin-top: 3.6rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.5rem;
   justify-content: center;
+
   align-items: center;
   color: #a5a5a5;
   font-family: Pretendard;
@@ -886,15 +907,17 @@ const CheckContainer = styled.div`
     margin-right: 1rem;
   }
   p {
-    width: 33.875rem;
+    /* width: 33.875rem; */
   }
   .checkbox {
-    width: 1.125rem;
-    height: 0.8125rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 0.5rem;
   }
   .box {
     width: 1.5rem;
     height: 1.5rem;
+    margin-left: 0.5rem;
   }
 `;
 
