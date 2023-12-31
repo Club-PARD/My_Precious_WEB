@@ -45,7 +45,6 @@ const WebLogin_3 = () => {
           <InnerRow3>
             <ImageDiv>
               <Img src={loginImage} alt="로그인페이지 기본 이미지"></Img>
-              <NameDiv>{userData.name}님</NameDiv>
             </ImageDiv>
             <form>
               <Button onClick={navigateToDashboard}>시작하기</Button>

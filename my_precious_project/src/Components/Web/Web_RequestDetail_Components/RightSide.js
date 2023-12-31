@@ -19,6 +19,7 @@ const Container = styled.div`
     flex-direction: column;
     margin: 0;
     padding: 0;
+    position: relative;
 `;
 
 const BorrowButton = styled.button`
@@ -35,7 +36,22 @@ const BorrowButton = styled.button`
     line-height: 1.375rem;
     border: none;
     cursor: pointer;
-    margin-left: 17.6875rem;
+    margin-left: 17.6875rem;z-index: 1;
+`;
+
+const ImageCharacter = styled.div`
+    position: absolute;
+    width: 16rem;
+    height: 16rem;
+    background-image:url(${Character});
+    background-repeat:no-repeat;
+    background-size: contain;
+    top: -190px;
+    left: 70%;
+    z-index: 0;
+    display: flex;
+    //justify-content: center;
+    //align-items: center;
 `;
 
 const WritingMessageContainer = styled.div`
@@ -57,7 +73,10 @@ function RightSide(props) {
         <ThemeProvider theme={theme}>
             <Container>
                 {clickstate === false ? (
+                    <>
+                    <ImageCharacter/>
                     <BorrowButton onClick={handleBurrowConfirmation}>도와주기</BorrowButton>
+                    </>
                 ) : (
                     <WritingMessageContainer>
                         <WritingMessage />

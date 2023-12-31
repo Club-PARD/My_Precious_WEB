@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useContext } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { useTheme } from "../../../contexts/ThemeContext.js"; // Context APi 적용
 import { useNavigate } from "react-router-dom";
-import Userheart from "../../../Assets/img/Userheart.png";
+import LoginImage from "../../../Assets/img/LoginImage.png";
 import { handleGoogleLogin } from "../../../API/googleLogin.js";
 import { UserContext } from "../../../contexts/userContext";
 import { UserDataContext } from "../../../contexts/userContext";
@@ -48,9 +48,9 @@ const Googlelogin = () => {
               여러분의 돈과 관계를 소중히 지켜드립니다. 함께 해주시겠어요?
             </IntroductionText>
             <img
-              src={Userheart}
-              alt="유저와 하트 이미지"
-              style={{ marginTop: "10px" }}
+              src={LoginImage}
+              alt="로그인 이미지"
+              style={{ marginTop: "3rem" }}
             ></img>
             <GoogleLoginBtn onClick={googleLogin}>
               Google로 로그인
