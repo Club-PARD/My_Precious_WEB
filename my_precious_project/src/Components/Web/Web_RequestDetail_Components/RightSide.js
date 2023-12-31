@@ -1,9 +1,11 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useEffect , useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider, keyframes } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context API 적용
 import WritingMessage from './WritingMessage.js';
 import Character from '../../../Assets/img/Character.png';
+import CheckedMessage from './CheckedMessage.js';
+import { UserDataContext } from '../../../contexts/userContext';
 
 const fadeIn = keyframes`
   from {
@@ -60,7 +62,11 @@ const WritingMessageContainer = styled.div`
 
 function RightSide({under100}) {
     const theme = useTheme();
+    const [userData, setUserData] = useContext(UserDataContext);
+    const uid = userData.uid;
     const [clickstate, setClickstate] = useState(false);
+
+    const navigate = useNavigate();
 
     // 버튼 활성화 여부를 결정할 상태 추가
     const [isButtonDisabled, setIsButtonDisabled] = useState(under100);
@@ -74,7 +80,13 @@ function RightSide({under100}) {
         // 기본 양식 제출 동작 방지
         event.preventDefault();
 
-        setClickstate(!clickstate);
+        if (uid) {
+            // 만약 uid가 참값(즉, false가 아님)이라면 도와주기 버튼 클릭 로직 실행
+            setClickstate(!clickstate);
+        } else {
+            // 만약 uid가 false라면, 로그인 페이지로 이동
+            navigate('/Login');
+        }
     };
 
     return (
@@ -84,11 +96,13 @@ function RightSide({under100}) {
                     <>
                     <ImageCharacter/>
                     <BorrowButton onClick={handleBurrowConfirmation} 
-                    disabled={isButtonDisabled}>도와주기</BorrowButton>
+                    disabled={isButtonDisabled}
+                    >도와주기</BorrowButton>
                     </>
                 ) : (
                     <WritingMessageContainer>
-                        <WritingMessage />
+                         <WritingMessage /> 
+                        {/* <CheckedMessage/> */}
                     </WritingMessageContainer>
                 )}
             </Container>
