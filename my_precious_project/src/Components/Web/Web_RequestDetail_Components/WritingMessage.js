@@ -80,7 +80,7 @@ const SaveButton = styled.button`
     height: 2.5rem;
     flex-shrink: 0;
     border-radius: 0.375em;
-    background: var(--primary_orange, #FF3D00);
+    background: ${(props) => (props.disabled ? '#D9D9D9' : '#FF3D00')};
     border: none;
 
     color: #FFFCFB;
@@ -243,7 +243,7 @@ function WritingMessage() {
           // 오류를 처리합니다.
         });
 
-        console.log(form.lendMoney, form.message, form.bank, form.bankAccount);
+        //console.log(form.lendMoney, form.message, form.bank, form.bankAccount);
     };
 
     // 모든 인풋 값이 비어있지 않은지 확인하는 함수

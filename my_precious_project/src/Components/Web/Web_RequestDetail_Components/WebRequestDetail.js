@@ -40,7 +40,6 @@ function WebRequestDetail() {
     const theme = useTheme();
     //모인 금액이 받길 원하는 금액을 넘지 않았을 경우
     const [under100, setUnder100] =useState(false);
-    console.log("페이지 상태 확인", under100)
 
     return (
         <ThemeProvider theme={theme}>

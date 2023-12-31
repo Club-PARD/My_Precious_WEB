@@ -47,7 +47,6 @@ function LeftSide({under100, setUnder100}) {
             const name = response.data.data.user.name;
             const lendMoneydata = response.data.data.debts;
 
-            console.log(lendMoneydata)
             //빌려준 친구 수 가져옴
             const lendMoneyCount =parseFloat(lendMoneydata.length);
 

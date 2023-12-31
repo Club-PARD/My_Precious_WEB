@@ -27,7 +27,7 @@ const BorrowButton = styled.button`
     height: 3.4375rem;
     flex-shrink: 0;
     border-radius: 0.5rem;
-    background: var(--primary_orange, #FF3D00);
+    background: ${(under100) => (under100 ? '#D9D9D9' : '#FF3D00')};
     color: #FFF;
     font-family: Pretendard;
     font-size: 1.25rem;
@@ -68,7 +68,7 @@ function RightSide({under100}) {
         setIsButtonDisabled(under100);
       }, [under100]);
 
-    console.log("빌려주기 버튼 상태",isButtonDisabled)
+    //console.log("빌려주기 버튼 상태",isButtonDisabled)
 
     const handleBurrowConfirmation = (event) => {
         // 기본 양식 제출 동작 방지
