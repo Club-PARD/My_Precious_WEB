@@ -28,7 +28,7 @@ const WebDashboard = () => {
     try {
       // 빌린 돈 데이터 가져오기
       const borrowResponse = await axios.get(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/boards/users/${uid}`
+        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/boards/users/${uid}`
       );
       const borrowData = borrowResponse.data.data;
       let transformeddBorrowData = [];
@@ -63,7 +63,7 @@ const WebDashboard = () => {
       // 받을 돈 데이터 가져오기
       // 받을 돈 데이터 가져오기
       const receiveResponse = await axios.get(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/debts/users/${uid}`
+        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/users/${uid}`
       );
       const receiveData = receiveResponse.data.data;
       let transformedReceiveData = [];
