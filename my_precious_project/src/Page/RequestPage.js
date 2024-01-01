@@ -266,7 +266,11 @@ const RequestPage = () => {
               >
                 <MobileDatePicker
                   onChange={(e) => {
-                    handleDateFormat(e.$d);
+                    if (e == null) {
+                      setForm({ ...form, payDate: form.payDate });
+                    } else {
+                      handleDateFormat(e.$d);
+                    }
                   }}
                   shouldDisableDate={(day) => {
                     return dayjs(dayjs(day).format(`YYYY-MM-DD`)).isBefore(

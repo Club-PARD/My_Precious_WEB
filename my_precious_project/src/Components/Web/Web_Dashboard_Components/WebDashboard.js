@@ -292,7 +292,7 @@ const Container = styled.div`
   padding: 0;
   align-items: center;
   background: #fafafa;
-  height: 100%;
+  min-height: 100vh;
 `;
 
 const ContentsDiv = styled.div`
