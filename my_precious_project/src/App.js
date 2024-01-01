@@ -9,6 +9,7 @@ import RequestPage from './Page/RequestPage.js';
 import DashboardPage from './Page/DashboardPage.js';
 import RequestDetailPage from './Page/RequestDetailPage.js';
 import UserProvider from './contexts/userContext.js';
+import ManagePage from './Page/ManagePage.js';
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/dashboard" element={<DashboardPage />} />
                     <Route path="/requestdetail" element={<RequestDetailPage />} />
+                    <Route path="/manage_request" element={<ManagePage />} />
                 </Routes>
             </Router>
             </UserProvider>
