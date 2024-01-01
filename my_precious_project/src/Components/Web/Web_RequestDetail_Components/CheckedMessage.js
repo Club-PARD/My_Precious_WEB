@@ -95,7 +95,7 @@ function CheckedMessage({debtIdgnum}) {
     };
 
     //빌려준 돈 숫자에서 문자 -> 컴마 추가
-    var receiveNumber = detailData.lendMoney;
+    var receiveNumber = parseFloat(detailData.lendMoney);
     var formattedNumber = receiveNumber.toLocaleString();
 
     return (
