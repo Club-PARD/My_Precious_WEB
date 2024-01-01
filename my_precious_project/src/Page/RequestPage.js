@@ -8,6 +8,7 @@ import dayjs, { Dayjs } from "dayjs";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserDataContext } from "../contexts/userContext";
+import Modal from "../Components/Web/Web_Login_Components/Modal/Modal.js";
 
 /****  MUI Libraries  *****/
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -22,10 +23,11 @@ const RequestPage = () => {
   const theme = useTheme();
   const isDesktopOrMobile = useMediaQuery({ query: "(max-width:768px)" }); // 758px 이하일 때는 모바일 뷰로 바뀐다.
 
+  const [modalShow, setModalShow] = useState(false);
+
   const [userData, setUserData] = useContext(UserDataContext);
   const userName = userData.name;
   const uid = userData.uid;
-  // console.log(uid);
 
   const [form, setForm] = useState({
     title: "",
@@ -152,7 +154,7 @@ const RequestPage = () => {
     console.log(form);
     axios
       .post(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/boards/${uid}`,
+        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/boards/${uid}`,
         {
           title: form.title,
           borrowMoney: form.borrowMoney,
@@ -171,6 +173,11 @@ const RequestPage = () => {
         console.error("업로드 중 오류 발생:", error);
         // 오류 처리
       });
+  };
+
+  const postDataAndToDashboard = () => {
+    handleSubmit();
+    navigate("/dashboard");
   };
 
   return (
@@ -371,11 +378,23 @@ const RequestPage = () => {
           </CheckContainer>
           <Button
             type="button"
-            onClick={handleSubmit}
+            onClick={() => setModalShow(true)}
+            // onClick={handleSubmit}
             disabled={active ? false : true}
           >
             요청하기
           </Button>
+          <div id="modal"></div>
+          {modalShow && (
+            <Modal
+              setModalShow={setModalShow}
+              setNextStep={postDataAndToDashboard}
+              content1="해당 글은 작성 완료 후 수정이 불가능합니다."
+              content2="내용이 맞는지 확인해주세요."
+              buttonContent="작성 완료"
+              close={true}
+            />
+          )}
         </Container>
       )}
     </>
