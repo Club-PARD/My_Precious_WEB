@@ -127,26 +127,38 @@ function RightSide({under100,updateLeftSide,setUpdateLeftSide}) {
     };
 
     return (
-        <ThemeProvider theme={theme}>
-            <Container>
-                {clickstate === false ? (
-                    <>
-                    <ImageCharacter/>
-                    <BorrowButton onClick={handleBurrowConfirmation} 
-                    disabled={isButtonDisabled}
-                    >도와주기</BorrowButton>
-                    </>
+      <ThemeProvider theme={theme}>
+        <Container>
+          {debtIdgnum !== "" ? (
+            <CheckedMessage debtIdgnum={debtIdgnum} />
+          ) : (
+            clickstate === false ? (
+              <>
+                <ImageCharacter />
+                <BorrowButton
+                  onClick={handleBurrowConfirmation}
+                  disabled={isButtonDisabled}
+                >
+                  도와주기
+                </BorrowButton>
+              </>
+            ) : (
+              <WritingMessageContainer>
+                {debtIdgnum === "" ? (
+                  <WritingMessage
+                    checkSendMessage={checkSendMessage}
+                    setCheckSendMessage={setCheckSendMessage}
+                  />
                 ) : (
-                    <WritingMessageContainer>
-                    {debtIdgnum ==="" ? (
-                        <WritingMessage checkSendMessage={checkSendMessage} setCheckSendMessage={setCheckSendMessage} />  
-                        ) :(
-                        <CheckedMessage debtIdgnum={debtIdgnum}/>  ) }
-                    </WritingMessageContainer>
+                  <CheckedMessage debtIdgnum={debtIdgnum} />
                 )}
-            </Container>
-        </ThemeProvider>
+              </WritingMessageContainer>
+            )
+          )}
+        </Container>
+      </ThemeProvider>
     );
+    
 }
 
 export default RightSide;
