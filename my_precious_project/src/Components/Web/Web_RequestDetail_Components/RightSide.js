@@ -30,7 +30,7 @@ const BorrowButton = styled.button`
     height: 3.4375rem;
     flex-shrink: 0;
     border-radius: 0.5rem;
-    background: ${(under100) => (under100 ? '#D9D9D9' : '#FF3D00')};
+    background: ${(props) => (props.disabled ? '#D9D9D9' : '#FF3D00')};
     color: #FFF;
     font-family: Pretendard;
     font-size: 1.25rem;
@@ -61,12 +61,47 @@ const WritingMessageContainer = styled.div`
     animation: ${fadeIn} 0.8s ease;
 `;
 
-function RightSide({under100}) {
+const boardId =1 ; // 임시 지워야함
+
+function RightSide({under100,updateLeftSide,setUpdateLeftSide}) {
     const theme = useTheme();
     const [userData, setUserData] = useContext(UserDataContext);
     const uid = userData.uid;
-    const debtId =uid;
     const [clickstate, setClickstate] = useState(false);
+
+    //돈을 빌려준 경우(안빌려줌-> 빌려줌-> 관리)
+    const [debtIdgnum, SetDebtIdgnum] =useState("");
+    
+    //메시지 전송했으면 오른쪽 화면바뀜
+    const [checkSendMessage, setCheckSendMessage] =useState(false); 
+
+    useEffect(() => {
+        console.log(debtIdgnum, "변경됨")
+        setUpdateLeftSide(!updateLeftSide);
+    }, [checkSendMessage]); 
+
+    axios
+    .get(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/boards/${boardId}`)
+    .then((response) => {
+      console.log("데이터를 받아오는중: ", response);
+
+      const debtDataArray = response.data.data || [];
+
+      const finduid = debtDataArray.map((item, index) => {
+        const num = debtDataArray[index];
+        const getuid = num.user.uid;
+  
+        if (getuid === uid) {
+          const getdebtid = num.id;
+          SetDebtIdgnum(getdebtid);
+          return getdebtid;
+        }
+      });
+    })
+    .catch((error) => {
+      console.error("데이터 전송 중 오류 발생: ", error);
+      // 오류를 처리합니다.
+    });
 
     const navigate = useNavigate();
 
@@ -103,8 +138,10 @@ function RightSide({under100}) {
                     </>
                 ) : (
                     <WritingMessageContainer>
-                        {/* <WritingMessage />   */}
-                         <CheckedMessage/>  
+                    {debtIdgnum ==="" ? (
+                        <WritingMessage checkSendMessage={checkSendMessage} setCheckSendMessage={setCheckSendMessage} />  
+                        ) :(
+                        <CheckedMessage debtIdgnum={debtIdgnum}/>  ) }
                     </WritingMessageContainer>
                 )}
             </Container>

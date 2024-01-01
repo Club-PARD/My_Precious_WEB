@@ -12,7 +12,7 @@ import Character from '../../../Assets/img/Character.png';
 
 const boardId = 1;
 
-function LeftSide({under100, setUnder100}) {
+function LeftSide({under100, setUnder100, updateLeftSide}) {
     const theme = useTheme();
 
     const [detailData, setDetailData] = useState({
@@ -34,7 +34,7 @@ function LeftSide({under100, setUnder100}) {
         axios
           .get(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/boards/${boardId}`)
           .then((response) => {
-            console.log("response: " + JSON.stringify(response.data.data));
+            //console.log("response: " + JSON.stringify(response.data.data));
     
             //서버에서 받은 데이터 추출
             const Title = response.data.data.title;
@@ -60,7 +60,7 @@ function LeftSide({under100, setUnder100}) {
                 return accumulator + currentValue;
             }, 0);
 
-            console.log("빌린돈 총합" , totalLendmoney)
+            //console.log("빌린돈 총합" , totalLendmoney)
 
             //날짜처리
             const formatted_date =payDate.substring(0, 4) + '년 ' + payDate.substring(4, 6) + '월 ' + payDate.substring(6)+'일';
@@ -83,7 +83,8 @@ function LeftSide({under100, setUnder100}) {
             }));
           })
           .catch((error) => console.log("error: " + error));
-      }, []);
+      }, [updateLeftSide]);
+
 
     //받은 돈 숫자에서 문자 -> 컴마 추가
     var receiveNumber = detailData.receive;

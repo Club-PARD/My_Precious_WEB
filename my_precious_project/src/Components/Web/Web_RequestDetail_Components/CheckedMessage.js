@@ -10,10 +10,11 @@ import SentToEmailModal from './Modal/SentToEmailModal.js';
 
 
 // 글읽기 페이지에서 채권자 입장(로그인 상태-> 빌려준 상태)
-function CheckedMessage() {
+function CheckedMessage({debtIdgnum}) {
     const theme = useTheme();
     const [userData, setUserData] = useContext(UserDataContext);
     const uid = userData.uid;
+    const debtId =debtIdgnum;
 
     //모달에 보낼 props값 - 재촉편지
     const Modal_Chaseup ={
@@ -29,35 +30,100 @@ function CheckedMessage() {
         longplacehorder: "머글님께서 힘들 때 도움을 준 친구에게 감사함을 전해보세요. MoneyGlove를 통해 돈을 빌려준 친구는 이자율도 없으며 금전적 이득을 위함이 아닌, 오로지 머글님을 걱정하는 마음을 가지고 도와주는 우정이 넘치는 친구입니다. 금액은 중요하지 않습니다. 자신의 상황에 최대의 금액을 보내준 친구에게 감사함을 전해주세요."
     }
 
-    //1. 서버에서 빌려준 메시지 get
-    //2. 서버로 체크박스 값 patch or post
+    const [detailData, setDetailData] = useState({
+        lendMoney: "",
+        message: "",
+        bank: "",
+        bankAccount: "",
+        debtStatus: "", //돈 갚은 사람 확인
+        repaymentStatus: "", //돈 빌려준 사람 확인
+        name: ""
+        
+    });
+
+    useEffect(() => {
+        // Fetch data when the component is mounted
+        axios
+          .get(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/${debtId}`, debtId)
+          .then((response) => {
+            const lendMoney = response.data.data.lendMoney;
+            const message = response.data.data.message;
+            const bank = response.data.data.bank;
+            const bankAccount = response.data.data.bankAccount;
+            const debtStatus = response.data.data.debtStatus;
+            const repaymentStatus = response.data.data.repaymentStatus;
+            const name = response.data.data.user.name;
+            console.log(debtStatus);
+
+            setDetailData({
+              lendMoney: lendMoney,
+              message: message,
+              bank: bank,
+              bankAccount: bankAccount,
+              debtStatus: debtStatus,
+              repaymentStatus: repaymentStatus,
+              name: name,
+            });
+          })
+          .catch((error) => {
+            console.error("데이터 전송 중 오류 발생: ", error);
+            // 오류를 처리합니다.
+          });
+    }, []);
+
+    const CheckDebtStatusSubmit = (event) => {
+        // 기본 양식 제출 동작 방지
+        event.preventDefault();
+
+        setDetailData((detailData) => ({
+            ...detailData,
+            repaymentStatus: debtId
+          }));
+
+        
+        axios
+        .patch(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/check-confirmed-boxes/${debtId}`, {repaymentStatus: debtId})
+        .then((response) => {
+            console.log(response);
+
+        })
+        .catch((error) => {
+          console.error("데이터 전송 중 오류 발생: ", error);
+
+        });
+
+    };
+
+    //빌려준 돈 숫자에서 문자 -> 컴마 추가
+    var receiveNumber = detailData.lendMoney;
+    var formattedNumber = receiveNumber.toLocaleString();
 
     return (
         <ThemeProvider theme={theme}>
             <Container>
                 <ContentsDiv>
                     <HeaderDiv>
-                        <Name>김현지 님</Name>
-                        <BorrowMoney>1,000,000 원</BorrowMoney>
+                        <Name>{detailData.name} 님</Name>
+                        <BorrowMoney>{formattedNumber} 원</BorrowMoney>
                     </HeaderDiv>
                     <DetailDiv>
                         <GrayText>응원메시지</GrayText>
                         <DisplayBorrowDiv>
-                            <DisplayBorrowText>머글이 많이 힘들겠다... 화이팅하고 얼마 안되지만 도움이 되길 바라!!
+                            <DisplayBorrowText>{detailData.message}
                             </DisplayBorrowText>
                         </DisplayBorrowDiv>
                     </DetailDiv>
                     <DetailDiv style={{marginTop: "0.56rem"}}>
                         <GrayText>빌려준 금액</GrayText>
-                        <DisplayBorderText>100,000 원</DisplayBorderText>
+                        <DisplayBorderText>{formattedNumber} 원</DisplayBorderText>
                     </DetailDiv>
                     <DetailDiv style={{marginTop: "0.56rem"}}>
                         <GrayText>돌려받을 계좌</GrayText>
-                        <DisplayBorderText>수협은행   001096172521</DisplayBorderText>
+                        <DisplayBorderText>{detailData.bank}  {detailData.bankAccount}</DisplayBorderText>
                     </DetailDiv>
                 </ContentsDiv>
                 <Div>
-                    <CheckBtn>갚은 것을 확인했어요</CheckBtn>
+                    <CheckBtn onClick={CheckDebtStatusSubmit}>갚은 것을 확인했어요</CheckBtn>
                     <SentToEmailModal props= {Modal_Chaseup}/>
                 </Div>
             </Container>
