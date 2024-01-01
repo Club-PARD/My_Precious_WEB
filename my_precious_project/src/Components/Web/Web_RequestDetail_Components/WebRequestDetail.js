@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate} from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 //import { Link } from 'react-router-dom';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
@@ -38,15 +38,18 @@ const Test = styled.div`
 
 function WebRequestDetail() {
     const theme = useTheme();
+    //모인 금액이 받길 원하는 금액을 넘지 않았을 경우
+    const [under100, setUnder100] =useState(false);
+    console.log("페이지 상태 확인", under100)
 
     return (
         <ThemeProvider theme={theme}>
             <Container>
                 <Header color={1}/>
                 <Div>
-                    <LeftSide/>
-                    <RightSide/>
-                </Div>
+                    <LeftSide under100={under100} setUnder100= {setUnder100} />
+                    <RightSide under100={under100} />
+                </Div> 
             </Container>
         </ThemeProvider>
     );

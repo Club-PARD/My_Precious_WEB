@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import * as React from "react";
 import { useMediaQuery } from "react-responsive";
 import AppHome from "../Components/App/App_Home_Components/AppHome";
@@ -6,6 +6,9 @@ import styled, { ThemeProvider } from "styled-components";
 import { useTheme } from "../contexts/ThemeContext.js"; // Context APi 적용
 import dayjs, { Dayjs } from "dayjs";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { UserDataContext } from "../contexts/userContext";
+import Modal from "../Components/Web/Web_Login_Components/Modal/Modal.js";
 
 /****  MUI Libraries  *****/
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -17,6 +20,15 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 const RequestPage = () => {
+  const theme = useTheme();
+  const isDesktopOrMobile = useMediaQuery({ query: "(max-width:768px)" }); // 758px 이하일 때는 모바일 뷰로 바뀐다.
+
+  const [modalShow, setModalShow] = useState(false);
+
+  const [userData, setUserData] = useContext(UserDataContext);
+  const userName = userData.name;
+  const uid = userData.uid;
+
   const [form, setForm] = useState({
     title: "",
     borrowMoney: "",
@@ -29,6 +41,10 @@ const RequestPage = () => {
   const [active, setActive] = useState(false);
   const [check, setCheck] = useState(false);
   const [money, setMoney] = useState();
+  const navigate = useNavigate();
+  const navigateToDashboard = () => {
+    navigate("/dashboard");
+  };
 
   useEffect(() => {
     // 모든 입력 필드의 변경 여부를 모니터링
@@ -40,15 +56,13 @@ const RequestPage = () => {
       form.payWay,
       form.bank,
       form.bankAccount,
+      check,
     ];
-    const originalFields = ["", "", "", "", "", "은행 선택", ""];
+    const originalFields = ["", "", "", "", "", "은행 선택", "", false];
 
     const hasChanged = fields.every(
       (field, index) => field !== originalFields[index]
     );
-
-    // console.log(hasChanged);
-
     setActive(hasChanged);
   }, [
     form.title,
@@ -58,6 +72,7 @@ const RequestPage = () => {
     form.payWay,
     form.bank,
     form.bankAccount,
+    check,
   ]);
 
   /*
@@ -66,9 +81,18 @@ const RequestPage = () => {
   const dateNow = new Date();
   const today = dateNow.toISOString().slice(0, 10);
   const [date, setDate] = useState(today);
+  const [printDate, setPrintDate] = useState("");
 
-  const theme = useTheme();
-  const isDesktopOrMobile = useMediaQuery({ query: "(max-width:768px)" }); // 758px 이하일 때는 모바일 뷰로 바뀐다.
+  const handleDateFormat = (originalDate) => {
+    const year = originalDate.getFullYear();
+    const month = (originalDate.getMonth() + 1).toString().padStart(2, "0");
+    const day = originalDate.getDate().toString().padStart(2, "0");
+    const printedDate = `${year}년 ${month}월 ${day}일`;
+    setPrintDate(printedDate);
+
+    const formattedDate = `${year}${month}${day}`;
+    setForm({ ...form, payDate: formattedDate });
+  };
 
   const addComma = (price) => {
     let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -81,15 +105,6 @@ const RequestPage = () => {
     let str = value.replaceAll(",", "");
     setForm({ ...form, borrowMoney: str });
     setMoney(str);
-  };
-
-  const handleDateFormat = (originalDate) => {
-    const year = originalDate.getFullYear();
-    const month = (originalDate.getMonth() + 1).toString().padStart(2, "0");
-    const day = originalDate.getDate().toString().padStart(2, "0");
-
-    const formattedDate = `${year}${month}${day}`;
-    setForm({ ...form, payDate: formattedDate });
   };
 
   const banks = [
@@ -139,7 +154,7 @@ const RequestPage = () => {
     console.log(form);
     axios
       .post(
-        "http://172.18.140.44:8080/api/boards/hbsNHR1qz9erDBjFQUZpyHhrVRG3",
+        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/boards/${uid}`,
         {
           title: form.title,
           borrowMoney: form.borrowMoney,
@@ -160,6 +175,11 @@ const RequestPage = () => {
       });
   };
 
+  const postDataAndToDashboard = () => {
+    handleSubmit();
+    navigate("/dashboard");
+  };
+
   return (
     <>
       {isDesktopOrMobile === true ? (
@@ -171,6 +191,10 @@ const RequestPage = () => {
           <MainImage
             src={process.env.PUBLIC_URL + "/img/RequestCharacter.svg"}
           ></MainImage>
+          <CloseButton
+            src={process.env.PUBLIC_URL + "/img/CloseButton.svg"}
+            onClick={navigateToDashboard}
+          ></CloseButton>
           <MainText>
             친구에게 돈을 빌리는 것은 당연한 게 아니에요! <br />
             고마운 친구에게 예쁜말로 부탁해보는 건 어떨까요?
@@ -332,13 +356,45 @@ const RequestPage = () => {
               />
             </div>
           </InputBankInfo>
+          <CheckContainer>
+            <div className="title">서약</div>
+            <p>
+              나 {userName}(은)는 {printDate}까지 돈을 갚을 것을 약속합니다.
+              고맙습니다.
+            </p>
+            {check ? (
+              <img
+                className="checkbox"
+                src={process.env.PUBLIC_URL + "/img/checkbox.svg"}
+                onClick={(e) => setCheck(!check)}
+              ></img>
+            ) : (
+              <img
+                className="box"
+                src={process.env.PUBLIC_URL + "/img/box.svg"}
+                onClick={(e) => setCheck(!check)}
+              ></img>
+            )}
+          </CheckContainer>
           <Button
             type="button"
-            onClick={handleSubmit}
+            onClick={() => setModalShow(true)}
+            // onClick={handleSubmit}
             disabled={active ? false : true}
           >
             요청하기
           </Button>
+          <div id="modal"></div>
+          {modalShow && (
+            <Modal
+              setModalShow={setModalShow}
+              setNextStep={postDataAndToDashboard}
+              content1="해당 글은 작성 완료 후 수정이 불가능합니다."
+              content2="내용이 맞는지 확인해주세요."
+              buttonContent="작성 완료"
+              close={true}
+            />
+          )}
         </Container>
       )}
     </>
@@ -847,6 +903,49 @@ const Button = styled.button`
   &:disabled {
     background: #d9d9d9;
   }
+`;
+
+const CheckContainer = styled.div`
+  width: 90rem;
+  height: 2.4375rem;
+  display: flex;
+  flex-direction: row;
+  margin-top: 2.5rem;
+  margin-bottom: 0.5rem;
+  justify-content: center;
+
+  align-items: center;
+  color: #a5a5a5;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.4375rem; /* 216.667% */
+  .title {
+    width: 2rem;
+    margin-right: 1rem;
+  }
+  p {
+    /* width: 33.875rem; */
+  }
+  .checkbox {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 0.5rem;
+  }
+  .box {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 0.5rem;
+  }
+`;
+
+const CloseButton = styled.img`
+  position: absolute;
+  top: 2.59rem;
+  right: 2.59rem;
+  width: 2.03881rem;
+  height: 2.03881rem;
 `;
 
 export default RequestPage;

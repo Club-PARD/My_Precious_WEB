@@ -36,3 +36,4 @@
 - npm install react-transition-group
 - npm install --save rc-progress
 - npm install @mui/lab @mui/material
+- npm i react-modal

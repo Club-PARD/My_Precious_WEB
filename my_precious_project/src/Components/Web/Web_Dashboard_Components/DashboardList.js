@@ -11,6 +11,11 @@ import { useNavigate } from 'react-router-dom';
 const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
     const theme = useTheme();
     const [selectedMenu, setSelectedMenu] = useState(0); // 초기값은 전체
+    const navigate = useNavigate();
+
+    const navigateToRequest = () => {
+        navigate('/request');
+    };
 
     // 메뉴가 변경되었을 때 실행되는 콜백
     const handleMenuChange = (newMargin) => {
@@ -48,7 +53,7 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
                 const setDateTime = new Date(setYear, setMonth - 1, setDay);
                 const differenceTime = setDateTime - currentDate;
                 const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
-                return differenceDays >= 0 && percentage(data) < 100;
+                return differenceDays > 0 && percentage(data) < 100;
             });
         } else if (selectedMenu === 50) {
             // 연체 중
@@ -60,7 +65,7 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
                 const setDateTime = new Date(setYear, setMonth - 1, setDay);
                 const differenceTime = setDateTime - currentDate;
                 const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
-                return differenceDays < 0 && percentage(data) < 100;
+                return differenceDays <= 0 && percentage(data) < 100;
             });
         } else if (selectedMenu === 75) {
             // 완료
@@ -95,7 +100,7 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
             <InnerRow1>
                 <ListTitle>{rightCard === 'on' ? '최근 빌려준 거래 전체 목록' : '최근 빌린 거래 전체 목록'}</ListTitle>
                 <AddButtonDiv>
-                    <TransactionAddButton>+ 새 거래 추가하기</TransactionAddButton>
+                    <TransactionAddButton onClick={navigateToRequest}>+ 새 거래 추가하기</TransactionAddButton>
                 </AddButtonDiv>
             </InnerRow1>
             <TransactionComponent>

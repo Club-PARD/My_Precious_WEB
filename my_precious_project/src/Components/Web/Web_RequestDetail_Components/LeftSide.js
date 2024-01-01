@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 //import { Link } from 'react-router-dom';
@@ -6,6 +6,171 @@ import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적
 import LineProgress from './LineProgress.js';
 import Talk from '../../../Assets/img/Talk.svg';
 import CheckBox from '../../../Assets/img/CheckBox.svg';
+import axios from 'axios';
+import Character from '../../../Assets/img/Character.png';
+
+
+const boardId = 1;
+
+function LeftSide({under100, setUnder100}) {
+    const theme = useTheme();
+
+    const [detailData, setDetailData] = useState({
+        total: 10000, //프로그레스바 전체(흰색부분)
+        receive: 1000, //프로그레스바 채워진 부분(주황색)
+        title: "",
+        reason: "",
+        plan: "",
+        date: "",
+        bank: "",
+        account:"",
+        name:"" ,
+        lendMoneyCount: 0 , // 빌려준 친구의 수
+        
+    });
+
+    useEffect(() => {
+        //GET 요청 보내기
+        axios
+          .get(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/boards/${boardId}`)
+          .then((response) => {
+            console.log("response: " + JSON.stringify(response.data.data));
+    
+            //서버에서 받은 데이터 추출
+            const Title = response.data.data.title;
+            const BorrowMoney = response.data.data.borrowMoney;
+            const payDate =response.data.data.payDate;
+            const situation =response.data.data.situation;
+            const payWay =response.data.data.payWay;
+            const bank =response.data.data.bank;
+            const bankAccount = response.data.data.bankAccount;
+            const name = response.data.data.user.name;
+            const lendMoneydata = response.data.data.debts;
+
+            console.log(lendMoneydata)
+            //빌려준 친구 수 가져옴
+            const lendMoneyCount =parseFloat(lendMoneydata.length);
+
+            //console.log(lendMoneydata[1].lendMoney)
+            
+            // 빌린돈 더하기
+            const maplend =lendMoneydata.map((value, index) =>{
+                return parseFloat(value.lendMoney);
+            });
+            const totalLendmoney = maplend.reduce((accumulator, currentValue) => {
+                return accumulator + currentValue;
+            }, 0);
+
+            console.log("빌린돈 총합" , totalLendmoney)
+
+            //날짜처리
+            const formatted_date =payDate.substring(0, 4) + '년 ' + payDate.substring(4, 6) + '월 ' + payDate.substring(6)+'일';
+
+            //숫자처리
+            const ChangeBorrowMoney =parseFloat(BorrowMoney);
+
+            setDetailData((detailData) => ({
+              ...detailData,
+              title: Title,
+              total: ChangeBorrowMoney,
+              date: formatted_date,
+              reason: situation,
+              plan :payWay,
+              bank : bank,
+              account : bankAccount,
+              name:name,
+              lendMoneyCount: lendMoneyCount,
+              receive:totalLendmoney
+            }));
+          })
+          .catch((error) => console.log("error: " + error));
+      }, []);
+
+    //받은 돈 숫자에서 문자 -> 컴마 추가
+    var receiveNumber = detailData.receive;
+    var formattedNumber = receiveNumber.toLocaleString();
+    //필요한 돈 숫자에서 문자 -> 컴마 추가
+    var totaleNumber = detailData.total;
+    var formattedNumber2 = totaleNumber.toLocaleString();
+
+    //모은 돈이 받길 원하는 돈을 넘었을 때 돈 빌려주기 작성 버튼 비활성화를 위한 상태 설정
+    useEffect(() => {
+        // total과 collect을 이용하여 퍼센트 계산
+        const percent = (detailData.receive / detailData.total) * 100;
+    
+        // 100% 이상인 경우
+        if (percent >= 100) {
+          setUnder100(true);
+        } else {
+        setUnder100(false);
+        }
+      }, [detailData.total, detailData.receive]);
+
+    return (
+        <ThemeProvider theme={theme}>
+            <Container>
+                <TotalColletMoney>현재까지 모인 금액</TotalColletMoney> 
+                <ImageCharacter/>
+                <Image> 
+                    <ImageText>
+                    현재까지 {detailData.lendMoneyCount}명의 친구가 함께 도와주고 있어요.
+                    </ImageText>
+                </Image>
+                <StyleLineProgress>
+                    <LineProgress total={parseFloat(detailData.total)} receive={parseFloat(detailData.receive)} />
+                </StyleLineProgress>
+                <Row>
+                    <Circle></Circle>
+                    <ReceivedMoney>{formattedNumber}원 모였어요</ReceivedMoney>
+                </Row>
+
+                <DisplayBoxDiv>
+                    <Line style={{height: "3.1875rem"}}>
+                        <DarkGrayText>제목</DarkGrayText>
+                        <DisplayDataTitleDiv >
+                            <DisplayDataTitleText>{detailData.title}</DisplayDataTitleText>
+                        </DisplayDataTitleDiv>
+                    </Line>
+                    <Line style={{marginTop:"0.56rem", height: "7.9375rem"}}>
+                        <DarkGrayText>사유</DarkGrayText>
+                        <DisplayDataReasonDiv>
+                            <DisplayDataReasonText>{detailData.reason}</DisplayDataReasonText>
+                        </DisplayDataReasonDiv>
+                    </Line>
+                    <Line style={{marginTop:"0.56rem" ,height: "5.3125rem"}}>
+                        <DarkGrayText style={{marginRight:"0.8rem"}}>상환 계획</DarkGrayText>
+                        <DisplayDataPlanDiv>
+                            <DisplayDataPlanText >{detailData.plan}</DisplayDataPlanText>
+                        </DisplayDataPlanDiv>
+                    </Line>
+                    <Line style={{marginTop:"3.19rem"}}>
+                        <DarkGrayText style={{ height: "2.4375rem"}}>필요 금액</DarkGrayText>
+                        <DisplayDataTotalDiv>
+                            <DisplayDataTotalText>{formattedNumber2} 원</DisplayDataTotalText>
+                        </DisplayDataTotalDiv>
+                    </Line>
+                    <Line style={{marginTop:"0.56rem" , height: "2.4375rem"}}>
+                        <DarkGrayText >갚을 날짜</DarkGrayText>
+                        <DisplayDataTotalDiv>
+                            <DisplayDataTotalText>{detailData.date} </DisplayDataTotalText>
+                        </DisplayDataTotalDiv>
+                    </Line>
+                    <Line style={{marginTop:"0.56rem"}}>
+                        <DarkGrayText style={{ height: "2.4375rem"}}>받을 계좌</DarkGrayText>
+                        <DisplayDataTotalDiv>
+                            <DisplayDataTotalText>{detailData.bank} {detailData.account} </DisplayDataTotalText>
+                        </DisplayDataTotalDiv>
+                    </Line>
+                    <SignDiv>
+                    <SignText>서약</SignText>
+                    <SignText>나 {detailData.name}는 {detailData.date}까지 돈을 갚을 것을 약속합니다.  감사합니다.</SignText>
+                    <img src={CheckBox} alt='체크박스 이미지'></img>
+                </SignDiv>
+                </DisplayBoxDiv>
+            </Container>
+        </ThemeProvider>
+    );
+}
 
 const Container = styled.div`
     position: relative;
@@ -34,7 +199,7 @@ const TotalColletMoney =styled.div`
 
 const Image = styled.div`
     position: absolute;
-    width: 10.375rem;
+    width: 11.875rem;
     height: 4.4375rem;
     background-image:url(${Talk});
     background-repeat:no-repeat;
@@ -43,25 +208,41 @@ const Image = styled.div`
     left: 45%;
     z-index: 1;
     display: flex;
-    justify-content: center;
+    //justify-content: center;
+    //align-items: center;
+`;
+
+const ImageCharacter = styled.div`
+    position: absolute;
+    width: 7rem;
+    height: 7rem;
+    background-image:url(${Character});
+    background-repeat:no-repeat;
+    background-size: contain;
+    top: 1%;
+    left: 35%;
+    z-index: 1;
+    display: flex;
+    //justify-content: center;
     //align-items: center;
 `;
 
 const ImageText = styled.div`
     color: #5B5B5B;
-
+    display: flex;
     font-family: Pretendard;
     font-size:  0.875rem;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    width: 9.375rem;
-    //height: 2.125rem;
-    padding-top: 0.75rem;
-    padding-left: 0.3rem;
+    width: 10rem;
+    height: 2.125rem;
+    padding-top: 0.55rem;
+    padding-left: 0.5rem;
 `;
 
 const StyleLineProgress =styled.div`
+    //max-width: 43.375rem;
     margin-left: 1.375rem;
     margin-top:  0.75rem;
 `;
@@ -98,6 +279,7 @@ const DisplayBoxDiv =styled.div`
     width:  42.375rem;
     height: 29.1875rem;
     //border: 0.0625rem solid red;
+    margin-right: 1.44rem;
     margin-left:  2.375rem;
     margin-top: 1.64rem;
 `;
@@ -105,6 +287,7 @@ const DisplayBoxDiv =styled.div`
 const Line = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: start;
 `;
 
@@ -117,7 +300,7 @@ const DarkGrayText = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 2.4375rem;
-    margin-right: 2.9375rem;
+    //margin-right: 2.9375rem;
 `;
 
 const DisplayDataDiv = styled.div`
@@ -200,12 +383,13 @@ const SignDiv =styled.div`
     display: flex;
     flex-direction: row;
     gap: 1.25rem;
-    padding-left: 4rem;
+    //padding-left: 4rem;
     padding-top: 2.19rem;
     align-items: center;
 `;
 
 const SignText = styled.div`
+
     display: flex;
     color: #A5A5A5;
     font-family: Pretendard;
@@ -214,93 +398,5 @@ const SignText = styled.div`
     font-weight: 600;
     line-height: 2.4375rem; /* 243.75% */
 `;
-
-function LeftSide() {
-    const theme = useTheme();
-
-    const userData = {
-        total: 5000000, //프로그레스바 전체(흰색부분)
-        receive: 4008000, //프로그레스바 채워진 부분(주황색)
-        title: "어머님 수술비가 위급합니다. 조금이라도 도와주세요..",
-        reason: "저희 어머니께서 지난주에 갑작스럽게 쓰러지셨습니다. 병명은 암이라고 하네요. 수술비용이 당장 500만 원이 필요하며, 추후에는 입원비용으로 계속해서 돈이 나갑니다. 시중에는 제가 모아둔 돈 300만 원 뿐이라.. 여러분의 도움이 필요합니다. 시간은 더디 걸리더라도 꼭 갚을 예정이며, 감사한 마음들 모두 기억하여 배로 갚으며 갈겠습니다. 작은 도움이라 여기며 지나치지 말아주시고, 조금이라도 보템 주시면 정말 감사하겠습니다. 후원이 아니라 제가 꼭 갚을 약속이니 안심하고 고려해주세요!..",
-        plan: "현재 아르바이트를 통해 지속적으로 돈을 벌고 있습니다. 생활비 빼고 조금씩이라도 여러분께 갚을 수 있습니다. 빠르면 3달 이내로, 늦으면 5달 정도로 갚을 계획입니다. 큰 금액을 빌려주시는 분께는 분할로 꾸준하게 갚겠습니다. 정말 감사해요. :)",
-        date: "2024년 02월 24일",
-        bank: "농협은행",
-        account:"352-1111-1111-11",
-        checkBox: true,
-        helpFriendCount: 2
-    };
-
-    //받은 돈 숫자에서 문자 -> 컴마 추가
-    var receiveNumber = userData.receive;
-    var formattedNumber = receiveNumber.toLocaleString();
-    //필요한 돈 숫자에서 문자 -> 컴마 추가
-    var totaleNumber = userData.total;
-    var formattedNumber2 = totaleNumber.toLocaleString();
-
-    return (
-        <ThemeProvider theme={theme}>
-            <Container>
-                <TotalColletMoney>현재까지 모인 금액</TotalColletMoney> 
-                <Image> 
-                    <ImageText>
-                    현재까지 {userData.helpFriendCount}명의 친구가 함께 도와주고 있어요.
-                    </ImageText>
-                </Image>
-                <StyleLineProgress>
-                    <LineProgress total={userData.total} receive={userData.receive}/>
-                </StyleLineProgress>
-                <Row>
-                    <Circle></Circle>
-                    <ReceivedMoney>{formattedNumber}원 모였어요</ReceivedMoney>
-                </Row>
-
-                <DisplayBoxDiv>
-                    <Line>
-                        <DarkGrayText>제목</DarkGrayText>
-                        <DisplayDataTitleDiv >
-                            <DisplayDataTitleText>{userData.title}</DisplayDataTitleText>
-                        </DisplayDataTitleDiv>
-                    </Line>
-                    <Line style={{marginTop:"0.56rem"}}>
-                        <DarkGrayText>사유</DarkGrayText>
-                        <DisplayDataReasonDiv>
-                            <DisplayDataReasonText>{userData.reason}</DisplayDataReasonText>
-                        </DisplayDataReasonDiv>
-                    </Line>
-                    <Line style={{marginTop:"0.56rem"}}>
-                        <DarkGrayText style={{marginRight:"0.8rem"}}>상환 계획</DarkGrayText>
-                        <DisplayDataPlanDiv>
-                            <DisplayDataPlanText >{userData.plan}</DisplayDataPlanText>
-                        </DisplayDataPlanDiv>
-                    </Line>
-                    <Line style={{marginTop:"3.19rem"}}>
-                        <DarkGrayText style={{marginRight:"0.8rem"}}>필요 금액</DarkGrayText>
-                        <DisplayDataTotalDiv>
-                            <DisplayDataTotalText>{formattedNumber2} 원</DisplayDataTotalText>
-                        </DisplayDataTotalDiv>
-                    </Line>
-                    <Line style={{marginTop:"0.56rem"}}>
-                        <DarkGrayText style={{marginRight:"0.8rem"}}>갚을 날짜</DarkGrayText>
-                        <DisplayDataTotalDiv>
-                            <DisplayDataTotalText>{userData.date} </DisplayDataTotalText>
-                        </DisplayDataTotalDiv>
-                    </Line>
-                    <Line style={{marginTop:"0.56rem"}}>
-                        <DarkGrayText style={{marginRight:"0.8rem"}}>갚을 날짜</DarkGrayText>
-                        <DisplayDataTotalDiv>
-                            <DisplayDataTotalText>{userData.bank} {userData.account} </DisplayDataTotalText>
-                        </DisplayDataTotalDiv>
-                    </Line>
-                </DisplayBoxDiv>
-                <SignDiv>
-                    <SignText>서약</SignText>
-                    <SignText>나 김현지는 2024년 02월 24일까지 돈을 갚을 것을 약속합니다.  감사합니다.</SignText>
-                    <img src={CheckBox} alt='체크박스 이미지'></img>
-                </SignDiv>
-            </Container>
-        </ThemeProvider>
-    );
-}
 
 export default LeftSide;
