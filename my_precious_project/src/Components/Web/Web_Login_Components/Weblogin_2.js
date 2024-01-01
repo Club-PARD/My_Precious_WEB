@@ -161,18 +161,20 @@ const InnerRow1 = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 9.6875rem;
-  margin-bottom: 3.125rem;
+  margin-top: 9.8125rem;
+  margin-bottom: 2.8rem;
 `;
 
 const InnerRow2 = styled.div`
-  color: #000;
+  color: var(--black_8, #1a1a1a);
   text-align: center;
-  font-size: 2rem;
+  font-family: Pretendard;
+  font-size: 1.75rem;
+  font-style: normal;
   font-weight: 600;
-  line-height: 3.125rem;
+  line-height: 2.625rem; /* 150% */
   width: 100%;
-  margin-bottom: 6.25rem;
+  margin-bottom: 6.36rem;
 `;
 
 const InnerRow3 = styled.div`
@@ -189,7 +191,7 @@ const Label1 = styled.label`
   position: relative;
   width: 100%;
   input {
-    margin-top: 1.875rem;
+    margin-top: 1.67rem;
     width: 25rem;
     height: 3.4375rem;
     border: 0.09375rem solid #ff3d00;
@@ -208,7 +210,7 @@ const Label1 = styled.label`
   }
   button {
     position: absolute;
-    margin-top: 1.9375rem;
+    margin-top: 1.67rem;
     right: 0;
     width: 9.375rem;
     height: 3.625rem;
@@ -226,10 +228,10 @@ const Label2 = styled.label`
   position: relative;
   width: 100%;
   input {
-    margin-top: 1.875rem;
+    margin-top: 1.98rem;
     width: 25rem;
     height: 3.4375rem;
-    border: 0.09375rem solid #ff3d00;
+    border: 0.09375rem solid #d9d9d9;
     border-radius: 0.40625rem;
     text-indent: 3.4375rem;
     font-size: 1.25rem;
@@ -242,20 +244,24 @@ const Label2 = styled.label`
   }
   input:focus {
     outline: none;
+    border: 0.09375rem solid #ff3d00;
   }
   button {
     position: absolute;
-    margin-top: 1.9375rem;
+    margin-top: 1.98rem;
     right: 0;
     width: 9.375rem;
-    height: 3.625rem;
+    height: 3.72rem;
     border-radius: 0.40625rem;
     border: none;
     color: white;
     font-size: 1.25rem;
     font-weight: 500;
-    background-color: #ff3d00;
+    background-color: #d9d9d9;
     cursor: pointer;
+  }
+  button:hover {
+    background-color: #ff3d00;
   }
 `;
 

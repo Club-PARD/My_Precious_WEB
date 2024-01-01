@@ -141,20 +141,22 @@ const ContentDiv = styled.div`
 `;
 
 const ExplainDiv = styled.div`
-  color: #000;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 600;
-  line-height: 3.1875rem;
+    color: var(--black_8, #1A1A1A);
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.625rem; 
 
   height: 6.375rem;
   margin-top: 2.82875rem;
 `;
 
 const InputForm = styled.form`
-  display: flex;
-  flex-direction: row;
-  margin-top: 7.304375rem;
+    display: flex;
+    flex-direction: row;
+    margin-top: 8.43rem;
 `;
 
 const InputNameDiv = styled.div`
@@ -168,12 +170,12 @@ const InputNameDiv = styled.div`
 `;
 
 const GrayText = styled.div`
-  color: #6b6a6a;
-  font-size: 1.25rem;
-  margin-bottom: 1.673125rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 1.942125rem;
+    color: #6b6a6a;
+    font-size: 1.25rem;
+    margin-bottom: 1.67rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.942125rem;
 `;
 
 const InputName = styled.input`
@@ -197,10 +199,19 @@ const InputName = styled.input`
     line-height: 1.942125rem;
   }
 
-  /* &:focus {
-        border-color: #00ff00;
+    &::placeholder {
+        color: #d9d9d9;
+        font-size: 1.25rem;
+        text-align: center;
+        margin-right: 0.6875rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.942125rem;
+    }
+
+    &:focus {
         outline: none;
-    } */
+    }
 `;
 
 const InputBirthDiv = styled.div`
@@ -219,46 +230,48 @@ const InputBirthSpace = styled.div`
 `;
 
 const InputYearDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 9.4573125rem;
-  height: 3.4620625rem;
-  flex-shrink: 0;
-  border-radius: 0.4221875rem;
-  border: 0.0844375rem solid #ff3d00;
-  margin-right: 0.633125rem;
-  padding: 0;
+    display: flex;
+    flex-direction: row;
+    width: 9.4573125rem;
+    height: 3.4620625rem;
+    flex-shrink: 0;
+    border-radius: 0.4221875rem;
+    border: 0.0844375rem solid #ff3d00;
+    align-items: center;
+    margin-right: 0.633125rem;
+    padding: 0;
 
-  font-size: 1.25rem;
-  text-align: center;
-  //align-items: center;
+    font-size: 1.25rem;
+    text-align: center;
 `;
 
 const InputMonthDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 3.88425rem;
-  height: 3.4620625rem;
-  flex-shrink: 0;
-  border-radius: 0.4221875rem;
-  border: 0.0844375rem solid #ff3d00;
-  margin-right: 0.633125rem;
-  padding: 0;
+    display: flex;
+    flex-direction: row;
+    width: 3.88425rem;
+    height: 3.4620625rem;
+    flex-shrink: 0;
+    border-radius: 0.4221875rem;
+    border: 0.0844375rem solid #ff3d00;
+    margin-right: 0.633125rem;
+    padding: 0;
+    align-items: center;
 
   font-size: 1.25rem;
   text-align: center;
 `;
 
 const InputDateDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 3.88425rem;
-  height: 3.4620625rem;
-  flex-shrink: 0;
-  border-radius: 0.4221875rem;
-  border: 0.0844375rem solid #ff3d00;
-  margin-right: 0.633125rem;
-  padding: 0;
+    display: flex;
+    flex-direction: row;
+    width: 3.88425rem;
+    height: 3.4620625rem;
+    flex-shrink: 0;
+    border-radius: 0.4221875rem;
+    border: 0.0844375rem solid #ff3d00;
+    margin-right: 0.633125rem;
+    padding: 0;
+    align-items: center;
 
   font-size: 1.25rem;
   text-align: center;
@@ -292,18 +305,18 @@ const StyleInput = styled.input`
 `;
 
 const StyleInputLabel = styled.label`
-  display: flex;
-  color: #d9d9d9;
-  text-align: center;
-  font-size: 1.25rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 1.942125rem;
-  padding: 0;
-  padding-bottom: 0.3125rem;
-  margin: 0;
-  align-items: center;
-  height: 100%;
+    display: flex;
+    color: #d9d9d9;
+    text-align: center;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.942125rem;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    height: 100%;
+    padding-bottom: 0.26rem; 
 `;
 
 const CheckBtn = styled.button`
