@@ -10,6 +10,9 @@ import {CopyToClipboard} from "react-copy-to-clipboard/src";
 import hamburgerbar from "../../../Assets/img/hamburgerbar.svg";
 import Back from "../../../Assets/img/Back.svg";
 import ManageFriendList from './ManageFriendList.js';
+import Copy from "../../../Assets/img/Copy.svg";
+import Show from "../../../Assets/img/Show.png";
+import ManageBottom from './ManageBottom.js';
 
 const Container = styled.div`
   display: flex;
@@ -20,7 +23,7 @@ const Container = styled.div`
   height: 100vh;
   width: 100%;
   align-items: center;
-  background:  #E5E5E5; 
+  background:  #F1F1F1; 
   overflow: hidden;
 `;
 
@@ -41,12 +44,12 @@ const TitleDiv =styled.div`
 `;
 
 const LinkCopyDiv =styled.div`
-    position: relative;
     display: flex;
     flex-direction: row;
-    width: 44.5rem;
+    width: 51.875rem;
     justify-content: end;
     padding-bottom: 1.06rem;
+    position: relative;
 `;
 
 const CopyText =styled.div`
@@ -58,24 +61,49 @@ const CopyText =styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: 1.25rem; 
-    margin-right: 1rem;
+    margin-right: 2rem;
+    padding-left: 0.5rem;
+    align-items: center;
     cursor: pointer;
 `;
 
-const ImageHamburgerButton = styled.button`
-  position: relative;
-  background: transparent;
-  border: none;
-  cursor: pointer;
+const BackBtn = styled.button`
+    position: absolute;
+    background-image:url(${Back});
+    background-repeat:no-repeat;
+    background-size: contain;
+    top: -90%;
+    left: -6%;
+    z-index: 1;
+    display: flex;
+    width: 1rem;
+    height: 2.375rem;
+    flex-shrink: 0;
+    border: none;
+    background-color: #F1F1F1;
+    cursor: pointer;
 `;
 
-const BackButton =styled.button`
-    position: relative;
-    background: transparent;
-    border: none;
-    cursor: pointer; 
-    left: -57%;
-    top:13%;
+const ShowMoreBtn =styled.button`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.1875rem;
+    border: 1px solid #FF6A3B;
+    width: 10.3125rem;
+    height: 1.8125rem;
+    flex-shrink: 0;
+    background-color: #F1F1F1;
+    gap: 0.38rem;
+
+    color: #FF6A3B;
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.25rem; /* 142.857% */
+    cursor: pointer;
 `;
 
 function WebManageRequest() {
@@ -89,24 +117,23 @@ function WebManageRequest() {
     return (
         <ThemeProvider theme={theme}>
             <Container>
-                <Header color={1}/>
+                <Header />
                 <ContentsDiv>
-                    <BackButton onClick={HandleBackClick}>
-                        <img src={Back} alt="뒤로가기 버튼튼" />
-                    </BackButton>
                     <TitleDiv>어머니 수술비용</TitleDiv>
-                    <LinkCopyDiv>
-                        <CopyToClipboard
-                            text="링크 만들어줘요잉"
-                            onCopy={() => alert("클립보드에 복사되었습니다.")}>
-                            <CopyText>링크복사</CopyText>
-                        </CopyToClipboard>
-                        <ImageHamburgerButton>
-                            <img src={hamburgerbar} alt="햄버거바 아이콘" />
-                        </ImageHamburgerButton>
-                    </LinkCopyDiv>
+                        <LinkCopyDiv>
+                            <BackBtn Btn onClick={HandleBackClick}/>
+                            <img src={Copy} alt="클립보드 아이콘"/>
+                            <CopyToClipboard
+                                text="링크 만들어줘요잉"
+                                onCopy={() => alert("클립보드에 복사되었습니다.")}>
+                                <CopyText>링크복사</CopyText>
+                            </CopyToClipboard>
+                            <ShowMoreBtn>
+                            <img src={Show} alt="전체보기 아이콘"/> 내가 쓴 글 전체보기
+                            </ShowMoreBtn>
+                        </LinkCopyDiv>
                     <ManageSummary/>
-                    <ManageFriendList/>
+                    <ManageBottom/>
                 </ContentsDiv>
             </Container>
         </ThemeProvider>

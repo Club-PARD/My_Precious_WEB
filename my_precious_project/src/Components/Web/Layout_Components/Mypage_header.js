@@ -9,16 +9,16 @@ const Navigation = styled.div`
   width: 100%;
   padding-top: 1.4375rem;
   flex-shrink: 0;
-  background: ${(props) => (props.bgcolor === 1 ? "#E5E5E5" : "#FAFAFA")};
+  background: ${(props) => (props.bgcolor === 1 ? "#E5E5E5" : "#F1F1F1")};
   justify-content: space-between;
   align-items: start;
 
   & button {
-    background: ${(props) => (props.bgcolor === 1 ? "#E5E5E5" : "#FAFAFA")};
+    background: ${(props) => (props.bgcolor === 1 ? "#E5E5E5" : "#F1F1F1")};
   }
 
   & div {
-    background: ${(props) => (props.bgcolor === 1 ? "#E5E5E5" : "#FAFAFA")};
+    background: ${(props) => (props.bgcolor === 1 ? "#E5E5E5" : "#F1F1F1")};
   }
 `;
 

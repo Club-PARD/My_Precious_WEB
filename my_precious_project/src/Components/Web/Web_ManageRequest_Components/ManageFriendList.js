@@ -8,14 +8,13 @@ import DisplayFriend from './DisplayFriend.js';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  //justify-content: center;
   margin: 0;
   padding: 0;
-  height: 100vh;
-  width: 100%;
+  height: 19.9375rem;
+  width: 20.225rem;
   align-items: center;
-  background:  #E5E5E5; 
-  overflow: hidden;
+  background:  #F1F1F1; 
+  overflow: auto;
 `;
 
 
@@ -25,7 +24,6 @@ function ManageFriendList() {
     return (
         <ThemeProvider theme={theme}>
             <Container>
-                <DisplayFriend/>
             </Container>
         </ThemeProvider>
     );

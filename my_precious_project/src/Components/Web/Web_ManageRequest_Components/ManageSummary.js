@@ -4,17 +4,21 @@ import styled, { ThemeProvider } from 'styled-components';
 //import { Link } from 'react-router-dom';
 import { useTheme } from '../../../contexts/ThemeContext.js.js'; // Context APi 적용
 import SmallLineProgress from './SmallLineProgress.js';
+import Character from '../../../Assets/img/Character.png';
+import Talk from '../../../Assets/img/Talk.svg';
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
     margin: 0;
     padding: 0;
-    width: 44.5rem;
-    height: 13.875rem;
+    width: 51.875rem;
+    height: 14.3125rem;
     flex-shrink: 0;
     border-radius: 0.625rem;
     background: #FBFBFB;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+    position: relative;
 `;
 
 const DisplayMoneyContainer =styled.div`
@@ -25,7 +29,7 @@ const DisplayMoneyContainer =styled.div`
 const DisplayMoneyDiv =styled.div`
     display: flex;
     flex-direction: column;
-    width: 20rem;
+    width: 23.46875rem;
     padding-top: 1.44rem;
 `;
 
@@ -102,8 +106,8 @@ const UnderGrayFirstDiv =styled.div`
 
 const Dday =styled.div`
     display: flex;
-    width: 3.625rem;
-    height: 1.25rem;
+    width: 5.1875rem;
+    height: 1.375rem;
     flex-shrink: 0;
     border-radius: 0.4375rem;
     border: 1px solid #FF3D00;
@@ -118,6 +122,48 @@ const Dday =styled.div`
     justify-content: center;
     text-align: center;
     margin-left: 1.12rem;
+`;
+
+const ImageCharacter = styled.div`
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    background-image:url(${Character});
+    background-repeat:no-repeat;
+    background-size: contain;
+    top: 3%;
+    left: 80%;
+    z-index: 1;
+    display: flex;
+`;
+
+const ImageTalk = styled.div`
+    position: absolute;
+    background-image:url(${Talk});
+    background-repeat:no-repeat;
+    background-size: contain;
+    top: 0%;
+    left: 85%;
+    z-index: 1;
+    display: flex;
+    width: 11rem;
+    height: 3.9375rem;
+    flex-shrink: 0;
+    //justify-content: center;
+`;
+
+const TalkText =styled.div`
+    display: flex;
+    color: #5B5B5B;
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    width: 8.6rem;
+    height: 2.2rem;
+    padding-top: 0.5rem;
+    padding-left: 1rem;
 `;
 
 function ManageSummary() {
@@ -140,6 +186,12 @@ function ManageSummary() {
     return (
         <ThemeProvider theme={theme}>
             <Container>
+                <ImageCharacter/>
+                <ImageTalk>
+                    <TalkText>현재까지 3명의 친구에게
+                    돈을 갚았어요.
+                    </TalkText>
+                </ImageTalk>
                 <DisplayMoneyContainer>
                 <DisplayMoneyDiv style={{paddingLeft:"1.56rem"}}>
                     <MoneyText>현재까지 모인 금액</MoneyText>
@@ -153,9 +205,8 @@ function ManageSummary() {
                     <SmallLineProgress total={parseFloat(detailData.total)} receive={parseFloat(detailData.receive)} />
                     <RightRowDiv>
                         <Row>
-                            <Circle/> 0
+                            <Circle/>갚은 금액 200,000
                         </Row>
-                        30,000
                     </RightRowDiv>
                 </DisplayMoneyDiv>
                 </DisplayMoneyContainer>

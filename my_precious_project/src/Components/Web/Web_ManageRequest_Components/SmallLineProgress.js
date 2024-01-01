@@ -57,7 +57,7 @@ function SmallLineProgress(props) {
         strokeWidth={1}
         strokeColor="#FC511C"
         trailWidth={1}
-        trailColor="#ECECEC"
+        trailColor="#F1F1F1"
         strokeLinecap="butt"
       />
     </Container>
@@ -73,7 +73,7 @@ const Container =styled.div`
 
 const StyleProgressDiv = styled(Line)`
     border-radius: 0.5rem;
-    width: 20rem;
+    width: 23.46875rem;
     height: 2.02531rem;
 
 `;
