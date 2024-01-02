@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 //import { Link } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { useTheme } from '../../../contexts/ThemeContext.js.js'; // Context APi 
 import SmallLineProgress from './SmallLineProgress.js';
 import Character from '../../../Assets/img/Character.png';
 import Talk from '../../../Assets/img/Talk.svg';
+import axios from 'axios';
 
 const Container = styled.div`
     display: flex;
@@ -166,7 +167,7 @@ const TalkText =styled.div`
     padding-left: 1rem;
 `;
 
-function ManageSummary({manageData,setManageData}) {
+function ManageSummary({manageData,boardId}) {
     const theme = useTheme();
 
     const [detailData, setDetailData] = useState({
@@ -180,8 +181,42 @@ function ManageSummary({manageData,setManageData}) {
         account:"",
         name:"" ,
         lendMoneyCount: 0 , // 빌려준 친구의 수
-        
+        ConfirmCount: 0, //갚은 사람 수
+        totalConfirmMoney: 0, // 갚은 돈 총액
     });
+
+    useEffect(() => {
+        axios
+          .get(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/confirmedDebts/${boardId}`)
+          .then((response) => {
+
+
+            const num =response.data.data
+            //갚은 사람의 수
+            const ConfirmCount =parseFloat(num.length);
+
+            // 갚은 돈 더하기
+            const mapConfirm =num.map((value, index) =>{
+                 return parseFloat(value.lendMoney);
+            });
+            const totalConfirmMoney = mapConfirm.reduce((accumulator, currentValue) => {
+                 return accumulator + currentValue;
+             }, 0);
+
+            console.log(totalConfirmMoney)
+
+            setDetailData({
+                ...detailData,
+                ConfirmCount: ConfirmCount,
+                totalConfirmMoney: totalConfirmMoney
+            });
+
+          })
+          .catch((error) => {
+            console.error("데이터 전송 중 오류 발생: ", error);
+            // 오류를 처리합니다.
+          });
+    }, [detailData.ConfirmCount,detailData.totalConfirmMoney]);
 
     //받은 돈 숫자에서 문자 -> 컴마 추가
     var receiveNumber = manageData.totalLendmoney;
@@ -190,29 +225,35 @@ function ManageSummary({manageData,setManageData}) {
     var totaleNumber = manageData.borrowMoney;
     var NeedformattedNumber = totaleNumber.toLocaleString();
 
+    var ConfirmNumber =detailData.totalConfirmMoney;
+    var ConfirmformattedNumber =ConfirmNumber.toLocaleString();
+
+
     return (
         <ThemeProvider theme={theme}>
             <Container>
                 <ImageCharacter/>
                 <ImageTalk>
-                    <TalkText>현재까지 0명의 친구에게
+                    <TalkText>현재까지 {detailData.ConfirmCount}명의 친구에게
                     돈을 갚았어요.
                     </TalkText>
                 </ImageTalk>
                 <DisplayMoneyContainer>
                 <DisplayMoneyDiv style={{paddingLeft:"1.56rem"}}>
                     <MoneyText>현재까지 모인 금액</MoneyText>
-                    <SmallLineProgress total={parseFloat(manageData.borrowMoney)} receive={parseFloat(manageData.totalLendmoney)} />
+                    <SmallLineProgress total={parseFloat(manageData.borrowMoney)} receive={parseFloat(manageData.totalLendmoney)}
+                    />
                     <Row>
                         <Circle/> 모인 금액 {LendformattedNumber}
                     </Row>
                 </DisplayMoneyDiv>
                 <DisplayMoneyDiv style={{paddingLeft:"1.25rem"}}>
                     <MoneyText>갚은 금액</MoneyText>
-                    <SmallLineProgress total={parseFloat(manageData.totalLendmoney)} receive={parseFloat(detailData.receive)} />
+                    <SmallLineProgress total={parseFloat(manageData.totalLendmoney)} receive={detailData.totalConfirmMoney}
+                     />
                     <RightRowDiv>
                         <Row>
-                            <Circle/>갚은 금액 200,000
+                            <Circle/>갚은 금액 {ConfirmformattedNumber}
                         </Row>
                     </RightRowDiv>
                 </DisplayMoneyDiv>

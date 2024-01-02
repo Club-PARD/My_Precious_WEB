@@ -188,7 +188,7 @@ function WebManageRequest() {
                             </CopyToClipboard>
                             <ShowMyboard manageData={manageData}/>
                         </LinkCopyDiv>
-                    <ManageSummary manageData={manageData} setManageData={setManageData}/>
+                    <ManageSummary manageData={manageData} setManageData={setManageData} boardId={boardId}/>
                     <ManageBottom boardId={boardId} manageData={manageData}/>
                 </ContentsDiv>
             </Container>
