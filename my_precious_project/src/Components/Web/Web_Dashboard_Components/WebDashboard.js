@@ -78,11 +78,6 @@ const WebDashboard = () => {
           bankAccount: item.bankAccount,
           debtStatus: item.debtStatus,
           repaymentStatus: item.repaymentStatus,
-          user: {
-            name: item.user?.name,
-            gmailId: item.user?.gmailId,
-            uid: item.user?.uid,
-          },
           board: {
             title: item.board?.title,
             borrowMoney: item.board?.borrowMoney,
@@ -113,10 +108,6 @@ const WebDashboard = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  BorrowDataSet.map((data, index) => {
-    console.log(`Data at index ${index}:`, data.debts);
-    return null; // React에서 map 함수를 사용할 때는 반드시 JSX나 null을 반환해야 합니다.
-  });
 
   //거래 내역 카드의 상태를 관리한다(왼쪽: 빌린돈/ 오른쪽: 받을돈)
   const [leftCard, setLeftCard] = useState("on");
@@ -291,20 +282,21 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   align-items: center;
-  background: #fafafa;
-  height: 100%;
+  background-color: #fafafa;
+  min-height: 100vh;
 `;
 
 const ContentsDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 726px;
+  margin-top: 8.75rem;
   //border: 1px solid green; // 위치 확인용 보더
 `;
 
 const NameGreeting = styled.div`
   color: #3e3e3e;
-  margin-top: 61px;
+  /* margin-top: 61px; */
   font-family: Pretendard;
   font-size: 32px;
   font-style: normal;
