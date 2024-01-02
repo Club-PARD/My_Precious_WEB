@@ -35,7 +35,7 @@ function DotButton(props) {
                 break;
             case 2:
                 // 두 번째 버튼을 클릭했을 때의 동작
-                if (props.dotColor !== 3) {
+                if (props.dotColor !== 3 && props.dotColor !== 1) {
                     navigate('/Login/3');
                 }
                 break;
