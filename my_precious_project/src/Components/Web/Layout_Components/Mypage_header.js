@@ -4,12 +4,12 @@ import styled, { ThemeProvider } from "styled-components";
 import { useTheme } from "../../../contexts/ThemeContext.js"; // Context APi 적용
 import MGLogo from "../../../Assets/img/MGLogo.svg";
 
-const Header = (props) => {
+const Header = ({ backcolor }) => {
   const theme = useTheme();
 
   return (
     <ThemeProvider theme={theme}>
-      <Navigation bgcolor={props.color}>
+      <Navigation bgcolor={backcolor}>
         <LogoImg src={MGLogo} alt="로고이미지"></LogoImg>
         <NavRightSideDiv>
           <AboutBtn>ABOUT US</AboutBtn>
@@ -21,25 +21,27 @@ const Header = (props) => {
 };
 
 const Navigation = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   width: 80%;
+  height: 4.1825rem;
   /* padding-top: 33px;
   padding-bottom: 75px; */
   flex-shrink: 0;
-  background: ${(props) => (props.bgcolor === 1 ? "#E5E5E5" : "#F1F1F1")};
+  background: ${(props) => props.bgcolor};
   justify-content: space-between;
   align-items: center;
   position: fixed;
   /* left: 0; */
-  top: 1.94rem;
+  padding-top: 1.94rem;
 
   & button {
-    background: ${(props) => (props.bgcolor === 1 ? "#E5E5E5" : "#F1F1F1")};
+    background: ${(props) => props.bgcolor};
   }
 
   & div {
-    background: ${(props) => (props.bgcolor === 1 ? "#E5E5E5" : "#F1F1F1")};
+    background: ${(props) => props.bgcolor};
   }
 `;
 
