@@ -188,6 +188,14 @@ const WebRequest = () => {
         <Header />
         {userName != null ? (
           <>
+            {/* <ContentContainer>
+              <BackIcon
+                src={process.env.PUBLIC_URL + "/img/Icon_back.svg"}
+                onClick={postDataAndToDashboard}
+              ></BackIcon>
+              <MainContainer></MainContainer>
+              <RightDiv></RightDiv>
+            </ContentContainer> */}
             <MainImage
               src={process.env.PUBLIC_URL + "/img/RequestCharacter.svg"}
             ></MainImage>
@@ -411,7 +419,27 @@ const WebRequest = () => {
 };
 
 const ContentContainer = styled.div`
-  /* width: ; */
+  width: calc(52.25rem + 6.2575rem);
+  height: 43.4375rem;
+  display: flex;
+  flex-direction: row;
+  justify-self: center;
+`;
+
+const BackIcon = styled.img`
+  width: 0.96875rem;
+  height: 2.375rem;
+`;
+const RightDiv = styled.div`
+  width: 0.96875rem;
+  height: 2.375rem;
+`;
+
+const MainContainer = styled.div`
+  width: 52.25rem;
+  height: 43.4375rem;
+  border-radius: 1.25rem;
+  background: rgba(255, 249, 247, 1);
 `;
 
 const MainImage = styled.img`
@@ -975,3 +1003,7 @@ const CloseButton = styled.img`
 `;
 
 export default WebRequest;
+
+{
+  /*  */
+}
