@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import styled, { css, keyframes } from "styled-components";
 import { CSSTransition } from "react-transition-group";
-import { useNavigate } from "react-router-dom";
 
 const Modal = ({
   setModalShow,

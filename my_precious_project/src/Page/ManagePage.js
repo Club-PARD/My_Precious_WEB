@@ -1,6 +1,6 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import AppManageRequest from "../Components/App/App_ManageRequest_Components/AppManageRequest"; 
+import AppManageRequest from "../Components/App/App_ManageRequest_Components/AppManageRequest";
 import WebManageRequest from "../Components/Web/Web_ManageRequest_Components/WebManageRequest";
 
 const ManagePage = () => {
@@ -8,7 +8,10 @@ const ManagePage = () => {
 
   return (
     <>
-      {isDesktopOrMobile === true ? (
+      <div>
+        <WebManageRequest />
+      </div>
+      {/* {isDesktopOrMobile === true ? (
         <div>
           <AppManageRequest />
         </div>
@@ -16,7 +19,7 @@ const ManagePage = () => {
         <div>
           <WebManageRequest />
         </div>
-      )}
+      )} */}
     </>
   );
 };

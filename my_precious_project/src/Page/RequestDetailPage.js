@@ -1,6 +1,6 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import AppRequestDetail from "../Components/App/App_RequestDetail_Components/AppRequestDetail"; 
+import AppRequestDetail from "../Components/App/App_RequestDetail_Components/AppRequestDetail";
 import WebRequestDetail from "../Components/Web/Web_RequestDetail_Components/WebRequestDetail";
 
 const RequestDetailPage = () => {
@@ -8,7 +8,10 @@ const RequestDetailPage = () => {
 
   return (
     <>
-      {isDesktopOrMobile === true ? (
+      <div>
+        <WebRequestDetail />
+      </div>
+      {/* {isDesktopOrMobile === true ? (
         <div>
           <AppRequestDetail />
         </div>
@@ -16,7 +19,7 @@ const RequestDetailPage = () => {
         <div>
           <WebRequestDetail />
         </div>
-      )}
+      )} */}
     </>
   );
 };

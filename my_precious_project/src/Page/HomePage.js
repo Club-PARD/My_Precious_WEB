@@ -8,7 +8,10 @@ const HomePage = () => {
 
   return (
     <>
-      {isDesktopOrMobile === true ? (
+      <div>
+        <WebHome />
+      </div>
+      {/* {isDesktopOrMobile === true ? (
         <div>
           <AppHome />
         </div>
@@ -16,7 +19,7 @@ const HomePage = () => {
         <div>
           <WebHome />
         </div>
-      )}
+      )} */}
     </>
   );
 };
