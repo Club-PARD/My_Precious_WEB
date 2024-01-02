@@ -62,9 +62,7 @@ const WritingMessageContainer = styled.div`
     animation: ${fadeIn} 0.8s ease;
 `;
 
-const boardId = 1; // 임시 지워야함
-
-function RightSide({ under100, updateLeftSide, setUpdateLeftSide }) {
+function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
     const theme = useTheme();
     const [userData, setUserData] = useUserData();
     const uid = userData.uid;
