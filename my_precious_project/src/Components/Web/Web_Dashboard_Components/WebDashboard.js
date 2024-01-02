@@ -7,7 +7,6 @@ import HistoryCard from "./HistoryCard.js";
 import DashboardList from "./DashboardList.js";
 import { UserDataContext } from "../../../contexts/userContext";
 import axios from "axios";
-import LoginErrorPage from "../../../Page/LoginErrorPage.js";
 
 //전체페이지
 const WebDashboard = () => {
@@ -17,7 +16,6 @@ const WebDashboard = () => {
   const [userData, setUserData] = useContext(UserDataContext);
   const uid = userData.uid;
   const restOfName = userData && userData.name ? userData.name.slice(1) : "";
-  const userName = userData.name;
   console.log(userData);
 
   // 페이지가 로드되었을 때 로컬 스토리지에 userData 저장
@@ -80,11 +78,6 @@ const WebDashboard = () => {
           bankAccount: item.bankAccount,
           debtStatus: item.debtStatus,
           repaymentStatus: item.repaymentStatus,
-          user: {
-            name: item.user?.name,
-            gmailId: item.user?.gmailId,
-            uid: item.user?.uid,
-          },
           board: {
             title: item.board?.title,
             borrowMoney: item.board?.borrowMoney,
@@ -115,10 +108,6 @@ const WebDashboard = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  BorrowDataSet.map((data, index) => {
-    console.log(`Data at index ${index}:`, data.debts);
-    return null; // React에서 map 함수를 사용할 때는 반드시 JSX나 null을 반환해야 합니다.
-  });
 
   //거래 내역 카드의 상태를 관리한다(왼쪽: 빌린돈/ 오른쪽: 받을돈)
   const [leftCard, setLeftCard] = useState("on");
@@ -259,33 +248,29 @@ const WebDashboard = () => {
     <ThemeProvider theme={theme}>
       <Container>
         <Header />
-        {restOfName != "" ? (
-          <ContentsDiv>
-            <NameGreeting>{restOfName}님 안녕하세요!</NameGreeting>
-            <MyHistory>내 거래 내역</MyHistory>
-            <CardDiv>
-              <HistoryCard
-                state={leftCard}
-                position={"left"}
-                cardInfo={leftCardInfo}
-                onClick={handleLeftCardClick}
-              />
-              <HistoryCard
-                state={rightCard}
-                position={"right"}
-                cardInfo={rightCardInfo}
-                onClick={handleRightCardClick}
-              />
-            </CardDiv>
-            <DashboardList
-              BorrowDataSet={BorrowDataSet}
-              ReceiveDataSet={ReceiveDataSet}
-              rightCard={rightCard}
+        <ContentsDiv>
+          <NameGreeting>{restOfName}님 안녕하세요!</NameGreeting>
+          <MyHistory>내 거래 내역</MyHistory>
+          <CardDiv>
+            <HistoryCard
+              state={leftCard}
+              position={"left"}
+              cardInfo={leftCardInfo}
+              onClick={handleLeftCardClick}
             />
-          </ContentsDiv>
-        ) : (
-          <LoginErrorPage />
-        )}
+            <HistoryCard
+              state={rightCard}
+              position={"right"}
+              cardInfo={rightCardInfo}
+              onClick={handleRightCardClick}
+            />
+          </CardDiv>
+          <DashboardList
+            BorrowDataSet={BorrowDataSet}
+            ReceiveDataSet={ReceiveDataSet}
+            rightCard={rightCard}
+          />
+        </ContentsDiv>
       </Container>
     </ThemeProvider>
   );
@@ -297,7 +282,7 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   align-items: center;
-  background: #fafafa;
+  background-color: #fafafa;
   min-height: 100vh;
 `;
 
