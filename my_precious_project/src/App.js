@@ -8,28 +8,31 @@ import LoginPage from './Page/LoginPage';
 import RequestPage from './Page/RequestPage.js';
 import DashboardPage from './Page/DashboardPage.js';
 import RequestDetailPage from './Page/RequestDetailPage.js';
-import UserProvider from './contexts/userContext.js';
+import { UserProvider } from './contexts/userContext.js';
 import ManagePage from './Page/ManagePage.js';
+import { RecoilRoot } from 'recoil';
 
 function App() {
     return (
-        <ThemeProvider theme={theme}>
-            <UserProvider>
-            <Router>
-                <ScrollToTop />
-                
-                <Routes>
-                    <Route path="/login/*" element={<LoginPage />} />
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/request" element={<RequestPage />} />
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="/dashboard" element={<DashboardPage />} />
-                    <Route path="/requestdetail" element={<RequestDetailPage />} />
-                    <Route path="/manage_request" element={<ManagePage />} />
-                </Routes>
-            </Router>
-            </UserProvider>
-        </ThemeProvider>
+        <RecoilRoot>
+            <ThemeProvider theme={theme}>
+                <UserProvider>
+                    <Router>
+                        <ScrollToTop />
+
+                        <Routes>
+                            <Route path="/login/*" element={<LoginPage />} />
+                            <Route path="/" element={<HomePage />} />
+                            <Route path="/request" element={<RequestPage />} />
+                            <Route path="/about" element={<AboutPage />} />
+                            <Route path="/dashboard" element={<DashboardPage />} />
+                            <Route path="/requestdetail" element={<RequestDetailPage />} />
+                            <Route path="/manage_request" element={<ManagePage />} />
+                        </Routes>
+                    </Router>
+                </UserProvider>
+            </ThemeProvider>
+        </RecoilRoot>
     );
 }
 

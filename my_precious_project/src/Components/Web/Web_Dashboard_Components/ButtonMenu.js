@@ -22,15 +22,10 @@ function ButtonMenu({ handleMenuChange, dataCounts }) {
             <StyledUl>
                 <StyledLi onClick={() => handleClick(0)}>
                     <StyledButton href="#">
-                        <FirstMenu>
-                            <ButtonImgContainer>
-                                <MoneyImg src={Cash} alt="돈 아이콘" />
-                            </ButtonImgContainer>
-                            <MenuContainer>
-                                <MenuName>전체</MenuName>
-                                <MenuCount>{dataCounts[0]}건</MenuCount>
-                            </MenuContainer>
-                        </FirstMenu>
+                        <MenuContainer>
+                            <SameMenuName>전체</SameMenuName>
+                            <SameMenuName>{dataCounts[0]}건</SameMenuName>
+                        </MenuContainer>
                     </StyledButton>
                 </StyledLi>
                 <StyledLi onClick={() => handleClick(25)}>
@@ -126,27 +121,6 @@ const MenuContainer = styled.div`
     align-items: center;
     width: 100%;
 `;
-const ButtonImgContainer = styled.div`
-    margin-left: 30px;
-`;
-
-const MoneyImg = styled.img`
-    width: 22px;
-    height: 22px;
-`;
-
-const MenuName = styled.div`
-    color: #676767;
-    font-weight: 600;
-    font-size: 16px;
-    margin-right: 10px;
-`;
-const MenuCount = styled.div`
-    color: #494949;
-    font-weight: 600;
-    font-size: 16px;
-    margin-right: 30px;
-`;
 
 const SameMenuName = styled.div`
     color: #676767;
@@ -159,10 +133,4 @@ const SameMenuCount = styled.div`
     font-weight: 600;
     font-size: 16px;
 `;
-
-const FirstMenu = styled.div`
-    display: flex;
-    flex-direction: row;
-`;
-
 export default ButtonMenu;

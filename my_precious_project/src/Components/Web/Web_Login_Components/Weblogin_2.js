@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
-import { UserDataContext } from '../../../contexts/userContext';
+import { useUserData } from '../../../contexts/userContext';
 import DotButton from './DotButton.js';
 import { handlePhoneButtonClick, handleAuthButtonClick } from '../../../API/phoneAuth';
 import WebLogin_2_checked from './Weblogin_2_checked.js';
@@ -14,12 +14,11 @@ const WebLogin_2 = () => {
     const [modalShow, setModalShow] = useState(false);
     const [isButtonClicked, setIsButtonClicked] = useState(false);
     const [isConfirmButtonDisabled, setIsConfirmButtonDisabled] = useState(true);
-
     const theme = useTheme();
 
     const authInputRef = useRef(null); // 인증번호 입력 필드에 대한 참조 생성
 
-    const [userData, setUserData] = useContext(UserDataContext);
+    const [userData, setUserData] = useUserData();
 
     const handlePress = (e) => {
         const regex = /^[0-9\b -]{0,13}$/;
@@ -82,12 +81,14 @@ const WebLogin_2 = () => {
                         >
                             <Label1 isButtonClicked={isButtonClicked}>
                                 <input
+                                    autoFocus
                                     id="recaptcha-container"
                                     type="text"
                                     value={phoneNumber}
                                     placeholder="010-xxxx-xxxx"
                                     onChange={handlePress}
                                     disabled={isButtonClicked}
+                                    maxLength="13"
                                     style={{ color: isButtonClicked ? '#D9D9D9' : 'black' }}
                                 ></input>
                                 <button
@@ -112,6 +113,7 @@ const WebLogin_2 = () => {
                                     placeholder="인증번호 입력"
                                     onChange={(e) => setAuthNumber(e.target.value)}
                                     disabled={isConfirmButtonDisabled}
+                                    maxLength="6"
                                 ></input>
                                 <button
                                     onClick={() =>
@@ -236,9 +238,12 @@ const Label2 = styled.label`
     position: relative;
     width: 100%;
     input {
+        box-sizing: border-box;
+        padding-left: 1rem;
         margin-top: 1.875rem;
-        width: 25rem;
-        height: 3.4375rem;
+        text-align: left;
+        width: 25.5rem;
+        height: 3.7rem;
         border: ${(props) => (props.isButtonClicked ? '0.09375rem solid #ff3d00' : '0.09375rem solid #D9D9D9')};
         border-radius: 0.40625rem;
         text-indent: 3.4375rem;

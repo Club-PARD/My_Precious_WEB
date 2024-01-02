@@ -2,14 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
 import DotButton from './DotButton.js';
-import { UserDataContext } from '../../../contexts/userContext';
+import { useUserData } from '../../../contexts/userContext';
 
 const WebLogin_1 = () => {
     const theme = useTheme();
     const navigate = useNavigate();
-    const [userData, setUserData] = useContext(UserDataContext);
+    const [userData, setUserData] = useUserData();
 
     const [name, setName] = useState('');
     const [year, setYear] = useState('');
@@ -17,6 +16,25 @@ const WebLogin_1 = () => {
     const [day, setDay] = useState('');
 
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+    const [yearInput, setYearInput] = useState(null);
+    const [monthInput, setMonthInput] = useState(null);
+    const [dayInput, setDayInput] = useState(null);
+
+    const handleYearChange = (e) => {
+        setYearInput(e.target.value);
+        setYear(e.target.value.replace(/\D/, ''));
+    };
+
+    const handleMonthChange = (e) => {
+        setMonthInput(e.target.value);
+        setMonth(e.target.value.replace(/\D/, ''));
+    };
+
+    const handleDayChange = (e) => {
+        setDayInput(e.target.value);
+        setDay(e.target.value.replace(/\D/, ''));
+    };
 
     const handleConfirmation = (event) => {
         event.preventDefault();
@@ -53,12 +71,6 @@ const WebLogin_1 = () => {
             setYear(userData.year || '');
             setMonth(userData.month || '');
             setDay(userData.day || '');
-        } else {
-            // userData가 없을 때 초기값 설정
-            setName('');
-            setYear('');
-            setMonth('');
-            setDay('');
         }
     }, [userData]);
 
@@ -90,9 +102,9 @@ const WebLogin_1 = () => {
                                             type="text"
                                             maxLength="4"
                                             value={year}
-                                            onChange={(e) => setYear(e.target.value.replace(/\D/, ''))}
+                                            onChange={handleYearChange}
                                         ></StyleInput>
-                                        <StyleInputLabel htmlFor="year">년</StyleInputLabel>
+                                        <YearInputLabel yearInput={yearInput}>년</YearInputLabel>
                                     </InputYearDiv>
                                     <InputMonthDiv>
                                         <StyleInput
@@ -101,9 +113,9 @@ const WebLogin_1 = () => {
                                             maxLength="2"
                                             style={{ width: '34px' }}
                                             value={month}
-                                            onChange={(e) => setMonth(e.target.value.replace(/\D/, ''))}
+                                            onChange={handleMonthChange}
                                         ></StyleInput>
-                                        <StyleInputLabel for="month">월</StyleInputLabel>
+                                        <MonthInputLabel monthInput={monthInput}>월</MonthInputLabel>
                                     </InputMonthDiv>
                                     <InputDateDiv>
                                         <StyleInput
@@ -112,9 +124,9 @@ const WebLogin_1 = () => {
                                             maxLength="2"
                                             style={{ width: '34px' }}
                                             value={day}
-                                            onChange={(e) => setDay(e.target.value.replace(/\D/, ''))}
+                                            onChange={handleDayChange}
                                         ></StyleInput>
-                                        <StyleInputLabel for="day">일</StyleInputLabel>
+                                        <DayInputLabel dayInput={dayInput}>일</DayInputLabel>
                                     </InputDateDiv>
                                     <CheckBtn type="submit" disabled={isButtonDisabled}>
                                         확인
@@ -176,8 +188,8 @@ const InputNameDiv = styled.div`
     text-align: center;
     width: 16.8458125rem;
     height: 3.4620625rem;
-    background-color: #fff;
     margin-right: 7.135625rem;
+    background-color: #fafafa;
 `;
 
 const GrayText = styled.div`
@@ -187,6 +199,7 @@ const GrayText = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: 1.942125rem;
+    background-color: #fafafa;
 `;
 
 const InputName = styled.input`
@@ -200,6 +213,7 @@ const InputName = styled.input`
     font-size: 1.25rem;
     text-align: center;
 
+    background-color: #fafafa;
     &::placeholder {
         color: #d9d9d9;
         font-size: 1.25rem;
@@ -208,6 +222,7 @@ const InputName = styled.input`
         font-style: normal;
         font-weight: 500;
         line-height: 1.942125rem;
+        background-color: #fafafa;
     }
 
     &:focus {
@@ -221,7 +236,7 @@ const InputBirthDiv = styled.div`
     text-align: center;
     width: 18.745375rem;
     height: 3.4620625rem;
-    background-color: #fff;
+    background-color: #fafafa;
 `;
 
 const InputBirthSpace = styled.div`
@@ -241,6 +256,7 @@ const InputYearDiv = styled.div`
     align-items: center;
     margin-right: 0.633125rem;
     padding: 0;
+    background-color: #fafafa;
 
     font-size: 1.25rem;
     text-align: center;
@@ -257,6 +273,7 @@ const InputMonthDiv = styled.div`
     margin-right: 0.633125rem;
     padding: 0;
     align-items: center;
+    background-color: #fafafa;
 
     font-size: 1.25rem;
     text-align: center;
@@ -273,6 +290,7 @@ const InputDateDiv = styled.div`
     margin-right: 0.633125rem;
     padding: 0;
     align-items: center;
+    background-color: #fafafa;
 
     font-size: 1.25rem;
     text-align: center;
@@ -285,12 +303,13 @@ const StyleInput = styled.input`
     width: 7.5rem;
     border: none;
     border-radius: 0.4221875em;
-    color: #6b6a6a;
+    color: black;
     font-size: 1.25rem;
     text-align: right;
     font-style: normal;
     font-weight: 500;
     line-height: 1.942125rem;
+    background-color: #fafafa;
 
     //스피너를 감춤
     appearance: textfield; /* Firefox */
@@ -305,9 +324,10 @@ const StyleInput = styled.input`
     }
 `;
 
-const StyleInputLabel = styled.label`
+const YearInputLabel = styled.label`
     display: flex;
-    color: #d9d9d9;
+    color: ${(props) =>
+        props.yearInput !== undefined && props.yearInput !== null && props.yearInput !== '' ? '#000' : '#d9d9d9'};
     text-align: center;
     font-size: 1.25rem;
     font-style: normal;
@@ -317,7 +337,34 @@ const StyleInputLabel = styled.label`
     margin: 0;
     align-items: center;
     height: 100%;
-    padding-bottom: 0.26rem;
+`;
+const MonthInputLabel = styled.label`
+    display: flex;
+    color: ${(props) =>
+        props.monthInput !== undefined && props.monthInput !== null && props.monthInput !== '' ? '#000' : '#d9d9d9'};
+    text-align: center;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.942125rem;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    height: 100%;
+`;
+const DayInputLabel = styled.label`
+    display: flex;
+    color: ${(props) =>
+        props.dayInput !== undefined && props.dayInput !== null && props.dayInput !== '' ? '#000' : '#d9d9d9'};
+    text-align: center;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.942125rem;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    height: 100%;
 `;
 
 const CheckBtn = styled.button`
