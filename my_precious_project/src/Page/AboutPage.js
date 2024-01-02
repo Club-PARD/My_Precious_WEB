@@ -8,7 +8,10 @@ const AboutPage = () => {
 
   return (
     <>
-      {isDesktopOrMobile === true ? (
+      <div>
+        <WebAbout />
+      </div>
+      {/* {isDesktopOrMobile === true ? (
         <div>
           <AppAbout />
         </div>
@@ -16,7 +19,7 @@ const AboutPage = () => {
         <div>
           <WebAbout />
         </div>
-      )}
+      )} */}
     </>
   );
 };

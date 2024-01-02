@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useMediaQuery } from "react-responsive";
 import AppDashboard from "../Components/App/App_Dashboard_Components/AppDashboard";
 import WebDashboard from "../Components/Web/Web_Dashboard_Components/WebDashboard";
@@ -8,7 +8,11 @@ const DashboardPage = () => {
 
   return (
     <>
-      {isDesktopOrMobile === true ? (
+      <div>
+        <WebDashboard />
+      </div>
+
+      {/* {isDesktopOrMobile === true ? (
         <div>
           <AppDashboard />
         </div>
@@ -16,7 +20,7 @@ const DashboardPage = () => {
         <div>
           <WebDashboard />
         </div>
-      )}
+      )} */}
     </>
   );
 };

@@ -7,6 +7,7 @@ import HistoryCard from "./HistoryCard.js";
 import DashboardList from "./DashboardList.js";
 import { UserDataContext } from "../../../contexts/userContext";
 import axios from "axios";
+import LoginErrorPage from "../../../Page/LoginErrorPage.js";
 
 //전체페이지
 const WebDashboard = () => {
@@ -16,6 +17,7 @@ const WebDashboard = () => {
   const [userData, setUserData] = useContext(UserDataContext);
   const uid = userData.uid;
   const restOfName = userData && userData.name ? userData.name.slice(1) : "";
+  const userName = userData.name;
   console.log(userData);
 
   // 페이지가 로드되었을 때 로컬 스토리지에 userData 저장
@@ -257,29 +259,33 @@ const WebDashboard = () => {
     <ThemeProvider theme={theme}>
       <Container>
         <Header />
-        <ContentsDiv>
-          <NameGreeting>{restOfName}님 안녕하세요!</NameGreeting>
-          <MyHistory>내 거래 내역</MyHistory>
-          <CardDiv>
-            <HistoryCard
-              state={leftCard}
-              position={"left"}
-              cardInfo={leftCardInfo}
-              onClick={handleLeftCardClick}
+        {restOfName != "" ? (
+          <ContentsDiv>
+            <NameGreeting>{restOfName}님 안녕하세요!</NameGreeting>
+            <MyHistory>내 거래 내역</MyHistory>
+            <CardDiv>
+              <HistoryCard
+                state={leftCard}
+                position={"left"}
+                cardInfo={leftCardInfo}
+                onClick={handleLeftCardClick}
+              />
+              <HistoryCard
+                state={rightCard}
+                position={"right"}
+                cardInfo={rightCardInfo}
+                onClick={handleRightCardClick}
+              />
+            </CardDiv>
+            <DashboardList
+              BorrowDataSet={BorrowDataSet}
+              ReceiveDataSet={ReceiveDataSet}
+              rightCard={rightCard}
             />
-            <HistoryCard
-              state={rightCard}
-              position={"right"}
-              cardInfo={rightCardInfo}
-              onClick={handleRightCardClick}
-            />
-          </CardDiv>
-          <DashboardList
-            BorrowDataSet={BorrowDataSet}
-            ReceiveDataSet={ReceiveDataSet}
-            rightCard={rightCard}
-          />
-        </ContentsDiv>
+          </ContentsDiv>
+        ) : (
+          <LoginErrorPage />
+        )}
       </Container>
     </ThemeProvider>
   );
