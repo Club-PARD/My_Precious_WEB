@@ -93,6 +93,7 @@ const RightNoDiv = styled.div`
 function ManageBottom({ boardId, manageData }) {
   const theme = useTheme();
   const [getdebtidShow, setGetdebtidShow] = useState("");
+  const [debtLength, setDebtLength] = useState(0);
   const debtId = parseFloat(getdebtidShow);
 
   const [displayData, setDisplayData] = useState({
@@ -106,50 +107,42 @@ function ManageBottom({ boardId, manageData }) {
     gmailId: "",
   });
 
-  useEffect(() => {
-    if (!getdebtidShow) {
-      return; // 값이 없을 경우 요청을 보내지 않습니다.
-    }
-    axios
-      .get(
+  const getData = async () => {
+    try {
+      const response = await axios.get(
         `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/${debtId}`
-      )
-      .then((response) => {
-        console.log("굿잡: ", response.data.data);
+      );
+      const borrowData = response.data.data;
+      let transformedBorrowData = {
+        lendMoney: borrowData.lendMoney,
+        message: borrowData.message,
+        bank: borrowData.bank,
+        bankAccount: borrowData.bankAccount,
+        debtStatus: borrowData.debtStatus,
+        repaymentStatus: borrowData.repaymentStatus,
+        name: borrowData.board.user.name,
+        gmailId: borrowData.board.user.gmailId,
+      };
 
-        const lendMoney = response.data.data.lendMoney;
-        const message = response.data.data.message;
-        const bank = response.data.data.bank;
-        const debtStatus = response.data.data.debtStatus;
-        const repaymentStatus = response.data.data.repaymentStatus;
-        const name = response.data.data.user.name;
-        const gmailId = response.data.data.user.gmailId;
+      setDebtLength(borrowData.debts.length);
 
-        setDisplayData({
-          ...displayData,
-          lendMoney: lendMoney,
-          message: message,
-          bank: bank,
-          debtStatus: debtStatus,
-          repaymentStatus: repaymentStatus,
-          name: name,
-          gmailId: gmailId,
-        });
+      setGetdebtidShow(transformedBorrowData);
+      console.log(transformedBorrowData);
+    } catch (error) {
+      console.error("API에서 데이터를 가져오는데 실패했습니다:", error);
+    }
+  };
 
-        console.log("...", getdebtidShow);
-      })
-      .catch((error) => {
-        console.error("데이터 전송 중 오류 발생: ", error);
-        // 오류를 처리합니다.
-      });
-  }, [getdebtidShow]);
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
       <Container>
         <ColumnDiv style={{ width: "31.1875rem", marginRight: "0.75rem" }}>
           <DisplayFriends>도와준 친구들</DisplayFriends>
-          {manageData.lendMoneyCount === 0 ? (
+          {debtLength === 0 ? (
             <LeftNoDiv>아직 내역이 없어요.</LeftNoDiv>
           ) : (
             <DisplayFriend displayData={displayData} debtId={debtId} />
@@ -157,11 +150,11 @@ function ManageBottom({ boardId, manageData }) {
         </ColumnDiv>
         <ColumnDiv style={{ width: "20.225rem" }}>
           <FriendsCountDiv>
-            <FriendsCountText>{manageData.lendMoneyCount}명</FriendsCountText>의
-            친구들이 도와주고 있어요
+            <FriendsCountText>{debtLength}명</FriendsCountText>의 친구들이
+            도와주고 있어요
           </FriendsCountDiv>
 
-          {manageData.lendMoneyCount === 0 ? (
+          {debtLength === 0 ? (
             <RightNoDiv>아직 내역이 없어요.</RightNoDiv>
           ) : (
             <ManageFriendList
