@@ -14,11 +14,13 @@ function DisplayFriend({displayData,debtId}) {
     const [userData, setUserData] = useContext(UserDataContext);
     const uid = userData.uid;
 
+
     //모달에 보낼 props값 - 감사편지
     const Modal_ThankU ={
         function : "감사편지",
         subHeader: "당신이 힘들 때 도움 준 친구에게 감사한 마음을 전해보아요.",
-        longplacehorder: "머글님께서 힘들 때 도움을 준 친구에게 감사함을 전해보세요. MoneyGlove를 통해 돈을 빌려준 친구는 이자율도 없으며 금전적 이득을 위함이 아닌, 오로지 머글님을 걱정하는 마음을 가지고 도와주는 우정이 넘치는 친구입니다. 금액은 중요하지 않습니다. 자신의 상황에 최대의 금액을 보내준 친구에게 감사함을 전해주세요."
+        longplacehorder: "머글님께서 힘들 때 도움을 준 친구에게 감사함을 전해보세요. MoneyGlove를 통해 돈을 빌려준 친구는 이자율도 없으며 금전적 이득을 위함이 아닌, 오로지 머글님을 걱정하는 마음을 가지고 도와주는 우정이 넘치는 친구입니다. 금액은 중요하지 않습니다. 자신의 상황에 최대의 금액을 보내준 친구에게 감사함을 전해주세요.",
+        sendToEmail: displayData.gmailId,
     }
 
     const CheckDebtStatusSubmit = (event) => {
@@ -67,7 +69,7 @@ function DisplayFriend({displayData,debtId}) {
                 </ContentsDiv>
                 <Div>
                     <CheckBtn onClick={CheckDebtStatusSubmit}>돈을 다 갚았어요</CheckBtn>
-                    <SentToEmailModal  props= {Modal_ThankU}/>
+                    <SentToEmailModal props= {Modal_ThankU}/>
                 </Div>
             </Container>
         </ThemeProvider>
