@@ -116,7 +116,6 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
 
 const TransactionComponent = styled.div`
     margin-top: 50px;
-    height: 100%;
 `;
 
 const InnerRow1 = styled.div`
