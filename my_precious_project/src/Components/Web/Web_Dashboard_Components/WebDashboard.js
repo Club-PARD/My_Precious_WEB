@@ -290,12 +290,13 @@ const ContentsDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 726px;
+  margin-top: 8.75rem;
   //border: 1px solid green; // 위치 확인용 보더
 `;
 
 const NameGreeting = styled.div`
   color: #3e3e3e;
-  margin-top: 61px;
+  /* margin-top: 61px; */
   font-family: Pretendard;
   font-size: 32px;
   font-style: normal;
