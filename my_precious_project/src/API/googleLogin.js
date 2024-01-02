@@ -8,7 +8,6 @@ export async function handleGoogleLogin(setLogInData, setUserData, navigate) {
     try {
         const data = await signInWithPopup(auth, provider);
         const userData = {
-            name: data.user.displayName,
             gmailId: data.user.email,
             uid: data.user.uid,
         };
@@ -27,7 +26,6 @@ export async function handleGoogleLogin(setLogInData, setUserData, navigate) {
         setUserData((prevUserData) => ({
             ...prevUserData,
             uid,
-            name,
         }));
 
         // 응답을 받아와서 email, birth, phoneNum 값을 확인
@@ -39,6 +37,10 @@ export async function handleGoogleLogin(setLogInData, setUserData, navigate) {
         if (userEmail) {
             // birth와 phoneNum이 모두 존재하는 경우 Dashboard로 이동
             if (userBirth && userPhoneNum) {
+                setUserData((prevUserData) => ({
+                    ...prevUserData,
+                    name,
+                }));
                 navigate('/dashboard');
             } else {
                 // 하나라도 존재하지 않는 경우 Login으로 이동

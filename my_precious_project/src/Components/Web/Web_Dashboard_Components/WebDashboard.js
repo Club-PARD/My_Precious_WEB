@@ -5,7 +5,7 @@ import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적
 import Header from '../Layout_Components/Mypage_header.js';
 import HistoryCard from './HistoryCard.js';
 import DashboardList from './DashboardList.js';
-import { UserDataContext } from '../../../contexts/userContext';
+import { useUserData } from '../../../contexts/userContext';
 import axios from 'axios';
 
 //전체페이지
@@ -13,14 +13,14 @@ const WebDashboard = () => {
     const theme = useTheme();
     const [BorrowDataSet, setBorrowDataSet] = useState([]);
     const [ReceiveDataSet, setReceiveDataSet] = useState([]);
-    const [userData, setUserData] = useContext(UserDataContext);
+    const [userData, setUserData] = useUserData();
     const uid = userData.uid;
     const restOfName = userData && userData.name ? userData.name.slice(1) : '';
     console.log(userData);
 
     // 페이지가 로드되었을 때 로컬 스토리지에 userData 저장
     useEffect(() => {
-        localStorage.setItem('userData', JSON.stringify(userData));
+        sessionStorage.setItem('userData', JSON.stringify(userData));
     }, []);
 
     // API에서 데이터 가져오기

@@ -2,14 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
 import DotButton from './DotButton.js';
-import { UserDataContext } from '../../../contexts/userContext';
+import { useUserData } from '../../../contexts/userContext';
 
 const WebLogin_1 = () => {
     const theme = useTheme();
     const navigate = useNavigate();
-    const [userData, setUserData] = useContext(UserDataContext);
+    const [userData, setUserData] = useUserData();
 
     const [name, setName] = useState('');
     const [year, setYear] = useState('');
@@ -53,12 +52,6 @@ const WebLogin_1 = () => {
             setYear(userData.year || '');
             setMonth(userData.month || '');
             setDay(userData.day || '');
-        } else {
-            // userData가 없을 때 초기값 설정
-            setName('');
-            setYear('');
-            setMonth('');
-            setDay('');
         }
     }, [userData]);
 
@@ -178,6 +171,7 @@ const InputNameDiv = styled.div`
     height: 3.4620625rem;
     background-color: #fff;
     margin-right: 7.135625rem;
+    background-color: #fafafa;
 `;
 
 const GrayText = styled.div`
@@ -187,6 +181,7 @@ const GrayText = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: 1.942125rem;
+    background-color: #fafafa;
 `;
 
 const InputName = styled.input`
@@ -200,6 +195,7 @@ const InputName = styled.input`
     font-size: 1.25rem;
     text-align: center;
 
+    background-color: #fafafa;
     &::placeholder {
         color: #d9d9d9;
         font-size: 1.25rem;
@@ -208,6 +204,7 @@ const InputName = styled.input`
         font-style: normal;
         font-weight: 500;
         line-height: 1.942125rem;
+        background-color: #fafafa;
     }
 
     &:focus {
@@ -221,7 +218,7 @@ const InputBirthDiv = styled.div`
     text-align: center;
     width: 18.745375rem;
     height: 3.4620625rem;
-    background-color: #fff;
+    background-color: #fafafa;
 `;
 
 const InputBirthSpace = styled.div`
@@ -241,6 +238,7 @@ const InputYearDiv = styled.div`
     align-items: center;
     margin-right: 0.633125rem;
     padding: 0;
+    background-color: #fafafa;
 
     font-size: 1.25rem;
     text-align: center;
@@ -257,6 +255,7 @@ const InputMonthDiv = styled.div`
     margin-right: 0.633125rem;
     padding: 0;
     align-items: center;
+    background-color: #fafafa;
 
     font-size: 1.25rem;
     text-align: center;
@@ -273,6 +272,7 @@ const InputDateDiv = styled.div`
     margin-right: 0.633125rem;
     padding: 0;
     align-items: center;
+    background-color: #fafafa;
 
     font-size: 1.25rem;
     text-align: center;
@@ -291,6 +291,7 @@ const StyleInput = styled.input`
     font-style: normal;
     font-weight: 500;
     line-height: 1.942125rem;
+    background-color: #fafafa;
 
     //스피너를 감춤
     appearance: textfield; /* Firefox */
@@ -317,7 +318,6 @@ const StyleInputLabel = styled.label`
     margin: 0;
     align-items: center;
     height: 100%;
-    padding-bottom: 0.26rem;
 `;
 
 const CheckBtn = styled.button`
