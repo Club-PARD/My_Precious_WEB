@@ -79,7 +79,7 @@ const DetailsReceiveMoney = ({ ReceiveDataSet = [] }) => {
     </div>
   );
 };
-const Container = styled.button`
+const Container = styled.div`
   margin-bottom: 5rem;
   display: flex;
   flex-direction: row;

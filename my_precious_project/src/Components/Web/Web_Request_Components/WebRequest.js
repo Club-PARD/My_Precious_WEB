@@ -183,9 +183,9 @@ const WebRequest = () => {
   };
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Container>
-        <Header />
+        <Header backcolor={"#FFF"} />
         {userName != null ? (
           <>
             {/* <ContentContainer>
@@ -414,7 +414,7 @@ const WebRequest = () => {
           <LoginErrorPage />
         )}
       </Container>
-    </>
+    </ThemeProvider>
   );
 };
 
@@ -456,7 +456,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   overflow-x: hidden;
 `;
 

@@ -29,9 +29,11 @@ const Container = styled.div`
 `;
 
 const ContentsDiv = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding-top: 3.96rem;
+  /* padding-top: 3.96rem; */
+  margin-top: 8.56rem;
 `;
 
 const TitleDiv = styled.div`
@@ -177,7 +179,7 @@ function WebManageRequest() {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        <Header />
+        <Header backcolor={"#F1F1F1"} />
         <ContentsDiv>
           <TitleDiv>{manageData.title}</TitleDiv>
           <LinkCopyDiv>

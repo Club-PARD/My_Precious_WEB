@@ -26,6 +26,8 @@ const Div = styled.div`
   align-items: center;
   width: 100%;
   justify-content: center;
+  margin-top: 9.19rem;
+  box-sizing: border-box;
 `;
 
 const Test = styled.div`
@@ -44,7 +46,7 @@ function WebRequestDetail() {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        <Header color={1} />
+        <Header backcolor={"#E5E5E5"} />
         <Div>
           <LeftSide
             under100={under100}

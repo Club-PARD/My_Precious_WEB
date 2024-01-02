@@ -247,7 +247,7 @@ const WebDashboard = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        <Header />
+        <Header backcolor={"#FAFAFA"} />
         <ContentsDiv>
           <NameGreeting>{restOfName}님 안녕하세요!</NameGreeting>
           <MyHistory>내 거래 내역</MyHistory>
