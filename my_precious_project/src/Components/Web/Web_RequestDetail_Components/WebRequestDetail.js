@@ -35,7 +35,7 @@ const Test = styled.div`
     align-items: center;
     justify-content: center;
 `
-
+const boardId =1 ;
 function WebRequestDetail() {
     const theme = useTheme();
     //모인 금액이 받길 원하는 금액을 넘지 않았을 경우
@@ -48,8 +48,10 @@ function WebRequestDetail() {
             <Container>
                 <Header color={1}/>
                 <Div>
-                    <LeftSide under100={under100} setUnder100= {setUnder100} updateLeftSide={updateLeftSide} />
-                    <RightSide under100={under100} updateLeftSide={updateLeftSide} setUpdateLeftSide={setUpdateLeftSide}/>
+                    <LeftSide under100={under100} setUnder100= {setUnder100} updateLeftSide={updateLeftSide}
+                    boardId={boardId} />
+                    <RightSide under100={under100} updateLeftSide={updateLeftSide} setUpdateLeftSide={setUpdateLeftSide}
+                    boardId={boardId}/>
                 </Div> 
             </Container>
         </ThemeProvider>

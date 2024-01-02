@@ -4,6 +4,7 @@ import { Context } from 'react-responsive';
 import styled from 'styled-components';
 import ImageX from '../../../../Assets/img/ImageX.png';
 import { UserDataContext } from '../../../../contexts/userContext';
+import axios from 'axios';
 
 //npm i react-modal
 
@@ -11,6 +12,9 @@ function SentToEmailModal({props}) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [userData, setUserData] = useContext(UserDataContext);
   const uid = userData.uid;
+
+  const [title, setTitle] = useState('');
+  const [message, setMessage] = useState('');
 
   const openModal = () => {
     //스크롤 비활성화
@@ -24,10 +28,32 @@ function SentToEmailModal({props}) {
     setModalIsOpen(false);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data ={
+      address: props.sendToEmail,
+      title: title,
+      message: message
+    }
+
+    axios
+    .post(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/mail`, data)
+    .then((response) => {
+      console.log(response);
+
+    })
+    .catch((error) => console.log("error: " + error));
+
+    closeModal();
+  };
 
   return (
     <div>
-      <ChaseUpBtn onClick={openModal}>{props.function} 작성</ChaseUpBtn>
+      {props.function ==="재촉편지" ? (
+      <ChaseUpBtn onClick={openModal}>{props.function} 작성</ChaseUpBtn> )
+      :(<ThankUBtn onClick={openModal}>{props.function} 작성</ThankUBtn>
+      )}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -39,10 +65,10 @@ function SentToEmailModal({props}) {
           <ImageXBtn onClick={closeModal}/>
           <HeaderText>머니글러브에서 <HeaderOrange> {props.function}</HeaderOrange>를 작성해보세요!</HeaderText>
           <GuideText>{props.subHeader}</GuideText>
-          <Form>
-            <Input1 placeholder='제목을 작성하는 곳'></Input1>
-            <Input2 placeholder= {props.longplacehorder}></Input2>
-            <SubmitBtn onClick={closeModal}>보내기</SubmitBtn>
+          <Form >
+            <Input1 placeholder='제목을 작성하는 곳' value={title} onChange={(e) => setTitle(e.target.value)}></Input1>
+            <Input2 placeholder= {props.longplacehorder} value={message} onChange={(e) => setMessage(e.target.value)}></Input2>
+            <SubmitBtn type="submit" onClick={handleSubmit}>보내기</SubmitBtn>
           </Form>
         </ContextDiv>
       </Modal>
@@ -82,6 +108,29 @@ const customModalStyles = {
 const ChaseUpBtn =styled.button`
     display: flex;
     width: 10.9375rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+    border-radius: 0.375rem;
+    background:  #B3B3B3;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    color: #FFFCFB;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.4375rem;
+    padding: 0;
+    cursor: pointer;
+    &:hover {
+      background:  #FF3D00;
+    }
+`;
+
+const ThankUBtn =styled.button`
+    display: flex;
+    width: 12.6875rem;
     height: 2.5rem;
     flex-shrink: 0;
     border-radius: 0.375rem;
