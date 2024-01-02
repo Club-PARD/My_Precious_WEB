@@ -7,13 +7,12 @@ import Header from '../Layout_Components/Mypage_header.js';
 import ManageSummary from './ManageSummary.js';
 import {CopyToClipboard} from "react-copy-to-clipboard/src";
 //npm install --save react-copy-to-clipboard
-import hamburgerbar from "../../../Assets/img/hamburgerbar.svg";
 import Back from "../../../Assets/img/Back.svg";
-import ManageFriendList from './ManageFriendList.js';
 import Copy from "../../../Assets/img/Copy.svg";
-import Show from "../../../Assets/img/Show.png";
+import Show from "../../../Assets/img/Show.svg";
 import ManageBottom from './ManageBottom.js';
 import axios from 'axios';
+import ShowMyboard from './ShowMyboard.js';
 
 const Container = styled.div`
   display: flex;
@@ -97,6 +96,7 @@ const ShowMoreBtn =styled.button`
     flex-shrink: 0;
     background-color: #F1F1F1;
     gap: 0.38rem;
+    padding: 0;
 
     color: #FF6A3B;
     font-family: Pretendard;
@@ -188,7 +188,7 @@ function WebManageRequest() {
             console.error("데이터 전송 중 오류 발생: ", error);
             // 오류를 처리합니다.
           });
-    }, []);
+    }, [boardId,mangeData.borrowMoney,mangeData.payDate,mangeData.dday,mangeData.lendMoneyCount,mangeData.totalLendmoney]);
 
     const HandleBackClick  = () =>{
         navigate("/dashboard");
@@ -208,9 +208,7 @@ function WebManageRequest() {
                                 onCopy={() => alert("클립보드에 복사되었습니다.")}>
                                 <CopyText>링크복사</CopyText>
                             </CopyToClipboard>
-                            <ShowMoreBtn>
-                            <img src={Show} alt="전체보기 아이콘"/> 내가 쓴 글 전체보기
-                            </ShowMoreBtn>
+                            <ShowMyboard mangeData={mangeData}/>
                         </LinkCopyDiv>
                     <ManageSummary mangeData={mangeData} setManageData={setManageData}/>
                     <ManageBottom boardId={boardId} mangeData={mangeData}/>

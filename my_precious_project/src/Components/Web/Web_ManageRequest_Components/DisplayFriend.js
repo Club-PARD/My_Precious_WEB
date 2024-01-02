@@ -82,9 +82,9 @@ const Container = styled.div`
     width: 31.1875rem;
     height: 19.9375rem;
     flex-shrink: 0;
-    border-radius:  0.625rem;
-    background: #FFF;
-    box-shadow: 0px 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.25);
+    border-radius: 0.625rem;
+    background: var(--White_2, #FAFAFA);
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
     align-items: center;
 
 
@@ -192,7 +192,7 @@ const Div =styled.div`
 
 const CheckBtn =styled.button  `
     display: flex;
-    width: 9.875rem;
+    width: 12.6875rem;
     height: 2.5rem;
     flex-shrink: 0;
     border-radius: 0.375rem;

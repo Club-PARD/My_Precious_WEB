@@ -81,9 +81,9 @@ const customModalStyles = {
 
 const ChaseUpBtn =styled.button`
     display: flex;
-    width: 9.875rem;
-    height: 2.5rem;
-    flex-shrink: 0;
+  width: 12.6875rem;
+  height: 2.5rem;
+  flex-shrink: 0;
     border-radius: 0.375rem;
     background:  #B3B3B3;
     border: none;

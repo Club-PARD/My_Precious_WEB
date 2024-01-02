@@ -10,9 +10,7 @@ import axios from 'axios';
 import Character from '../../../Assets/img/Character.png';
 
 
-const boardId = 1;
-
-function LeftSide({under100, setUnder100, updateLeftSide}) {
+function LeftSide({under100, setUnder100, updateLeftSide,boardId}) {
     const theme = useTheme();
 
     const [detailData, setDetailData] = useState({

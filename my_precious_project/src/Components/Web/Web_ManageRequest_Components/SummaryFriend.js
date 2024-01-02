@@ -11,7 +11,7 @@ const Container = styled.button`
     flex-shrink: 0;
     border-radius: 0.625rem;
     background: ${(props) => (props.isSelected ? '#FFCDBD' : '#FAFAFA')};
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
     border: ${(props) => (props.isSelected ? '1px solid #FF6A3B' : 'none')};
     justify-content: center;
     align-items: center;
