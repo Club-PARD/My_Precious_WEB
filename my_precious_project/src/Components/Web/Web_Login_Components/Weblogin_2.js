@@ -238,9 +238,12 @@ const Label2 = styled.label`
     position: relative;
     width: 100%;
     input {
+        box-sizing: border-box;
+        padding-left: 1rem;
         margin-top: 1.875rem;
-        width: 25rem;
-        height: 3.4375rem;
+        text-align: left;
+        width: 25.5rem;
+        height: 3.7rem;
         border: ${(props) => (props.isButtonClicked ? '0.09375rem solid #ff3d00' : '0.09375rem solid #D9D9D9')};
         border-radius: 0.40625rem;
         text-indent: 3.4375rem;
