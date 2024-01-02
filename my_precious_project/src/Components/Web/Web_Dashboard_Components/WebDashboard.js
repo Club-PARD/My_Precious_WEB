@@ -70,28 +70,35 @@ const WebDashboard = () => {
 
             if (receiveData) {
                 // 데이터를 ReceiveDataSet 형식으로 변환
-                const transformedReceiveData = receiveData.map((item) => ({
-                    id: item.id,
-                    lendMoney: item.lendMoney,
-                    message: item.message,
-                    bank: item.bank,
-                    bankAccount: item.bankAccount,
-                    debtStatus: item.debtStatus,
-                    repaymentStatus: item.repaymentStatus,
-                    board: {
-                        title: item.board?.title,
-                        borrowMoney: item.board?.borrowMoney,
-                        payDate: item.board?.payDate,
-                        bank: item.board?.bank,
-                        bankAccount: item.board?.bankAccount,
-                        userSimpleResponse: {
-                            name: item.board?.userSimpleResponse?.name,
-                            gmailId: item.board?.userSimpleResponse?.gmailId,
-                            uid: item.board?.userSimpleResponse?.uid,
-                        },
-                    },
-                }));
+                const transformedReceiveData = receiveData.map((item) => {
+                    const debts =
+                        item.board?.debts?.map((debt) => ({
+                            lendMoney: debt.lendMoney,
+                        })) || [];
 
+                    return {
+                        id: item.id,
+                        lendMoney: item.lendMoney,
+                        message: item.message,
+                        bank: item.bank,
+                        bankAccount: item.bankAccount,
+                        debtStatus: item.debtStatus,
+                        repaymentStatus: item.repaymentStatus,
+                        board: {
+                            title: item.board?.title,
+                            borrowMoney: item.board?.borrowMoney,
+                            payDate: item.board?.payDate,
+                            bank: item.board?.bank,
+                            bankAccount: item.board?.bankAccount,
+                            user: {
+                                name: item.board?.user?.name,
+                                gmailId: item.board?.user?.gmailId,
+                                uid: item.board?.user?.uid,
+                            },
+                            debts: debts,
+                        },
+                    };
+                });
                 setReceiveDataSet(transformedReceiveData);
                 console.log(transformedReceiveData);
             } else {
@@ -123,7 +130,6 @@ const WebDashboard = () => {
         const filteredDataSet = BorrowDataSet.filter(
             (data) => (data.debts.reduce((acc, debt) => acc + Number(debt.lendMoney), 0) / data.borrowMoney) * 100 < 100
         );
-        console.log(filteredDataSet);
         const CardCount = filteredDataSet.length;
         const CardTotal = filteredDataSet.reduce((acc, data) => acc + Number(data.borrowMoney), 0);
 
