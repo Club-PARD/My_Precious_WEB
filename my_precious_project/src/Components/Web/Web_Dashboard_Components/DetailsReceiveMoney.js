@@ -182,7 +182,7 @@ const DisplayDday = styled.div`
   height: 19px;
   border-radius: 20px;
   background-color: #ff3d00;
-  margin-left: 41px;
+  margin-left: 65px;
   margin-bottom: 7px;
   color: #ffefef;
   font-family: Pretendard;

@@ -5,7 +5,7 @@ import { useTheme } from "../../../contexts/ThemeContext.js"; // Context APi 적
 import Header from "../Layout_Components/Mypage_header.js";
 import HistoryCard from "./HistoryCard.js";
 import DashboardList from "./DashboardList.js";
-import { UserDataContext } from "../../../contexts/userContext";
+import { useUserData } from "../../../contexts/userContext";
 import axios from "axios";
 
 //전체페이지
@@ -13,14 +13,14 @@ const WebDashboard = () => {
   const theme = useTheme();
   const [BorrowDataSet, setBorrowDataSet] = useState([]);
   const [ReceiveDataSet, setReceiveDataSet] = useState([]);
-  const [userData, setUserData] = useContext(UserDataContext);
+  const [userData, setUserData] = useUserData();
   const uid = userData.uid;
   const restOfName = userData && userData.name ? userData.name.slice(1) : "";
   console.log(userData);
 
   // 페이지가 로드되었을 때 로컬 스토리지에 userData 저장
   useEffect(() => {
-    localStorage.setItem("userData", JSON.stringify(userData));
+    sessionStorage.setItem("userData", JSON.stringify(userData));
   }, []);
 
   // API에서 데이터 가져오기
@@ -70,28 +70,35 @@ const WebDashboard = () => {
 
       if (receiveData) {
         // 데이터를 ReceiveDataSet 형식으로 변환
-        const transformedReceiveData = receiveData.map((item) => ({
-          id: item.id,
-          lendMoney: item.lendMoney,
-          message: item.message,
-          bank: item.bank,
-          bankAccount: item.bankAccount,
-          debtStatus: item.debtStatus,
-          repaymentStatus: item.repaymentStatus,
-          board: {
-            title: item.board?.title,
-            borrowMoney: item.board?.borrowMoney,
-            payDate: item.board?.payDate,
-            bank: item.board?.bank,
-            bankAccount: item.board?.bankAccount,
-            userSimpleResponse: {
-              name: item.board?.userSimpleResponse?.name,
-              gmailId: item.board?.userSimpleResponse?.gmailId,
-              uid: item.board?.userSimpleResponse?.uid,
-            },
-          },
-        }));
+        const transformedReceiveData = receiveData.map((item) => {
+          const debts =
+            item.board?.debts?.map((debt) => ({
+              lendMoney: debt.lendMoney,
+            })) || [];
 
+          return {
+            id: item.id,
+            lendMoney: item.lendMoney,
+            message: item.message,
+            bank: item.bank,
+            bankAccount: item.bankAccount,
+            debtStatus: item.debtStatus,
+            repaymentStatus: item.repaymentStatus,
+            board: {
+              title: item.board?.title,
+              borrowMoney: item.board?.borrowMoney,
+              payDate: item.board?.payDate,
+              bank: item.board?.bank,
+              bankAccount: item.board?.bankAccount,
+              user: {
+                name: item.board?.user?.name,
+                gmailId: item.board?.user?.gmailId,
+                uid: item.board?.user?.uid,
+              },
+              debts: debts,
+            },
+          };
+        });
         setReceiveDataSet(transformedReceiveData);
         console.log(transformedReceiveData);
       } else {

@@ -10,7 +10,7 @@ import axios from "axios";
 
 function SentToEmailModal({ props }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [userData, setUserData] = useContext(UserDataContext);
+  const [userData, setUserData] = useUserData();
   const uid = userData.uid;
 
   const [title, setTitle] = useState("");

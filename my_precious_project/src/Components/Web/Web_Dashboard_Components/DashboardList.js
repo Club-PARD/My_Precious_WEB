@@ -30,7 +30,7 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
 
         if (rightCard === 'on') {
             percentage = (data) => {
-                const totalLendMoney = data.debts?.reduce((acc, debt) => acc + Number(debt.lendMoney), 0) ?? 0;
+                const totalLendMoney = data.board?.debts?.reduce((acc, debt) => acc + Number(debt.lendMoney), 0) ?? 0;
                 const borrowMoney = data.board?.borrowMoney ?? 0;
                 return (totalLendMoney / borrowMoney) * 100;
             };
@@ -39,6 +39,7 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
             percentage = (data) => {
                 const totalLendMoney = data.debts?.reduce((acc, debt) => acc + Number(debt.lendMoney), 0) ?? 0;
                 const borrowMoney = data.borrowMoney ?? 0;
+                console.log('Total Lend Money:', totalLendMoney);
                 return (totalLendMoney / borrowMoney) * 100;
             };
             dataSet = BorrowDataSet;
@@ -85,7 +86,6 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
             dataSet = BorrowDataSet;
         }
 
-        // 이 부분은 실제 데이터 수를 계산하는 로직에 맞게 수정해야 합니다.
         const allCount = dataSet.length;
         const inProgressCount = getFilteredData(25).length;
         const overdueCount = getFilteredData(50).length;

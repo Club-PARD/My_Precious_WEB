@@ -3,13 +3,13 @@ import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import DotButton from './DotButton.js';
 import loginImage from '../../../Assets/img/LoginImage.png';
-import { UserDataContext } from '../../../contexts/userContext';
+import { useUserData } from '../../../contexts/userContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const WebLogin_3 = () => {
     const theme = useTheme();
-    const [userData, setUserData] = useContext(UserDataContext);
+    const [userData, setUserData] = useUserData();
     const [total, setTotal] = useState(null);
 
     const navigate = useNavigate();
@@ -45,6 +45,7 @@ const WebLogin_3 = () => {
                     <InnerRow3>
                         <ImageDiv>
                             <Img src={loginImage} alt="로그인페이지 기본 이미지"></Img>
+                            <NameDiv>{userData.name} 님</NameDiv>
                         </ImageDiv>
                         <form>
                             <Button onClick={navigateToDashboard}>시작하기</Button>
@@ -114,18 +115,18 @@ const ImageDiv = styled.div`
 `;
 
 const Img = styled.img`
-    //margin-top: 3.125rem;
+    width: 150px;
 `;
 
 const NameDiv = styled.div`
     width: 9.6875rem;
     height: 2.75rem;
     flex-shrink: 0;
-    margin-top: 2.731875rem;
     color: #ff3d00;
     text-align: center;
+    margin-top: 1.6rem;
     //font-family: Pretendard;
-    font-size: 2.055375rem;
+    font-size: 2rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
