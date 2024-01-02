@@ -166,7 +166,7 @@ const TalkText =styled.div`
     padding-left: 1rem;
 `;
 
-function ManageSummary() {
+function ManageSummary({mangeData,setManageData}) {
     const theme = useTheme();
 
     const [detailData, setDetailData] = useState({
@@ -183,26 +183,33 @@ function ManageSummary() {
         
     });
 
+    //받은 돈 숫자에서 문자 -> 컴마 추가
+    var receiveNumber = mangeData.totalLendmoney;
+    var LendformattedNumber = receiveNumber.toLocaleString();
+    //필요한 돈 숫자에서 문자 -> 컴마 추가
+    var totaleNumber = mangeData.borrowMoney;
+    var NeedformattedNumber = totaleNumber.toLocaleString();
+
     return (
         <ThemeProvider theme={theme}>
             <Container>
                 <ImageCharacter/>
                 <ImageTalk>
-                    <TalkText>현재까지 3명의 친구에게
+                    <TalkText>현재까지 0명의 친구에게
                     돈을 갚았어요.
                     </TalkText>
                 </ImageTalk>
                 <DisplayMoneyContainer>
                 <DisplayMoneyDiv style={{paddingLeft:"1.56rem"}}>
                     <MoneyText>현재까지 모인 금액</MoneyText>
-                    <SmallLineProgress total={parseFloat(detailData.total)} receive={parseFloat(detailData.receive)} />
+                    <SmallLineProgress total={parseFloat(mangeData.borrowMoney)} receive={parseFloat(mangeData.totalLendmoney)} />
                     <Row>
-                        <Circle/> 30,000
+                        <Circle/> 모인 금액 {LendformattedNumber}
                     </Row>
                 </DisplayMoneyDiv>
                 <DisplayMoneyDiv style={{paddingLeft:"1.25rem"}}>
                     <MoneyText>갚은 금액</MoneyText>
-                    <SmallLineProgress total={parseFloat(detailData.total)} receive={parseFloat(detailData.receive)} />
+                    <SmallLineProgress total={parseFloat(mangeData.totalLendmoney)} receive={parseFloat(detailData.receive)} />
                     <RightRowDiv>
                         <Row>
                             <Circle/>갚은 금액 200,000
@@ -213,12 +220,17 @@ function ManageSummary() {
                 <UnderGrayDiv>
                     <UnderGrayFirstDiv>
                         <div style={{paddingRight:"6.19rem"}}>필요 금액</div>
-                        <div>5,000,000 원</div>
+                        <div>{NeedformattedNumber} 원</div>
                     </UnderGrayFirstDiv>
                     <UnderGrayFirstDiv>
                         <div style={{paddingRight:"2.3rem"}}>갚기로 한 약속날짜</div>
-                        <div>2024년 02월 24일</div>
-                        <Dday>D-20</Dday>
+                        <div>{mangeData.formatted_date}</div>
+                        
+                        {mangeData.dday >=0 ? (
+                        <Dday>D-{mangeData.dday}</Dday>
+                        ) :(
+                            <Dday>D+{Math.abs(mangeData.dday)} </Dday>
+                        )}
                     </UnderGrayFirstDiv>
                 </UnderGrayDiv>
             </Container>

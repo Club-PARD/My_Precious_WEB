@@ -10,11 +10,13 @@ const Container = styled.button`
     height: 3.54031rem;
     flex-shrink: 0;
     border-radius: 0.625rem;
-    background: var(--White_2, #FAFAFA);
+    background: ${(props) => (props.isSelected ? '#FFCDBD' : '#FAFAFA')};
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    border: none;
+    border: ${(props) => (props.isSelected ? '1px solid #FF6A3B' : 'none')};
     justify-content: center;
     align-items: center;
+    margin-bottom: 0.56rem;
+    cursor: pointer;
 `;
 
 const Row =styled.div`
@@ -23,7 +25,7 @@ const Row =styled.div`
     width: 17rem;
     justify-content: space-between;
 
-    color: #696969;
+    color: ${(props) => (props.isSelected ? '#3E3E3E' : '#696969')};
     text-align: right;
     font-family: Pretendard;
     font-size: 1.125rem;
@@ -33,15 +35,17 @@ const Row =styled.div`
     align-items: center;
 `;
 
-function SummaryFriend() {
+function SummaryFriend(props) {
     const theme = useTheme();
+
+    const formatNum =parseFloat(props.money).toLocaleString();
 
     return (
         <ThemeProvider theme={theme}>
-            <Container>
-                <Row>
-                    <div>김현중</div>
-                    <div>10,000 원</div>
+            <Container isSelected={props.isSelected} onClick={props.onClick} disabled={props.isSelected} >
+                <Row >
+                    <div>{props.name}</div>
+                    <div>{formatNum} 원</div>
                 </Row>
             </Container>
         </ThemeProvider>

@@ -19,7 +19,7 @@ function SmallLineProgress(props) {
     const endPercent = (props.receive / props.total) * 100;
 
     // 애니메이션 지속 시간 (밀리초)
-    const duration = 1000;
+    const duration = 200000;
     let startTime;
     let animationFrame;
 
