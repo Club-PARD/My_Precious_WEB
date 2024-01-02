@@ -166,7 +166,7 @@ const TalkText =styled.div`
     padding-left: 1rem;
 `;
 
-function ManageSummary({mangeData,setManageData}) {
+function ManageSummary({manageData,setManageData}) {
     const theme = useTheme();
 
     const [detailData, setDetailData] = useState({
@@ -184,10 +184,10 @@ function ManageSummary({mangeData,setManageData}) {
     });
 
     //받은 돈 숫자에서 문자 -> 컴마 추가
-    var receiveNumber = mangeData.totalLendmoney;
+    var receiveNumber = manageData.totalLendmoney;
     var LendformattedNumber = receiveNumber.toLocaleString();
     //필요한 돈 숫자에서 문자 -> 컴마 추가
-    var totaleNumber = mangeData.borrowMoney;
+    var totaleNumber = manageData.borrowMoney;
     var NeedformattedNumber = totaleNumber.toLocaleString();
 
     return (
@@ -202,14 +202,14 @@ function ManageSummary({mangeData,setManageData}) {
                 <DisplayMoneyContainer>
                 <DisplayMoneyDiv style={{paddingLeft:"1.56rem"}}>
                     <MoneyText>현재까지 모인 금액</MoneyText>
-                    <SmallLineProgress total={parseFloat(mangeData.borrowMoney)} receive={parseFloat(mangeData.totalLendmoney)} />
+                    <SmallLineProgress total={parseFloat(manageData.borrowMoney)} receive={parseFloat(manageData.totalLendmoney)} />
                     <Row>
                         <Circle/> 모인 금액 {LendformattedNumber}
                     </Row>
                 </DisplayMoneyDiv>
                 <DisplayMoneyDiv style={{paddingLeft:"1.25rem"}}>
                     <MoneyText>갚은 금액</MoneyText>
-                    <SmallLineProgress total={parseFloat(mangeData.totalLendmoney)} receive={parseFloat(detailData.receive)} />
+                    <SmallLineProgress total={parseFloat(manageData.totalLendmoney)} receive={parseFloat(detailData.receive)} />
                     <RightRowDiv>
                         <Row>
                             <Circle/>갚은 금액 200,000
@@ -224,12 +224,12 @@ function ManageSummary({mangeData,setManageData}) {
                     </UnderGrayFirstDiv>
                     <UnderGrayFirstDiv>
                         <div style={{paddingRight:"2.3rem"}}>갚기로 한 약속날짜</div>
-                        <div>{mangeData.formatted_date}</div>
+                        <div>{manageData.formatted_date}</div>
                         
-                        {mangeData.dday >=0 ? (
-                        <Dday>D-{mangeData.dday}</Dday>
+                        {manageData.dday >=0 ? (
+                        <Dday>D-{manageData.dday}</Dday>
                         ) :(
-                            <Dday>D+{Math.abs(mangeData.dday)} </Dday>
+                            <Dday>D+{Math.abs(manageData.dday)} </Dday>
                         )}
                     </UnderGrayFirstDiv>
                 </UnderGrayDiv>

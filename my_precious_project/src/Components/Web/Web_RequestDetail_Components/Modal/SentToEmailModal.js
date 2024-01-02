@@ -27,7 +27,10 @@ function SentToEmailModal({props}) {
 
   return (
     <div>
-      <ChaseUpBtn onClick={openModal}>{props.function} 작성</ChaseUpBtn>
+      {props.function ==="재촉편지" ? (
+      <ChaseUpBtn onClick={openModal}>{props.function} 작성</ChaseUpBtn> )
+      :(<ThankUBtn onClick={openModal}>{props.function} 작성</ThankUBtn>
+      )}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -81,9 +84,32 @@ const customModalStyles = {
 
 const ChaseUpBtn =styled.button`
     display: flex;
-  width: 12.6875rem;
-  height: 2.5rem;
-  flex-shrink: 0;
+    width: 10.9375rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+    border-radius: 0.375rem;
+    background:  #B3B3B3;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    color: #FFFCFB;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.4375rem;
+    padding: 0;
+    cursor: pointer;
+    &:hover {
+      background:  #FF3D00;
+    }
+`;
+
+const ThankUBtn =styled.button`
+    display: flex;
+    width: 12.6875rem;
+    height: 2.5rem;
+    flex-shrink: 0;
     border-radius: 0.375rem;
     background:  #B3B3B3;
     border: none;

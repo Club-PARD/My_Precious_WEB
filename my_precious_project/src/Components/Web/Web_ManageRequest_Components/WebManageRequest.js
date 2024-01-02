@@ -84,28 +84,6 @@ const BackBtn = styled.button`
     cursor: pointer;
 `;
 
-const ShowMoreBtn =styled.button`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0.1875rem;
-    border: 1px solid #FF6A3B;
-    width: 10.3125rem;
-    height: 1.8125rem;
-    flex-shrink: 0;
-    background-color: #F1F1F1;
-    gap: 0.38rem;
-    padding: 0;
-
-    color: #FF6A3B;
-    font-family: Pretendard;
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 1.25rem; /* 142.857% */
-    cursor: pointer;
-`;
 
 const boardId =39; //임시로 정해둔 값
 
@@ -113,7 +91,7 @@ function WebManageRequest() {
     const theme = useTheme();
     const navigate = useNavigate();
 
-    const [mangeData, setManageData] = useState({
+    const [manageData, setManageData] = useState({
         title: "",
         borrowMoney: 0,
         payDate: "",
@@ -188,7 +166,7 @@ function WebManageRequest() {
             console.error("데이터 전송 중 오류 발생: ", error);
             // 오류를 처리합니다.
           });
-    }, [boardId,mangeData.borrowMoney,mangeData.payDate,mangeData.dday,mangeData.lendMoneyCount,mangeData.totalLendmoney]);
+    }, [boardId,manageData.borrowMoney,manageData.payDate,manageData.dday,manageData.lendMoneyCount,manageData.totalLendmoney]);
 
     const HandleBackClick  = () =>{
         navigate("/dashboard");
@@ -199,7 +177,7 @@ function WebManageRequest() {
             <Container>
                 <Header />
                 <ContentsDiv>
-                    <TitleDiv>{mangeData.title}</TitleDiv>
+                    <TitleDiv>{manageData.title}</TitleDiv>
                         <LinkCopyDiv>
                             <BackBtn onClick={HandleBackClick}/>
                             <img src={Copy} alt="클립보드 아이콘"/>
@@ -208,10 +186,10 @@ function WebManageRequest() {
                                 onCopy={() => alert("클립보드에 복사되었습니다.")}>
                                 <CopyText>링크복사</CopyText>
                             </CopyToClipboard>
-                            <ShowMyboard mangeData={mangeData}/>
+                            <ShowMyboard manageData={manageData}/>
                         </LinkCopyDiv>
-                    <ManageSummary mangeData={mangeData} setManageData={setManageData}/>
-                    <ManageBottom boardId={boardId} mangeData={mangeData}/>
+                    <ManageSummary manageData={manageData} setManageData={setManageData}/>
+                    <ManageBottom boardId={boardId} manageData={manageData}/>
                 </ContentsDiv>
             </Container>
         </ThemeProvider>

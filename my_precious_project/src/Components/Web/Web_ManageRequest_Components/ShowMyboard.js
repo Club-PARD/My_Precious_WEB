@@ -9,12 +9,12 @@ import BlueCharacter from "../../../Assets/img/BlueCharacter.svg";
 import CheckBox from '../../../Assets/img/CheckBox.svg';
 
 
-function ShowMyboard(mangeData) {
+function ShowMyboard(manageData) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [userData, setUserData] = useContext(UserDataContext);
   const uid = userData.uid;
 
-  console.log(mangeData);
+  console.log(manageData);
 
   const openModal = () => {
     //스크롤 비활성화
@@ -28,10 +28,10 @@ function ShowMyboard(mangeData) {
     setModalIsOpen(false);
   };
 
-  const MoneyNum =mangeData.mangeData.borrowMoney.toLocaleString();
+  const MoneyNum =manageData.manageData.borrowMoney.toLocaleString();
 
-  const formatted_date =mangeData.mangeData.payDate.substring(0, 4) + '년 ' + mangeData.mangeData.payDate.substring(4, 6) + '월 ' + mangeData.mangeData.payDate.substring(6)+'일';
-  const formatted_date2 =mangeData.mangeData.payDate.substring(0, 4) + '.' + mangeData.mangeData.payDate.substring(4, 6) + '.' + mangeData.mangeData.payDate.substring(6);
+  const formatted_date =manageData.manageData.payDate.substring(0, 4) + '년 ' + manageData.manageData.payDate.substring(4, 6) + '월 ' + manageData.manageData.payDate.substring(6)+'일';
+  const formatted_date2 =manageData.manageData.payDate.substring(0, 4) + '.' + manageData.manageData.payDate.substring(4, 6) + '.' + manageData.manageData.payDate.substring(6);
 
 
   return (
@@ -55,13 +55,13 @@ function ShowMyboard(mangeData) {
                 <Line style={{height: "3.1875rem", paddingTop: "0.5rem"}}>
                         <DarkGrayText>제목</DarkGrayText>
                         <DisplayDataTitleDiv >
-                            <DisplayDataTitleText>{mangeData.mangeData.title}</DisplayDataTitleText>
+                            <DisplayDataTitleText>{manageData.manageData.title}</DisplayDataTitleText>
                         </DisplayDataTitleDiv>
                     </Line>
                     <Line style={{marginTop:"0.63rem", height: "7.9375rem"}}>
                         <DarkGrayText >사유</DarkGrayText>
                         <DisplayDataReasonDiv>
-                            <DisplayDataReasonText>{mangeData.mangeData.situation}</DisplayDataReasonText>
+                            <DisplayDataReasonText>{manageData.manageData.situation}</DisplayDataReasonText>
                         </DisplayDataReasonDiv>
                     </Line>
                     <Line style={{marginTop:"2.19em"}}>
@@ -79,15 +79,15 @@ function ShowMyboard(mangeData) {
                     <Line style={{marginTop:"0.62rem", justifyContent: "start"}}>
                         <DarkGrayText style={{ height: "2.4375rem", paddingRight:"0.90rem"}}>받을 계좌</DarkGrayText>
                         <DisplayDataTotalDiv style={{width:"13rem" , marginRight:"1.3rem"}}>
-                            <DisplayDataTotalText >{mangeData.mangeData.bank}</DisplayDataTotalText>
+                            <DisplayDataTotalText >{manageData.manageData.bank}</DisplayDataTotalText>
                         </DisplayDataTotalDiv>
                         <DisplayDataTotalDiv style={{width:"23.1875rem"}}>
-                            <DisplayDataTotalText>{mangeData.mangeData.bankAccount}</DisplayDataTotalText>
+                            <DisplayDataTotalText>{manageData.manageData.bankAccount}</DisplayDataTotalText>
                         </DisplayDataTotalDiv>
                     </Line>
                 <SignDiv>
                     <SignText>서약</SignText>
-                    <SignText>나 {mangeData.mangeData.name}(은)는 {formatted_date}까지 돈을 갚을 것을 약속합니다.</SignText>
+                    <SignText>나 {manageData.manageData.name}(은)는 {formatted_date}까지 돈을 갚을 것을 약속합니다.</SignText>
                     <img src={CheckBox} alt='체크박스 이미지'></img>
                 </SignDiv>
                 </DisplayBoxDiv>

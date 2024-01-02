@@ -67,7 +67,7 @@ function DisplayFriend({displayData,debtId}) {
                 </ContentsDiv>
                 <Div>
                     <CheckBtn onClick={CheckDebtStatusSubmit}>돈을 다 갚았어요</CheckBtn>
-                    <SentToEmailModal props= {Modal_ThankU}/>
+                    <SentToEmailModal  props= {Modal_ThankU}/>
                 </Div>
             </Container>
         </ThemeProvider>
@@ -209,5 +209,6 @@ const CheckBtn =styled.button  `
     padding: 0;
     cursor: pointer;
 `;
+
 
 export default DisplayFriend;

@@ -90,7 +90,7 @@ const RightNoDiv = styled.div`
     align-items: center;
 `;
 
-function ManageBottom({boardId,mangeData}) {
+function ManageBottom({boardId,manageData}) {
     const theme = useTheme();
     const [getdebtidShow, setGetdebtidShow]= useState("");
     const debtId =parseFloat(getdebtidShow);
@@ -149,7 +149,7 @@ function ManageBottom({boardId,mangeData}) {
             <Container>
                 <ColumnDiv style={{width: "31.1875rem", marginRight: "0.75rem"}}>
                     <DisplayFriends>도와준 친구들</DisplayFriends>
-                    {mangeData.lendMoneyCount ===0 ? (
+                    {manageData.lendMoneyCount ===0 ? (
                         <LeftNoDiv>아직 내역이 없어요.</LeftNoDiv>
                     ) : (
                         <DisplayFriend displayData={displayData} debtId={debtId} />
@@ -158,10 +158,10 @@ function ManageBottom({boardId,mangeData}) {
                 </ColumnDiv>
                 <ColumnDiv style={{width:"20.225rem"}}>
                     <FriendsCountDiv>
-                        <FriendsCountText>{mangeData.lendMoneyCount}명</FriendsCountText>의 친구들이 도와주고 있어요 
+                        <FriendsCountText>{manageData.lendMoneyCount}명</FriendsCountText>의 친구들이 도와주고 있어요 
                     </FriendsCountDiv>
 
-                    {mangeData.lendMoneyCount === 0 ?(
+                    {manageData.lendMoneyCount === 0 ?(
                     <RightNoDiv>아직 내역이 없어요.</RightNoDiv> 
                     ) :(
                         <ManageFriendList boardId={boardId} setGetdebtidShow={setGetdebtidShow}/>
