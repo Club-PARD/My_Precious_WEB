@@ -241,16 +241,14 @@ function ManageSummary({manageData,boardId}) {
                 <DisplayMoneyContainer>
                 <DisplayMoneyDiv style={{paddingLeft:"1.56rem"}}>
                     <MoneyText>현재까지 모인 금액</MoneyText>
-                    <SmallLineProgress total={parseFloat(manageData.borrowMoney)} receive={parseFloat(manageData.totalLendmoney)}
-                    />
+                    <SmallLineProgress total={parseFloat(manageData.borrowMoney)} receive={parseFloat(manageData.totalLendmoney)} />
                     <Row>
                         <Circle/> 모인 금액 {LendformattedNumber}
                     </Row>
                 </DisplayMoneyDiv>
                 <DisplayMoneyDiv style={{paddingLeft:"1.25rem"}}>
                     <MoneyText>갚은 금액</MoneyText>
-                    <SmallLineProgress total={parseFloat(manageData.totalLendmoney)} receive={detailData.totalConfirmMoney}
-                     />
+                    <SmallLineProgress total={parseFloat(manageData.totalLendmoney)} receive={detailData.totalConfirmMoney} />
                     <RightRowDiv>
                         <Row>
                             <Circle/>갚은 금액 {ConfirmformattedNumber}
