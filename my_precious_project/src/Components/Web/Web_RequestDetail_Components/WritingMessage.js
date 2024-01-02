@@ -80,7 +80,7 @@ const SaveButton = styled.button`
     height: 2.5rem;
     flex-shrink: 0;
     border-radius: 0.375em;
-    background: var(--primary_orange, #FF3D00);
+    background: ${(props) => (props.disabled ? '#D9D9D9' : '#FF3D00')};
     border: none;
 
     color: #FFFCFB;
@@ -167,7 +167,7 @@ const Input3 =styled.input`
     }
 `;
 
-function WritingMessage() {
+function WritingMessage({ checkSendMessage, setCheckSendMessage }) {
     const theme = useTheme();
     const [userData, setUserData] = useContext(UserDataContext);
     const uid = userData.uid;
@@ -231,19 +231,23 @@ function WritingMessage() {
             "bankAccount": form.bankAccount
           }
         //서버에 유저 데이터 보내기
+        
         axios
-        .post(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/debts/boards/${boardId}/users/${uid}`, Data)
+        .post(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/boards/${boardId}/users/${uid}`, Data)
         .then((response) => {
             console.log(Data);
           console.log("데이터가 전송되었습니다: ", response.data);
           //서버에서의 응답을 처리합니다.
+          const detId = response.data.data.id;
+            console.log(detId)
         })
         .catch((error) => {
           console.error("데이터 전송 중 오류 발생: ", error);
           // 오류를 처리합니다.
         });
 
-        console.log(form.lendMoney, form.message, form.bank, form.bankAccount);
+        //console.log(form.lendMoney, form.message, form.bank, form.bankAccount);
+        setCheckSendMessage(!checkSendMessage);
     };
 
     // 모든 인풋 값이 비어있지 않은지 확인하는 함수

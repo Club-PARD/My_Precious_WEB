@@ -12,7 +12,7 @@ import Character from '../../../Assets/img/Character.png';
 
 const boardId = 1;
 
-function LeftSide({under100, setUnder100}) {
+function LeftSide({under100, setUnder100, updateLeftSide}) {
     const theme = useTheme();
 
     const [detailData, setDetailData] = useState({
@@ -32,9 +32,9 @@ function LeftSide({under100, setUnder100}) {
     useEffect(() => {
         //GET 요청 보내기
         axios
-          .get(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/boards/${boardId}`)
+          .get(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/boards/${boardId}`)
           .then((response) => {
-            console.log("response: " + JSON.stringify(response.data.data));
+            //console.log("response: " + JSON.stringify(response.data.data));
     
             //서버에서 받은 데이터 추출
             const Title = response.data.data.title;
@@ -47,7 +47,6 @@ function LeftSide({under100, setUnder100}) {
             const name = response.data.data.user.name;
             const lendMoneydata = response.data.data.debts;
 
-            console.log(lendMoneydata)
             //빌려준 친구 수 가져옴
             const lendMoneyCount =parseFloat(lendMoneydata.length);
 
@@ -61,7 +60,7 @@ function LeftSide({under100, setUnder100}) {
                 return accumulator + currentValue;
             }, 0);
 
-            console.log("빌린돈 총합" , totalLendmoney)
+            //console.log("빌린돈 총합" , totalLendmoney)
 
             //날짜처리
             const formatted_date =payDate.substring(0, 4) + '년 ' + payDate.substring(4, 6) + '월 ' + payDate.substring(6)+'일';
@@ -84,7 +83,8 @@ function LeftSide({under100, setUnder100}) {
             }));
           })
           .catch((error) => console.log("error: " + error));
-      }, []);
+      }, [updateLeftSide]);
+
 
     //받은 돈 숫자에서 문자 -> 컴마 추가
     var receiveNumber = detailData.receive;
@@ -179,9 +179,10 @@ const Container = styled.div`
     margin: 0;
     padding: 0;
     width: 46.1875rem;
-    height: 47.8125rem;
-    background: #FAFAFA;
-    box-shadow: 0px  0.25rem  0.25rem 0px rgba(0, 0, 0, 0.25);
+    height: 45.3125rem;
+    border-radius: 0.625rem;
+    background: var(--White_2, #FAFAFA);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     margin-top: 2.6rem;
 `;
 
@@ -193,7 +194,7 @@ const TotalColletMoney =styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    padding-top: 3.0625rem;
+    padding-top: 1.13rem;
     padding-left: 1.375rem;
 `;
 
@@ -204,8 +205,8 @@ const Image = styled.div`
     background-image:url(${Talk});
     background-repeat:no-repeat;
     background-size: contain;
-    top: 1%;
-    left: 45%;
+    top: -2%;
+    left: 40%;
     z-index: 1;
     display: flex;
     //justify-content: center;
@@ -214,13 +215,13 @@ const Image = styled.div`
 
 const ImageCharacter = styled.div`
     position: absolute;
-    width: 7rem;
-    height: 7rem;
+    width: 6rem;
+    height: 6rem;
     background-image:url(${Character});
     background-repeat:no-repeat;
     background-size: contain;
-    top: 1%;
-    left: 35%;
+    top: 0%;
+    left: 32%;
     z-index: 1;
     display: flex;
     //justify-content: center;
@@ -228,6 +229,7 @@ const ImageCharacter = styled.div`
 `;
 
 const ImageText = styled.div`
+    position: relative;
     color: #5B5B5B;
     display: flex;
     font-family: Pretendard;
@@ -236,9 +238,8 @@ const ImageText = styled.div`
     font-weight: 600;
     line-height: normal;
     width: 10rem;
-    height: 2.125rem;
     padding-top: 0.55rem;
-    padding-left: 0.5rem;
+    left: 10%;
 `;
 
 const StyleLineProgress =styled.div`
