@@ -17,6 +17,25 @@ const WebLogin_1 = () => {
 
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
+    const [yearInput, setYearInput] = useState(null);
+    const [monthInput, setMonthInput] = useState(null);
+    const [dayInput, setDayInput] = useState(null);
+
+    const handleYearChange = (e) => {
+        setYearInput(e.target.value);
+        setYear(e.target.value.replace(/\D/, ''));
+    };
+
+    const handleMonthChange = (e) => {
+        setMonthInput(e.target.value);
+        setMonth(e.target.value.replace(/\D/, ''));
+    };
+
+    const handleDayChange = (e) => {
+        setDayInput(e.target.value);
+        setDay(e.target.value.replace(/\D/, ''));
+    };
+
     const handleConfirmation = (event) => {
         event.preventDefault();
         const birthDate = `${year}-${month}-${day}`;
@@ -83,9 +102,9 @@ const WebLogin_1 = () => {
                                             type="text"
                                             maxLength="4"
                                             value={year}
-                                            onChange={(e) => setYear(e.target.value.replace(/\D/, ''))}
+                                            onChange={handleYearChange}
                                         ></StyleInput>
-                                        <StyleInputLabel htmlFor="year">년</StyleInputLabel>
+                                        <YearInputLabel yearInput={yearInput}>년</YearInputLabel>
                                     </InputYearDiv>
                                     <InputMonthDiv>
                                         <StyleInput
@@ -94,9 +113,9 @@ const WebLogin_1 = () => {
                                             maxLength="2"
                                             style={{ width: '34px' }}
                                             value={month}
-                                            onChange={(e) => setMonth(e.target.value.replace(/\D/, ''))}
+                                            onChange={handleMonthChange}
                                         ></StyleInput>
-                                        <StyleInputLabel for="month">월</StyleInputLabel>
+                                        <MonthInputLabel monthInput={monthInput}>월</MonthInputLabel>
                                     </InputMonthDiv>
                                     <InputDateDiv>
                                         <StyleInput
@@ -105,9 +124,9 @@ const WebLogin_1 = () => {
                                             maxLength="2"
                                             style={{ width: '34px' }}
                                             value={day}
-                                            onChange={(e) => setDay(e.target.value.replace(/\D/, ''))}
+                                            onChange={handleDayChange}
                                         ></StyleInput>
-                                        <StyleInputLabel for="day">일</StyleInputLabel>
+                                        <DayInputLabel dayInput={dayInput}>일</DayInputLabel>
                                     </InputDateDiv>
                                     <CheckBtn type="submit" disabled={isButtonDisabled}>
                                         확인
@@ -169,7 +188,6 @@ const InputNameDiv = styled.div`
     text-align: center;
     width: 16.8458125rem;
     height: 3.4620625rem;
-    background-color: #fff;
     margin-right: 7.135625rem;
     background-color: #fafafa;
 `;
@@ -285,7 +303,7 @@ const StyleInput = styled.input`
     width: 7.5rem;
     border: none;
     border-radius: 0.4221875em;
-    color: #6b6a6a;
+    color: black;
     font-size: 1.25rem;
     text-align: right;
     font-style: normal;
@@ -306,9 +324,38 @@ const StyleInput = styled.input`
     }
 `;
 
-const StyleInputLabel = styled.label`
+const YearInputLabel = styled.label`
     display: flex;
-    color: #d9d9d9;
+    color: ${(props) =>
+        props.yearInput !== undefined && props.yearInput !== null && props.yearInput !== '' ? '#000' : '#d9d9d9'};
+    text-align: center;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.942125rem;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    height: 100%;
+`;
+const MonthInputLabel = styled.label`
+    display: flex;
+    color: ${(props) =>
+        props.monthInput !== undefined && props.monthInput !== null && props.monthInput !== '' ? '#000' : '#d9d9d9'};
+    text-align: center;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.942125rem;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    height: 100%;
+`;
+const DayInputLabel = styled.label`
+    display: flex;
+    color: ${(props) =>
+        props.dayInput !== undefined && props.dayInput !== null && props.dayInput !== '' ? '#000' : '#d9d9d9'};
     text-align: center;
     font-size: 1.25rem;
     font-style: normal;
