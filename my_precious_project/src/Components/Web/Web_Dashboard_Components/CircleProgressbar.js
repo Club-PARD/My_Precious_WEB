@@ -19,8 +19,7 @@ function CircleProgressbar({ totalMoney, debtMoney, index }) {
     useEffect(() => {
         const startPercent = 0;
         const endPercent = (inputValue / startValue) * 100;
-        const duration = (inputValue / startValue) * 2000;
-
+        const duration = 2000;
         let startTime;
         let animationFrame;
 
@@ -77,7 +76,7 @@ function CircleProgressbar({ totalMoney, debtMoney, index }) {
                     }}
                 >
                     <DisplayDiv>
-                        <DisplayPercentDiv>{percent > 100 ? '100%+' : Math.round(percent) + '%'}</DisplayPercentDiv>
+                        <DisplayPercentDiv>{Math.round(percent)}%</DisplayPercentDiv>
                         <CollectText>모였어요.</CollectText>
                     </DisplayDiv>
                 </div>
