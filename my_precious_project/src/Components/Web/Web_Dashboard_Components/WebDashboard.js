@@ -176,7 +176,7 @@ const WebDashboard = () => {
         );
         console.log(filteredDataSet);
         const CardCount = filteredDataSet.length;
-        const CardTotal = filteredDataSet.reduce((acc, data) => acc + Number(data.board.borrowMoney), 0);
+        const CardTotal = filteredDataSet.reduce((acc, data) => acc + Number(data.lendMoney), 0);
 
         let maxDifferenceDays = Number.MIN_SAFE_INTEGER;
 
