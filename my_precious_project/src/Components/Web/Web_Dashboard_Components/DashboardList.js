@@ -105,14 +105,31 @@ const DashboardList = ({ BorrowDataSet, ReceiveDataSet, rightCard }) => {
             </InnerRow1>
             <TransactionComponent>
                 {rightCard === 'on' ? (
-                    <DetailsReceiveMoney ReceiveDataSet={getFilteredData(selectedMenu)} />
-                ) : (
+                    ReceiveDataSet && ReceiveDataSet.length > 0 ? (
+                        <DetailsReceiveMoney ReceiveDataSet={getFilteredData(selectedMenu)} />
+                    ) : (
+                        <EmptyDataDiv>아직 거래 내역이 없어요.</EmptyDataDiv>
+                    )
+                ) : BorrowDataSet && BorrowDataSet.length > 0 ? (
                     <DetailsBorrowMoney BorrowDataSet={getFilteredData(selectedMenu)} />
+                ) : (
+                    <EmptyDataDiv>아직 거래 내역이 없어요.</EmptyDataDiv>
                 )}
             </TransactionComponent>
         </ThemeProvider>
     );
 };
+
+const EmptyDataDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 150px;
+    color: #b3b3b3;
+    font-size: 18px;
+    font-weight: 500;
+`;
 
 const TransactionComponent = styled.div`
     margin-top: 50px;
