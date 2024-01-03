@@ -11,7 +11,9 @@ import SentToEmailModal from "../Web_RequestDetail_Components/Modal/SentToEmailM
 function DisplayFriend({ displayData, debtId }) {
   const theme = useTheme();
   const [userData, setUserData] = useUserData();
+  const [send, setSend] = useState(false);
   const uid = userData.uid;
+  console.log(displayData.id);
 
   //모달에 보낼 props값 - 감사편지
   const Modal_ThankU = {
@@ -28,8 +30,8 @@ function DisplayFriend({ displayData, debtId }) {
 
     axios
       .patch(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/debts/check-paid-boxes/${debtId}`,
-        { debtStatus: debtId }
+        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/debts/check-paid-boxes/${displayData.id}`,
+        { debtStatus: displayData.id }
       )
       .then((response) => {
         console.log(response);
@@ -37,8 +39,15 @@ function DisplayFriend({ displayData, debtId }) {
       .catch((error) => {
         console.error("데이터 전송 중 오류 발생: ", error);
       });
+
+    if (displayData.debtStatus === "PENDING") {
+      setSend(false);
+    } else {
+      setSend(true);
+    }
   };
   console.log(displayData);
+
   //빌려준 돈 숫자에서 문자 -> 컴마 추가
   var receiveNumber = parseFloat(displayData?.lendMoney);
   var formattedNumber = receiveNumber.toLocaleString();
@@ -68,7 +77,17 @@ function DisplayFriend({ displayData, debtId }) {
           </DetailDiv>
         </ContentsDiv>
         <Div>
-          <CheckBtn onClick={CheckDebtStatusSubmit}>돈을 다 갚았어요</CheckBtn>
+          <CheckBtn
+            style={{
+              disable: displayData.debtStatus === "PAID" ? true : false,
+              backgroundColor:
+                displayData.debtStatus === "PAID" ? "#B3B3B3" : "#FF3D00",
+              cursor: displayData.debtStatus === "PAID" ? "default" : "pointer",
+            }}
+            onClick={CheckDebtStatusSubmit}
+          >
+            돈을 다 갚았어요
+          </CheckBtn>
           <SentToEmailModal props={Modal_ThankU} />
         </Div>
       </Container>

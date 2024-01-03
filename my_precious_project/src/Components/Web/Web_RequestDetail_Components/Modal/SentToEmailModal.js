@@ -15,6 +15,7 @@ function SentToEmailModal({ props }) {
 
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
+  const [send, setSend] = useState(false);
 
   const openModal = () => {
     //스크롤 비활성화
@@ -30,6 +31,7 @@ function SentToEmailModal({ props }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setSend(true);
 
     const data = {
       address: props.sendToEmail,
