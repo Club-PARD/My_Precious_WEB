@@ -85,10 +85,6 @@ const Container = styled.div`
     padding-bottom: 10px;
     padding-left: 10px;
     padding-right: 10px;
-    &:hover {
-        background-color: #e8e8e8;
-    }
-    cursor: pointer;
 `;
 
 const StyleCircleProgressbar = styled.div`
