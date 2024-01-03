@@ -30,6 +30,35 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
     lendMoneyCount: 0, // 빌려준 친구의 수
   });
 
+  // const getData = async () => {
+  // 	try {
+  // 		const response = await axios.get(
+  //       `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/boards/${boardId}`
+  //     );
+  //     const borrowData = response.data.data;
+  //     let transformedBorrowData = {
+  //       id: borrowData.id,
+  //       title: borrowData.title,
+  //       borrowMoney: borrowData.borrowMoney,
+  //       payDate: borrowData.payDate,
+  //       situation: borrowData.situation,
+  //       payWay: borrowData.payWay,
+  //       bank: borrowData.bank,
+  //       bankAccount: borrowData.bankAccount,
+  //       boardStatus: borrowData.boardStatus,
+  //       user: {
+  //         name: borrowData.user.name,
+  //         gmailId: borrowData.user.gmailId,
+  //         uid: borrowData.user.uid,
+  //       },
+  //       debts: borrowData.debts.map((dept) => ({
+  //         lendMoney: dept.lendMoney,
+  //       })),
+  //       dday: borrowData.dday,
+  //     };
+  // 	}
+  // }
+
   useEffect(() => {
     //GET 요청 보내기
     axios

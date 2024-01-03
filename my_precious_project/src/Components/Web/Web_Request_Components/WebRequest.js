@@ -59,7 +59,7 @@ const WebRequest = () => {
       form.bankAccount,
       check,
     ];
-    const originalFields = ["", "", "", "", "", "은행 선택", "", false];
+    const originalFields = ["", "", "", "", "은행 선택", "", false];
 
     const hasChanged = fields.every(
       (field, index) => field !== originalFields[index]
@@ -213,6 +213,7 @@ const WebRequest = () => {
                       }
                       onFocus={() => setIsInputFocused1(true)}
                       onBlur={() => setIsInputFocused1(false)}
+                      maxLength="15"
                     />
                   </div>
                 </InputTitle>
