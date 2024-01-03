@@ -74,12 +74,21 @@ const DetailsReceiveMoney = ({ ReceiveDataSet = [] }) => {
     );
 };
 const Container = styled.div`
-    margin-bottom: 5rem;
+    margin-bottom: 1.5rem;
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 120px;
     justify-content: center;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    &:hover {
+        background-color: #e8e8e8;
+    }
+    cursor: pointer;
 `;
 
 const StyleCircleProgressbar = styled.div`

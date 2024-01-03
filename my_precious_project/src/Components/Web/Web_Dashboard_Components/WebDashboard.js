@@ -130,32 +130,35 @@ const WebDashboard = () => {
         const filteredDataSet = BorrowDataSet.filter(
             (data) => (data.debts.reduce((acc, debt) => acc + Number(debt.lendMoney), 0) / data.borrowMoney) * 100 < 100
         );
-        console.log(filteredDataSet);
+
         const CardCount = filteredDataSet.length;
-        const CardTotal = filteredDataSet.reduce((acc, data) => acc + Number(data.borrowMoney), 0);
+        const CardTotal = CardCount > 0 ? filteredDataSet.reduce((acc, data) => acc + Number(data.borrowMoney), 0) : 0;
 
         let maxDifferenceDays = Number.MIN_SAFE_INTEGER;
+        let CardDate = '0';
 
-        for (let i = 0; i < filteredDataSet.length; i++) {
-            const payDate = filteredDataSet[i].payDate.toString();
-            const setYear = parseInt(payDate.slice(0, 4));
-            const setMonth = parseInt(payDate.slice(4, 6));
-            const setDay = parseInt(payDate.slice(6, 8));
+        if (CardCount > 0) {
+            for (let i = 0; i < filteredDataSet.length; i++) {
+                const payDate = filteredDataSet[i].payDate.toString();
+                const setYear = parseInt(payDate.slice(0, 4));
+                const setMonth = parseInt(payDate.slice(4, 6));
+                const setDay = parseInt(payDate.slice(6, 8));
 
-            const setDateTime = new Date(setYear, setMonth - 1, setDay);
-            setDateTime.setDate(setDateTime.getDate() + 1);
-            const payDateTime = new Date();
-            const differenceTime = payDateTime - setDateTime;
-            const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
+                const setDateTime = new Date(setYear, setMonth - 1, setDay);
+                setDateTime.setDate(setDateTime.getDate() + 1);
+                const payDateTime = new Date();
+                const differenceTime = payDateTime - setDateTime;
+                const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
 
-            maxDifferenceDays = Math.max(maxDifferenceDays, differenceDays);
+                maxDifferenceDays = Math.max(maxDifferenceDays, differenceDays);
+            }
+            CardDate =
+                maxDifferenceDays < 0
+                    ? `D${maxDifferenceDays}`
+                    : maxDifferenceDays === 0
+                    ? 'D-Day'
+                    : `D+${maxDifferenceDays}`;
         }
-        const CardDate =
-            maxDifferenceDays < 0
-                ? `D${maxDifferenceDays}`
-                : maxDifferenceDays === 0
-                ? 'D-Day'
-                : `D+${maxDifferenceDays}`;
         return {
             CardCount,
             CardTotal,
@@ -164,43 +167,49 @@ const WebDashboard = () => {
     };
 
     const RightCalculateCardInfo = (ReceiveDataSet) => {
-        if (!ReceiveDataSet || ReceiveDataSet.length === 0) {
-            return {
-                CardCount: 0,
-                CardTotal: 0,
-                CardDate: '0',
-            };
+        // 초기값 설정
+        let CardCount = 0,
+            CardTotal = 0,
+            CardDate = '0';
+
+        // 데이터가 유효한 경우에만 처리
+        if (ReceiveDataSet && ReceiveDataSet.length > 0) {
+            const filteredDataSet = ReceiveDataSet.filter(
+                (data) => (Number(data.lendMoney) / Number(data.board.borrowMoney)) * 100 < 100
+            );
+
+            CardCount = filteredDataSet.length;
+
+            // CardCount가 0보다 큰 경우에만 CardTotal과 CardDate 계산
+            if (CardCount > 0) {
+                CardTotal = filteredDataSet.reduce((acc, data) => acc + Number(data.lendMoney), 0);
+
+                let maxDifferenceDays = Number.MIN_SAFE_INTEGER;
+
+                for (let i = 0; i < filteredDataSet.length; i++) {
+                    const payDate = filteredDataSet[i].board.payDate.toString();
+                    const setYear = parseInt(payDate.slice(0, 4));
+                    const setMonth = parseInt(payDate.slice(4, 6));
+                    const setDay = parseInt(payDate.slice(6, 8));
+
+                    const setDateTime = new Date(setYear, setMonth - 1, setDay);
+                    setDateTime.setDate(setDateTime.getDate() + 1);
+                    const payDateTime = new Date();
+
+                    const differenceTime = payDateTime - setDateTime;
+                    const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
+
+                    maxDifferenceDays = Math.max(maxDifferenceDays, differenceDays);
+                }
+
+                CardDate =
+                    maxDifferenceDays < 0
+                        ? `D${maxDifferenceDays}`
+                        : maxDifferenceDays === 0
+                        ? 'D-Day'
+                        : `D+${maxDifferenceDays}`;
+            }
         }
-        const filteredDataSet = ReceiveDataSet.filter(
-            (data) => (Number(data.lendMoney) / Number(data.board.borrowMoney)) * 100 < 100
-        );
-        console.log(filteredDataSet);
-        const CardCount = filteredDataSet.length;
-        const CardTotal = filteredDataSet.reduce((acc, data) => acc + Number(data.lendMoney), 0);
-
-        let maxDifferenceDays = Number.MIN_SAFE_INTEGER;
-
-        for (let i = 0; i < filteredDataSet.length; i++) {
-            const payDate = filteredDataSet[i].board.payDate.toString();
-            const setYear = parseInt(payDate.slice(0, 4));
-            const setMonth = parseInt(payDate.slice(4, 6));
-            const setDay = parseInt(payDate.slice(6, 8));
-
-            const setDateTime = new Date(setYear, setMonth - 1, setDay);
-            setDateTime.setDate(setDateTime.getDate() + 1);
-            const payDateTime = new Date();
-            const differenceTime = payDateTime - setDateTime;
-            const differenceDays = Math.ceil(differenceTime / (1000 * 60 * 60 * 24));
-
-            maxDifferenceDays = Math.max(maxDifferenceDays, differenceDays);
-        }
-
-        const CardDate =
-            maxDifferenceDays < 0
-                ? `D${maxDifferenceDays}`
-                : maxDifferenceDays === 0
-                ? 'D-Day'
-                : `D+${maxDifferenceDays}`;
 
         return {
             CardCount,
