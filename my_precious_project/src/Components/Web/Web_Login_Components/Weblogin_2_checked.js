@@ -5,18 +5,17 @@ import DotButton from "./DotButton.js";
 import { Checkmark } from "react-checkmark";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { UserDataContext } from "../../../contexts/userContext";
+import { useUserData } from "../../../contexts/userContext";
 
 const WebLogin_2_checked = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const [userData, setUserData] = useContext(UserDataContext);
+  const [userData, setUserData] = useUserData();
   const userKey = userData.uid;
 
   const handleConfirmation = async (event) => {
     // 기본 양식 제출 동작 방지
     event.preventDefault();
-
     try {
       const response = await axios.patch(
         `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/users/${userKey}`,
@@ -104,7 +103,7 @@ const InnerRow3 = styled.div`
   width: 100%;
   font-size: 1.25rem;
   font-weight: 500;
-  color: #d9d9d9;
+  color: rgba(179, 179, 179, 1);
 `;
 
 const Div = styled.div`
