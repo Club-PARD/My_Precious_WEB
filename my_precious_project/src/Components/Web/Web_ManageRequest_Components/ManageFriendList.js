@@ -60,17 +60,10 @@ function ManageFriendList({ boardId, handleDisplayData }) {
 
   useEffect(() => {
     // 초기 렌더링 시에 setGetdebtidShow에 디폴트 Debtid를 설정
-<<<<<<< HEAD
-        if (selectedFriend !== null) {
-          setGetdebtidShow(selectedFriend);
-        }
-    }, [selectedFriend]);
-=======
     if (selectedFriend !== null) {
       handleFriendClick(selectedFriend);
     }
   }, [selectedFriend, handleDisplayData]);
->>>>>>> main
 
   const handleFriendClick = (friendId) => {
     // setSelectedFriend(friendId === selectedFriend ? "" : friendId);
