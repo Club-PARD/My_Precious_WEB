@@ -35,7 +35,7 @@ const Test = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const boardId = 48;
+const boardId = 56;
 function WebRequestDetail() {
   const theme = useTheme();
   //모인 금액이 받길 원하는 금액을 넘지 않았을 경우

@@ -35,7 +35,6 @@ function CheckedMessage({ debtIdgnum }) {
     });
 
     useEffect(() => {
-        // Fetch data when the component is mounted
         axios
             .get(
                 `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/${debtId}`,
