@@ -10,7 +10,7 @@ import axios from 'axios';
 import Character from '../../../Assets/img/Character.png';
 
 
-function LeftSide({under100, setUnder100, updateLeftSide,boardId}) {
+function LeftSide({ setUnder100, updateLeftSide,boardId}) {
     const theme = useTheme();
 
     const [detailData, setDetailData] = useState({
@@ -77,12 +77,11 @@ function LeftSide({under100, setUnder100, updateLeftSide,boardId}) {
               account : bankAccount,
               name:name,
               lendMoneyCount: lendMoneyCount,
-              receive:totalLendmoney
+              receive:totalLendmoney,
             }));
           })
           .catch((error) => console.log("error: " + error));
-      }, [updateLeftSide]);
-
+    }, [updateLeftSide]);
 
     //받은 돈 숫자에서 문자 -> 컴마 추가
     var receiveNumber = detailData.receive;

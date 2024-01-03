@@ -10,18 +10,19 @@ import SentToEmailModal from './Modal/SentToEmailModal.js';
 
 
 // 글읽기 페이지에서 채권자 입장(로그인 상태-> 빌려준 상태)
-function CheckedMessage({debtIdgnum}) {
+function CheckedMessage({debtIdgnum, getEmail}) {
     const theme = useTheme();
     const [userData, setUserData] = useContext(UserDataContext);
     const uid = userData.uid;
     const debtId =debtIdgnum;
+
 
     //모달에 보낼 props값 - 재촉편지
     const Modal_Chaseup ={
         function : "재촉편지",
         subHeader: "과격한 재촉 편지는 법적 문제가 될 수 있으니 주의해주세요.",
         longplacehorder: "기간내에 돈을 돌려받지 못했다면, 재촉편지를 작성해 볼 수 있습니다. 과격한 재촉은 오히려 상대방이 돈을 갚기에 반감을 살 수 있습니다. 상대방이 돈을 못 갚고 있는 상황에 대해 이해하려고 노력해보세요. 그리고 이후에 지금 돈을 돌려 받아야 하는 이유에 대해 설명하세요. 우정을 지키기 위해 따뜻한 말로 작성해주세요.",
-        sendToEmail: "",
+        sendToEmail: getEmail,
     }
 
     const [detailData, setDetailData] = useState({
@@ -31,15 +32,18 @@ function CheckedMessage({debtIdgnum}) {
         bankAccount: "",
         debtStatus: "", //돈 갚은 사람 확인
         repaymentStatus: "", //돈 빌려준 사람 확인
-        name: ""
+        name: "",
         
     });
 
+    console.log(detailData);
+    
     useEffect(() => {
         // Fetch data when the component is mounted
         axios
           .get(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/${debtId}`, debtId)
           .then((response) => {
+            console.log(response.data.data);
             const lendMoney = response.data.data.lendMoney;
             const message = response.data.data.message;
             const bank = response.data.data.bank;

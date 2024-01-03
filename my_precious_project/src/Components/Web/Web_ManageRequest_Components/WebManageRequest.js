@@ -85,7 +85,7 @@ const BackBtn = styled.button`
 `;
 
 
-const boardId =39; //임시로 정해둔 값
+const boardId =48; //임시로 정해둔 값
 
 function WebManageRequest() {
     const theme = useTheme();
@@ -120,7 +120,7 @@ function WebManageRequest() {
             const situation = response.data.data.situation;
             const payWay = response.data.data.payWay;
             const bank = response.data.data.bank;
-            const bankAccount = response.data.data.user.bankAccount;
+            const bankAccount = response.data.data.bankAccount;
             const boardStatus = response.data.data.boardStatus;
             const name = response.data.data.user.name;
             const debts = response.data.data.debts;
