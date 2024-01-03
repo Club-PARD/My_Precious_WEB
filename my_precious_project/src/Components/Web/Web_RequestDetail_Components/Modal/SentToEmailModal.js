@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { Context } from 'react-responsive';
 import styled from 'styled-components';
 import ImageX from '../../../../Assets/img/ImageX.png';
-import { UserDataContext } from '../../../../contexts/userContext';
+import { useUserData } from '../../../../contexts/userContext';
 import axios from 'axios';
 
 //npm i react-modal
