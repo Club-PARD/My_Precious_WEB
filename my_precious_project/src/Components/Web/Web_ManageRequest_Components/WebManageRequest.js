@@ -87,12 +87,6 @@ const BackBtn = styled.button`
   cursor: pointer;
 `;
 
-<<<<<<< HEAD
-
-const boardId =48; //임시로 정해둔 값
-
-=======
->>>>>>> main
 function WebManageRequest() {
   let boardId = useParams();
   boardId = boardId.board_id;
@@ -144,27 +138,8 @@ function WebManageRequest() {
         dday: borrowData.dday,
       };
 
-<<<<<<< HEAD
-    useEffect(() => {
-        // Fetch data when the component is mounted
-        axios
-          .get(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/boards/${boardId}`)
-          .then((response) => {
-            const title = response.data.data.title;
-            const borrowMoney = response.data.data.borrowMoney;
-            const payDate = response.data.data.payDate;
-            const situation = response.data.data.situation;
-            const payWay = response.data.data.payWay;
-            const bank = response.data.data.bank;
-            const bankAccount = response.data.data.bankAccount;
-            const boardStatus = response.data.data.boardStatus;
-            const name = response.data.data.user.name;
-            const debts = response.data.data.debts;
-            const dday = response.data.data.dday;
-=======
       setManageData(transformedBorrowData);
       console.log(transformedBorrowData);
->>>>>>> main
 
       //빌려준 친구 수 가져옴
       const lendMoneyCount = parseFloat(transformedBorrowData.debts.length);

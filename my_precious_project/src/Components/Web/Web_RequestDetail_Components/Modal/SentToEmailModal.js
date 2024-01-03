@@ -18,14 +18,7 @@ function SentToEmailModal({ props }) {
 
   const openModal = () => {
     //스크롤 비활성화
-<<<<<<< HEAD
-    document.body.style.overflow = 'hidden'; 
-    
-    console.log(props.getEmail);
-
-=======
     document.body.style.overflow = "hidden";
->>>>>>> main
     setModalIsOpen(true);
   };
 
@@ -35,26 +28,9 @@ function SentToEmailModal({ props }) {
     setModalIsOpen(false);
   };
 
-  //console.log(typeof(props.sendToEmail));
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-<<<<<<< HEAD
-    const data ={
-      "address": props.sendToEmail,
-      "title": title,
-      "message": message
-    }
-    
-    axios
-    .post(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/v9/mail`, data)
-    .then((response) => {
-      console.log("데이터를 전송중입니다",data);
-
-    })
-    .catch((error) => console.log("error: " + error));
-=======
     const data = {
       address: props.sendToEmail,
       title: title,
@@ -70,10 +46,8 @@ function SentToEmailModal({ props }) {
         console.log(response);
       })
       .catch((error) => console.log("error: " + error));
->>>>>>> main
 
     closeModal();
-
   };
 
   return (
@@ -96,12 +70,6 @@ function SentToEmailModal({ props }) {
             작성해보세요!
           </HeaderText>
           <GuideText>{props.subHeader}</GuideText>
-<<<<<<< HEAD
-          <Form >
-            <Input1 placeholder='제목을 작성하는 곳'  onChange={(e) => setTitle(e.target.value)}></Input1>
-            <Input2 placeholder= {props.longplacehorder} onChange={(e) => setMessage(e.target.value)}></Input2>
-            <SubmitBtn type="submit" onClick={handleSubmit}>보내기</SubmitBtn>
-=======
           <Form>
             <Input1
               placeholder="제목을 작성하는 곳"
@@ -116,7 +84,6 @@ function SentToEmailModal({ props }) {
             <SubmitBtn type="submit" onClick={handleSubmit}>
               보내기
             </SubmitBtn>
->>>>>>> main
           </Form>
         </ContextDiv>
       </Modal>

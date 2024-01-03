@@ -12,10 +12,6 @@ import Character from "../../../Assets/img/Character.png";
 function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
   const theme = useTheme();
 
-<<<<<<< HEAD
-function LeftSide({ setUnder100, updateLeftSide,boardId}) {
-    const theme = useTheme();
-=======
   const [detailData, setDetailData] = useState({
     total: 10000, //프로그레스바 전체(흰색부분)
     receive: 1000, //프로그레스바 채워진 부분(주황색)
@@ -28,7 +24,6 @@ function LeftSide({ setUnder100, updateLeftSide,boardId}) {
     name: "",
     lendMoneyCount: 0, // 빌려준 친구의 수
   });
->>>>>>> main
 
   useEffect(() => {
     //GET 요청 보내기
@@ -74,24 +69,6 @@ function LeftSide({ setUnder100, updateLeftSide,boardId}) {
           payDate.substring(6) +
           "일";
 
-<<<<<<< HEAD
-            setDetailData((detailData) => ({
-              ...detailData,
-              title: Title,
-              total: ChangeBorrowMoney,
-              date: formatted_date,
-              reason: situation,
-              plan :payWay,
-              bank : bank,
-              account : bankAccount,
-              name:name,
-              lendMoneyCount: lendMoneyCount,
-              receive:totalLendmoney,
-            }));
-          })
-          .catch((error) => console.log("error: " + error));
-    }, [updateLeftSide]);
-=======
         //숫자처리
         const ChangeBorrowMoney = parseFloat(BorrowMoney);
 
@@ -111,7 +88,6 @@ function LeftSide({ setUnder100, updateLeftSide,boardId}) {
       })
       .catch((error) => console.log("error: " + error));
   }, [updateLeftSide]);
->>>>>>> main
 
   //받은 돈 숫자에서 문자 -> 컴마 추가
   var receiveNumber = detailData.receive;

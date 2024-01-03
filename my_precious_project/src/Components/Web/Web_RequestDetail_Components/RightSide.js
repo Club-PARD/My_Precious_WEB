@@ -74,8 +74,6 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
     //메시지 전송했으면 오른쪽 화면바뀜
     const [checkSendMessage, setCheckSendMessage] = useState(false);
 
-    const [getEmail, setgetEmail] =useState("");
-
     useEffect(() => {
         console.log(debtIdgnum, '변경됨');
         setUpdateLeftSide(!updateLeftSide);
@@ -111,11 +109,8 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
     useEffect(() => {
         setIsButtonDisabled(under100);
     }, [under100]);
-<<<<<<< HEAD
-=======
 
     //console.log("빌려주기 버튼 상태",isButtonDisabled)
->>>>>>> main
 
     const handleBurrowConfirmation = (event) => {
         // 기본 양식 제출 동작 방지
@@ -143,9 +138,6 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
                         </BorrowButton>
                     </>
                 ) : (
-<<<<<<< HEAD
-                  <CheckedMessage debtIdgnum={debtIdgnum} getEmail={getEmail}/>
-=======
                     <WritingMessageContainer>
                         {debtIdgnum === '' ? (
                             <WritingMessage
@@ -156,7 +148,6 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
                             <CheckedMessage debtIdgnum={debtIdgnum} />
                         )}
                     </WritingMessageContainer>
->>>>>>> main
                 )}
             </Container>
         </ThemeProvider>
