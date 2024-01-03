@@ -8,12 +8,13 @@ import Talk from "../../../Assets/img/Talk.svg";
 import CheckBox from "../../../Assets/img/CheckBox.svg";
 import axios from "axios";
 import Character from "../../../Assets/img/Character.png";
+import { useParams } from "react-router-dom";
 
 function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
   const theme = useTheme();
 
   const [detailData, setDetailData] = useState({
-    borrowMoney:"" , //프로그레스바 전체(흰색부분)
+    borrowMoney: "", //프로그레스바 전체(흰색부분)
     totalLendmoney: "", //프로그레스바 채워진 부분(주황색)
     bank: "",
     bankAccount: "",
@@ -24,111 +25,135 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
     payWay: "",
     situation: "",
     title: "",
-    name: '',
+    name: "",
     gmailId: "",
-    uid : "",
+    uid: "",
     lendMoneyCount: 0, // 빌려준 친구의 수
   });
 
-  // const getData = async () => {
-  // 	try {
-  // 		const response = await axios.get(
-  //       `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/boards/${boardId}`
-  //     );
-  //     const borrowData = response.data.data;
-  //     let transformedBorrowData = {
-  //       id: borrowData.id,
-  //       title: borrowData.title,
-  //       borrowMoney: borrowData.borrowMoney,
-  //       payDate: borrowData.payDate,
-  //       situation: borrowData.situation,
-  //       payWay: borrowData.payWay,
-  //       bank: borrowData.bank,
-  //       bankAccount: borrowData.bankAccount,
-  //       boardStatus: borrowData.boardStatus,
-  //       user: {
-  //         name: borrowData.user.name,
-  //         gmailId: borrowData.user.gmailId,
-  //         uid: borrowData.user.uid,
-  //       },
-  //       debts: borrowData.debts.map((dept) => ({
-  //         lendMoney: dept.lendMoney,
-  //       })),
-  //       dday: borrowData.dday,
-  //     };
-  // 	}
-  // }
+  const getData = async () => {
+    try {
+      const response = await axios.get(
+        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/boards/${boardId}`
+      );
+      const borrowData = response.data.data;
+      let transformedBorrowData = {
+        id: borrowData.id,
+        title: borrowData.title,
+        borrowMoney: borrowData.borrowMoney,
+        payDate: borrowData.payDate,
+        situation: borrowData.situation,
+        payWay: borrowData.payWay,
+        bank: borrowData.bank,
+        bankAccount: borrowData.bankAccount,
+        boardStatus: borrowData.boardStatus,
+        user: {
+          name: borrowData.user.name,
+          gmailId: borrowData.user.gmailId,
+          uid: borrowData.user.uid,
+        },
+        debts: borrowData.debts.map((dept) => ({
+          lendMoney: dept.lendMoney,
+        })),
+        dday: borrowData.dday,
+      };
+
+      //빌려준 친구 수 가져옴
+      const lendMoneyCount = parseFloat(transformedBorrowData.debts.length);
+
+      // 빌린돈 더하기
+      const maplend = transformedBorrowData.debts.map((value, index) => {
+        return parseFloat(value.lendMoney);
+      });
+      const totalLendmoney = maplend.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+      }, 0);
+
+      setDetailData((prevManageData) => ({
+        ...prevManageData,
+        borrowMoney: transformedBorrowData.borrowMoney, //프로그레스바 전체(흰색부분)
+        totalLendmoney: totalLendmoney, //프로그레스바 채워진 부분(주황색)
+        bank: transformedBorrowData.bank,
+        bankAccount: transformedBorrowData.bankAccount,
+        boardStatus: transformedBorrowData.boardStatus,
+        dday: transformedBorrowData.dday,
+        debts: transformedBorrowData.debts,
+        payDate: transformedBorrowData.payDate,
+        payWay: transformedBorrowData.payWay,
+        situation: transformedBorrowData.situation,
+        title: transformedBorrowData.title,
+        name: transformedBorrowData.user.name,
+        gmailId: transformedBorrowData.user.gmailId,
+        uid: transformedBorrowData.user.uid,
+        lendMoneyCount: lendMoneyCount, // 빌려준 친구의 수
+      }));
+    } catch (error) {
+      console.error("API에서 데이터를 가져오는데 실패했습니다:", error);
+    }
+  };
 
   useEffect(() => {
-    //GET 요청 보내기
-    axios
-      .get(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/boards/${boardId}`
-      )
-      .then((response) => {
-        console.log("response: " , response.data.data);
+    getData();
+  }, []);
 
-        //서버에서 받은 데이터 추출
-        const requestdetailData = response.data.data;
-        let transformedRequestdetail = {
-          bank: requestdetailData.bank,
-          bankAccount: requestdetailData.bankAccount,
-          boardStatus: requestdetailData.boardStatus,
-          borrowMoney: parseFloat(requestdetailData.borrowMoney),
-          dday: requestdetailData.dday,
-          debts: requestdetailData.debts.map((dept) => ({
-            lendMoney: dept.lendMoney,
-          })),
-          payDate: requestdetailData.payDate,
-          payWay: requestdetailData.payWay,
-          situation: requestdetailData.situation,
-          title: requestdetailData.title,
-          user: {
-            name: requestdetailData.user.name,
-            gmailId: requestdetailData.user.gmailId,
-            uid: requestdetailData.user.uid,
-          },
-        };
-  
-        //빌려준 친구 수 가져옴
-        const lendMoneyCount = parseFloat(transformedRequestdetail.debts.length);
+  // useEffect(() => {
+  //   //GET 요청 보내기
+  //   axios
+  //     .get(
+  //       `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/boards/${boardId}`
+  //     )
+  //     .then((response) => {
+  //       console.log("response: " , response.data.data);
 
-        // 빌린돈 더하기
-        const maplend = transformedRequestdetail.debts.map((value, index) => {
-          return parseFloat(value.lendMoney);
-        });
-        const totalLendmoney = maplend.reduce((accumulator, currentValue) => {
-          return accumulator + currentValue;
-        }, 0);
+  //       //서버에서 받은 데이터 추출
+  //       const requestdetailData = response.data.data;
+  //       let transformedRequestdetail = {
+  //         bank: requestdetailData.bank,
+  //         bankAccount: requestdetailData.bankAccount,
+  //         boardStatus: requestdetailData.boardStatus,
+  //         borrowMoney: parseFloat(requestdetailData.borrowMoney),
+  //         dday: requestdetailData.dday,
+  //         debts: requestdetailData.debts.map((dept) => ({
+  //           lendMoney: dept.lendMoney,
+  //         })),
+  //         payDate: requestdetailData.payDate,
+  //         payWay: requestdetailData.payWay,
+  //         situation: requestdetailData.situation,
+  //         title: requestdetailData.title,
+  //         user: {
+  //           name: requestdetailData.user.name,
+  //           gmailId: requestdetailData.user.gmailId,
+  //           uid: requestdetailData.user.uid,
+  //         },
+  //       };
 
-        //setDetailData(transformedRequestdetail);
+  //       //setDetailData(transformedRequestdetail);
 
-        setDetailData((detailData) => ({
-          ...detailData,
-          lendMoneyCount: lendMoneyCount,
-          totalLendmoney: totalLendmoney,
-          bank:transformedRequestdetail.bank,
-          bankAccount:transformedRequestdetail.bankAccount,
-          boardStatus:transformedRequestdetail.boardStatus,
-          borrowMoney:transformedRequestdetail.borrowMoney,
-          dday:transformedRequestdetail.dday,
-          debts:transformedRequestdetail.debts,
-          payDate:transformedRequestdetail.payDate,
-          payWay:transformedRequestdetail.payDate,
-          situation:transformedRequestdetail.situation,
-          title:transformedRequestdetail.title,
-          name:transformedRequestdetail.user.name,
-          gmailId:transformedRequestdetail.user.gmailId,
-          uid:transformedRequestdetail.user.uid
-        }));
+  //       setDetailData((detailData) => ({
+  //         ...detailData,
+  //         lendMoneyCount: lendMoneyCount,
+  //         totalLendmoney: totalLendmoney,
+  //         bank:transformedRequestdetail.bank,
+  //         bankAccount:transformedRequestdetail.bankAccount,
+  //         boardStatus:transformedRequestdetail.boardStatus,
+  //         borrowMoney:transformedRequestdetail.borrowMoney,
+  //         dday:transformedRequestdetail.dday,
+  //         debts:transformedRequestdetail.debts,
+  //         payDate:transformedRequestdetail.payDate,
+  //         payWay:transformedRequestdetail.payDate,
+  //         situation:transformedRequestdetail.situation,
+  //         title:transformedRequestdetail.title,
+  //         name:transformedRequestdetail.user.name,
+  //         gmailId:transformedRequestdetail.user.gmailId,
+  //         uid:transformedRequestdetail.user.uid
+  //       }));
 
+  //     })
+  //     .catch((error) => console.log("error: " + error));
+  // }, [updateLeftSide]);
 
-      })
-      .catch((error) => console.log("error: " + error));
-  }, [updateLeftSide]);
-
-    //날짜처리
-    const formatted_date =
+  //날짜처리
+  const formatted_date =
     detailData.payDate.substring(0, 4) +
     "년 " +
     detailData.payDate.substring(4, 6) +
@@ -189,7 +214,9 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
           <Line style={{ marginTop: "0.56rem", height: "7.9375rem" }}>
             <DarkGrayText>사유</DarkGrayText>
             <DisplayDataReasonDiv>
-              <DisplayDataReasonText>{detailData.situation}</DisplayDataReasonText>
+              <DisplayDataReasonText>
+                {detailData.situation}
+              </DisplayDataReasonText>
             </DisplayDataReasonDiv>
           </Line>
           <Line style={{ marginTop: "3.19rem" }}>
@@ -210,13 +237,11 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
             <DarkGrayText style={{ height: "2.4375rem" }}>
               받을 계좌
             </DarkGrayText>
-            <DisplayDataTotalDiv style={{width:"13rem"}}>
-              <DisplayDataTotalText >
-                {detailData.bank}
-              </DisplayDataTotalText>
+            <DisplayDataTotalDiv style={{ width: "13rem" }}>
+              <DisplayDataTotalText>{detailData.bank}</DisplayDataTotalText>
             </DisplayDataTotalDiv>
-            <DisplayDataTotalDiv style={{width:"23.1875rem"}}>
-              <DisplayDataTotalText >
+            <DisplayDataTotalDiv style={{ width: "23.1875rem" }}>
+              <DisplayDataTotalText>
                 {detailData.bankAccount}
               </DisplayDataTotalText>
             </DisplayDataTotalDiv>
@@ -259,7 +284,6 @@ const TotalColletMoney = styled.div`
   line-height: normal;
   padding-top: 3.06rem;
   padding-left: 1.375rem;
-
 `;
 
 const Image = styled.div`
