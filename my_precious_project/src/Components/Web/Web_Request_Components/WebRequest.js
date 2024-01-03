@@ -154,7 +154,7 @@ const WebRequest = () => {
     console.log(form);
     axios
       .post(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/boards/${uid}`,
+        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/boards/${uid}`,
         {
           title: form.title,
           borrowMoney: form.borrowMoney,
