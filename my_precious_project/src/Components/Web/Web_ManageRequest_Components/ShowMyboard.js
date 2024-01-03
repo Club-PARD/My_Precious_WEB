@@ -82,7 +82,7 @@ function ShowMyboard(manageData) {
                                 </DisplayDataTotalDiv>
                             </Line>
                             <Line style={{ marginTop: '0.62rem', justifyContent: 'start' }}>
-                                <DarkGrayText style={{ height: '2.4375rem', paddingRight: '0.90rem' }}>
+                                <DarkGrayText style={{ height: '2.4375rem', marginRight: '1.06rem' }}>
                                     받을 계좌
                                 </DarkGrayText>
                                 <DisplayDataTotalDiv style={{ width: '13rem', marginRight: '1.3rem' }}>
@@ -95,8 +95,8 @@ function ShowMyboard(manageData) {
                             <SignDiv>
                                 <SignText>서약</SignText>
                                 <SignText>
-                                    나 {manageData.manageData.name}(은)는 {formatted_date}까지 돈을 갚을 것을
-                                    약속합니다.
+                                    나 {manageData.manageData.user.name}(은)는 {formatted_date}
+                                    까지 돈을 갚을 것을 약속합니다.
                                 </SignText>
                                 <img src={CheckBox} alt="체크박스 이미지"></img>
                             </SignDiv>
@@ -229,10 +229,11 @@ const DisplayBoxDiv = styled.div`
 `;
 
 const Line = styled.div`
+    width: 42.5625rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: start;
+    align-items: center;
 `;
 
 const DarkGrayText = styled.div`
@@ -328,7 +329,7 @@ const SignDiv = styled.div`
     display: flex;
     flex-direction: row;
     gap: 1.25rem;
-    //padding-left: 4rem;
+    justify-content: center;
     padding-top: 2.62rem;
     align-items: center;
     padding-left: 1rem;
