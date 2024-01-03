@@ -93,10 +93,12 @@ const RightNoDiv = styled.div`
 function ManageBottom({ boardId, manageData }) {
   const theme = useTheme();
   const [getdebtidShow, setGetdebtidShow] = useState("");
+  const [debtidData, setDebtidData] = useState([]);
   const [debtLength, setDebtLength] = useState(0);
-  const debtId = parseFloat(getdebtidShow);
+  const [debtId, setDebtId] = useState();
 
   const [displayData, setDisplayData] = useState({
+    id: "",
     lendMoney: "",
     message: "",
     bank: "",
@@ -110,24 +112,31 @@ function ManageBottom({ boardId, manageData }) {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/${debtId}`
+        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/boards/${boardId}`
       );
       const borrowData = response.data.data;
-      let transformedBorrowData = {
-        lendMoney: borrowData.lendMoney,
-        message: borrowData.message,
-        bank: borrowData.bank,
-        bankAccount: borrowData.bankAccount,
-        debtStatus: borrowData.debtStatus,
-        repaymentStatus: borrowData.repaymentStatus,
-        name: borrowData.board.user.name,
-        gmailId: borrowData.board.user.gmailId,
-      };
+      if (borrowData) {
+        const transformedBorrowData = borrowData.map((item) => {
+          return {
+            id: item.id,
+            lendMoney: item.lendMoney,
+            message: item.message,
+            bank: item.bank,
+            bankAccount: item.bankAccount,
+            debtStatus: item.debtStatus,
+            repaymentStatus: item.repaymentStatus,
+            name: item.user.name,
+            gmailId: item.user.gmailId,
+          };
+        });
 
-      setDebtLength(borrowData.debts.length);
-
-      setGetdebtidShow(transformedBorrowData);
-      console.log(transformedBorrowData);
+        setDebtLength(borrowData.length);
+        setDebtidData(transformedBorrowData);
+      } else {
+        console.error(
+          "API에서 받을 돈 데이터를 가져오는데 실패했습니다: 데이터가 존재하지 않습니다."
+        );
+      }
     } catch (error) {
       console.error("API에서 데이터를 가져오는데 실패했습니다:", error);
     }
@@ -137,6 +146,13 @@ function ManageBottom({ boardId, manageData }) {
     getData();
   }, []);
 
+  const handleDisplayData = (debtid) => {
+    // setGetdebtidShow(debtid);
+    if (debtidData.length > 0) {
+      setDisplayData(debtidData.find((item) => item.id === debtid));
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container>
@@ -145,7 +161,7 @@ function ManageBottom({ boardId, manageData }) {
           {debtLength === 0 ? (
             <LeftNoDiv>아직 내역이 없어요.</LeftNoDiv>
           ) : (
-            <DisplayFriend displayData={displayData} debtId={debtId} />
+            <DisplayFriend displayData={displayData} debtId={debtidData} />
           )}
         </ColumnDiv>
         <ColumnDiv style={{ width: "20.225rem" }}>
@@ -159,7 +175,7 @@ function ManageBottom({ boardId, manageData }) {
           ) : (
             <ManageFriendList
               boardId={boardId}
-              setGetdebtidShow={setGetdebtidShow}
+              handleDisplayData={handleDisplayData}
             />
           )}
         </ColumnDiv>

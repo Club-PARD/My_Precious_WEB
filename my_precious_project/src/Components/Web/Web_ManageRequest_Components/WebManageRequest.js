@@ -98,16 +98,15 @@ function WebManageRequest() {
     borrowMoney: 0,
     payDate: "",
     situation: "",
-    payWay: "",
     bank: "",
     bankAccount: "",
     boardStatus: "",
     name: "",
     debts: "",
     dday: 0,
-    lendMoneyCount: 0, // 빌린 친구 수
-    totalLendmoney: 0, //빌린 돈 총합
-    formatted_date: "", //형식이 맞춰진 지불날짜
+    lendMoneyCount: 0,
+    totalLendmoney: 0,
+    formattedDate: "",
   });
   console.log(boardId);
 
@@ -118,28 +117,35 @@ function WebManageRequest() {
       );
       const borrowData = response.data.data;
       let transformedBorrowData = {
-        id: borrowData.id,
         title: borrowData.title,
         borrowMoney: borrowData.borrowMoney,
         payDate: borrowData.payDate,
         situation: borrowData.situation,
-        payWay: borrowData.payWay,
         bank: borrowData.bank,
         bankAccount: borrowData.bankAccount,
         boardStatus: borrowData.boardStatus,
-        user: {
-          name: borrowData.user.name,
-          gmailId: borrowData.user.gmailId,
-          uid: borrowData.user.uid,
-        },
+        name: borrowData.user.name,
         debts: borrowData.debts.map((dept) => ({
           lendMoney: dept.lendMoney,
         })),
         dday: borrowData.dday,
       };
 
-      setManageData(transformedBorrowData);
+      setManageData((prevManageData) => ({
+        ...prevManageData,
+        title: transformedBorrowData.title,
+        borrowMoney: transformedBorrowData.borrowMoney,
+        payDate: transformedBorrowData.payDate,
+        situation: transformedBorrowData.situation,
+        bank: transformedBorrowData.bank,
+        bankAccount: transformedBorrowData.bankAccount,
+        boardStatus: transformedBorrowData.boardStatus,
+        name: transformedBorrowData.name,
+        debts: transformedBorrowData.debts,
+        dday: transformedBorrowData.dday,
+      }));
       console.log(transformedBorrowData);
+      console.log(manageData);
 
       //빌려준 친구 수 가져옴
       const lendMoneyCount = parseFloat(transformedBorrowData.debts.length);
@@ -148,7 +154,7 @@ function WebManageRequest() {
       const maplend = transformedBorrowData.debts.map((value, index) => {
         return parseFloat(value.lendMoney);
       });
-      const totalLendmoney = maplend.reduce((accumulator, currentValue) => {
+      const total_Lendmoney = maplend.reduce((accumulator, currentValue) => {
         return accumulator + currentValue;
       }, 0);
 
@@ -160,6 +166,15 @@ function WebManageRequest() {
         "월 " +
         transformedBorrowData.payDate.substring(6) +
         "일";
+
+      setManageData((prevManageData) => ({
+        ...prevManageData,
+        lendMoneyCount: lendMoneyCount,
+        totalLendmoney: total_Lendmoney,
+        formattedDate: formatted_date,
+      }));
+
+      console.log(manageData);
 
       //숫자처리
       const ChangeBorrowMoney = parseFloat(transformedBorrowData.borrowMoney);

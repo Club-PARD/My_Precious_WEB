@@ -27,7 +27,7 @@ function ShowMyboard(manageData) {
     setModalIsOpen(false);
   };
 
-  const MoneyNum = manageData.manageData.borrowMoney.toLocaleString();
+  const MoneyNum = manageData.manageData.borrowMoney?.toLocaleString();
 
   const formatted_date =
     manageData.manageData.payDate.substring(0, 4) +
@@ -115,7 +115,7 @@ function ShowMyboard(manageData) {
               <SignDiv>
                 <SignText>서약</SignText>
                 <SignText>
-                  나 {manageData.manageData.user.name}(은)는 {formatted_date}
+                  나 {manageData.manageData.name}(은)는 {formatted_date}
                   까지 돈을 갚을 것을 약속합니다.
                 </SignText>
                 <img src={CheckBox} alt="체크박스 이미지"></img>

@@ -170,6 +170,7 @@ function ManageSummary({ manageData, boardId }) {
   const theme = useTheme();
 
   const [BorrowDataSet, setBorrowDataSet] = useState([]);
+  const [totalRepayMoney, setTotalRepayMoney] = useState(0);
 
   const [detailData, setDetailData] = useState({
     total: 10000, //이만큼 돈 주세요
@@ -201,6 +202,15 @@ function ManageSummary({ manageData, boardId }) {
           };
         });
         setBorrowDataSet(transformedBorrowData);
+
+        const mapRepay = transformedBorrowData.map((value, index) => {
+          return parseFloat(value.lendMoney);
+        });
+        const totalRepayMoney = mapRepay.reduce((accumulator, currentValue) => {
+          return accumulator + currentValue;
+        }, 0);
+        setTotalRepayMoney(totalRepayMoney);
+
         console.log(transformedBorrowData);
       }
     } catch (error) {
@@ -224,7 +234,7 @@ function ManageSummary({ manageData, boardId }) {
     var NeedformattedNumber = totaleNumber.toLocaleString();
   }
 
-  var ConfirmNumber = detailData.totalConfirmMoney;
+  var ConfirmNumber = totalRepayMoney;
   if (ConfirmNumber !== undefined) {
     var ConfirmformattedNumber = ConfirmNumber.toLocaleString();
   }
@@ -235,7 +245,7 @@ function ManageSummary({ manageData, boardId }) {
         <ImageCharacter />
         <ImageTalk>
           <TalkText>
-            현재까지 {detailData.ConfirmCount}명의 친구에게 돈을 갚았어요.
+            현재까지 {BorrowDataSet.ConfirmCount}명의 친구에게 돈을 갚았어요.
           </TalkText>
         </ImageTalk>
         <DisplayMoneyContainer>
@@ -253,7 +263,7 @@ function ManageSummary({ manageData, boardId }) {
             <MoneyText>갚은 금액</MoneyText>
             <SmallLineProgress
               total={parseFloat(manageData.totalLendmoney)}
-              receive={detailData.totalConfirmMoney}
+              receive={totalRepayMoney}
             />
             <RightRowDiv>
               <Row>
