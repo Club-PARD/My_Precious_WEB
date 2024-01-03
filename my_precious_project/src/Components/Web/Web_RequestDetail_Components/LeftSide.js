@@ -111,8 +111,6 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
   var receiveNumber = detailData.totalLendmoney;
   var formattedNumber = receiveNumber.toLocaleString();
 
-  console.log("제대로 저장됐는지", detailData);
-
   //필요한 돈 숫자에서 문자 -> 컴마 추가
   var totaleNumber = detailData.borrowMoney;
   var formattedNumber2 = totaleNumber.toLocaleString();

@@ -163,7 +163,7 @@ const Input3 = styled.input`
     }
 `;
 
-function WritingMessage({ checkSendMessage, setCheckSendMessage }) {
+function WritingMessage({ checkSendMessage, setCheckSendMessage, boardId }) {
     const theme = useTheme();
     const [userData, setUserData] = useUserData();
     const uid = userData.uid;
@@ -221,13 +221,14 @@ function WritingMessage({ checkSendMessage, setCheckSendMessage }) {
         // 쉼표 제거
         let nocommalendmoney = form.lendMoney.replace(/,/g, '');
         const Data = {
-            lendMoney: nocommalendmoney,
-            message: form.message,
-            bank: form.bank,
-            bankAccount: form.bankAccount,
+            "lendMoney": nocommalendmoney,
+            "message": form.message,
+            "bank": form.bank,
+            "bankAccount": form.bankAccount,
         };
         //서버에 유저 데이터 보내기
 
+        console.log("보낸 데이터 확인", Data)
         axios
             .post(
                 `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/boards/${boardId}/users/${uid}`,
