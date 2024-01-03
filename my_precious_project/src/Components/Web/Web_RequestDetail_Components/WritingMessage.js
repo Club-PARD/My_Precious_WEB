@@ -10,6 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import axios from 'axios';
 import { useUserData } from '../../../contexts/userContext';
+import Modal from '../Web_Login_Components/Modal/Modal.js';
 
 //돈 빌려달라고 하는 사람이 게시한 게시글
 const boardId = 1;
@@ -167,6 +168,7 @@ function WritingMessage({ checkSendMessage, setCheckSendMessage, boardId }) {
     const theme = useTheme();
     const [userData, setUserData] = useUserData();
     const uid = userData.uid;
+    const [modalShow, setModalShow] = useState(false);
 
     //임의로 지정한 인풋 값 변수
     const [form, setForm] = useState({
@@ -212,6 +214,13 @@ function WritingMessage({ checkSendMessage, setCheckSendMessage, boardId }) {
 
     // 버튼 활성화 여부를 결정할 상태 추가
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+    const navigate = useNavigate();
+
+    const navigateToRequestdetail = () => {
+      navigate("/dashboard");
+    };
+  
 
     const handleSubmit = (event) => {
         console.log('확인 함수 호출됨');
@@ -375,8 +384,21 @@ function WritingMessage({ checkSendMessage, setCheckSendMessage, boardId }) {
                             }
                         ></Input3>
                     </InputBoxDiv>
-                    <SaveButton disabled={isButtonDisabled}>저장하기</SaveButton>
+                    <SaveButton  disabled={isButtonDisabled}onClick={() => setModalShow(!modalShow)}>저장하기</SaveButton>
+                    
+                    
                 </Form>
+                <div id="modal"></div>
+                    {modalShow && (
+                        <Modal
+                            setModalShow={setModalShow}
+                            setNextStep={navigateToRequestdetail}
+                            content1="채무기록이 저장되었습니다."
+                            content2=""
+                            buttonContent="확인"
+                            close={false}
+                        />
+                        )}
             </Container>
         </ThemeProvider>
     );

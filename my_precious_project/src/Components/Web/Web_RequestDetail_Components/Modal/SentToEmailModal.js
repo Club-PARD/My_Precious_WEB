@@ -13,6 +13,7 @@ function SentToEmailModal({ props }) {
   const [userData, setUserData] = useUserData();
   const uid = userData.uid;
 
+
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
 

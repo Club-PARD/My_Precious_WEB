@@ -78,7 +78,7 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
           ...detailData,
           lendMoneyCount: lendMoneyCount,
           totalLendmoney: totalLendmoney,
-          bank:transformedRequestdetail.bankAccount,
+          bank:transformedRequestdetail.bank,
           bankAccount:transformedRequestdetail.bankAccount,
           boardStatus:transformedRequestdetail.boardStatus,
           borrowMoney:transformedRequestdetail.borrowMoney,
