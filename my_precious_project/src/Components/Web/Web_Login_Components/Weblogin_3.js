@@ -22,7 +22,7 @@ const WebLogin_3 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/users"
+          "http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/users"
         );
         setTotal(response.data.total);
       } catch (error) {
