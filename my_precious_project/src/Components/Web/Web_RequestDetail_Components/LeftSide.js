@@ -13,15 +13,20 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
   const theme = useTheme();
 
   const [detailData, setDetailData] = useState({
-    total: 10000, //프로그레스바 전체(흰색부분)
-    receive: 1000, //프로그레스바 채워진 부분(주황색)
-    title: "",
-    reason: "",
-    plan: "",
-    date: "",
+    borrowMoney:"" , //프로그레스바 전체(흰색부분)
+    totalLendmoney: "", //프로그레스바 채워진 부분(주황색)
     bank: "",
-    account: "",
-    name: "",
+    bankAccount: "",
+    boardStatus: "",
+    dday: "",
+    debts: "",
+    payDate: "",
+    payWay: "",
+    situation: "",
+    title: "",
+    name: '',
+    gmailId: "",
+    uid : "",
     lendMoneyCount: 0, // 빌려준 친구의 수
   });
 
@@ -61,74 +66,88 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
         `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/boards/${boardId}`
       )
       .then((response) => {
-        //console.log("response: " + JSON.stringify(response.data.data));
+        console.log("response: " , response.data.data);
 
         //서버에서 받은 데이터 추출
-        const Title = response.data.data.title;
-        const BorrowMoney = response.data.data.borrowMoney;
-        const payDate = response.data.data.payDate;
-        const situation = response.data.data.situation;
-        const payWay = response.data.data.payWay;
-        const bank = response.data.data.bank;
-        const bankAccount = response.data.data.bankAccount;
-        const name = response.data.data.user.name;
-        const lendMoneydata = response.data.data.debts;
-
+        const requestdetailData = response.data.data;
+        let transformedRequestdetail = {
+          bank: requestdetailData.bank,
+          bankAccount: requestdetailData.bankAccount,
+          boardStatus: requestdetailData.boardStatus,
+          borrowMoney: parseFloat(requestdetailData.borrowMoney),
+          dday: requestdetailData.dday,
+          debts: requestdetailData.debts.map((dept) => ({
+            lendMoney: dept.lendMoney,
+          })),
+          payDate: requestdetailData.payDate,
+          payWay: requestdetailData.payWay,
+          situation: requestdetailData.situation,
+          title: requestdetailData.title,
+          user: {
+            name: requestdetailData.user.name,
+            gmailId: requestdetailData.user.gmailId,
+            uid: requestdetailData.user.uid,
+          },
+        };
+  
         //빌려준 친구 수 가져옴
-        const lendMoneyCount = parseFloat(lendMoneydata.length);
-
-        //console.log(lendMoneydata[1].lendMoney)
+        const lendMoneyCount = parseFloat(transformedRequestdetail.debts.length);
 
         // 빌린돈 더하기
-        const maplend = lendMoneydata.map((value, index) => {
+        const maplend = transformedRequestdetail.debts.map((value, index) => {
           return parseFloat(value.lendMoney);
         });
         const totalLendmoney = maplend.reduce((accumulator, currentValue) => {
           return accumulator + currentValue;
         }, 0);
 
-        //console.log("빌린돈 총합" , totalLendmoney)
-
-        //날짜처리
-        const formatted_date =
-          payDate.substring(0, 4) +
-          "년 " +
-          payDate.substring(4, 6) +
-          "월 " +
-          payDate.substring(6) +
-          "일";
-
-        //숫자처리
-        const ChangeBorrowMoney = parseFloat(BorrowMoney);
+        //setDetailData(transformedRequestdetail);
 
         setDetailData((detailData) => ({
           ...detailData,
-          title: Title,
-          total: ChangeBorrowMoney,
-          date: formatted_date,
-          reason: situation,
-          plan: payWay,
-          bank: bank,
-          account: bankAccount,
-          name: name,
           lendMoneyCount: lendMoneyCount,
-          receive: totalLendmoney,
+          totalLendmoney: totalLendmoney,
+          bank:transformedRequestdetail.bank,
+          bankAccount:transformedRequestdetail.bankAccount,
+          boardStatus:transformedRequestdetail.boardStatus,
+          borrowMoney:transformedRequestdetail.borrowMoney,
+          dday:transformedRequestdetail.dday,
+          debts:transformedRequestdetail.debts,
+          payDate:transformedRequestdetail.payDate,
+          payWay:transformedRequestdetail.payDate,
+          situation:transformedRequestdetail.situation,
+          title:transformedRequestdetail.title,
+          name:transformedRequestdetail.user.name,
+          gmailId:transformedRequestdetail.user.gmailId,
+          uid:transformedRequestdetail.user.uid
         }));
+
+
       })
       .catch((error) => console.log("error: " + error));
   }, [updateLeftSide]);
 
+    //날짜처리
+    const formatted_date =
+    detailData.payDate.substring(0, 4) +
+    "년 " +
+    detailData.payDate.substring(4, 6) +
+    "월 " +
+    detailData.payDate.substring(6) +
+    "일";
+
   //받은 돈 숫자에서 문자 -> 컴마 추가
-  var receiveNumber = detailData.receive;
+  var receiveNumber = detailData.totalLendmoney;
   var formattedNumber = receiveNumber.toLocaleString();
+
   //필요한 돈 숫자에서 문자 -> 컴마 추가
-  var totaleNumber = detailData.total;
+  var totaleNumber = detailData.borrowMoney;
   var formattedNumber2 = totaleNumber.toLocaleString();
 
   //모은 돈이 받길 원하는 돈을 넘었을 때 돈 빌려주기 작성 버튼 비활성화를 위한 상태 설정
   useEffect(() => {
     // total과 collect을 이용하여 퍼센트 계산
-    const percent = (detailData.receive / detailData.total) * 100;
+    const percent = (detailData.totalLendmoney / detailData.borrowMoney) * 100;
 
     // 100% 이상인 경우
     if (percent >= 100) {
@@ -136,7 +155,7 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
     } else {
       setUnder100(false);
     }
-  }, [detailData.total, detailData.receive]);
+  }, [detailData.borrowMoney, detailData.totalLendmoney]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -151,8 +170,8 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
         </Image>
         <StyleLineProgress>
           <LineProgress
-            total={parseFloat(detailData.total)}
-            receive={parseFloat(detailData.receive)}
+            total={parseFloat(detailData.borrowMoney)}
+            receive={parseFloat(detailData.totalLendmoney)}
           />
         </StyleLineProgress>
         <Row>
@@ -170,16 +189,8 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
           <Line style={{ marginTop: "0.56rem", height: "7.9375rem" }}>
             <DarkGrayText>사유</DarkGrayText>
             <DisplayDataReasonDiv>
-              <DisplayDataReasonText>{detailData.reason}</DisplayDataReasonText>
+              <DisplayDataReasonText>{detailData.situation}</DisplayDataReasonText>
             </DisplayDataReasonDiv>
-          </Line>
-          <Line style={{ marginTop: "0.56rem", height: "5.3125rem" }}>
-            <DarkGrayText style={{ marginRight: "0.8rem" }}>
-              상환 계획
-            </DarkGrayText>
-            <DisplayDataPlanDiv>
-              <DisplayDataPlanText>{detailData.plan}</DisplayDataPlanText>
-            </DisplayDataPlanDiv>
           </Line>
           <Line style={{ marginTop: "3.19rem" }}>
             <DarkGrayText style={{ height: "2.4375rem" }}>
@@ -192,23 +203,28 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
           <Line style={{ marginTop: "0.56rem", height: "2.4375rem" }}>
             <DarkGrayText>갚을 날짜</DarkGrayText>
             <DisplayDataTotalDiv>
-              <DisplayDataTotalText>{detailData.date} </DisplayDataTotalText>
+              <DisplayDataTotalText>{formatted_date} </DisplayDataTotalText>
             </DisplayDataTotalDiv>
           </Line>
           <Line style={{ marginTop: "0.56rem" }}>
             <DarkGrayText style={{ height: "2.4375rem" }}>
               받을 계좌
             </DarkGrayText>
-            <DisplayDataTotalDiv>
-              <DisplayDataTotalText>
-                {detailData.bank} {detailData.account}{" "}
+            <DisplayDataTotalDiv style={{width:"13rem"}}>
+              <DisplayDataTotalText >
+                {detailData.bank}
+              </DisplayDataTotalText>
+            </DisplayDataTotalDiv>
+            <DisplayDataTotalDiv style={{width:"23.1875rem"}}>
+              <DisplayDataTotalText >
+                {detailData.bankAccount}
               </DisplayDataTotalText>
             </DisplayDataTotalDiv>
           </Line>
           <SignDiv>
             <SignText>서약</SignText>
             <SignText>
-              나 {detailData.name}는 {detailData.date}까지 돈을 갚을 것을
+              나 {detailData.name}(은)는 {formatted_date}까지 돈을 갚을 것을
               약속합니다. 감사합니다.
             </SignText>
             <img src={CheckBox} alt="체크박스 이미지"></img>
@@ -241,8 +257,9 @@ const TotalColletMoney = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  padding-top: 1.13rem;
+  padding-top: 3.06rem;
   padding-left: 1.375rem;
+
 `;
 
 const Image = styled.div`
@@ -252,7 +269,7 @@ const Image = styled.div`
   background-image: url(${Talk});
   background-repeat: no-repeat;
   background-size: contain;
-  top: -2%;
+  top: 2%;
   left: 40%;
   z-index: 1;
   display: flex;
@@ -267,7 +284,7 @@ const ImageCharacter = styled.div`
   background-image: url(${Character});
   background-repeat: no-repeat;
   background-size: contain;
-  top: 0%;
+  top: 3%;
   left: 32%;
   z-index: 1;
   display: flex;
@@ -329,7 +346,7 @@ const DisplayBoxDiv = styled.div`
   //border: 0.0625rem solid red;
   margin-right: 1.44rem;
   margin-left: 2.375rem;
-  margin-top: 1.64rem;
+  margin-top: 1.62rem;
 `;
 
 const Line = styled.div`

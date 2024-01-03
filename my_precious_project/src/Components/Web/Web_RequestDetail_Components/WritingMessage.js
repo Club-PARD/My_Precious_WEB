@@ -10,6 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import axios from 'axios';
 import { useUserData } from '../../../contexts/userContext';
+import Modal from '../Web_Login_Components/Modal/Modal.js';
 
 //돈 빌려달라고 하는 사람이 게시한 게시글
 const boardId = 1;
@@ -163,10 +164,11 @@ const Input3 = styled.input`
     }
 `;
 
-function WritingMessage({ checkSendMessage, setCheckSendMessage }) {
+function WritingMessage({ checkSendMessage, setCheckSendMessage, boardId }) {
     const theme = useTheme();
     const [userData, setUserData] = useUserData();
     const uid = userData.uid;
+    const [modalShow, setModalShow] = useState(false);
 
     //임의로 지정한 인풋 값 변수
     const [form, setForm] = useState({
@@ -213,6 +215,13 @@ function WritingMessage({ checkSendMessage, setCheckSendMessage }) {
     // 버튼 활성화 여부를 결정할 상태 추가
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
+    const navigate = useNavigate();
+
+    const navigateToRequestdetail = () => {
+      navigate("/dashboard");
+    };
+  
+
     const handleSubmit = (event) => {
         console.log('확인 함수 호출됨');
         // 기본 양식 제출 동작 방지
@@ -221,13 +230,14 @@ function WritingMessage({ checkSendMessage, setCheckSendMessage }) {
         // 쉼표 제거
         let nocommalendmoney = form.lendMoney.replace(/,/g, '');
         const Data = {
-            lendMoney: nocommalendmoney,
-            message: form.message,
-            bank: form.bank,
-            bankAccount: form.bankAccount,
+            "lendMoney": nocommalendmoney,
+            "message": form.message,
+            "bank": form.bank,
+            "bankAccount": form.bankAccount,
         };
         //서버에 유저 데이터 보내기
 
+        console.log("보낸 데이터 확인", Data)
         axios
             .post(
                 `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/boards/${boardId}/users/${uid}`,
@@ -374,8 +384,21 @@ function WritingMessage({ checkSendMessage, setCheckSendMessage }) {
                             }
                         ></Input3>
                     </InputBoxDiv>
-                    <SaveButton disabled={isButtonDisabled}>저장하기</SaveButton>
+                    <SaveButton  disabled={isButtonDisabled}onClick={() => setModalShow(!modalShow)}>저장하기</SaveButton>
+                    
+                    
                 </Form>
+                <div id="modal"></div>
+                    {modalShow && (
+                        <Modal
+                            setModalShow={setModalShow}
+                            setNextStep={navigateToRequestdetail}
+                            content1="채무기록이 저장되었습니다."
+                            content2=""
+                            buttonContent="확인"
+                            close={false}
+                        />
+                        )}
             </Container>
         </ThemeProvider>
     );

@@ -79,10 +79,12 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
         setUpdateLeftSide(!updateLeftSide);
     }, [checkSendMessage]);
 
+    useEffect(() => {
+        
     axios
         .get(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/boards/${boardId}`)
         .then((response) => {
-            console.log('데이터를 받아오는중: ', response);
+        console.log('데이터를 받아오는중: ', response);
 
             const debtDataArray = response.data.data || [];
 
@@ -101,6 +103,7 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
             console.error('데이터 전송 중 오류 발생: ', error);
             // 오류를 처리합니다.
         });
+    }, [boardId]);
 
     const navigate = useNavigate();
 
@@ -143,6 +146,7 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
                             <WritingMessage
                                 checkSendMessage={checkSendMessage}
                                 setCheckSendMessage={setCheckSendMessage}
+                                boardId={boardId}
                             />
                         ) : (
                             <CheckedMessage debtIdgnum={debtIdgnum} />

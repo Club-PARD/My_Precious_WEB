@@ -1,23 +1,29 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 //import { Link } from 'react-router-dom';
-import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
-import MGLogo from '../../../Assets/img/MGLogo.svg';
+import { useTheme } from "../../../contexts/ThemeContext.js"; // Context APi 적용
+import MGLogo from "../../../Assets/img/MGLogo.svg";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ backcolor }) => {
-    const theme = useTheme();
+  const theme = useTheme();
+  const navigate = useNavigate();
 
-    return (
-        <ThemeProvider theme={theme}>
-            <Navigation bgcolor={backcolor}>
-                <LogoImg src={MGLogo} alt="로고이미지"></LogoImg>
-                <NavRightSideDiv>
-                    <AboutBtn>ABOUT US</AboutBtn>
-                    <DashboardBtn>DASHBOARD</DashboardBtn>
-                </NavRightSideDiv>
-            </Navigation>
-        </ThemeProvider>
-    );
+  const navigateToDashboard = () => {
+    navigate(`/dashboard/`);
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Navigation bgcolor={backcolor}>
+        <LogoImg src={MGLogo} alt="로고이미지"></LogoImg>
+        <NavRightSideDiv>
+          <AboutBtn>ABOUT US</AboutBtn>
+          <DashboardBtn onClick={navigateToDashboard}>DASHBOARD</DashboardBtn>
+        </NavRightSideDiv>
+      </Navigation>
+    </ThemeProvider>
+  );
 };
 
 const Navigation = styled.div`
