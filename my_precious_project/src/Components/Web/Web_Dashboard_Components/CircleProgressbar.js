@@ -76,7 +76,7 @@ function CircleProgressbar({ totalMoney, debtMoney, index }) {
                     }}
                 >
                     <DisplayDiv>
-                        <DisplayPercentDiv>{Math.round(percent)}%</DisplayPercentDiv>
+                        <DisplayPercentDiv>{percent > 100 ? '100%+' : Math.round(percent) + '%'}</DisplayPercentDiv>
                         <CollectText>모였어요.</CollectText>
                     </DisplayDiv>
                 </div>
