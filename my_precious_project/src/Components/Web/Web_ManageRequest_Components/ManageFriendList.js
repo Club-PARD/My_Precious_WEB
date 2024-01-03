@@ -58,7 +58,7 @@ function ManageFriendList({boardId, setGetdebtidShow}) {
         if (selectedFriend !== null) {
           setGetdebtidShow(selectedFriend);
         }
-    }, [selectedFriend, setGetdebtidShow]);
+    }, [selectedFriend]);
 
     const handleFriendClick = (friendId) => {
         setSelectedFriend(friendId === selectedFriend ? "" : friendId);
