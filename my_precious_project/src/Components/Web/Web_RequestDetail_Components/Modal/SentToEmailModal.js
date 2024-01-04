@@ -71,8 +71,10 @@ function SentToEmailModal({ props }) {
             머니글러브에서 <HeaderOrange> {props.function}</HeaderOrange>를
             작성해보세요!
           </HeaderText>
-          <GuideText>{props.subHeader}</GuideText>
-          <Form>
+          <GuideText>
+            <div style={{display: "flex"}}>{props.subHeader}</div>
+          </GuideText>
+          <Form style={{width:"36.8125rem", alignItems: "end"}}>
             <Input1
               placeholder="제목을 작성하는 곳"
               value={title}
@@ -118,6 +120,7 @@ const customModalStyles = {
     justifyContent: "center",
     overflow: "auto",
     border: "none",
+    display: "flex"
   },
 };
 
@@ -172,9 +175,10 @@ const ContextDiv = styled.div`
   flex-direction: column;
   //align-items: center;
   width: 39rem;
-  padding-top: 2.2rem;
-  padding-left: 3.2rem;
+  padding-top: 3.06rem;
+  //padding-left: 3.2rem;
   position: relative;
+  align-items: center;
 `;
 
 const ImageXBtn = styled.button`
@@ -218,14 +222,17 @@ const HeaderOrange = styled(HeaderText)`
 const GuideText = styled.div`
   display: flex;
   height: 2.5rem;
+  width : 36.8125rem;
   flex-shrink: 0;
-  color: var(--grey-grey-6-secondary, #504f4f);
+  color: var(--grey-grey-6-secondary, #504F4F);
   font-family: Pretendard;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 1.875rem;
-  padding-top: 0.37rem;
+  line-height: 1.875rem; /* 166.667% */
+  padding-top: 0.44rem;
+  align-items: center;
+  justify-content: start;
 `;
 
 const Form = styled.form`
@@ -237,22 +244,21 @@ const Form = styled.form`
 
 const Input1 = styled.textarea`
   display: flex;
-  width: 33.8225rem;
+  width: 33.9325rem;
   height: 2.4375rem;
   flex-shrink: 0;
   overflow: auto;
   border-radius: 0.625rem;
   border: 1px solid var(--grey-Grey_2, #d9d9d9);
-  padding-left: 1.87rem;
-  padding-right: 1.87rem;
-  padding-top: 0.5rem;
+  padding-left: 1.44rem;
+  padding-right: 1.44rem;
   resize: none;
-  color: var(--grey-Grey_3, #b3b3b3);
+  color: var(--grey-Grey_7, #3E3E3E);
   font-family: Pretendard;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-style: normal;
-  font-weight: 500;
-  //line-height: 1.875rem;
+  font-weight: 600;
+  line-height: 2.4375rem; /* 243.75% */
 
   &::placeholder {
     color: var(--grey-Grey_3, #b3b3b3);
@@ -268,16 +274,17 @@ const Input1 = styled.textarea`
 `;
 
 const Input2 = styled(Input1)`
-  width: 33.8225rem;
-  height: 11.5rem;
+  width: 33.9325rem;
+  height: 8.1225rem;
   flex-shrink: 0;
-  color: var(--grey-Grey_3, #b3b3b3);
-  font-family: Inter;
+  color: var(--grey-grey-6-secondary, #504F4F);
+  font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  margin-top: 0.56rem;
+  font-weight: 500;
+  line-height: 1.4375rem; 
+  margin-top: 0.63rem;
+  padding-top: 0.94rem;
 `;
 
 const SubmitBtn = styled.div`
@@ -297,7 +304,6 @@ const SubmitBtn = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
-  margin-left: 25rem;
 `;
 
 export default SentToEmailModal;
