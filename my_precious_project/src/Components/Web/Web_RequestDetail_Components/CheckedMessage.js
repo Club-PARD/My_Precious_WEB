@@ -33,7 +33,7 @@ function CheckedMessage({ debtIdgnum }) {
     function: "재촉편지",
     subHeader: "과격한 재촉 편지는 법적 문제가 될 수 있으니 주의해주세요.",
     longplacehorder:
-      " ",
+      "기간 내에 돈을 돌려받지 못했다면, 재촉편지를 작성해볼 수 있습니다.",
     sendToEmail: detailData.gamil,
   };
 

@@ -107,7 +107,7 @@ function ManageBottom({ boardId, manageData }) {
     debtStatus: "",
     repaymentStatus: "",
     name: "",
-    gmailId: "",
+    gmailId: "", 
   });
 
   const getData = async () => {
