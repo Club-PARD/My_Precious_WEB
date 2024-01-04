@@ -96,6 +96,11 @@ const Container = styled.div`
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
+  &:hover {
+    background-color: #e8e8e8;
+  }
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
 `;
 
 const StyleCircleProgressbar = styled.div`
