@@ -37,14 +37,7 @@ function CheckedMessage({ debtIdgnum }) {
 
   useEffect(() => {
     axios
-<<<<<<< HEAD
       .get(`http://13.209.230.190/api/v23/debts/${debtId}`, debtId)
-=======
-      .get(
-        `http://13.209.230.190/api/v23/debts/${debtId}`,
-        debtId
-      )
->>>>>>> main
       .then((response) => {
         const lendMoney = response.data.data.lendMoney;
         const message = response.data.data.message;
