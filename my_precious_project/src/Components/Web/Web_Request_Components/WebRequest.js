@@ -220,6 +220,7 @@ const WebRequest = () => {
                                             value={addComma(money)}
                                             onFocus={() => setIsInputFocused3(true)}
                                             onBlur={() => setIsInputFocused3(false)}
+                                            maxLength="14"
                                         ></input>
                                         <div className="won">원</div>
                                     </div>
