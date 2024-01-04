@@ -7,7 +7,7 @@ import LineProgress from "./LineProgress.js";
 import Talk from "../../../Assets/img/Talk.svg";
 import CheckBox from "../../../Assets/img/CheckBox.svg";
 import axios from "axios";
-import Character from "../../../Assets/img/Character.png";
+
 import { useParams } from "react-router-dom";
 
 function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
@@ -128,106 +128,117 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container>
-        <TotalColletMoney>현재까지 모인 금액</TotalColletMoney>
-        <ImageCharacter />
+      <Outer>
         <Image>
           <ImageText>
             현재까지 {detailData.lendMoneyCount}명의 친구가 함께 도와주고
             있어요.
           </ImageText>
         </Image>
-        <StyleLineProgress>
-          <LineProgress
-            total={parseFloat(detailData.borrowMoney)}
-            receive={parseFloat(detailData.totalLendmoney)}
-          />
-        </StyleLineProgress>
-        <Row>
-          <Circle></Circle>
-          <ReceivedMoney>{formattedNumber}원 모였어요</ReceivedMoney>
-        </Row>
+        <Container>
+          <TotalColletMoney>현재까지 모인 금액</TotalColletMoney>
+          <StyleLineProgress>
+            <LineProgress
+              total={parseFloat(detailData.borrowMoney)}
+              receive={parseFloat(detailData.totalLendmoney)}
+            />
+          </StyleLineProgress>
+          <Row>
+            <Circle></Circle>
+            <ReceivedMoney>{formattedNumber}원 모였어요</ReceivedMoney>
+          </Row>
 
-        <DisplayBoxDiv>
-          <Line style={{ height: "3.1875rem" }}>
-            <DarkGrayText>제목</DarkGrayText>
-            <DisplayDataTitleDiv>
-              <DisplayDataTitleText>{detailData.title}</DisplayDataTitleText>
-            </DisplayDataTitleDiv>
-          </Line>
-          <Line style={{ marginTop: "0.56rem", height: "7.9375rem" }}>
-            <DarkGrayText>사유</DarkGrayText>
-            <DisplayDataReasonDiv>
-              <DisplayDataReasonText>
-                {detailData.situation}
-              </DisplayDataReasonText>
-            </DisplayDataReasonDiv>
-          </Line>
-          <Line style={{ marginTop: "3.19rem" }}>
-            <DarkGrayText style={{ height: "2.4375rem" }}>
-              필요 금액
-            </DarkGrayText>
-            <DisplayDataTotalDiv>
-              <DisplayDataTotalText>{formattedNumber2} 원</DisplayDataTotalText>
-            </DisplayDataTotalDiv>
-          </Line>
-          <Line style={{ marginTop: "0.56rem", height: "2.4375rem" }}>
-            <DarkGrayText>갚을 날짜</DarkGrayText>
-            <DisplayDataTotalDiv>
-              <DisplayDataTotalText>{formatted_date} </DisplayDataTotalText>
-            </DisplayDataTotalDiv>
-          </Line>
-          <Line style={{ marginTop: "0.56rem" }}>
-            <DarkGrayText style={{ height: "2.4375rem" }}>
-              받을 계좌
-            </DarkGrayText>
-            <DisplayDataTotalDiv style={{ width: "13rem" }}>
-              <DisplayDataTotalText>{detailData.bank}</DisplayDataTotalText>
-            </DisplayDataTotalDiv>
-            <DisplayDataTotalDiv style={{ width: "23.1875rem" }}>
-              <DisplayDataTotalText>
-                {detailData.bankAccount}
-              </DisplayDataTotalText>
-            </DisplayDataTotalDiv>
-          </Line>
-          <SignDiv>
-            <SignText>서약</SignText>
-            <SignText>
-              나 {detailData.name}(은)는 {formatted_date}까지 돈을 갚을 것을
-              약속합니다. 감사합니다.
-            </SignText>
-            <img src={CheckBox} alt="체크박스 이미지"></img>
-          </SignDiv>
-        </DisplayBoxDiv>
-      </Container>
+          <DisplayBoxDiv>
+            <Line style={{ height: "3.1875rem" }}>
+              <DarkGrayText>제목</DarkGrayText>
+              <DisplayDataTitleDiv>
+                <DisplayDataTitleText>{detailData.title}</DisplayDataTitleText>
+              </DisplayDataTitleDiv>
+            </Line>
+            <Line style={{ marginTop: "0.56rem", height: "7.9375rem" }}>
+              <DarkGrayText>사유</DarkGrayText>
+              <DisplayDataReasonDiv>
+                <DisplayDataReasonText>
+                  {detailData.situation}
+                </DisplayDataReasonText>
+              </DisplayDataReasonDiv>
+            </Line>
+            <Line style={{ marginTop: "3.19rem" }}>
+              <DarkGrayText style={{ height: "2.4375rem" }}>
+                필요 금액
+              </DarkGrayText>
+              <DisplayDataTotalDiv>
+                <DisplayDataTotalText>
+                  {formattedNumber2} 원
+                </DisplayDataTotalText>
+              </DisplayDataTotalDiv>
+            </Line>
+            <Line style={{ marginTop: "0.56rem", height: "2.4375rem" }}>
+              <DarkGrayText>갚을 날짜</DarkGrayText>
+              <DisplayDataTotalDiv>
+                <DisplayDataTotalText>{formatted_date} </DisplayDataTotalText>
+              </DisplayDataTotalDiv>
+            </Line>
+            <Line style={{ marginTop: "0.56rem" }}>
+              <DarkGrayText style={{ height: "2.4375rem" }}>
+                받을 계좌
+              </DarkGrayText>
+              <DisplayDataTotalDiv style={{ width: "12.23756rem" }}>
+                <DisplayDataTotalText>{detailData.bank}</DisplayDataTotalText>
+              </DisplayDataTotalDiv>
+              <DisplayDataTotalDiv style={{ width: "21.82763rem" }}>
+                <DisplayDataTotalText>
+                  {detailData.bankAccount}
+                </DisplayDataTotalText>
+              </DisplayDataTotalDiv>
+            </Line>
+            <SignDiv>
+              <SignText>서약</SignText>
+              <SignText>
+                나 {detailData.name}(은)는 {formatted_date}까지 돈을 갚을 것을
+                약속합니다. 감사합니다.
+              </SignText>
+              <img src={CheckBox} alt="체크박스 이미지"></img>
+            </SignDiv>
+          </DisplayBoxDiv>
+        </Container>
+      </Outer>
     </ThemeProvider>
   );
 }
+
+const Outer = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  padding-top: 8.75rem;
+`;
 
 const Container = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
   margin: 0;
   padding: 0;
-  width: 46.1875rem;
-  height: 45.3125rem;
+  width: 44.5rem;
+  height: 43.3125rem;
   border-radius: 0.625rem;
-  background: var(--White_2, #fafafa);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  /* margin-top: 2.6rem; */
+  background: #f3f3f3;
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.15);
 `;
 
 const TotalColletMoney = styled.div`
   color: #3e3e3e;
-
+  width: 39.25rem;
+  text-align: start;
   font-family: Pretendard;
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  padding-top: 3.06rem;
-  padding-left: 1.375rem;
+  margin-top: 1.5rem;
 `;
 
 const Image = styled.div`
@@ -237,25 +248,10 @@ const Image = styled.div`
   background-image: url(${Talk});
   background-repeat: no-repeat;
   background-size: contain;
-  top: 2%;
-  left: 40%;
+  top: 7.75rem;
+  left: 31rem;
   z-index: 1;
-  display: flex;
-  //justify-content: center;
-  //align-items: center;
-`;
-
-const ImageCharacter = styled.div`
-  position: absolute;
-  width: 6rem;
-  height: 6rem;
-  background-image: url(${Character});
-  background-repeat: no-repeat;
-  background-size: contain;
-  top: 3%;
-  left: 32%;
-  z-index: 1;
-  display: flex;
+  /* display: flex; */
   //justify-content: center;
   //align-items: center;
 `;
@@ -270,21 +266,24 @@ const ImageText = styled.div`
   font-weight: 600;
   line-height: normal;
   width: 10rem;
-  padding-top: 0.55rem;
+  padding-top: 0.8rem;
   left: 10%;
 `;
 
 const StyleLineProgress = styled.div`
   //max-width: 43.375rem;
-  margin-left: 1.375rem;
+  //margin-left: 1.375rem;
   margin-top: 0.75rem;
+  width: 39.25rem;
 `;
 const Row = styled.div`
+  width: 39.25rem;
   display: flex;
   flex-direction: row;
   justify-content: end;
   align-items: center;
-  padding-right: 1.625rem;
+  /* padding-right: 1.625rem; */
+  margin-top: 0.62rem;
 `;
 
 const Circle = styled.div`
@@ -309,11 +308,11 @@ const ReceivedMoney = styled.div`
 const DisplayBoxDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 42.375rem;
+  width: 39.25rem;
   height: 29.1875rem;
   //border: 0.0625rem solid red;
-  margin-right: 1.44rem;
-  margin-left: 2.375rem;
+  /* margin-right: 1.44rem; */
+  /* margin-left: 2.375rem; */
   margin-top: 1.62rem;
 `;
 
@@ -325,15 +324,13 @@ const Line = styled.div`
 `;
 
 const DarkGrayText = styled.div`
-  display: flex;
   color: #6a6a6a;
 
   font-family: Pretendard;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 2.4375rem;
-  //margin-right: 2.9375rem;
+  line-height: 2.4375rem; /* 243.75% */
 `;
 
 const DisplayDataDiv = styled.div`
@@ -361,6 +358,7 @@ const DisplayDataText = styled.div`
 `;
 
 const DisplayDataTitleDiv = styled(DisplayDataDiv)`
+  width: 34.65356rem;
   height: 3.1875rem;
 `;
 
@@ -372,6 +370,7 @@ const DisplayDataTitleText = styled(DisplayDataText)`
 `;
 
 const DisplayDataReasonDiv = styled(DisplayDataDiv)`
+  width: 34.65356rem;
   height: 7.9375rem;
 `;
 
@@ -395,6 +394,7 @@ const DisplayDataPlanText = styled(DisplayDataText)`
 `;
 
 const DisplayDataTotalDiv = styled(DisplayDataDiv)`
+  width: 34.65356rem;
   height: 2.4375rem;
   justify-content: end;
   align-items: center;
