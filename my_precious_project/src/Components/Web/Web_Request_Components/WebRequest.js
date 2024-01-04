@@ -135,7 +135,7 @@ const WebRequest = () => {
     const handleSubmit = () => {
         console.log(form);
         axios
-            .post(`http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/boards/${uid}`, {
+            .post(`https://httptest.dhdhh.shop/api/v23/boards/${uid}`, {
                 title: form.title,
                 borrowMoney: form.borrowMoney,
                 payDate: form.payDate,
@@ -473,6 +473,35 @@ const InputTitle = styled.div`
     margin-top: 1.25rem;
     width: 42.4375rem;
     height: 2.4375rem;
+    color: rgba(105, 102, 102, 1);
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.4375rem; /* 278.571% */
+    margin: 0.37rem 0rem 0.37rem 0rem;
+  }
+  .container {
+    width: 37.5625rem;
+    height: 2.4375rem;
+    flex-shrink: 0;
+    border-radius: 0.625rem;
+    border: 1px solid #e8e8e8;
+    background: #fff;
+    font-family: Pretendard;
+    /* margin-left: 1.31rem; */
+  }
+  .title {
+    color: #6a6a6a;
+    //margin-right: 3rem;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.4375rem; /* 243.75% */
+  }
+  input {
+    cursor: pointer;
     position: relative;
     justify-content: center;
     align-items: center;
@@ -560,18 +589,55 @@ const InputReason = styled.div`
     margin-top: 0.56rem;
     width: 42.4375rem;
     height: 8.5625rem;
-    position: relative;
-    justify-content: center;
-    /* align-items: center; */
-    div {
-        width: 4.875rem;
-        color: rgba(105, 102, 102, 1);
-        font-family: Pretendard;
-        font-size: 0.875rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 2.4375rem; /* 278.571% */
-        margin: 0.37rem 0rem 0.37rem 0rem;
+    flex-shrink: 0;
+    border-radius: 0.625rem;
+    border: 1px solid #e8e8e8;
+    background: #fff;
+    font-family: Pretendard;
+    /* margin-left: 1.31rem; */
+  }
+  .container:hover {
+    border: 1px solid #ff3d00;
+  }
+  .title {
+    color: #6a6a6a;
+    //margin-right: 3rem;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.4375rem; /* 243.75% */
+    margin-top: 1.12rem;
+  }
+  textarea {
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 36.2525rem;
+    height: 6.4rem;
+    flex-shrink: 0;
+    border-radius: 0.625rem;
+    background: #fff;
+    border: none;
+    /* padding: 0.9375rem 1.0625rem 0rem 0rem; */
+    font-family: Pretendard;
+    margin-left: 1.31rem;
+    overflow-wrap: break-word; /* 텍스트가 영역을 벗어날 경우 줄바꿈 */
+    word-wrap: break-word; /* IE 지원을 위해 추가 */
+    white-space: pre-wrap; /* 공백 및 줄바꿈 유지 */
+    resize: none; /*사용자에 의한 크기 조정 비활성화 */
+
+    &::placeholder {
+      position: absolute;
+      top: 1rem;
+      transform: translateY(-50%);
+      color: #a5a5a5;
+      font-family: Pretendard;
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 2.4375rem; /* 278.571% */
+      opacity: 1;
+      transition: top 0.3s, font-size 0.3s, opacity 0.3s;
     }
     .container {
         display: flex;
@@ -1047,6 +1113,7 @@ const CheckContainer = styled.div`
     /* margin-bottom: 0.5rem; */
     justify-content: center;
 
+<<<<<<< HEAD
     align-items: center;
     color: #a5a5a5;
     font-family: Pretendard;
@@ -1074,6 +1141,35 @@ const CheckContainer = styled.div`
         margin-left: 0.5rem;
         cursor: pointer;
     }
+=======
+  align-items: center;
+  color: #a5a5a5;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.4375rem; /* 216.667% */
+  cursor: default;
+  .title {
+    width: 3rem;
+    margin-right: 1rem;
+  }
+  p {
+    /* width: 33.875rem; */
+  }
+  .checkbox {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+  }
+  .box {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+  }
+>>>>>>> main
 `;
 
 const CloseButton = styled.img`

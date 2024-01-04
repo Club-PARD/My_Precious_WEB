@@ -13,11 +13,11 @@ const Container = styled.div`
   flex-direction: column;
   margin: 0;
   padding: 0;
-  width: 51.875rem;
+  width: 54.625rem;
   height: 14.3125rem;
   flex-shrink: 0;
   border-radius: 0.625rem;
-  background: #fbfbfb;
+  background: #fafafa;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
   position: relative;
 `;
@@ -31,7 +31,7 @@ const DisplayMoneyDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 23.46875rem;
-  padding-top: 1.44rem;
+  padding-top: 1.56rem;
 `;
 
 const MoneyText = styled.div`
@@ -42,7 +42,7 @@ const MoneyText = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  padding-bottom: 0.74rem;
+  padding-bottom: 0.76rem;
 `;
 
 const Row = styled.div`
@@ -87,9 +87,9 @@ const RightRowDiv = styled.div`
 const UnderGrayDiv = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 2.3rem;
-  padding-left: 1.56rem;
-  gap: 0.37rem;
+  padding-top: 2.19rem;
+  padding-left: 1.94rem;
+  gap: 0.5rem;
   justify-content: center;
 `;
 
@@ -121,7 +121,7 @@ const Dday = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-left: 1.12rem;
+  margin-left: 1.25rem;
 `;
 
 const ImageCharacter = styled.div`
@@ -132,7 +132,7 @@ const ImageCharacter = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   top: 3%;
-  left: 80%;
+  left: 76%;
   z-index: 1;
   display: flex;
 `;
@@ -143,7 +143,7 @@ const ImageTalk = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   top: 0%;
-  left: 85%;
+  left: 82%;
   z-index: 1;
   display: flex;
   width: 11rem;
@@ -172,25 +172,12 @@ function ManageSummary({ manageData, boardId }) {
   const [BorrowDataSet, setBorrowDataSet] = useState([]);
   const [totalRepayMoney, setTotalRepayMoney] = useState(0);
 
-  const [detailData, setDetailData] = useState({
-    total: 10000, //이만큼 돈 주세요
-    receive: 5000, //이만큼 모였어요
-    title: "",
-    reason: "",
-    plan: "",
-    date: "",
-    bank: "",
-    account: "",
-    name: "",
-    lendMoneyCount: 0, // 빌려준 친구의 수
-    ConfirmCount: 0, //갚은 사람 수
-    totalConfirmMoney: 0, // 갚은 돈 총액
-  });
+  console.log("확인", totalRepayMoney);
 
   const getData = async () => {
     try {
       const response = await axios.get(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v9/debts/confirmedDebts/${boardId}`
+        `https://httptest.dhdhh.shop/api/v23/debts/confirmedDebts/${boardId}`
       );
       const borrowData = response.data.data;
       if (borrowData) {
@@ -220,24 +207,32 @@ function ManageSummary({ manageData, boardId }) {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [manageData.totalLendmoney]);
 
   //받은 돈 숫자에서 문자 -> 컴마 추가
-  var receiveNumber = manageData.totalLendmoney;
+  var receiveNumber = parseFloat(manageData.totalLendmoney);
   if (receiveNumber !== undefined) {
     var LendformattedNumber = receiveNumber.toLocaleString();
   }
 
   //필요한 돈 숫자에서 문자 -> 컴마 추가
-  var totaleNumber = manageData.borrowMoney;
+  var totaleNumber = parseFloat(manageData.borrowMoney);
   if (totaleNumber !== undefined) {
     var NeedformattedNumber = totaleNumber.toLocaleString();
   }
 
-  var ConfirmNumber = totalRepayMoney;
+  var ConfirmNumber = parseFloat(totalRepayMoney);
   if (ConfirmNumber !== undefined) {
     var ConfirmformattedNumber = ConfirmNumber.toLocaleString();
   }
+
+  const formatted_date =
+    manageData.payDate.substring(0, 4) +
+    "년 " +
+    manageData.payDate.substring(4, 6) +
+    "월 " +
+    manageData.payDate.substring(6) +
+    "일";
 
   return (
     <ThemeProvider theme={theme}>
@@ -245,11 +240,11 @@ function ManageSummary({ manageData, boardId }) {
         <ImageCharacter />
         <ImageTalk>
           <TalkText>
-            현재까지 {BorrowDataSet.ConfirmCount}명의 친구에게 돈을 갚았어요.
+            현재까지 {BorrowDataSet.length}명의 친구에게 돈을 갚았어요.
           </TalkText>
         </ImageTalk>
         <DisplayMoneyContainer>
-          <DisplayMoneyDiv style={{ paddingLeft: "1.56rem" }}>
+          <DisplayMoneyDiv style={{ paddingLeft: "1.62em" }}>
             <MoneyText>현재까지 모인 금액</MoneyText>
             <SmallLineProgress
               total={parseFloat(manageData.borrowMoney)}
@@ -259,7 +254,7 @@ function ManageSummary({ manageData, boardId }) {
               <Circle /> 모인 금액 {LendformattedNumber}
             </Row>
           </DisplayMoneyDiv>
-          <DisplayMoneyDiv style={{ paddingLeft: "1.25rem" }}>
+          <DisplayMoneyDiv style={{ paddingLeft: "4.31rem" }}>
             <MoneyText>갚은 금액</MoneyText>
             <SmallLineProgress
               total={parseFloat(manageData.totalLendmoney)}
@@ -275,12 +270,12 @@ function ManageSummary({ manageData, boardId }) {
         </DisplayMoneyContainer>
         <UnderGrayDiv>
           <UnderGrayFirstDiv>
-            <div style={{ paddingRight: "6.19rem" }}>필요 금액</div>
+            <div style={{ paddingRight: "5.13rem" }}>필요 금액</div>
             <div>{NeedformattedNumber} 원</div>
           </UnderGrayFirstDiv>
           <UnderGrayFirstDiv>
-            <div style={{ paddingRight: "2.3rem" }}>갚기로 한 약속날짜</div>
-            <div>{manageData.formatted_date}</div>
+            <div style={{ paddingRight: "1.44rem" }}>갚기로 한 약속날짜</div>
+            <div>{formatted_date}</div>
 
             {manageData.dday >= 0 ? (
               <Dday>D-{manageData.dday}</Dday>
