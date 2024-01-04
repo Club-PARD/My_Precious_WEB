@@ -27,7 +27,7 @@ function ShowMyboard(manageData) {
     setModalIsOpen(false);
   };
 
-  const MoneyNum = manageData.manageData.borrowMoney?.toLocaleString();
+  const MoneyNum = parseFloat(manageData.manageData.borrowMoney)?.toLocaleString();
 
   const formatted_date =
     manageData.manageData.payDate.substring(0, 4) +

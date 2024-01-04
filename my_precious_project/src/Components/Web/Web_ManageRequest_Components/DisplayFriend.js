@@ -30,7 +30,7 @@ function DisplayFriend({ displayData, debtId }) {
 
     axios
       .patch(
-        `https://httptest.dhdhh.shop/api/v23/debts/check-paid-boxes/${displayData.id}`,
+        `http://13.209.230.190/api/v23/debts/check-paid-boxes/${displayData.id}`,
         { debtStatus: displayData.id }
       )
       .then((response) => {

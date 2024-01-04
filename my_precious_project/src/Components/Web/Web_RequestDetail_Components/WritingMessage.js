@@ -12,122 +12,122 @@ import axios from "axios";
 import { useUserData } from "../../../contexts/userContext";
 import Modal from "../Web_Login_Components/Modal/Modal.js";
 
-//돈 빌려달라고 하는 사람이 게시한 게시글
-const boardId = 1;
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0;
-  width: 31.1875rem;
-  height: 22.25rem;
+  width: 29.25rem;
+  height: 21.25rem;
   flex-shrink: 0;
   border-radius: 0.625rem;
-  background: #fff;
-  box-shadow: 0px 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.25);
-  margin-left: 3.625rem;
+  background: #FAFAFA;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+  margin-left: 1.25rem;
   align-items: center;
 `;
 
 const TitleText = styled.div`
-  color: var(--primary_orange, #ff3d00);
+  color: var(--primary_orange, #FF3D00);
   text-align: center;
   font-family: Pretendard;
   font-size: 1.75rem;
   font-style: normal;
   font-weight: 700;
   line-height: 1.375rem; /* 78.571% */
-  padding-top: 1.9375rem;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 1.5rem;
-`;
-
-const Input1 = styled.textarea`
-  display: flex;
-  width: 25.4375rem;
-  height: 3.875rem;
-  flex-shrink: 0;
-  overflow: auto;
-  border-radius: 0.625rem;
-  border: 0.0625rem solid var(--grey-Grey_2, #d9d9d9);
-  padding: 1rem 1.31rem 1rem 1.31rem;
-  resize: none;
-
-  &::placeholder {
-    color: var(--grey-Grey_3, #b3b3b3);
-    font-family: Pretendard;
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1.25rem;
-  }
-  &:focus {
-    outline: none;
-  }
+  padding-top: 2.19rem;
 `;
 
 const SaveButton = styled.button`
   margin-top: 1.31rem;
-  width: 16.125rem;
+  width: 26.125rem;
   height: 2.5rem;
   flex-shrink: 0;
   border-radius: 0.375em;
   background: ${(props) => (props.disabled ? "#D9D9D9" : "#FF3D00")};
   border: none;
 
-  color: #fffcfb;
-
+  color: #FFFCFB;
   text-align: center;
   font-family: Pretendard;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 2.4375rem;
+  line-height: normal;
+  margin-top: 1.62rem;
   cursor: pointer;
 `;
 
-const InputBoxDiv = styled.div`
+const RowTextDiv =styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 28.125rem;
-  height: 2.4375rem;
-  flex-shrink: 0;
-  border-radius: 0.625rem;
-  border: 0.0625rem solid var(--grey-Grey_2, #d9d9d9);
-  padding: 0;
-
-  color: var(--grey-Grey_4, #8e8e8e);
-  font-family: Pretendard;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 2.4375rem; /* 278.571% */
+  justify-content: space-between;
+  gap: 1.2rem;
 `;
 
 const GaryText = styled.div`
-  color: var(--grey-Grey_4, #8e8e8e);
+  color: var(--grey-Grey_4, #8E8E8E);
   font-family: Pretendard;
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 2.4375rem;
-  padding-left: 0.9375rem;
+  line-height: normal;
+  display: flex;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2.5rem;
+`;
+
+const Input1 = styled.textarea`
+  display: flex;
+  width: 18.6825rem;
+  height: 2.37rem;
+  flex-shrink: 0;
+  overflow: auto;
+  border-radius: 0.625rem;
+  border: 0.0625rem solid var(--grey-Grey_2, #d9d9d9);
+  padding: 0.5rem 0.69rem 0.63rem 0.69rem;
+  resize: none;
+  color: var(--grey-Grey_5, #696666);
+  font-family: Pretendard;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.25rem; /* 142.857% */
+  margin-bottom: 0.56rem;
+
+  &::placeholder {
+    color: var(--grey-Grey_3, #b3b3b3);
+    text-align: left;
+    font-family: Pretendard;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+  }
+  &:focus {
+    outline: none;
+  }
 `;
 
 const Input2 = styled.input`
-  width: 21rem;
-  border: none;
+display: flex;
+  width: 15.8425rem;
+  height: 1.1575rem;
   border-radius: 0.625rem;
-  padding: 0;
-  padding-left: 1.1rem;
-  height: 2rem;
+  border: none;
+  padding: 0.61rem 0.64rem 0.61rem 0.94rem ;
+  color: #696969;
+  text-align: right;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
   &::placeholder {
     color: var(--grey-Grey_3, #b3b3b3);
     text-align: left;
@@ -143,16 +143,73 @@ const Input2 = styled.input`
   }
 `;
 
+const Input2Div =styled.div`
+  display: flex;
+  width: 20.0625rem;
+  height: 2.4375rem;
+  flex-shrink: 0;
+  text-align: right;
+  border-radius: 0.625rem;
+  border: 1px solid #D9D9D9;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFFFFF;
+  margin-bottom: 0.5rem;
+  
+  color: #696969;
+  text-align: left;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  //justify-content: center;
+`;
+
+const Input3Div =styled.div`
+  display: flex;
+  width: 18.1825rem;
+  height: 2.4375rem;
+  flex-shrink: 0;
+  text-align: right;
+  border-radius: 0.625rem;
+  border: 1px solid #D9D9D9;
+  justify-content: end;
+  align-items: center;
+  background-color: #FFFFFF;
+  padding-left: 0.94rem;
+  padding-right: 0.94rem;
+  
+  color: #696969;
+  text-align: left;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  //justify-content: center;
+  align-items: center;
+`;
+
 const Input3 = styled.input`
-  width: 15rem;
+  width: 9rem;
   border: none;
   //margin-left: 0.5rem;
   padding: 0;
+  padding-left: 1rem;
   border-radius: 0.625rem;
   height: 2rem;
+  text-align: right;
+  color: #696969;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: flex;
   &::placeholder {
     color: var(--grey-Grey_3, #b3b3b3);
-    text-align: left;
+    text-align: right;
     font-family: Pretendard;
     font-size: 0.75rem;
     font-style: normal;
@@ -300,101 +357,113 @@ function WritingMessage({ checkSendMessage, setCheckSendMessage, boardId }) {
       <Container>
         <TitleText>꼭 송금한 이후 작성해주세요.</TitleText>
         <Form onSubmit={handleSubmit}>
-          <Input1
-            type="text"
-            placeholder="친구에게 간단한 응원 메세지를 함께 남겨보세요. 머니글러브가 도움을 잘 간직하고 있을게요. 해당글은 머글님이 계속해서 볼 수 있어요."
-            onChange={(e) => setForm({ ...form, message: e.target.value })}
-          ></Input1>
-          <InputBoxDiv style={{ marginTop: "1.31rem" }}>
-            <GaryText>빌려준 금액</GaryText>
-            <Input2
+          <RowTextDiv>
+          <GaryText>응원 메세지</GaryText>
+            <Input1
               type="text"
-              placeholder="절대 무리해서 빌려주지 않도록 유의해주세요!"
-              value={formatAmount(form.lendMoney)}
-              onChange={(e) =>
-                setForm((prevForm) => ({
-                  ...prevForm,
-                  lendMoney: e.target.value.replace(/\D/, ""),
-                }))
-              }
-            ></Input2>
-          </InputBoxDiv>
-          <InputBoxDiv style={{ marginTop: "0.5rem" }}>
+              placeholder="친구에게 간단한 응원 메세지를 함께 남겨보세요. 머니글러브가 도움을 잘 간직하고 있을게요. 해당글은 머글님이 계속해서 볼 수 있어요."
+              onChange={(e) => setForm({ ...form, message: e.target.value })}
+            ></Input1>
+          </RowTextDiv>
+          <RowTextDiv>
+            <GaryText>빌려준 금액</GaryText>
+            <Input2Div>
+              <Input2
+                type="text"
+                placeholder="절대 무리해서 빌려주지 않도록 유의해주세요!"
+                value={formatAmount(form.lendMoney)}
+                onChange={(e) =>
+                  setForm((prevForm) => ({
+                    ...prevForm,
+                    lendMoney: e.target.value.replace(/\D/, ""),
+                  }))
+                }
+              ></Input2>
+              원
+            </Input2Div>
+          </RowTextDiv>
+          <RowTextDiv style={{gap:" 0.4rem"}}>
             <GaryText>돌려받을 계좌</GaryText>
-            <FormControl
-              sx={{
-                width: "5.2rem",
-                height: "3.2rem",
-                padding: "1rem",
-                paddingRight: "0",
-                paddingLeft: "0.3rem",
-                margin: "0",
-                "& .MuiOutlinedInput-root": {
-                  "&:hover > fieldset": { borderColor: "#E0E0E0" },
-                  fieldset: { borderColor: "#E0E0E0", border: "none" },
-                  borderRadius: "10px",
-                },
-                "& .MuiInputBase-input": {
+            <Input3Div>
+              <FormControl
+                sx={{
+                  width: "8rem",
+                  height: "3.2rem",
                   padding: "1rem",
                   paddingRight: "0",
-                  paddingLeft: "0",
-                },
-              }}
-            >
-              <InputLabel
-                id="demo-simple-select-autowidth-label"
-                sx={{
-                  width: "15rem",
-                  height: "1rem",
-                  padding: "0",
+                  paddingLeft: "0.3rem",
+                  
                   margin: "0",
-                }}
-              ></InputLabel>
-              <Select
-                labelId="demo-simple-select-autowidth-label"
-                id="demo-simple-select-autowidth"
-                value={form.bank}
-                onChange={(e) => setForm({ ...form, bank: e.target.value })}
-                autoWidth
-                label=""
-                MenuProps={MenuProps}
-                sx={{
-                  padding: "0",
-                  color: "#B3B3B3",
-                  textAlign: "left",
-                  fontFamily: "Pretendard",
-                  fontSize: "0.75rem",
-                  fontStyle: "normal",
-                  fontWeight: "500",
-                  width: "5rem",
-                  "& .MuiSelect-icon": {
-                    display: "none",
+                  "& .MuiOutlinedInput-root": {
+                    "&:hover > fieldset": { borderColor: "#E0E0E0" },
+                    fieldset: { borderColor: "#E0E0E0", border: "none" },
+                    borderRadius: "10px",
                   },
-                  "#demo-simple-select-autowidth": {
-                    paddingRight: "0 !important",
+                  "& .MuiInputBase-input": {
+                    padding: "1rem",
+                    paddingRight: "0",
+                    paddingLeft: "0",
                   },
                 }}
               >
-                <MenuItem value="은행 선택">은행 선택</MenuItem>
-                {banks.map((bank) => (
-                  <MenuItem key={bank} value={bank}>
-                    {bank}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <Input3
-              type="text"
-              placeholder="계좌번호"
-              value={form.bankAccount}
-              onChange={(e) =>
-                setForm((prevForm) => ({
-                  ...prevForm,
-                  bankAccount: e.target.value.replace(/\D/, ""),
-                }))
-              }
-            ></Input3>
-          </InputBoxDiv>
+                <InputLabel
+                  id="demo-simple-select-autowidth-label"
+                  sx={{
+                    width: "15rem",
+                    height: "1rem",
+                    padding: "0",
+                    margin: "0",
+                    
+                  }}
+                ></InputLabel>
+                <Select
+                  labelId="demo-simple-select-autowidth-label"
+                  id="demo-simple-select-autowidth"
+                  value={form.bank}
+                  onChange={(e) => setForm({ ...form, bank: e.target.value })}
+                  autoWidth
+                  label=""
+                  MenuProps={MenuProps}
+                  sx={{
+                    padding: "0",
+                    color: form.bank === "은행 선택" ? "#b3b3b3" : "#696969",
+                    fontFamily: "Pretendard",
+                    fontSize: form.bank === "은행 선택" ?" 0.75rem" : "1rem",
+                    fontStyle: "normal",
+                    fontWeight: form.bank === "은행 선택" ? "500" :"600",
+                    lineHeight: 'normal',
+                    width: "8rem",
+                    textAlign: "end",
+                    "& .MuiSelect-icon": {
+                      display: "none",
+                    },
+                    "#demo-simple-select-autowidth": {
+                      paddingRight: "0 !important",
+                    },
+                  }}
+                >
+                  <MenuItem value="은행 선택"
+                  >은행 선택</MenuItem>
+                  {banks.map((bank) => (
+                    <MenuItem key={bank} value={bank}>
+                      {bank}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <Input3
+                type="text"
+                placeholder="계좌번호"
+                value={form.bankAccount}
+                onChange={(e) =>
+                  setForm((prevForm) => ({
+                    ...prevForm,
+                    bankAccount: e.target.value.replace(/\D/, ""),
+                  }))
+                }
+              ></Input3>
+            </Input3Div>
+          </RowTextDiv>
           <SaveButton
             disabled={isButtonDisabled}
             onClick={() => setModalShow(!modalShow)}
