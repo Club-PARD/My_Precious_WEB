@@ -49,9 +49,9 @@ const TitleDiv = styled.div`
 const LinkCopyDiv = styled.div`
   display: flex;
   flex-direction: row;
-  width: 54.625rem;
+  width: 51.875rem;
   justify-content: end;
-  padding-bottom: 1.25rem;
+  padding-bottom: 1.06rem;
   position: relative;
 `;
 
@@ -97,7 +97,6 @@ function WebManageRequest() {
     title: "",
     borrowMoney: 0,
     payDate: "",
-    payWay: "",
     situation: "",
     bank: "",
     bankAccount: "",
@@ -114,14 +113,13 @@ function WebManageRequest() {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `http://13.209.230.190/api/v23/boards/${boardId}`
+        `https://httptest.dhdhh.shop/api/v23/boards/${boardId}`
       );
       const borrowData = response.data.data;
       let transformedBorrowData = {
         title: borrowData.title,
         borrowMoney: borrowData.borrowMoney,
         payDate: borrowData.payDate,
-        payWay:borrowData.payWay,
         situation: borrowData.situation,
         bank: borrowData.bank,
         bankAccount: borrowData.bankAccount,
