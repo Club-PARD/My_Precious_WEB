@@ -6,6 +6,7 @@ import LoginImage from "../../../Assets/img/LoginImage.png";
 import { handleGoogleLogin } from "../../../API/googleLogin.js";
 import { useLogInData, useUserData } from "../../../contexts/userContext";
 import axios from "axios";
+import BlueCharacter from "../../../Assets/img/BlueCharacter.svg";
 
 const Googlelogin = () => {
   const [logInData, setLogInData] = useLogInData();
@@ -47,9 +48,9 @@ const Googlelogin = () => {
               여러분의 돈과 관계를 소중히 지켜드립니다. 함께 해주시겠어요?
             </IntroductionText>
             <img
-              src={LoginImage}
+              src={BlueCharacter}
               alt="로그인 이미지"
-              style={{ marginTop: "3rem" }}
+              style={{ marginTop: "1.78rem", width:"9.64475rem", height: "11.0315rem" }}
             ></img>
             <GoogleLoginBtn onClick={googleLogin}>
               Google로 로그인
@@ -141,7 +142,7 @@ const GoogleLoginBtn = styled.button`
   border: none;
   justify-content: center;
   align-items: center;
-  margin-top: 3.61rem;
+  margin-top: 2.69rem;
 
   color: #f5f5f5;
 
