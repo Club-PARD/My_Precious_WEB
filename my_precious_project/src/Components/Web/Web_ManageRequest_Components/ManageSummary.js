@@ -121,7 +121,7 @@ const Dday = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-left: 1.12rem;
+  margin-left: 1.25rem;
 `;
 
 const ImageCharacter = styled.div`
@@ -268,11 +268,11 @@ function ManageSummary({ manageData, boardId }) {
         </DisplayMoneyContainer>
         <UnderGrayDiv>
           <UnderGrayFirstDiv>
-            <div style={{ paddingRight: "6.19rem" }}>필요 금액</div>
+            <div style={{ paddingRight: "5.13rem" }}>필요 금액</div>
             <div>{NeedformattedNumber} 원</div>
           </UnderGrayFirstDiv>
           <UnderGrayFirstDiv>
-            <div style={{ paddingRight: "2.3rem" }}>갚기로 한 약속날짜</div>
+            <div style={{ paddingRight: "1.44rem" }}>갚기로 한 약속날짜</div>
             <div>{formatted_date}</div>
 
             {manageData.dday >= 0 ? (

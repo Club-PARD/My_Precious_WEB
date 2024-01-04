@@ -61,8 +61,8 @@ const LeftNoDiv = styled.div`
   height: 19.9375rem;
   flex-shrink: 0;
   border-radius: 0.625rem;
-  background: #f0f0f0;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background: #FAFAFA;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
   color: var(--grey-Grey_3, #b3b3b3);
   font-family: Pretendard;
   font-size: 1.125rem;
@@ -78,8 +78,8 @@ const RightNoDiv = styled.div`
   width: 19.625rem;
   height: 19.9375rem;
   border-radius: 0.625rem;
-  background: #f0f0f0;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background: #FAFAFA;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
   color: var(--grey-Grey_3, #b3b3b3);
   font-family: Pretendard;

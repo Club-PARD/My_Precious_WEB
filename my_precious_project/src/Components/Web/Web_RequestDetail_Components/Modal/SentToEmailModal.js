@@ -5,8 +5,7 @@ import styled from "styled-components";
 import ImageX from "../../../../Assets/img/ImageX.png";
 import { useUserData } from "../../../../contexts/userContext";
 import axios from "axios";
-
-//npm i react-modal
+import BlueCharacter from "../../../../Assets/img/BlueCharacter.svg";
 
 function SentToEmailModal({ props }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -89,6 +88,7 @@ function SentToEmailModal({ props }) {
               보내기
             </SubmitBtn>
           </Form>
+          <BlueImage/>
         </ContextDiv>
       </Modal>
     </div>
@@ -120,7 +120,8 @@ const customModalStyles = {
     justifyContent: "center",
     overflow: "auto",
     border: "none",
-    display: "flex"
+    display: "flex",
+    overflow: "hidden",
   },
 };
 
@@ -179,8 +180,22 @@ const ContextDiv = styled.div`
   //padding-left: 3.2rem;
   position: relative;
   align-items: center;
+  position: relative;
 `;
 
+const BlueImage = styled.div`
+  display: flex;
+  width: 8.56269rem;
+  height: 8.42856rem;
+  position: absolute;
+  background-image: url(${BlueCharacter});
+  background-repeat: no-repeat;
+  background-size: contain;
+  top: 72%;
+  left: -2%;
+  z-index: 0;
+  display: flex;
+`;
 const ImageXBtn = styled.button`
   position: absolute;
   width: 1.32625rem;
@@ -277,12 +292,12 @@ const Input2 = styled(Input1)`
   width: 33.9325rem;
   height: 8.1225rem;
   flex-shrink: 0;
-  color: var(--grey-grey-6-secondary, #504F4F);
-  font-family: Pretendard;
+  color: var(--grey-Grey_3, #B3B3B3);
+  font-family: Inter;
   font-size: 1rem;
   font-style: normal;
-  font-weight: 500;
-  line-height: 1.4375rem; 
+  font-weight: 400;
+  line-height: normal;
   margin-top: 0.63rem;
   padding-top: 0.94rem;
 `;

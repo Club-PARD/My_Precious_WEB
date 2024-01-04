@@ -83,7 +83,7 @@ function ShowMyboard(manageData) {
                 <DarkGrayText>상환 계획</DarkGrayText>
                 <DisplayDataReasonDiv style={{height: "4.375rem"}}>
                   <DisplayDataReasonText>
-                    {manageData.manageData.situation}
+                    {manageData.manageData.payWay}
                   </DisplayDataReasonText>
                 </DisplayDataReasonDiv>
               </Line>
@@ -215,7 +215,7 @@ const ImageXBtn = styled.button`
 `;
 
 const HeaderText = styled.div`
-  color: var(--primary_orange, #ff3d00);
+  color: var(--primary_orange, #FF3D00);
   text-align: center;
   font-family: Pretendard;
   font-size: 1.75rem;
