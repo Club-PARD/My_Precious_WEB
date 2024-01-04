@@ -15,7 +15,7 @@ export async function handleGoogleLogin(setLogInData, setUserData, navigate) {
 
     // axios를 이용한 POST 요청
     const response = await axios.post(
-      "http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/users",
+      "http://13.209.230.190/api/v23/users",
       userData
     );
     console.log(response.data);

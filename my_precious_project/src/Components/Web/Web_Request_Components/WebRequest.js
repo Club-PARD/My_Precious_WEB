@@ -154,7 +154,7 @@ const WebRequest = () => {
     console.log(form);
     axios
       .post(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/boards/${uid}`,
+        `http://13.209.230.190/api/v23/boards/${uid}`,
         {
           title: form.title,
           borrowMoney: form.borrowMoney,
@@ -207,7 +207,7 @@ const WebRequest = () => {
                   <div className="container">
                     <input
                       type="text"
-                      placeholder="예시) 어머님 수술비가 위급합니다. 조금이라도 도와주세요.."
+                      placeholder="제목을 15자 이내로 간결하게 적어주세요. ex) 어머님 수술비"
                       onChange={(e) =>
                         setForm({ ...form, title: e.target.value })
                       }
@@ -222,7 +222,7 @@ const WebRequest = () => {
                   <div className="container">
                     <textarea
                       type="text"
-                      placeholder="돈을 빌려야 하는 자세한 상황을 이야기 해주세요."
+                      placeholder="친구에게 돈을 빌려야 하는 자세한 상황을 설명해주세요. ex) 지난달에 .."
                       onChange={(e) =>
                         setForm({ ...form, situation: e.target.value })
                       }
@@ -530,7 +530,7 @@ const InputTitle = styled.div`
   }
   .title {
     color: #6a6a6a;
-    margin-right: 3rem;
+    //margin-right: 3rem;
     font-family: Pretendard;
     font-size: 1rem;
     font-style: normal;
@@ -617,7 +617,7 @@ const InputReason = styled.div`
   }
   .title {
     color: #6a6a6a;
-    margin-right: 3rem;
+    //margin-right: 3rem;
     font-family: Pretendard;
     font-size: 1rem;
     font-style: normal;
@@ -1083,7 +1083,7 @@ const CheckContainer = styled.div`
   line-height: 2.4375rem; /* 216.667% */
   cursor: default;
   .title {
-    width: 2rem;
+    width: 3rem;
     margin-right: 1rem;
   }
   p {

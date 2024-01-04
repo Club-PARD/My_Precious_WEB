@@ -239,7 +239,7 @@ function WritingMessage({ checkSendMessage, setCheckSendMessage, boardId }) {
     console.log("보낸 데이터 확인", Data);
     axios
       .post(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/debts/boards/${boardId}/users/${uid}`,
+        `http://13.209.230.190/api/v23/debts/boards/${boardId}/users/${uid}`,
         Data
       )
       .then((response) => {
