@@ -75,7 +75,7 @@ function SentToEmailModal({ props }) {
           </GuideText>
           <Form style={{width:"36.8125rem", alignItems: "end"}}>
             <Input1
-              placeholder="제목을 작성하는 곳"
+              placeholder="제목을 작성해주세요."
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             ></Input1>
