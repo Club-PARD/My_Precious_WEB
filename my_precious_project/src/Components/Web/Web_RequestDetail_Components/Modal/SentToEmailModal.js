@@ -45,6 +45,8 @@ function SentToEmailModal({ props }) {
       })
       .catch((error) => console.log("error: " + error));
 
+    setTitle("");
+    setMessage("");
     closeModal();
   };
 

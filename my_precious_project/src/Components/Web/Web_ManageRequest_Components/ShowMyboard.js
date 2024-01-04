@@ -55,7 +55,10 @@ function ShowMyboard(manageData) {
         style={customModalStyles}
       >
         <ContextDiv>
-          <ImageXBtn onClick={closeModal} />
+          <ImageXBtn
+            src={process.env.PUBLIC_URL + "/img/CloseButton.svg"}
+            onClick={closeModal}
+          />
           <BlueImage alt="파란색 캐릭터 이미지" />
           <HeaderText>
             친구에게 돈을 빌리는 것은 당연한 게 아니에요! <br></br>예쁜 말로
@@ -63,10 +66,10 @@ function ShowMyboard(manageData) {
           </HeaderText>
           <CenterContents>
             <DisplayBoxDiv>
-              <Line style={{ height: "2.4375rem", }}>
+              <Line style={{ height: "2.4375rem" }}>
                 <DarkGrayText>제목</DarkGrayText>
                 <DisplayDataTitleDiv>
-                  <DisplayDataTitleText style={{alignItems:"center"}}>
+                  <DisplayDataTitleText style={{ alignItems: "center" }}>
                     {manageData.manageData.title}
                   </DisplayDataTitleText>
                 </DisplayDataTitleDiv>
@@ -81,13 +84,13 @@ function ShowMyboard(manageData) {
               </Line>
               <Line>
                 <DarkGrayText>상환 계획</DarkGrayText>
-                <DisplayDataReasonDiv style={{height: "4.375rem"}}>
+                <DisplayDataReasonDiv style={{ height: "4.375rem" }}>
                   <DisplayDataReasonText>
                     {manageData.manageData.payWay}
                   </DisplayDataReasonText>
                 </DisplayDataReasonDiv>
               </Line>
-              <Line >
+              <Line>
                 <DarkGrayText style={{ height: "2.4375rem" }}>
                   필요 금액
                 </DarkGrayText>
@@ -101,14 +104,14 @@ function ShowMyboard(manageData) {
                   <DisplayDataTotalText>{formatted_date2}</DisplayDataTotalText>
                 </DisplayDataTotalDiv>
               </Line>
-              <Line style={{ justifyContent: "start" }}>
-                <DarkGrayText
-                  style={{ height: "2.4375rem", marginRight: "1.46rem",}}
-                >
-                  받을 계좌
-                </DarkGrayText>
+              <Line style={{ height: "2.4375rem" }}>
+                <DarkGrayText>받을 계좌</DarkGrayText>
                 <DisplayDataTotalDiv
-                  style={{ width: "13rem", marginRight: "1.3rem" }}
+                  style={{
+                    width: "13rem",
+                    // marginRight: "0.62rem",
+                    marginLeft: "0.9rem",
+                  }}
                 >
                   <DisplayDataTotalText>
                     {manageData.manageData.bank}
@@ -198,24 +201,17 @@ const ContextDiv = styled.div`
   margin-top: 2.37rem;
 `;
 
-const ImageXBtn = styled.button`
+const ImageXBtn = styled.img`
   position: absolute;
   width: 1.1875rem;
   height: 1.19113rem;
-  flex-shrink: 0;
-  background-image: url(${ImageX});
-  background-repeat: no-repeat;
-  background-size: contain;
   top: -3%;
   left: 92%;
-  z-index: 0;
-  display: flex;
-  border: none;
   cursor: pointer;
 `;
 
 const HeaderText = styled.div`
-  color: var(--primary_orange, #FF3D00);
+  color: var(--primary_orange, #ff3d00);
   text-align: center;
   font-family: Pretendard;
   font-size: 1.75rem;
@@ -269,8 +265,6 @@ const Line = styled.div`
 const DarkGrayText = styled.div`
   display: flex;
   color: #6a6a6a;
-
-  color: #6a6a6a;
   font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
@@ -284,7 +278,7 @@ const DisplayDataDiv = styled.div`
   height: 3.1875rem;
   flex-shrink: 0;
   border-radius: 0.625rem;
-  border: 1px solid #E0E0E0;
+  border: 1px solid #e0e0e0;
   background: #fafafa;
   overflow: auto;
 `;
@@ -303,7 +297,7 @@ const DisplayDataText = styled.div`
 `;
 
 const DisplayDataTitleDiv = styled(DisplayDataDiv)`
-  height:  2.4375rem;
+  height: 2.4375rem;
 `;
 
 const DisplayDataTitleText = styled(DisplayDataText)`
@@ -319,7 +313,7 @@ const DisplayDataReasonDiv = styled(DisplayDataDiv)`
 
 const DisplayDataReasonText = styled(DisplayDataText)`
   color: var(--grey-grey-6-secondary, #504f4f);
-  text-align: right;
+  text-align: left;
   font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
