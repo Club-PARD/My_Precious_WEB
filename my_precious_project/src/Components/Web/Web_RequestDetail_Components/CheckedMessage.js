@@ -7,6 +7,7 @@ import axios from "axios";
 import { useUserData } from "../../../contexts/userContext";
 import CheckBox from "../../../Assets/img/CheckBox.svg";
 import SentToEmailModal from "./Modal/SentToEmailModal.js";
+import Modal from "../Web_Login_Components/Modal/Modal.js";
 
 // 글읽기 페이지에서 채권자 입장(로그인 상태-> 빌려준 상태)
 function CheckedMessage({ debtIdgnum }) {
@@ -14,6 +15,7 @@ function CheckedMessage({ debtIdgnum }) {
   const [userData, setUserData] = useUserData();
   const uid = userData.uid;
   const debtId = debtIdgnum;
+  const [modalShow, setModalShow] = useState(false);
 
   const [detailData, setDetailData] = useState({
     lendMoney: "",
@@ -148,7 +150,7 @@ const Container = styled.div`
   border-radius: 0.625rem;
   background: #FAFAFA;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-  margin-left: 3.625rem;
+  margin-left: 1.25rem;
   align-items: center;
 `;
 
