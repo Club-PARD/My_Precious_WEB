@@ -101,7 +101,6 @@ function CheckedMessage({ debtIdgnum }) {
         <ContentsDiv>
           <HeaderDiv>
             <Name>{detailData.name} 님</Name>
-            <BorrowMoney>{formattedNumber} 원</BorrowMoney>
           </HeaderDiv>
           <DetailDiv>
             <GrayText>응원메시지</GrayText>
@@ -121,10 +120,10 @@ function CheckedMessage({ debtIdgnum }) {
           </DetailDiv>
         </ContentsDiv>
         <Div>
+          <SentToEmailModal props={Modal_Chaseup} />
           <CheckBtn onClick={CheckDebtStatusSubmit}>
             갚은 것을 확인했어요
           </CheckBtn>
-          <SentToEmailModal props={Modal_Chaseup} />
         </Div>
       </Container>
     </ThemeProvider>
@@ -136,12 +135,12 @@ const Container = styled.div`
   flex-direction: column;
   margin: 0;
   padding: 0;
-  width: 31.1875rem;
-  height: 22.25rem;
+  width: 29.25rem;
+  height: 21.25rem;
   flex-shrink: 0;
   border-radius: 0.625rem;
-  background: #fff;
-  box-shadow: 0px 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.25);
+  background: #FAFAFA;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
   margin-left: 3.625rem;
   align-items: center;
 `;
@@ -151,25 +150,26 @@ const ContentsDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 26.435rem;
-  padding-top: 1.12rem;
 `;
 
 const HeaderDiv = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding-bottom: 2.2rem;
+  padding-top: 2.19rem;
+  padding-bottom: 2.5rem;
 `;
 
 const Name = styled.div`
   display: flex;
-  color: var(--grey-grey-6-secondary, #504f4f);
+  color: var(--grey-Grey_7, #3E3E3E);
+  text-align: center;
   font-family: Pretendard;
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   font-style: normal;
-  font-weight: 600;
-  line-height: 1.1875rem; /* 95% */
+  font-weight: 700;
+  line-height: 1.375rem; /* 78.571% */
 `;
 
 const BorrowMoney = styled.div`
@@ -244,16 +244,17 @@ const DisplayBorderText = styled.div`
 const Div = styled.div`
   display: flex;
   flex-direction: row;
-  width: 30rem;
   justify-content: space-between;
-  padding-top: 1.94rem;
+  padding-top: 1.63em;
   align-items: center;
+  justify-content: center;
   width: 23.5rem;
+  gap: 1.25rem
 `;
 
 const CheckBtn = styled.button`
   display: flex;
-  width: 10.9375rem;
+  width: 12.4375rem;
   height: 2.5rem;
   flex-shrink: 0;
   border-radius: 0.375rem;

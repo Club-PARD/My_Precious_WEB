@@ -20,43 +20,43 @@ const Container = styled.div`
   flex-direction: column;
   margin: 0;
   padding: 0;
-  width: 31.1875rem;
-  height: 22.25rem;
+  width: 29.25rem;
+  height: 21.25rem;
   flex-shrink: 0;
   border-radius: 0.625rem;
-  background: #fff;
-  box-shadow: 0px 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.25);
+  background: #FAFAFA;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
   margin-left: 3.625rem;
   align-items: center;
 `;
 
 const TitleText = styled.div`
-  color: var(--primary_orange, #ff3d00);
+  color: var(--primary_orange, #FF3D00);
   text-align: center;
   font-family: Pretendard;
   font-size: 1.75rem;
   font-style: normal;
   font-weight: 700;
   line-height: 1.375rem; /* 78.571% */
-  padding-top: 1.9375rem;
+  padding-top: 2.19rem;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 1.5rem;
+  padding-top: 2.5rem;
 `;
 
 const Input1 = styled.textarea`
   display: flex;
-  width: 25.4375rem;
-  height: 3.875rem;
+  width: 20.0625rem;
+  height: 3.5rem;
   flex-shrink: 0;
   overflow: auto;
   border-radius: 0.625rem;
   border: 0.0625rem solid var(--grey-Grey_2, #d9d9d9);
-  padding: 1rem 1.31rem 1rem 1.31rem;
+  padding: 0.56rem 0.69rem 0.56rem 0.69rem;
   resize: none;
 
   &::placeholder {
@@ -111,14 +111,21 @@ const InputBoxDiv = styled.div`
   line-height: 2.4375rem; /* 278.571% */
 `;
 
-const GaryText = styled.div`
+const GrayText = styled.div`
+  display: flex;
   color: var(--grey-Grey_4, #8e8e8e);
   font-family: Pretendard;
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 2.4375rem;
-  padding-left: 0.9375rem;
+  line-height: 2.4375rem; /* 278.571% */
+`;
+
+const DetailDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const Input2 = styled.input`
@@ -300,13 +307,16 @@ function WritingMessage({ checkSendMessage, setCheckSendMessage, boardId }) {
       <Container>
         <TitleText>꼭 송금한 이후 작성해주세요.</TitleText>
         <Form onSubmit={handleSubmit}>
+          <DetailDiv>
+          <GrayText>응원 메시지</GrayText>
           <Input1
             type="text"
             placeholder="친구에게 간단한 응원 메세지를 함께 남겨보세요. 머니글러브가 도움을 잘 간직하고 있을게요. 해당글은 머글님이 계속해서 볼 수 있어요."
             onChange={(e) => setForm({ ...form, message: e.target.value })}
           ></Input1>
-          <InputBoxDiv style={{ marginTop: "1.31rem" }}>
-            <GaryText>빌려준 금액</GaryText>
+          </DetailDiv>
+          <DetailDiv>
+          <GrayText>빌려준 금액</GrayText>
             <Input2
               type="text"
               placeholder="절대 무리해서 빌려주지 않도록 유의해주세요!"
@@ -318,9 +328,9 @@ function WritingMessage({ checkSendMessage, setCheckSendMessage, boardId }) {
                 }))
               }
             ></Input2>
-          </InputBoxDiv>
-          <InputBoxDiv style={{ marginTop: "0.5rem" }}>
-            <GaryText>돌려받을 계좌</GaryText>
+          </DetailDiv>
+          <DetailDiv>
+            <GrayText>돌려받을 계좌</GrayText>
             <FormControl
               sx={{
                 width: "5.2rem",
@@ -394,7 +404,7 @@ function WritingMessage({ checkSendMessage, setCheckSendMessage, boardId }) {
                 }))
               }
             ></Input3>
-          </InputBoxDiv>
+          </DetailDiv>
           <SaveButton
             disabled={isButtonDisabled}
             onClick={() => setModalShow(!modalShow)}

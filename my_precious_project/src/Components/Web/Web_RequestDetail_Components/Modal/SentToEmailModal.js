@@ -54,9 +54,9 @@ function SentToEmailModal({ props }) {
   return (
     <div>
       {props.function === "재촉편지" ? (
-        <ChaseUpBtn onClick={openModal}>{props.function} 작성</ChaseUpBtn>
+        <ChaseUpBtn onClick={openModal}>{props.function} 작성하기</ChaseUpBtn>
       ) : (
-        <ThankUBtn onClick={openModal}>{props.function} 작성</ThankUBtn>
+        <ThankUBtn onClick={openModal}>{props.function} 작성하기</ThankUBtn>
       )}
       <Modal
         isOpen={modalIsOpen}
@@ -127,7 +127,7 @@ const customModalStyles = {
 
 const ChaseUpBtn = styled.button`
   display: flex;
-  width: 10.9375rem;
+  width: 12.4375rem;
   height: 2.5rem;
   flex-shrink: 0;
   border-radius: 0.375rem;
