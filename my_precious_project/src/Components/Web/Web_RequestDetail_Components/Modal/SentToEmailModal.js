@@ -39,7 +39,10 @@ function SentToEmailModal({ props }) {
     };
 
     axios
-      .post(`https://httptest.dhdhh.shop/api/v23/mails`, data)
+      .post(
+        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/mails`,
+        data
+      )
       .then((response) => {
         console.log(response);
       })
@@ -68,9 +71,9 @@ function SentToEmailModal({ props }) {
             작성해보세요!
           </HeaderText>
           <GuideText>
-            <div style={{ display: "flex" }}>{props.subHeader}</div>
+            <div style={{display: "flex"}}>{props.subHeader}</div>
           </GuideText>
-          <Form style={{ width: "36.8125rem", alignItems: "end" }}>
+          <Form style={{width:"36.8125rem", alignItems: "end"}}>
             <Input1
               placeholder="제목을 작성하는 곳"
               value={title}
@@ -85,7 +88,7 @@ function SentToEmailModal({ props }) {
               보내기
             </SubmitBtn>
           </Form>
-          <BlueImage />
+          <BlueImage/>
         </ContextDiv>
       </Modal>
     </div>
@@ -234,9 +237,9 @@ const HeaderOrange = styled(HeaderText)`
 const GuideText = styled.div`
   display: flex;
   height: 2.5rem;
-  width: 36.8125rem;
+  width : 36.8125rem;
   flex-shrink: 0;
-  color: var(--grey-grey-6-secondary, #504f4f);
+  color: var(--grey-grey-6-secondary, #504F4F);
   font-family: Pretendard;
   font-size: 1.125rem;
   font-style: normal;
@@ -265,7 +268,7 @@ const Input1 = styled.textarea`
   padding-left: 1.44rem;
   padding-right: 1.44rem;
   resize: none;
-  color: var(--grey-Grey_7, #3e3e3e);
+  color: var(--grey-Grey_7, #3E3E3E);
   font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
@@ -289,7 +292,7 @@ const Input2 = styled(Input1)`
   width: 33.9325rem;
   height: 8.1225rem;
   flex-shrink: 0;
-  color: var(--grey-Grey_3, #b3b3b3);
+  color: var(--grey-Grey_3, #B3B3B3);
   font-family: Inter;
   font-size: 1rem;
   font-style: normal;

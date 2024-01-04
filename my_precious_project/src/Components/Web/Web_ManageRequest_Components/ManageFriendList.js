@@ -29,7 +29,9 @@ function ManageFriendList({ boardId, handleDisplayData }) {
 
   useEffect(() => {
     axios
-      .get(`https://httptest.dhdhh.shop/api/v23/debts/boards/${boardId}`)
+      .get(
+        `http://13.209.230.190/api/v23/debts/boards/${boardId}`
+      )
       .then((response) => {
         console.log("데이터를 받아오는중: ", response);
 
