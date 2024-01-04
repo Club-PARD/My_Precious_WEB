@@ -14,8 +14,6 @@ import ManageBottom from "./ManageBottom.js";
 import axios from "axios";
 import ShowMyboard from "./ShowMyboard.js";
 import { useParams } from "react-router-dom";
-import "semantic-ui-css/semantic.min.css";
-import { Dropdown } from "semantic-ui-react";
 
 const Container = styled.div`
   display: flex;
@@ -51,9 +49,9 @@ const TitleDiv = styled.div`
 const LinkCopyDiv = styled.div`
   display: flex;
   flex-direction: row;
-  width: 54.625rem;
+  width: 51.875rem;
   justify-content: end;
-  padding-bottom: 1.25rem;
+  padding-bottom: 1.06rem;
   position: relative;
 `;
 
@@ -89,17 +87,6 @@ const BackBtn = styled.button`
   cursor: pointer;
 `;
 
-const DropText = styled.div`
-  font-weight: 500 !important;
-`;
-
-const Avatar = styled.img`
-  width: 2rem;
-  height: 2rem;
-  margin-left: 0.5rem;
-  border-radius: 50%;
-`;
-
 function WebManageRequest() {
   let boardId = useParams();
   boardId = boardId.board_id;
@@ -110,7 +97,6 @@ function WebManageRequest() {
     title: "",
     borrowMoney: 0,
     payDate: "",
-    payWay: "",
     situation: "",
     bank: "",
     bankAccount: "",
@@ -134,7 +120,6 @@ function WebManageRequest() {
         title: borrowData.title,
         borrowMoney: borrowData.borrowMoney,
         payDate: borrowData.payDate,
-        payWay:borrowData.payWay,
         situation: borrowData.situation,
         bank: borrowData.bank,
         bankAccount: borrowData.bankAccount,
@@ -206,53 +191,6 @@ function WebManageRequest() {
     navigate("/dashboard");
   };
 
-  const options = [
-    {
-      key: "update",
-      text: "글 수정하기",
-      disabled: manageData.lendMoneyCount > 0 ? false : true,
-    },
-    {
-      key: "delete",
-      text: "글 삭제하기",
-      disabled: manageData.lendMoneyCount > 0 ? false : true,
-    },
-  ];
-
-  const handleDropdownChange = async (e, { value }) => {
-    if (value === "update") {
-      // '글 수정하기' 옵션을 선택했을 때의 동작
-      try {
-        // 데이터 수정을 위한 Fetch 또는 Axios 요청 등을 여기에 추가
-        // 예시: 게시글 수정을 위한 API 호출
-        const response = await axios.put(
-          `http://your-api-endpoint/update/${boardId}`
-        );
-
-        console.log("게시글이 성공적으로 수정되었습니다:", response.data);
-        // 데이터를 수정한 후 필요한 작업을 수행
-        getData();
-      } catch (error) {
-        console.error("게시글 수정 중 에러 발생:", error);
-      }
-    } else if (value === "delete") {
-      // '글 삭제하기' 옵션을 선택했을 때의 동작
-      // 데이터 삭제 등을 처리하는 로직을 추가
-      try {
-        const response = await axios.delete(
-          `http://your-api-endpoint/delete/${boardId}`
-        );
-
-        console.log("게시글이 성공적으로 삭제되었습니다:", response.data);
-        // 데이터를 삭제한 후 필요한 작업을 수행
-        // 예시: navigate("/dashboard") 등으로 리다이렉트
-        navigate("/dashboard");
-      } catch (error) {
-        console.error("게시글 삭제 중 에러 발생:", error);
-      }
-    }
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <Container>
@@ -269,7 +207,6 @@ function WebManageRequest() {
               <CopyText>링크복사</CopyText>
             </CopyToClipboard>
             <ShowMyboard manageData={manageData} />
-            <Dropdown options={options} />
           </LinkCopyDiv>
           <ManageSummary
             manageData={manageData}
