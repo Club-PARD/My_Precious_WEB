@@ -12,6 +12,7 @@ export async function handleGoogleLogin(setLogInData, setUserData, navigate) {
       uid: data.user.uid,
     };
     setLogInData(userData);
+    console.log("로그인 정보 : ", userData);
 
     // axios를 이용한 POST 요청
     const response = await axios.post(

@@ -148,6 +148,7 @@ const WebRequest = () => {
   const [isInputFocused4, setIsInputFocused4] = useState(false);
   const [isInputFocused5, setIsInputFocused5] = useState(false);
   const [isInputFocused6, setIsInputFocused6] = useState(false);
+  const [isInputFocused7, setIsInputFocused7] = useState(false);
 
   /***** 데이터 전송 *****/
   const handleSubmit = () => {
@@ -228,7 +229,21 @@ const WebRequest = () => {
                   />
                 </div>
               </InputReason>
-              <InputFinanceInfo className={isInputFocused3 ? "focused" : ""}>
+              <InputMethod className={isInputFocused3 ? "focused" : ""}>
+                <div className="title">상환 계획</div>
+                <div className="container">
+                  <textarea
+                    type="text"
+                    placeholder="어떤 방법으로 갚을 예정인지 상환 계획을 알려주면 좋아요. ex) 4월달에 알바비 들어와..)"
+                    onChange={(e) =>
+                      setForm({ ...form, situation: e.target.value })
+                    }
+                    onFocus={() => setIsInputFocused3(true)}
+                    onBlur={() => setIsInputFocused3(false)}
+                  />
+                </div>
+              </InputMethod>
+              <InputFinanceInfo className={isInputFocused4 ? "focused" : ""}>
                 <div className="title">필요 금액</div>
                 <div className="container">
                   <input
@@ -242,19 +257,19 @@ const WebRequest = () => {
                       onChangePoints(e);
                     }}
                     value={addComma(money)}
-                    onFocus={() => setIsInputFocused3(true)}
-                    onBlur={() => setIsInputFocused3(false)}
+                    onFocus={() => setIsInputFocused4(true)}
+                    onBlur={() => setIsInputFocused4(false)}
                     maxLength="14"
                   ></input>
                   <div className="won">원</div>
                 </div>
               </InputFinanceInfo>
-              <InputDayInfo className={isInputFocused4 ? "focused" : ""}>
+              <InputDayInfo className={isInputFocused5 ? "focused" : ""}>
                 <div className="title">갚을 날짜</div>
                 <div
                   className="container"
-                  onFocus={() => setIsInputFocused4(true)}
-                  onBlur={() => setIsInputFocused4(false)}
+                  onFocus={() => setIsInputFocused5(true)}
+                  onBlur={() => setIsInputFocused5(false)}
                 >
                   <LocalizationProvider
                     dateAdapter={AdapterDayjs}
@@ -302,13 +317,13 @@ const WebRequest = () => {
                 </div>
               </InputDayInfo>
               <InputBankInfo
-                className={isInputFocused5 && isInputFocused6 ? "focused" : ""}
+                className={isInputFocused6 && isInputFocused6 ? "focused" : ""}
               >
                 <div className="title">받을 계좌</div>
                 <div
                   className="container1"
-                  onFocus={() => setIsInputFocused5(true)}
-                  onBlur={() => setIsInputFocused5(false)}
+                  onFocus={() => setIsInputFocused6(true)}
+                  onBlur={() => setIsInputFocused6(false)}
                 >
                   <FormControl
                     sx={{
@@ -359,8 +374,8 @@ const WebRequest = () => {
                 </div>
                 <div
                   className="container2"
-                  onFocus={() => setIsInputFocused6(true)}
-                  onBlur={() => setIsInputFocused6(false)}
+                  onFocus={() => setIsInputFocused7(true)}
+                  onBlur={() => setIsInputFocused7(false)}
                 >
                   <input
                     className="input2"
@@ -428,7 +443,7 @@ const WebRequest = () => {
 
 const ContentContainer = styled.div`
   width: 100%;
-  height: 43.4375rem;
+  /* height: 43.4375rem; */
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -448,7 +463,7 @@ const RightDiv = styled.div`
 
 const MainContainer = styled.div`
   width: 47.0625rem;
-  height: 43rem;
+  /* height: 43.4375rem; */
   flex-shrink: 0;
   border-radius: 1.25rem;
   background: #fbfbfb;
@@ -470,14 +485,15 @@ const TitleContainer = styled.div`
 `;
 
 const MainImage = styled.img`
-  width: 6.75525rem;
-  height: 6.75525rem;
+  width: 6.11963rem;
+  height: 6.11963rem;
   flex-shrink: 0;
-  margin: 1.12rem 3.31rem 1.12rem 1.25rem;
+  margin: 0.74rem 3.94rem 1.08rem 1.25rem;
 `;
 
 const Container = styled.div`
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -500,8 +516,8 @@ const MainText = styled.div`
 const InputTitle = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 1.25rem;
-  width: 42.4375rem;
+  /* margin-top: 1.25rem; */
+  width: 41.5625rem;
   height: 2.4375rem;
   position: relative;
   justify-content: center;
@@ -522,7 +538,7 @@ const InputTitle = styled.div`
     margin: 0.37rem 0rem 0.37rem 0rem;
   }
   .container {
-    width: 37.5625rem;
+    width: 36.8125rem;
     height: 2.4375rem;
     flex-shrink: 0;
     border-radius: 0.625rem;
@@ -533,7 +549,6 @@ const InputTitle = styled.div`
   }
   .title {
     color: #6a6a6a;
-    margin-right: 3rem;
     font-family: Pretendard;
     font-size: 1rem;
     font-style: normal;
@@ -544,7 +559,7 @@ const InputTitle = styled.div`
     cursor: pointer;
     position: relative;
     box-sizing: border-box;
-    width: 36.2525rem;
+    width: 35.5025rem;
     height: 2.4375rem;
     flex-shrink: 0;
     border: none;
@@ -588,11 +603,11 @@ const InputReason = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 0.56rem;
-  width: 42.4375rem;
+  width: 41.5625rem;
   height: 8.5625rem;
   position: relative;
   justify-content: center;
-  /* align-items: center; */
+  align-items: center;
   div {
     width: 4.875rem;
     color: rgba(105, 102, 102, 1);
@@ -601,12 +616,12 @@ const InputReason = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 2.4375rem; /* 278.571% */
-    margin: 0.37rem 0rem 0.37rem 0rem;
+    margin: 0rem 0rem 0rem 0rem;
   }
   .container {
     display: flex;
     align-items: center;
-    width: 37.5625rem;
+    width: 36.8125rem;
     height: 8.5625rem;
     flex-shrink: 0;
     border-radius: 0.625rem;
@@ -620,18 +635,16 @@ const InputReason = styled.div`
   }
   .title {
     color: #6a6a6a;
-    margin-right: 3rem;
     font-family: Pretendard;
     font-size: 1rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 2.4375rem; /* 243.75% */
-    margin-top: 1.12rem;
+    line-height: 1.25rem; /* 125% */
   }
   textarea {
     cursor: pointer;
     box-sizing: border-box;
-    width: 36.2525rem;
+    width: 34rem;
     height: 6.4rem;
     flex-shrink: 0;
     border-radius: 0.625rem;
@@ -677,8 +690,7 @@ const InputMethod = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 0.56rem;
-  margin-bottom: 3.5625rem;
-  width: 42.4375rem;
+  width: 41.5625rem;
   height: 5.3125rem;
   position: relative;
   justify-content: center;
@@ -691,19 +703,26 @@ const InputMethod = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 2.4375rem; /* 278.571% */
-    margin: 0.375rem 0rem 0.375rem 0rem;
+    margin: 0rem 0rem 0rem 0rem;
+  }
+  .title {
+    color: #6a6a6a;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.25rem; /* 125% */
   }
   .container {
     display: flex;
     align-items: center;
-    width: 37.5625rem;
+    width: 36.8125rem;
     height: 5.3125rem;
     flex-shrink: 0;
     border-radius: 0.625rem;
     border: 1px solid #e8e8e8;
     background: #fff;
     font-family: Pretendard;
-    margin-left: 1.31rem;
   }
   .container:hover {
     border: 1px solid #ff3d00;
@@ -711,7 +730,7 @@ const InputMethod = styled.div`
   textarea {
     cursor: pointer;
     box-sizing: border-box;
-    width: 36.2525rem;
+    width: 34rem;
     height: 5.3125rem;
     flex-shrink: 0;
     border-radius: 0.625rem;
@@ -757,7 +776,7 @@ const InputDayInfo = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 0.625rem;
-  width: 42.4375rem;
+  width: 41.5625rem;
   height: 2.4375rem;
   position: relative;
   justify-content: center;
@@ -777,7 +796,7 @@ const InputDayInfo = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 37.5625rem;
+    width: 36.8125rem;
     height: 2.4375rem;
     flex-shrink: 0;
     border-radius: 0.625rem;
@@ -791,7 +810,6 @@ const InputDayInfo = styled.div`
   }
   .title {
     color: #6a6a6a;
-    margin-right: 0.06;
     font-family: Pretendard;
     font-size: 1rem;
     font-style: normal;
@@ -830,7 +848,7 @@ const InputBankInfo = styled.div`
   display: flex;
   flex-direction: row;
   /* margin-bottom: 0.625rem; */
-  width: 42.4375rem;
+  width: 41.5625rem;
   height: 2.4375rem;
   position: relative;
   justify-content: center;
@@ -846,7 +864,7 @@ const InputBankInfo = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 2.4375rem; /* 278.571% */
-    margin: 0.375rem 0rem 0.375rem 0rem;
+    margin: 0rem;
     /* top: 50%; */
   }
   .container1 {
@@ -854,14 +872,14 @@ const InputBankInfo = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: end;
-    width: 13.5rem;
+    width: 13rem;
     height: 2.4375rem;
     flex-shrink: 0;
     border-radius: 0.625rem;
     border: 1px solid #e8e8e8;
     background: #fff;
     font-family: Pretendard;
-    margin-right: 0.75rem;
+    margin-right: 0.62rem;
   }
   .container1:hover {
     border: 1px solid #ff3d00;
@@ -879,7 +897,7 @@ const InputBankInfo = styled.div`
     border: 1px solid #e8e8e8;
     background: #fff;
     font-family: Pretendard;
-    padding-right: 2.5rem;
+    padding-right: 2rem;
   }
   .container2:hover {
     border: 1px solid #ff3d00;
@@ -889,7 +907,6 @@ const InputBankInfo = styled.div`
     flex-direction: row;
     justify-content: start;
     color: #6a6a6a;
-    margin-right: 0.06rem;
     font-family: Pretendard;
     font-size: 1rem;
     font-style: normal;
@@ -897,7 +914,7 @@ const InputBankInfo = styled.div`
     line-height: 2.4375rem; /* 243.75% */
   }
   input {
-    width: 22.1875rem;
+    width: 13rem;
     height: 2.4375rem;
 
     border: none;
@@ -971,12 +988,12 @@ const InputFinanceInfo = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 0.625rem;
-  width: 42.4375rem;
+  width: 41.5625rem;
   height: 2.4375rem;
   position: relative;
   justify-content: center;
   align-items: center;
-  margin-top: 2.69rem;
+  margin-top: 0.56rem;
   div {
     width: 4.875rem;
     color: rgba(105, 102, 102, 1);
@@ -985,14 +1002,14 @@ const InputFinanceInfo = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 2.4375rem; /* 278.571% */
-    margin: 0.375rem 0rem 0.375rem 0rem;
+    margin: 0rem 0rem 0rem 0rem;
     /* top: 50%; */
   }
   .container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 37.5625rem;
+    width: 36.8125rem;
     height: 2.4375rem;
     flex-shrink: 0;
     border-radius: 0.625rem;
@@ -1006,7 +1023,6 @@ const InputFinanceInfo = styled.div`
   }
   .title {
     color: #6a6a6a;
-    margin-right: 0.06;
     font-family: Pretendard;
     font-size: 1rem;
     font-style: normal;
@@ -1060,6 +1076,7 @@ const Button = styled.button`
   border-radius: 0.625rem;
   background: #ff3d00;
   margin-top: 0.88rem;
+  margin-bottom: 1.38rem;
   color: white;
   border: 1px;
   &:disabled {
@@ -1069,12 +1086,10 @@ const Button = styled.button`
 `;
 
 const CheckContainer = styled.div`
-  width: 90rem;
   height: 2.4375rem;
   display: flex;
   flex-direction: row;
-  margin-top: 2rem;
-  /* margin-bottom: 0.5rem; */
+  margin-top: 2.06rem;
   justify-content: center;
 
   align-items: center;
