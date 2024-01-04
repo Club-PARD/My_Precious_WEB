@@ -117,7 +117,7 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
                       </TextDiv>
                     </ImageColumnDiv>
                 </ImageRowDiv> 
-                {debtIdgnum !== "" ? (
+                {uid !== "" ? (
                   <OrangeBtn 
                     onClick={handleBurrowConfirmation}
                     disabled={isButtonDisabled}
