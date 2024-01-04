@@ -51,9 +51,9 @@ const TitleDiv = styled.div`
 const LinkCopyDiv = styled.div`
   display: flex;
   flex-direction: row;
-  width: 51.875rem;
+  width: 54.625rem;
   justify-content: end;
-  padding-bottom: 1.06rem;
+  padding-bottom: 1.25rem;
   position: relative;
 `;
 
@@ -110,6 +110,7 @@ function WebManageRequest() {
     title: "",
     borrowMoney: 0,
     payDate: "",
+    payWay: "",
     situation: "",
     bank: "",
     bankAccount: "",
@@ -133,6 +134,7 @@ function WebManageRequest() {
         title: borrowData.title,
         borrowMoney: borrowData.borrowMoney,
         payDate: borrowData.payDate,
+        payWay:borrowData.payWay,
         situation: borrowData.situation,
         bank: borrowData.bank,
         bankAccount: borrowData.bankAccount,

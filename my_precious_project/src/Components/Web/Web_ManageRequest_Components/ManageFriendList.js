@@ -13,7 +13,7 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   height: 19.9375rem;
-  width: 22rem;
+  width: 21rem;
   align-items: start;
   background: #f1f1f1;
   overflow: auto;
@@ -29,7 +29,13 @@ function ManageFriendList({ boardId, handleDisplayData }) {
 
   useEffect(() => {
     axios
+<<<<<<< HEAD
       .get(`http://13.209.230.190/api/v23/debts/boards/${boardId}`)
+=======
+      .get(
+        `http://13.209.230.190/api/v23/debts/boards/${boardId}`
+      )
+>>>>>>> main
       .then((response) => {
         console.log("데이터를 받아오는중: ", response);
 

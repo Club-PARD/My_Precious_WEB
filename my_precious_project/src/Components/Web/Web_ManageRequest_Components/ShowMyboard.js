@@ -63,15 +63,15 @@ function ShowMyboard(manageData) {
           </HeaderText>
           <CenterContents>
             <DisplayBoxDiv>
-              <Line style={{ height: "3.1875rem", paddingTop: "0.5rem" }}>
+              <Line style={{ height: "2.4375rem", }}>
                 <DarkGrayText>제목</DarkGrayText>
                 <DisplayDataTitleDiv>
-                  <DisplayDataTitleText>
+                  <DisplayDataTitleText style={{alignItems:"center"}}>
                     {manageData.manageData.title}
                   </DisplayDataTitleText>
                 </DisplayDataTitleDiv>
               </Line>
-              <Line style={{ marginTop: "0.63rem", height: "7.9375rem" }}>
+              <Line style={{ height: "8.6875rem" }}>
                 <DarkGrayText>사유</DarkGrayText>
                 <DisplayDataReasonDiv>
                   <DisplayDataReasonText>
@@ -79,7 +79,15 @@ function ShowMyboard(manageData) {
                   </DisplayDataReasonText>
                 </DisplayDataReasonDiv>
               </Line>
-              <Line style={{ marginTop: "2.19em" }}>
+              <Line>
+                <DarkGrayText>상환 계획</DarkGrayText>
+                <DisplayDataReasonDiv style={{height: "4.375rem"}}>
+                  <DisplayDataReasonText>
+                    {manageData.manageData.payWay}
+                  </DisplayDataReasonText>
+                </DisplayDataReasonDiv>
+              </Line>
+              <Line >
                 <DarkGrayText style={{ height: "2.4375rem" }}>
                   필요 금액
                 </DarkGrayText>
@@ -87,15 +95,15 @@ function ShowMyboard(manageData) {
                   <DisplayDataTotalText>{MoneyNum} 원</DisplayDataTotalText>
                 </DisplayDataTotalDiv>
               </Line>
-              <Line style={{ marginTop: "0.62rem", height: "2.4375rem" }}>
+              <Line style={{ height: "2.4375rem" }}>
                 <DarkGrayText>갚을 날짜</DarkGrayText>
                 <DisplayDataTotalDiv>
                   <DisplayDataTotalText>{formatted_date2}</DisplayDataTotalText>
                 </DisplayDataTotalDiv>
               </Line>
-              <Line style={{ marginTop: "0.62rem", justifyContent: "start" }}>
+              <Line style={{ justifyContent: "start" }}>
                 <DarkGrayText
-                  style={{ height: "2.4375rem", marginRight: "1.06rem" }}
+                  style={{ height: "2.4375rem", marginRight: "1.46rem",}}
                 >
                   받을 계좌
                 </DarkGrayText>
@@ -187,7 +195,7 @@ const ContextDiv = styled.div`
   width: 54.625rem;
   flex-shrink: 0;
   position: relative;
-  margin-top: 2.81rem;
+  margin-top: 2.37rem;
 `;
 
 const ImageXBtn = styled.button`
@@ -207,7 +215,7 @@ const ImageXBtn = styled.button`
 `;
 
 const HeaderText = styled.div`
-  color: var(--primary_orange, #ff3d00);
+  color: var(--primary_orange, #FF3D00);
   text-align: center;
   font-family: Pretendard;
   font-size: 1.75rem;
@@ -243,13 +251,15 @@ const DisplayBoxDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 43rem;
-  height: 29.1875rem;
+  //height: 29.1875rem;
   margin-top: 1.64rem;
-  justify-content: center;
+  //justify-content: center;
+  //align-items: start;
+  gap: 0.56rem;
 `;
 
 const Line = styled.div`
-  width: 42.5625rem;
+  width: 43.5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -268,24 +278,13 @@ const DarkGrayText = styled.div`
   line-height: 2.4375rem; /* 243.75% */
 `;
 
-const DarkGrayText2 = styled.div`
-  display: flex;
-  color: var(--grey-grey-6-secondary, #504f4f);
-  font-family: Pretendard;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 1.4375rem; /* 143.75% */
-  margin: 0.875rem 2.25rem 0.875rem 1.3125rem;
-`;
-
 const DisplayDataDiv = styled.div`
   display: flex;
   width: 37.5625rem;
   height: 3.1875rem;
   flex-shrink: 0;
   border-radius: 0.625rem;
-  border: 1px solid #cacaca;
+  border: 1px solid #E0E0E0;
   background: #fafafa;
   overflow: auto;
 `;
@@ -304,7 +303,7 @@ const DisplayDataText = styled.div`
 `;
 
 const DisplayDataTitleDiv = styled(DisplayDataDiv)`
-  height: 3.1875rem;
+  height:  2.4375rem;
 `;
 
 const DisplayDataTitleText = styled(DisplayDataText)`
@@ -315,7 +314,7 @@ const DisplayDataTitleText = styled(DisplayDataText)`
 `;
 
 const DisplayDataReasonDiv = styled(DisplayDataDiv)`
-  height: 7.9375rem;
+  height: 8.6875rem;
 `;
 
 const DisplayDataReasonText = styled(DisplayDataText)`
@@ -350,9 +349,9 @@ const SignDiv = styled.div`
   flex-direction: row;
   gap: 1.25rem;
   justify-content: center;
-  padding-top: 2.62rem;
   align-items: center;
   padding-left: 1rem;
+  height: 5rem;
 `;
 
 const SignText = styled.div`
