@@ -149,7 +149,7 @@ const ThankUBtn = styled.button`
   width: 12.6875rem;
   height: 2.5rem;
   flex-shrink: 0;
-  border-radius: 0.375rem;
+  border-radius: 0.625rem;
   background: #b3b3b3;
   border: none;
   align-items: center;
