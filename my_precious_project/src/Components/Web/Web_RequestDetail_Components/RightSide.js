@@ -181,6 +181,7 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   position: relative;
+  margin-top: 7.75rem;
 `;
 
 const WritingMessageContainer = styled.div`

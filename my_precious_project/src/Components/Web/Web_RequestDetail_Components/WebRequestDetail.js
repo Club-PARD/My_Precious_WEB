@@ -55,7 +55,7 @@ const Container = styled.div`
 const Div = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  //align-items: center;
   width: 100%;
   justify-content: center;
   margin-top: 9.19rem;
