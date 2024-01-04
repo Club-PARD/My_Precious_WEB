@@ -153,18 +153,15 @@ const WebRequest = () => {
   const handleSubmit = () => {
     console.log(form);
     axios
-      .post(
-        `http://13.209.230.190/api/v23/boards/${uid}`,
-        {
-          title: form.title,
-          borrowMoney: form.borrowMoney,
-          payDate: form.payDate,
-          situation: form.situation,
-          payWay: form.payWay,
-          bank: form.bank,
-          bankAccount: form.bankAccount,
-        }
-      )
+      .post(`http://13.209.230.190/api/v23/boards/${uid}`, {
+        title: form.title,
+        borrowMoney: form.borrowMoney,
+        payDate: form.payDate,
+        situation: form.situation,
+        payWay: form.payWay,
+        bank: form.bank,
+        bankAccount: form.bankAccount,
+      })
       .then((response) => {
         console.log("요청데이터가 저장되었습니다.", response.data);
         // 서버에서의 응답을 처리
