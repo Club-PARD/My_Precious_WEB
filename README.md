@@ -11,7 +11,6 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 + 채권자는 공유받은 링크를 통해 글을 확인하고 채무기록을 남길 수 있습니다.
 + 구글 이메일을 통해 채권자와 채무자는 채무 기록에 대한 알람을 받을 수 있습니다.
 
-<br>
 
 ## 🔎 목차
 1. [프로젝트 전체 기간](#-프로젝트-전체-기간)
@@ -21,7 +20,6 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 5. [라이브러리](#-라이브러리)
 6. [설치 방법](#-설치-방법)
 
-<br>
 
 ## 📆 [프로젝트 전체 기간](#-프로젝트-전체-기간)
 + 23.12.02 ~24.01.06
@@ -36,6 +34,7 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 |**이름**|김현중|박민지|이유현|김채린|장동원|김현지|
 |**나이**|26|25|23|24|23|25|
 
+
 ## ✅ [Stack](#-stack)
 ![React](https://img.shields.io/badge/react-444444?style=for-the-badge&logo=react) 
 <img src="https://img.shields.io/badge/html5-E34F26?style=flat-square&logo=html5&logoColor=white"> 
@@ -47,6 +46,7 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 <img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+
 
 ## 📄 [페이지별 기능](#-페이지별-기능)
 
@@ -61,5 +61,6 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 - npm install @mui/lab @mui/material
 - npm i react-modal
 - npm i recoil
+  
 
 ## 🚩 [설치 방법](#-설치-방법)
