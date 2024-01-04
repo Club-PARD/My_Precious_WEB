@@ -153,7 +153,7 @@ const WebRequest = () => {
   const handleSubmit = () => {
     console.log(form);
     axios
-      .post(`http://13.209.230.190/api/v23/boards/${uid}`, {
+      .post(`https://httptest.dhdhh.shop/api/v23/boards/${uid}`, {
         title: form.title,
         borrowMoney: form.borrowMoney,
         payDate: form.payDate,
@@ -210,7 +210,7 @@ const WebRequest = () => {
                       }
                       onFocus={() => setIsInputFocused1(true)}
                       onBlur={() => setIsInputFocused1(false)}
-                      maxLength="15"
+                      maxLength="30"
                     />
                   </div>
                 </InputTitle>
@@ -235,11 +235,16 @@ const WebRequest = () => {
                       type="text"
                       placeholder=""
                       onChange={(e) => {
+                        const re = /[^0-9]/g;
+                        if (re.test(e.target.value)) {
+                          e.target.value = e.target.value.replace(re, "");
+                        }
                         onChangePoints(e);
                       }}
                       value={addComma(money)}
                       onFocus={() => setIsInputFocused3(true)}
                       onBlur={() => setIsInputFocused3(false)}
+                      maxLength="14"
                     ></input>
                     <div className="won">원</div>
                   </div>
@@ -363,9 +368,13 @@ const WebRequest = () => {
                       className="input2"
                       type="text"
                       placeholder="계좌 번호를 입력하세요."
-                      onChange={(e) =>
-                        setForm({ ...form, bankAccount: e.target.value })
-                      }
+                      onChange={(e) => {
+                        const re = /[^0-9]/g;
+                        if (re.test(e.target.value)) {
+                          e.target.value = e.target.value.replace(re, "");
+                        }
+                        setForm({ ...form, bankAccount: e.target.value });
+                      }}
                     />
                   </div>
                 </InputBankInfo>
@@ -492,20 +501,10 @@ const MainText = styled.div`
 `;
 
 const InputTitle = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 1.25rem;
-  width: 42.4375rem;
-  height: 2.4375rem;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  .container:hover {
-    border: 1px solid #ff3d00;
-  }
-
-  div {
-    width: 36.8125rem;
+    display: flex;
+    flex-direction: row;
+    margin-top: 1.25rem;
+    width: 42.4375rem;
     height: 2.4375rem;
     color: rgba(105, 102, 102, 1);
     font-family: Pretendard;
@@ -527,7 +526,7 @@ const InputTitle = styled.div`
   }
   .title {
     color: #6a6a6a;
-    margin-right: 3rem;
+    //margin-right: 3rem;
     font-family: Pretendard;
     font-size: 1rem;
     font-style: normal;
@@ -537,70 +536,91 @@ const InputTitle = styled.div`
   input {
     cursor: pointer;
     position: relative;
-    box-sizing: border-box;
-    width: 36.2525rem;
-    height: 2.4375rem;
-    flex-shrink: 0;
-    border: none;
-    border-radius: 0.625rem;
-    background: #fff;
-    font-family: Pretendard;
-    margin-left: 1.31rem;
-
-    &::placeholder {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #a5a5a5;
-      font-family: Pretendard;
-      font-size: 0.875rem;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 2.4375rem; /* 278.571% */
-      opacity: 1;
-      /* margin-left: 1.31rem; */
-      transition: top 0.3s, font-size 0.3s, opacity 0.3s;
+    justify-content: center;
+    align-items: center;
+    .container:hover {
+        border: 1px solid #ff3d00;
     }
-  }
-  &.focused {
+
+    div {
+        width: 36.8125rem;
+        height: 2.4375rem;
+        color: rgba(105, 102, 102, 1);
+        font-family: Pretendard;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 2.4375rem; /* 278.571% */
+        margin: 0.37rem 0rem 0.37rem 0rem;
+    }
     .container {
-      border: 1px solid #ff3d00;
+        width: 37.5625rem;
+        height: 2.4375rem;
+        flex-shrink: 0;
+        border-radius: 0.625rem;
+        border: 1px solid #e8e8e8;
+        background: #fff;
+        font-family: Pretendard;
+        /* margin-left: 1.31rem; */
     }
-  }
+    .title {
+        color: #6a6a6a;
+        margin-right: 3rem;
+        font-family: Pretendard;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 2.4375rem; /* 243.75% */
+    }
+    input {
+        cursor: pointer;
+        position: relative;
+        box-sizing: border-box;
+        width: 36.2525rem;
+        height: 2.4375rem;
+        flex-shrink: 0;
+        border: none;
+        border-radius: 0.625rem;
+        background: #fff;
+        font-family: Pretendard;
+        margin-left: 1.31rem;
 
-  input:focus {
-    margin-left: 1.31rem;
-    outline: none;
-    &::placeholder {
-      top: 10px;
-      opacity: 0;
+        &::placeholder {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a5a5a5;
+            font-family: Pretendard;
+            font-size: 0.875rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 2.4375rem; /* 278.571% */
+            opacity: 1;
+            /* margin-left: 1.31rem; */
+            transition: top 0.3s, font-size 0.3s, opacity 0.3s;
+        }
     }
-  }
+    &.focused {
+        .container {
+            border: 1px solid #ff3d00;
+        }
+    }
+
+    input:focus {
+        margin-left: 1.31rem;
+        outline: none;
+        &::placeholder {
+            top: 10px;
+            opacity: 0;
+        }
+    }
 `;
 
 const InputReason = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 0.56rem;
-  width: 42.4375rem;
-  height: 8.5625rem;
-  position: relative;
-  justify-content: center;
-  /* align-items: center; */
-  div {
-    width: 4.875rem;
-    color: rgba(105, 102, 102, 1);
-    font-family: Pretendard;
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 2.4375rem; /* 278.571% */
-    margin: 0.37rem 0rem 0.37rem 0rem;
-  }
-  .container {
     display: flex;
-    align-items: center;
-    width: 37.5625rem;
+    flex-direction: row;
+    margin-top: 0.56rem;
+    width: 42.4375rem;
     height: 8.5625rem;
     flex-shrink: 0;
     border-radius: 0.625rem;
@@ -614,7 +634,7 @@ const InputReason = styled.div`
   }
   .title {
     color: #6a6a6a;
-    margin-right: 3rem;
+    //margin-right: 3rem;
     font-family: Pretendard;
     font-size: 1rem;
     font-style: normal;
@@ -652,19 +672,74 @@ const InputReason = styled.div`
       opacity: 1;
       transition: top 0.3s, font-size 0.3s, opacity 0.3s;
     }
-  }
-  &.focused {
     .container {
-      border: 1px solid #ff3d00;
+        display: flex;
+        align-items: center;
+        width: 37.5625rem;
+        height: 8.5625rem;
+        flex-shrink: 0;
+        border-radius: 0.625rem;
+        border: 1px solid #e8e8e8;
+        background: #fff;
+        font-family: Pretendard;
+        /* margin-left: 1.31rem; */
     }
-  }
-  textarea:focus {
-    outline: none;
-    &::placeholder {
-      top: 0.625rem;
-      opacity: 0;
+    .container:hover {
+        border: 1px solid #ff3d00;
     }
-  }
+    .title {
+        color: #6a6a6a;
+        margin-right: 3rem;
+        font-family: Pretendard;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 2.4375rem; /* 243.75% */
+        margin-top: 1.12rem;
+    }
+    textarea {
+        cursor: pointer;
+        box-sizing: border-box;
+        width: 36.2525rem;
+        height: 6.4rem;
+        flex-shrink: 0;
+        border-radius: 0.625rem;
+        background: #fff;
+        border: none;
+        /* padding: 0.9375rem 1.0625rem 0rem 0rem; */
+        font-family: Pretendard;
+        margin-left: 1.31rem;
+        overflow-wrap: break-word; /* 텍스트가 영역을 벗어날 경우 줄바꿈 */
+        word-wrap: break-word; /* IE 지원을 위해 추가 */
+        white-space: pre-wrap; /* 공백 및 줄바꿈 유지 */
+        resize: none; /*사용자에 의한 크기 조정 비활성화 */
+
+        &::placeholder {
+            position: absolute;
+            top: 1rem;
+            transform: translateY(-50%);
+            color: #a5a5a5;
+            font-family: Pretendard;
+            font-size: 0.875rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 2.4375rem; /* 278.571% */
+            opacity: 1;
+            transition: top 0.3s, font-size 0.3s, opacity 0.3s;
+        }
+    }
+    &.focused {
+        .container {
+            border: 1px solid #ff3d00;
+        }
+    }
+    textarea:focus {
+        outline: none;
+        &::placeholder {
+            top: 0.625rem;
+            opacity: 0;
+        }
+    }
 `;
 
 const InputMethod = styled.div`

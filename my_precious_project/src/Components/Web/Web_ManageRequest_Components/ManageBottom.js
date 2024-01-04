@@ -11,8 +11,9 @@ import ManageFriendList from "./ManageFriendList.js";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  width: 51.875rem;
+  width: 54.625rem;
   padding-top: 3.31rem;
+  gap: 0.2rem;
 `;
 
 const ColumnDiv = styled.div`
@@ -60,8 +61,8 @@ const LeftNoDiv = styled.div`
   height: 19.9375rem;
   flex-shrink: 0;
   border-radius: 0.625rem;
-  background: #f0f0f0;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background: #fafafa;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
   color: var(--grey-Grey_3, #b3b3b3);
   font-family: Pretendard;
   font-size: 1.125rem;
@@ -77,8 +78,8 @@ const RightNoDiv = styled.div`
   width: 19.625rem;
   height: 19.9375rem;
   border-radius: 0.625rem;
-  background: #f0f0f0;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background: #fafafa;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
   color: var(--grey-Grey_3, #b3b3b3);
   font-family: Pretendard;
@@ -112,7 +113,7 @@ function ManageBottom({ boardId, manageData }) {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `http://13.209.230.190/api/v23/debts/boards/${boardId}`
+        `https://httptest.dhdhh.shop/api/v23/debts/boards/${boardId}`
       );
       const borrowData = response.data.data;
       if (borrowData) {
@@ -156,20 +157,12 @@ function ManageBottom({ boardId, manageData }) {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        <ColumnDiv style={{ width: "31.1875rem", marginRight: "0.75rem" }}>
+        <ColumnDiv style={{ width: "20.225rem", marginRight: "2.88rem" }}>
           <DisplayFriends>도와준 친구들</DisplayFriends>
-          {debtLength === 0 ? (
-            <LeftNoDiv>아직 내역이 없어요.</LeftNoDiv>
-          ) : (
-            <DisplayFriend displayData={displayData} debtId={debtidData} />
-          )}
-        </ColumnDiv>
-        <ColumnDiv style={{ width: "20.225rem" }}>
           <FriendsCountDiv>
             <FriendsCountText>{debtLength}명</FriendsCountText>의 친구들이
             도와주고 있어요
           </FriendsCountDiv>
-
           {debtLength === 0 ? (
             <RightNoDiv>아직 내역이 없어요.</RightNoDiv>
           ) : (
@@ -177,6 +170,13 @@ function ManageBottom({ boardId, manageData }) {
               boardId={boardId}
               handleDisplayData={handleDisplayData}
             />
+          )}
+        </ColumnDiv>
+        <ColumnDiv style={{ width: "31.1875rem" }}>
+          {debtLength === 0 ? (
+            <LeftNoDiv>아직 내역이 없어요.</LeftNoDiv>
+          ) : (
+            <DisplayFriend displayData={displayData} debtId={debtidData} />
           )}
         </ColumnDiv>
       </Container>

@@ -113,7 +113,7 @@ function WebManageRequest() {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `http://13.209.230.190/api/v23/boards/${boardId}`
+        `https://httptest.dhdhh.shop/api/v23/boards/${boardId}`
       );
       const borrowData = response.data.data;
       let transformedBorrowData = {

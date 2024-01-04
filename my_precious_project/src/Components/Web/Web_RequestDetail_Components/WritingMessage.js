@@ -239,7 +239,7 @@ function WritingMessage({ checkSendMessage, setCheckSendMessage, boardId }) {
     console.log("보낸 데이터 확인", Data);
     axios
       .post(
-        `http://13.209.230.190/api/v23/debts/boards/${boardId}/users/${uid}`,
+        `https://httptest.dhdhh.shop/api/v23/debts/boards/${boardId}/users/${uid}`,
         Data
       )
       .then((response) => {

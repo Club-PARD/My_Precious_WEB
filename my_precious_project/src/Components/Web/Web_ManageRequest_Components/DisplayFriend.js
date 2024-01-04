@@ -30,7 +30,7 @@ function DisplayFriend({ displayData, debtId }) {
 
     axios
       .patch(
-        `http://13.209.230.190/api/v23/debts/check-paid-boxes/${displayData.id}`,
+        `https://httptest.dhdhh.shop/api/v23/debts/check-paid-boxes/${displayData.id}`,
         { debtStatus: displayData.id }
       )
       .then((response) => {
@@ -77,6 +77,7 @@ function DisplayFriend({ displayData, debtId }) {
           </DetailDiv>
         </ContentsDiv>
         <Div>
+          <SentToEmailModal props={Modal_ThankU} />
           <CheckBtn
             style={{
               disable: displayData.debtStatus === "PAID" ? true : false,
@@ -88,7 +89,6 @@ function DisplayFriend({ displayData, debtId }) {
           >
             돈을 다 갚았어요
           </CheckBtn>
-          <SentToEmailModal props={Modal_ThankU} />
         </Div>
       </Container>
     </ThemeProvider>
@@ -122,7 +122,7 @@ const HeaderDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 1.6rem;
+  padding-bottom: 1.75rem;
 `;
 
 const Name = styled.div`
@@ -198,10 +198,10 @@ const Div = styled.div`
   flex-direction: row;
   width: 30rem;
   justify-content: end;
-  padding-top: 1.94rem;
+  padding-top: 1.44rem;
   align-items: center;
   width: 23.5rem;
-  gap: 0.69rem;
+  gap: 0.75rem;
   padding-left: 2.5rem;
 `;
 
@@ -210,7 +210,7 @@ const CheckBtn = styled.button`
   width: 12.6875rem;
   height: 2.5rem;
   flex-shrink: 0;
-  border-radius: 0.375rem;
+  border-radius: 0.625rem;
   background: #ff3d00;
   border: none;
   align-items: center;
