@@ -118,9 +118,19 @@ function CheckedMessage({ debtIdgnum }) {
         </ContentsDiv>
         <Div>
           <SentToEmailModal props={Modal_Chaseup} />
-          <CheckBtn onClick={CheckDebtStatusSubmit}>
+          <CheckBtn onClick={() => setModalShow(!modalShow)}>
             갚은 것을 확인했어요
           </CheckBtn>
+          {modalShow && (
+          <Modal
+            setModalShow={setModalShow}
+            setNextStep={CheckDebtStatusSubmit}
+            content1="채무기록이 저장되었습니다."
+            content2=""
+            buttonContent="확인"
+            close={false}
+          />
+        )}
         </Div>
       </Container>
     </ThemeProvider>

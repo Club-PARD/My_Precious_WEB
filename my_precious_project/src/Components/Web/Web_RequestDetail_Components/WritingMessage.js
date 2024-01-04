@@ -12,9 +12,6 @@ import axios from "axios";
 import { useUserData } from "../../../contexts/userContext";
 import Modal from "../Web_Login_Components/Modal/Modal.js";
 
-//돈 빌려달라고 하는 사람이 게시한 게시글
-const boardId = 1;
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
