@@ -11,8 +11,9 @@ import ManageFriendList from "./ManageFriendList.js";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  width: 51.875rem;
+  width: 54.625rem;
   padding-top: 3.31rem;
+  gap:0.2rem;
 `;
 
 const ColumnDiv = styled.div`
@@ -112,7 +113,7 @@ function ManageBottom({ boardId, manageData }) {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/debts/boards/${boardId}`
+        `http://13.209.230.190/api/v23/debts/boards/${boardId}`
       );
       const borrowData = response.data.data;
       if (borrowData) {
@@ -156,20 +157,12 @@ function ManageBottom({ boardId, manageData }) {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        <ColumnDiv style={{ width: "31.1875rem", marginRight: "0.75rem" }}>
+        <ColumnDiv style={{ width: "20.225rem", marginRight: "2.88rem" }}>
           <DisplayFriends>도와준 친구들</DisplayFriends>
-          {debtLength === 0 ? (
-            <LeftNoDiv>아직 내역이 없어요.</LeftNoDiv>
-          ) : (
-            <DisplayFriend displayData={displayData} debtId={debtidData} />
-          )}
-        </ColumnDiv>
-        <ColumnDiv style={{ width: "20.225rem" }}>
           <FriendsCountDiv>
             <FriendsCountText>{debtLength}명</FriendsCountText>의 친구들이
             도와주고 있어요
           </FriendsCountDiv>
-
           {debtLength === 0 ? (
             <RightNoDiv>아직 내역이 없어요.</RightNoDiv>
           ) : (
@@ -177,6 +170,13 @@ function ManageBottom({ boardId, manageData }) {
               boardId={boardId}
               handleDisplayData={handleDisplayData}
             />
+          )}
+        </ColumnDiv>
+        <ColumnDiv style={{ width: "31.1875rem" }}>
+          {debtLength === 0 ? (
+            <LeftNoDiv>아직 내역이 없어요.</LeftNoDiv>
+          ) : (
+            <DisplayFriend displayData={displayData} debtId={debtidData} />
           )}
         </ColumnDiv>
       </Container>

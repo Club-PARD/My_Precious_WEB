@@ -38,7 +38,7 @@ function CheckedMessage({ debtIdgnum }) {
   useEffect(() => {
     axios
       .get(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/debts/${debtId}`,
+        `http://13.209.230.190/api/v23/debts/${debtId}`,
         debtId
       )
       .then((response) => {
@@ -80,7 +80,7 @@ function CheckedMessage({ debtIdgnum }) {
 
     axios
       .patch(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/debts/check-confirmed-boxes/${debtId}`,
+        `http://13.209.230.190/api/v23/debts/check-confirmed-boxes/${debtId}`,
         { repaymentStatus: debtId }
       )
       .then((response) => {

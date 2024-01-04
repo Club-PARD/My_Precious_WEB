@@ -49,9 +49,9 @@ const TitleDiv = styled.div`
 const LinkCopyDiv = styled.div`
   display: flex;
   flex-direction: row;
-  width: 51.875rem;
+  width: 54.625rem;
   justify-content: end;
-  padding-bottom: 1.06rem;
+  padding-bottom: 1.25rem;
   position: relative;
 `;
 
@@ -113,7 +113,7 @@ function WebManageRequest() {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/boards/${boardId}`
+        `http://13.209.230.190/api/v23/boards/${boardId}`
       );
       const borrowData = response.data.data;
       let transformedBorrowData = {

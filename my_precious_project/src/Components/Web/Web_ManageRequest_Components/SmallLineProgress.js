@@ -42,7 +42,7 @@ function SmallLineProgress({ total, receive }) {
         strokeWidth={1}
         strokeColor="#FC511C"
         trailWidth={1}
-        trailColor="#F1F1F1"
+        trailColor="#E5E5E5"
         strokeLinecap="butt"
       />
     </Container>
@@ -54,6 +54,7 @@ const Container = styled.div`
   flex-direction: column;
   padding: 0;
   margin: 0;
+  z-index: 2;
 `;
 
 const StyleProgressDiv = styled(Line)`

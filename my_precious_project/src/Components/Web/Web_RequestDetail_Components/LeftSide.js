@@ -34,7 +34,7 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/boards/${boardId}`
+        `http://13.209.230.190/api/v23/boards/${boardId}`
       );
       const borrowData = response.data.data;
       let transformedBorrowData = {
