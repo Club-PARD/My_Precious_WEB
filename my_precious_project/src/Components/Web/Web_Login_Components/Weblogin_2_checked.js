@@ -18,7 +18,7 @@ const WebLogin_2_checked = () => {
     event.preventDefault();
     try {
       const response = await axios.patch(
-        `http://13.209.230.190/api/v23/users/${userKey}`,
+        `https://httptest.dhdhh.shop/api/v23/users/${userKey}`,
         {
           name: userData.name,
           birth: userData.birthDate,

@@ -21,7 +21,9 @@ const Googlelogin = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://13.209.230.190/api/v23/users");
+        const response = await axios.get(
+          "https://httptest.dhdhh.shop/api/v23/users"
+        );
         setTotal(response.data.total);
       } catch (error) {
         console.error("Error fetching data: ", error);
