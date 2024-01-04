@@ -13,7 +13,7 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 
 <br>
 
-## 목차
+## 🔎 목차
 1. [프로젝트 전체 기간](#-프로젝트-전체-기간)
 2. [팀원 구성](#-팀원-구성)
 3. [Stack](#-stack)
@@ -36,7 +36,7 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 |**이름**|김현중|박민지|이유현|김채린|장동원|김현지|
 |**나이**|26|25|23|24|23|25|
 
-## 📄 [Stack](#-stack)
+## ✅ [Stack](#-stack)
 ![React](https://img.shields.io/badge/react-444444?style=for-the-badge&logo=react) 
 <img src="https://img.shields.io/badge/html5-E34F26?style=flat-square&logo=html5&logoColor=white"> 
 ![css3](https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3) 
@@ -48,7 +48,7 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
 
-## [페이지별 기능](#-페이지별-기능)
+## 📄 [페이지별 기능](#-페이지별-기능)
 
 
 ## 📥 [라이브러리](#-라이브러리)
@@ -62,4 +62,4 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 - npm i react-modal
 - npm i recoil
 
-## [설치 방법](#-설치-방법)
+## 🚩 [설치 방법](#-설치-방법)
