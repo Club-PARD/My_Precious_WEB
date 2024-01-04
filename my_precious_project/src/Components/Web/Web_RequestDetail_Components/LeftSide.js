@@ -106,11 +106,11 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
     "일";
 
   //받은 돈 숫자에서 문자 -> 컴마 추가
-  var receiveNumber = detailData.totalLendmoney;
+  var receiveNumber = parseFloat(detailData.totalLendmoney);
   var formattedNumber = receiveNumber.toLocaleString();
 
   //필요한 돈 숫자에서 문자 -> 컴마 추가
-  var totaleNumber = detailData.borrowMoney;
+  var totaleNumber = parseFloat(detailData.borrowMoney);
   var formattedNumber2 = totaleNumber.toLocaleString();
 
   //모은 돈이 받길 원하는 돈을 넘었을 때 돈 빌려주기 작성 버튼 비활성화를 위한 상태 설정

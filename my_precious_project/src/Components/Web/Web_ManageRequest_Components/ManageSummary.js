@@ -256,7 +256,7 @@ function ManageSummary({ manageData, boardId }) {
             <MoneyText>갚은 금액</MoneyText>
             <SmallLineProgress
               total={parseFloat(manageData.totalLendmoney)}
-              receive={totalRepayMoney}
+              receive={parseFloat(totalRepayMoney)}
             />
             <RightRowDiv>
               <Row>

@@ -241,7 +241,7 @@ const WebRequest = () => {
                       }
                       onChangePoints(e);
                     }}
-                    value={addComma(돈)}
+                    value={addComma(money)}
                     onFocus={() => setIsInputFocused3(true)}
                     onBlur={() => setIsInputFocused3(false)}
                     maxLength="14"

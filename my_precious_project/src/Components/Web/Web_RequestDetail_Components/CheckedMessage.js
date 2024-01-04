@@ -16,7 +16,7 @@ function CheckedMessage({ debtIdgnum }) {
   const debtId = debtIdgnum;
 
   const [detailData, setDetailData] = useState({
-    lendMoney: "",
+    lendMoney: "10000000",
     message: "",
     bank: "",
     bankAccount: "",
