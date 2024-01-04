@@ -8,7 +8,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useUserData } from '../../../contexts/userContext';
-import Modal from '../Web_Login_Components/Modal/Modal.js';
+import RequestModal from '../Web_Login_Components/Modal/RequestModal.js';
 import { auth } from '../../../API/firebaseAPI';
 
 /****  MUI Libraries  *****/
@@ -163,231 +163,225 @@ const WebRequest = () => {
         <ThemeProvider theme={theme}>
             <Container>
                 <Header backcolor={'#FFF'} />
-                {/* {userName != null ? ( */}
-                <>
-                    <ContentContainer>
-                        <BackIcon
-                            src={process.env.PUBLIC_URL + '/img/Icon_back.svg'}
-                            onClick={postDataAndToDashboard}
-                        ></BackIcon>
-                        <MainContainer>
-                            <TitleContainer>
-                                <MainImage src={process.env.PUBLIC_URL + '/img/RequestCharacter.svg'}></MainImage>
-                                <MainText>
-                                    친구에게 돈을 빌리는 것은 당연한 게 아니에요!
-                                    <br />
-                                    예쁜 말로 정중히 부탁해보는 건 어떨까요?
-                                </MainText>
-                            </TitleContainer>
-                            <InputTitle className={isInputFocused1 ? 'focused' : ''}>
-                                <div className="title">제목</div>
-                                <div className="container">
-                                    <input
-                                        type="text"
-                                        placeholder="예시) 어머님 수술비가 위급합니다. 조금이라도 도와주세요.."
-                                        onChange={(e) => setForm({ ...form, title: e.target.value })}
-                                        onFocus={() => setIsInputFocused1(true)}
-                                        onBlur={() => setIsInputFocused1(false)}
-                                        maxLength="30"
-                                    />
-                                </div>
-                            </InputTitle>
-                            <InputReason className={isInputFocused2 ? 'focused' : ''}>
-                                <div className="title">사유</div>
-                                <div className="container">
-                                    <textarea
-                                        type="text"
-                                        placeholder="돈을 빌려야 하는 자세한 상황을 이야기 해주세요."
-                                        onChange={(e) => setForm({ ...form, situation: e.target.value })}
-                                        onFocus={() => setIsInputFocused2(true)}
-                                        onBlur={() => setIsInputFocused2(false)}
-                                    />
-                                </div>
-                            </InputReason>
-                            <InputFinanceInfo className={isInputFocused3 ? 'focused' : ''}>
-                                <div className="title">필요 금액</div>
-                                <div className="container">
-                                    <input
-                                        type="text"
-                                        placeholder=""
-                                        onChange={(e) => {
-                                            const re = /[^0-9]/g;
-                                            if (re.test(e.target.value)) {
-                                                e.target.value = e.target.value.replace(re, '');
-                                            }
-                                            onChangePoints(e);
-                                        }}
-                                        value={addComma(money)}
-                                        onFocus={() => setIsInputFocused3(true)}
-                                        onBlur={() => setIsInputFocused3(false)}
-                                        maxLength="14"
-                                    ></input>
-                                    <div className="won">원</div>
-                                </div>
-                            </InputFinanceInfo>
-                            <InputDayInfo className={isInputFocused4 ? 'focused' : ''}>
-                                <div className="title">갚을 날짜</div>
-                                <div
-                                    className="container"
-                                    onFocus={() => setIsInputFocused4(true)}
-                                    onBlur={() => setIsInputFocused4(false)}
-                                >
-                                    <LocalizationProvider dateAdapter={AdapterDayjs} dateFormats={{ monthShort: `M` }}>
-                                        <MobileDatePicker
-                                            onChange={(e) => {
-                                                if (e == null) {
-                                                    setForm({ ...form, payDate: form.payDate });
-                                                } else {
-                                                    handleDateFormat(e.$d);
-                                                }
-                                            }}
-                                            shouldDisableDate={(day) => {
-                                                return dayjs(dayjs(day).format(`YYYY-MM-DD`)).isBefore(today);
-                                            }}
-                                            sx={{
-                                                width: '100%',
-                                                '& .MuiInputLabel-root.Mui-focused': {
-                                                    color: '#FF3D00',
-                                                },
-                                                '& .toolbar': {
-                                                    color: 'white',
-                                                    backgroundColor: '#FF3D00',
-                                                    '& .MuiTypography-root ': {
-                                                        color: 'white',
-                                                    },
-                                                },
-                                                '& .MuiOutlinedInput-root': {
-                                                    '&:hover > fieldset': { borderColor: '#E0E0E0' },
-                                                    fieldset: {
-                                                        borderColor: '#E0E0E0',
-                                                        border: 'none',
-                                                    },
-                                                    borderRadius: '10px',
-                                                },
-                                                '& .MuiButton-text ': {
-                                                    color: '#F95D44',
-                                                },
-                                            }}
+                {userName != null ? (
+                    <>
+                        <ContentContainer>
+                            <BackIcon
+                                src={process.env.PUBLIC_URL + '/img/Icon_back.svg'}
+                                onClick={postDataAndToDashboard}
+                            ></BackIcon>
+                            <MainContainer>
+                                <TitleContainer>
+                                    <MainImage src={process.env.PUBLIC_URL + '/img/RequestCharacter.svg'}></MainImage>
+                                    <MainText>
+                                        친구에게 돈을 빌리는 것은 당연한 게 아니에요!
+                                        <br />
+                                        예쁜 말로 정중히 부탁해보는 건 어떨까요?
+                                    </MainText>
+                                </TitleContainer>
+                                <InputTitle className={isInputFocused1 ? 'focused' : ''}>
+                                    <div className="title">제목</div>
+                                    <div className="container">
+                                        <input
+                                            type="text"
+                                            placeholder="예시) 어머님 수술비가 위급합니다. 조금이라도 도와주세요.."
+                                            onChange={(e) => setForm({ ...form, title: e.target.value })}
+                                            onFocus={() => setIsInputFocused1(true)}
+                                            onBlur={() => setIsInputFocused1(false)}
+                                            maxLength="30"
                                         />
-                                    </LocalizationProvider>
-                                </div>
-                            </InputDayInfo>
-                            <InputBankInfo className={isInputFocused5 && isInputFocused6 ? 'focused' : ''}>
-                                <div className="title">받을 계좌</div>
-                                <div
-                                    className="container1"
-                                    onFocus={() => setIsInputFocused5(true)}
-                                    onBlur={() => setIsInputFocused5(false)}
-                                >
-                                    <FormControl
-                                        sx={{
-                                            width: '15rem',
-                                            height: '1rem',
-                                            padding: '0',
-                                            margin: '0',
-                                            '& .MuiOutlinedInput-root': {
-                                                '&:hover > fieldset': { borderColor: '#E0E0E0' },
-                                                fieldset: { borderColor: '#E0E0E0', border: 'none' },
-                                                borderRadius: '10px',
-                                            },
-                                            '& .MuiSvgIcon-root': {
-                                                width: '0rem',
-                                                height: '0rem',
-                                            },
-                                        }}
+                                    </div>
+                                </InputTitle>
+                                <InputReason className={isInputFocused2 ? 'focused' : ''}>
+                                    <div className="title">사유</div>
+                                    <div className="container">
+                                        <textarea
+                                            type="text"
+                                            placeholder="돈을 빌려야 하는 자세한 상황을 이야기 해주세요."
+                                            onChange={(e) => setForm({ ...form, situation: e.target.value })}
+                                            onFocus={() => setIsInputFocused2(true)}
+                                            onBlur={() => setIsInputFocused2(false)}
+                                        />
+                                    </div>
+                                </InputReason>
+                                <InputFinanceInfo className={isInputFocused3 ? 'focused' : ''}>
+                                    <div className="title">필요 금액</div>
+                                    <div className="container">
+                                        <input
+                                            type="text"
+                                            placeholder=""
+                                            onChange={(e) => {
+                                                const re = /[^0-9]/g;
+                                                if (re.test(e.target.value)) {
+                                                    e.target.value = e.target.value.replace(re, '');
+                                                }
+                                                onChangePoints(e);
+                                            }}
+                                            value={addComma(money)}
+                                            onFocus={() => setIsInputFocused3(true)}
+                                            onBlur={() => setIsInputFocused3(false)}
+                                            maxLength="14"
+                                        ></input>
+                                        <div className="won">원</div>
+                                    </div>
+                                </InputFinanceInfo>
+                                <InputDayInfo className={isInputFocused4 ? 'focused' : ''}>
+                                    <div className="title">갚을 날짜</div>
+                                    <div
+                                        className="container"
+                                        onFocus={() => setIsInputFocused4(true)}
+                                        onBlur={() => setIsInputFocused4(false)}
                                     >
-                                        <InputLabel
-                                            id="demo-simple-select-autowidth-label"
+                                        <LocalizationProvider
+                                            dateAdapter={AdapterDayjs}
+                                            dateFormats={{ monthShort: `M` }}
+                                        >
+                                            <MobileDatePicker
+                                                onChange={(e) => {
+                                                    if (e == null) {
+                                                        setForm({ ...form, payDate: form.payDate });
+                                                    } else {
+                                                        handleDateFormat(e.$d);
+                                                    }
+                                                }}
+                                                shouldDisableDate={(day) => {
+                                                    return dayjs(dayjs(day).format(`YYYY-MM-DD`)).isBefore(today);
+                                                }}
+                                                sx={{
+                                                    width: '100%',
+                                                    '& .MuiInputLabel-root.Mui-focused': {
+                                                        color: '#FF3D00',
+                                                    },
+                                                    '& .toolbar': {
+                                                        color: 'white',
+                                                        backgroundColor: '#FF3D00',
+                                                        '& .MuiTypography-root ': {
+                                                            color: 'white',
+                                                        },
+                                                    },
+                                                    '& .MuiOutlinedInput-root': {
+                                                        '&:hover > fieldset': { borderColor: '#E0E0E0' },
+                                                        fieldset: {
+                                                            borderColor: '#E0E0E0',
+                                                            border: 'none',
+                                                        },
+                                                        borderRadius: '10px',
+                                                    },
+                                                    '& .MuiButton-text ': {
+                                                        color: '#F95D44',
+                                                    },
+                                                }}
+                                            />
+                                        </LocalizationProvider>
+                                    </div>
+                                </InputDayInfo>
+                                <InputBankInfo className={isInputFocused5 && isInputFocused6 ? 'focused' : ''}>
+                                    <div className="title">받을 계좌</div>
+                                    <div
+                                        className="container1"
+                                        onFocus={() => setIsInputFocused5(true)}
+                                        onBlur={() => setIsInputFocused5(false)}
+                                    >
+                                        <FormControl
                                             sx={{
                                                 width: '15rem',
                                                 height: '1rem',
                                                 padding: '0',
                                                 margin: '0',
+                                                '& .MuiOutlinedInput-root': {
+                                                    '&:hover > fieldset': { borderColor: '#E0E0E0' },
+                                                    fieldset: { borderColor: '#E0E0E0', border: 'none' },
+                                                    borderRadius: '10px',
+                                                },
+                                                '& .MuiSvgIcon-root': {
+                                                    width: '0rem',
+                                                    height: '0rem',
+                                                },
                                             }}
-                                        ></InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-autowidth-label"
-                                            id="demo-simple-select-autowidth"
-                                            value={form.bank}
-                                            onChange={(e) => setForm({ ...form, bank: e.target.value })}
-                                            autoWidth
-                                            label=""
-                                            MenuProps={MenuProps}
-                                            indicator
                                         >
-                                            <MenuItem value="은행 선택">은행 선택</MenuItem>
-                                            {banks.map((bank) => (
-                                                <MenuItem key={bank} value={bank}>
-                                                    {bank}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                </div>
-                                <div
-                                    className="container2"
-                                    onFocus={() => setIsInputFocused6(true)}
-                                    onBlur={() => setIsInputFocused6(false)}
+                                            <InputLabel
+                                                id="demo-simple-select-autowidth-label"
+                                                sx={{
+                                                    width: '15rem',
+                                                    height: '1rem',
+                                                    padding: '0',
+                                                    margin: '0',
+                                                }}
+                                            ></InputLabel>
+                                            <Select
+                                                labelId="demo-simple-select-autowidth-label"
+                                                id="demo-simple-select-autowidth"
+                                                value={form.bank}
+                                                onChange={(e) => setForm({ ...form, bank: e.target.value })}
+                                                autoWidth
+                                                label=""
+                                                MenuProps={MenuProps}
+                                                indicator
+                                            >
+                                                <MenuItem value="은행 선택">은행 선택</MenuItem>
+                                                {banks.map((bank) => (
+                                                    <MenuItem key={bank} value={bank}>
+                                                        {bank}
+                                                    </MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+                                    </div>
+                                    <div
+                                        className="container2"
+                                        onFocus={() => setIsInputFocused6(true)}
+                                        onBlur={() => setIsInputFocused6(false)}
+                                    >
+                                        <input
+                                            className="input2"
+                                            type="text"
+                                            placeholder="계좌 번호를 입력하세요."
+                                            onChange={(e) => {
+                                                const re = /[^0-9]/g;
+                                                if (re.test(e.target.value)) {
+                                                    e.target.value = e.target.value.replace(re, '');
+                                                }
+                                                setForm({ ...form, bankAccount: e.target.value });
+                                            }}
+                                        />
+                                    </div>
+                                </InputBankInfo>
+                                <CheckContainer>
+                                    <div className="title">서약</div>
+                                    <p>
+                                        나 {userName}(은)는 {printDate}까지 돈을 갚을 것을 약속합니다.
+                                    </p>
+                                    {check ? (
+                                        <img
+                                            className="checkbox"
+                                            src={process.env.PUBLIC_URL + '/img/checkbox.svg'}
+                                            onClick={(e) => setCheck(!check)}
+                                        ></img>
+                                    ) : (
+                                        <img
+                                            className="box"
+                                            src={process.env.PUBLIC_URL + '/img/box.svg'}
+                                            onClick={(e) => setCheck(!check)}
+                                        ></img>
+                                    )}
+                                </CheckContainer>
+                                <Button
+                                    type="button"
+                                    onClick={() => setModalShow(true)}
+                                    // onClick={handleSubmit}
+                                    disabled={active ? false : true}
                                 >
-                                    <input
-                                        className="input2"
-                                        type="text"
-                                        placeholder="계좌 번호를 입력하세요."
-                                        onChange={(e) => {
-                                            const re = /[^0-9]/g;
-                                            if (re.test(e.target.value)) {
-                                                e.target.value = e.target.value.replace(re, '');
-                                            }
-                                            setForm({ ...form, bankAccount: e.target.value });
-                                        }}
-                                    />
-                                </div>
-                            </InputBankInfo>
-                            <CheckContainer>
-                                <div className="title">서약</div>
-                                <p>
-                                    나 {userName}(은)는 {printDate}까지 돈을 갚을 것을 약속합니다.
-                                </p>
-                                {check ? (
-                                    <img
-                                        className="checkbox"
-                                        src={process.env.PUBLIC_URL + '/img/checkbox.svg'}
-                                        onClick={(e) => setCheck(!check)}
-                                    ></img>
-                                ) : (
-                                    <img
-                                        className="box"
-                                        src={process.env.PUBLIC_URL + '/img/box.svg'}
-                                        onClick={(e) => setCheck(!check)}
-                                    ></img>
-                                )}
-                            </CheckContainer>
-                            <Button
-                                type="button"
-                                onClick={() => setModalShow(true)}
-                                // onClick={handleSubmit}
-                                disabled={active ? false : true}
-                            >
-                                요청하기
-                            </Button>
-                            <div id="modal"></div>
-                            {modalShow && (
-                                <Modal
-                                    setModalShow={setModalShow}
-                                    setNextStep={postDataAndToDashboard}
-                                    content1="해당 글은 작성 완료 후 수정이 불가능합니다."
-                                    content2="내용이 맞는지 확인해주세요."
-                                    buttonContent="작성 완료"
-                                    close={true}
-                                />
-                            )}
-                        </MainContainer>
-                        <RightDiv></RightDiv>
-                    </ContentContainer>
-                </>
-                {/* ) : (
-          <LoginErrorPage />
-        )} */}
+                                    요청하기
+                                </Button>
+                                <div id="requestModal"></div>
+                                {modalShow && <RequestModal setModalShow={setModalShow} />}
+                            </MainContainer>
+                            <RightDiv></RightDiv>
+                        </ContentContainer>
+                    </>
+                ) : (
+                    <LoginErrorPage />
+                )}
             </Container>
         </ThemeProvider>
     );
