@@ -21,9 +21,7 @@ const Googlelogin = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/users"
-        );
+        const response = await axios.get("http://13.209.230.190/api/v23/users");
         setTotal(response.data.total);
       } catch (error) {
         console.error("Error fetching data: ", error);

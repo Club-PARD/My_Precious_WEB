@@ -112,7 +112,7 @@ function ManageBottom({ boardId, manageData }) {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/debts/boards/${boardId}`
+        `http://13.209.230.190/api/v23/debts/boards/${boardId}`
       );
       const borrowData = response.data.data;
       if (borrowData) {

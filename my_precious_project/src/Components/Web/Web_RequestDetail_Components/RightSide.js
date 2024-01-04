@@ -81,9 +81,7 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
 
   useEffect(() => {
     axios
-      .get(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/debts/boards/${boardId}`
-      )
+      .get(`http://13.209.230.190/api/v23/debts/boards/${boardId}`)
       .then((response) => {
         console.log("데이터를 받아오는중: ", response);
 

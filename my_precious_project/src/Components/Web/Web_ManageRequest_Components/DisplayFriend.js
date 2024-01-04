@@ -30,7 +30,7 @@ function DisplayFriend({ displayData, debtId }) {
 
     axios
       .patch(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/debts/check-paid-boxes/${displayData.id}`,
+        `http://13.209.230.190/api/v23/debts/check-paid-boxes/${displayData.id}`,
         { debtStatus: displayData.id }
       )
       .then((response) => {

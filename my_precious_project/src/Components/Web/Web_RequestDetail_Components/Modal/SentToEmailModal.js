@@ -40,10 +40,7 @@ function SentToEmailModal({ props }) {
     };
 
     axios
-      .post(
-        `http://moneyglove-env.eba-xt43tq6x.ap-northeast-2.elasticbeanstalk.com/api/v23/mails`,
-        data
-      )
+      .post(`http://13.209.230.190/api/v23/mails`, data)
       .then((response) => {
         console.log(response);
       })
