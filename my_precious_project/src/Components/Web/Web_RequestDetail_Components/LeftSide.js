@@ -96,62 +96,6 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
     getData();
   }, []);
 
-  // useEffect(() => {
-  //   //GET 요청 보내기
-  //   axios
-  //     .get(
-  //       `https://httptest.dhdhh.shop/api/v23/boards/${boardId}`
-  //     )
-  //     .then((response) => {
-  //       console.log("response: " , response.data.data);
-
-  //       //서버에서 받은 데이터 추출
-  //       const requestdetailData = response.data.data;
-  //       let transformedRequestdetail = {
-  //         bank: requestdetailData.bank,
-  //         bankAccount: requestdetailData.bankAccount,
-  //         boardStatus: requestdetailData.boardStatus,
-  //         borrowMoney: parseFloat(requestdetailData.borrowMoney),
-  //         dday: requestdetailData.dday,
-  //         debts: requestdetailData.debts.map((dept) => ({
-  //           lendMoney: dept.lendMoney,
-  //         })),
-  //         payDate: requestdetailData.payDate,
-  //         payWay: requestdetailData.payWay,
-  //         situation: requestdetailData.situation,
-  //         title: requestdetailData.title,
-  //         user: {
-  //           name: requestdetailData.user.name,
-  //           gmailId: requestdetailData.user.gmailId,
-  //           uid: requestdetailData.user.uid,
-  //         },
-  //       };
-
-  //       //setDetailData(transformedRequestdetail);
-
-  //       setDetailData((detailData) => ({
-  //         ...detailData,
-  //         lendMoneyCount: lendMoneyCount,
-  //         totalLendmoney: totalLendmoney,
-  //         bank:transformedRequestdetail.bank,
-  //         bankAccount:transformedRequestdetail.bankAccount,
-  //         boardStatus:transformedRequestdetail.boardStatus,
-  //         borrowMoney:transformedRequestdetail.borrowMoney,
-  //         dday:transformedRequestdetail.dday,
-  //         debts:transformedRequestdetail.debts,
-  //         payDate:transformedRequestdetail.payDate,
-  //         payWay:transformedRequestdetail.payDate,
-  //         situation:transformedRequestdetail.situation,
-  //         title:transformedRequestdetail.title,
-  //         name:transformedRequestdetail.user.name,
-  //         gmailId:transformedRequestdetail.user.gmailId,
-  //         uid:transformedRequestdetail.user.uid
-  //       }));
-
-  //     })
-  //     .catch((error) => console.log("error: " + error));
-  // }, [updateLeftSide]);
-
   //날짜처리
   const formatted_date =
     detailData.payDate.substring(0, 4) +
@@ -471,6 +415,7 @@ const SignDiv = styled.div`
   flex-direction: row;
   gap: 1.25rem;
   //padding-left: 4rem;
+  justify-content: center;
   padding-top: 2.19rem;
   align-items: center;
 `;
