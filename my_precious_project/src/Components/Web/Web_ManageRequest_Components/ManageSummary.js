@@ -17,7 +17,7 @@ const Container = styled.div`
   height: 14.3125rem;
   flex-shrink: 0;
   border-radius: 0.625rem;
-  background: #FAFAFA;
+  background: #fafafa;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
   position: relative;
 `;
@@ -172,7 +172,7 @@ function ManageSummary({ manageData, boardId }) {
   const [BorrowDataSet, setBorrowDataSet] = useState([]);
   const [totalRepayMoney, setTotalRepayMoney] = useState(0);
 
-  console.log("확인",totalRepayMoney);
+  console.log("확인", totalRepayMoney);
 
   const getData = async () => {
     try {
@@ -209,7 +209,6 @@ function ManageSummary({ manageData, boardId }) {
     getData();
   }, [manageData.totalLendmoney]);
 
-
   //받은 돈 숫자에서 문자 -> 컴마 추가
   var receiveNumber = parseFloat(manageData.totalLendmoney);
   if (receiveNumber !== undefined) {
@@ -228,9 +227,12 @@ function ManageSummary({ manageData, boardId }) {
   }
 
   const formatted_date =
-  manageData.payDate.substring(0, 4) + "년 " + manageData.payDate.substring(4, 6) +
-  "월 " + manageData.payDate.substring(6) +
-  "일";
+    manageData.payDate.substring(0, 4) +
+    "년 " +
+    manageData.payDate.substring(4, 6) +
+    "월 " +
+    manageData.payDate.substring(6) +
+    "일";
 
   return (
     <ThemeProvider theme={theme}>
