@@ -1,15 +1,8 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Link } from 'react-router-dom';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import FirstHome from './FirstHome.js';
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-`;
+import HomeHeader from './HomeHeader.js';
 
 const WebHome = () => {
     const theme = useTheme();
@@ -17,10 +10,20 @@ const WebHome = () => {
     return (
         <ThemeProvider theme={theme}>
             <Container>
-                <FirstHome/>
+                <HomeHeader backcolor={'transparent'}></HomeHeader>
+                <FirstHome />
             </Container>
         </ThemeProvider>
     );
 };
+
+const Container = styled.div`
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+`;
 
 export default WebHome;
