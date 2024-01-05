@@ -83,7 +83,7 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
     } else {
       // 만약 uid가 false라면, 로그인 페이지로 이동
       setLinkto(!linkTo);
-      setGetzboardid(boardId);
+      setGetboardid(boardId);
       navigate("/Login");
     }
   };
