@@ -11,6 +11,7 @@ import RequestDetailPage from "./Page/RequestDetailPage.js";
 import { RecoilRoot } from "recoil";
 import { UserProvider } from "./contexts/userContext.js";
 import ManagePage from "./Page/ManagePage.js";
+import Cursor from './Cursor';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <UserProvider>
           <Router>
             <ScrollToTop />
+            <Cursor />
             <Routes>
               <Route path="/login/*" element={<LoginPage />} />
               <Route path="/" element={<HomePage />} />

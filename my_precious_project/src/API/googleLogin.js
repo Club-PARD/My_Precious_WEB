@@ -2,7 +2,7 @@ import { app, auth } from "./firebaseAPI";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import axios from "axios";
 
-export async function handleGoogleLogin(setLogInData, setUserData, navigate) {
+export async function handleGoogleLogin(setLogInData, setUserData, navigate, linkTo, getboardid) {
   const provider = new GoogleAuthProvider();
 
   try {
@@ -42,7 +42,13 @@ export async function handleGoogleLogin(setLogInData, setUserData, navigate) {
           ...prevUserData,
           name,
         }));
+        //로그인은 안했는데, 빌려주기로 해서 로그인 하러온 상태일떄
+        if(linkTo){
+          console.log("제대로 출력되는지",getboardid, typeof(getboardid));
+          navigate(`/request-detail/${getboardid}`);
+        } else{
         navigate("/dashboard");
+        }
       } else {
         // 하나라도 존재하지 않는 경우 Login으로 이동
         navigate("/login/2");
