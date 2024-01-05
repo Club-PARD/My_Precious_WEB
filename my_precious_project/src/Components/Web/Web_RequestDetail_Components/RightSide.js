@@ -79,8 +79,12 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        {debtIdgnum !== "" ? (
-          <CheckedMessage debtIdgnum={debtIdgnum} />
+        {debtIdgnum === "" ? (
+                        <WritingMessage
+                        checkSendMessage={checkSendMessage}
+                        setCheckSendMessage={setCheckSendMessage}
+                        boardId={boardId}
+                      />
         ) : clickstate === false ? (
           <>
             <GuideMessage>
