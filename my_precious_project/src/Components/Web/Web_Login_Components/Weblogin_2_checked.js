@@ -18,7 +18,7 @@ const WebLogin_2_checked = () => {
     event.preventDefault();
     try {
       const response = await axios.patch(
-        `https://httptest.dhdhh.shop/api/v23/users/${userKey}`,
+        `https://moneyglove.site:8080/api/v23/users/${userKey}`,
         {
           name: userData.name,
           birth: userData.birthDate,

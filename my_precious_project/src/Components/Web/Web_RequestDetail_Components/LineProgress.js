@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Line } from 'rc-progress';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import { Line } from "rc-progress";
+import styled from "styled-components";
 
 function LineProgress(props) {
-
   // 현재 진행률 상태 변수
   const [percent, setPercent] = useState(0);
 
@@ -19,7 +18,7 @@ function LineProgress(props) {
     const endPercent = (props.receive / props.total) * 100;
 
     // 애니메이션 지속 시간 (밀리초)
-    const duration = 100*endPercent;
+    const duration = 100 * endPercent;
     let startTime;
     let animationFrame;
 
@@ -31,7 +30,8 @@ function LineProgress(props) {
 
       // 진행률 계산
       const progress = Math.min((timestamp - startTime) / duration, 1);
-      const currentPercent = startPercent + progress * (endPercent - startPercent);
+      const currentPercent =
+        startPercent + progress * (endPercent - startPercent);
 
       // 진행률 업데이트
       updatePercent(currentPercent);
@@ -64,18 +64,18 @@ function LineProgress(props) {
   );
 }
 
-const Container =styled.div`
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-`
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+`;
 
 const StyleProgressDiv = styled(Line)`
-    border-radius:0.5rem;
-    border: 0.0625rem solid #E0E0E0;
-    width: 43.375rem;
-    height: 2.9375rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #e0e0e0;
+  width: 39.25rem;
+  height: 2.9375rem;
 `;
 
 export default LineProgress;

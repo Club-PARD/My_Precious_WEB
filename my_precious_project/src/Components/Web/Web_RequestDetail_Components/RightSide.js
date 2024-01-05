@@ -32,7 +32,7 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
 
   useEffect(() => {
     axios
-      .get(`https://httptest.dhdhh.shop/api/v23/debts/boards/${boardId}`)
+      .get(`https://moneyglove.site:8080/api/v23/debts/boards/${boardId}`)
       .then((response) => {
         console.log("데이터를 받아오는중: ", response);
 

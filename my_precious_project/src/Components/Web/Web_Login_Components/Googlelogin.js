@@ -23,7 +23,7 @@ const Googlelogin = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://httptest.dhdhh.shop/api/v23/users"
+          "https://moneyglove.site:8080/api/v23/users"
         );
         setTotal(response.data.total);
       } catch (error) {

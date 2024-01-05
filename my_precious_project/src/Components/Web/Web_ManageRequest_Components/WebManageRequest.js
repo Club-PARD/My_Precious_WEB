@@ -114,14 +114,14 @@ function WebManageRequest() {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `http://13.209.230.190/api/v23/boards/${boardId}`
+        `https://moneyglove.site:8080/api/v23/boards/${boardId}`
       );
       const borrowData = response.data.data;
       let transformedBorrowData = {
         title: borrowData.title,
         borrowMoney: borrowData.borrowMoney,
         payDate: borrowData.payDate,
-        payWay:borrowData.payWay,
+        payWay: borrowData.payWay,
         situation: borrowData.situation,
         bank: borrowData.bank,
         bankAccount: borrowData.bankAccount,
@@ -203,7 +203,7 @@ function WebManageRequest() {
             <BackBtn onClick={HandleBackClick} />
             <img src={Copy} alt="클립보드 아이콘" />
             <CopyToClipboard
-              text="링크 만들어줘요잉"
+              text={`https://precious-relationship.web.app/request-detail/${boardId}`}
               onCopy={() => alert("클립보드에 복사되었습니다.")}
             >
               <CopyText>링크복사</CopyText>

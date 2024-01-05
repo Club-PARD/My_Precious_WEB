@@ -27,6 +27,7 @@ const WebRequest = () => {
   const isDesktopOrMobile = useMediaQuery({ query: "(max-width:768px)" }); // 758px 이하일 때는 모바일 뷰로 바뀐다.
 
   const [modalShow, setModalShow] = useState(false);
+  const [modal2, setModal2] = useState(false);
   const [userData, setUserData] = useUserData();
   const userName = userData.name;
   const uid = userData.uid;
@@ -41,6 +42,7 @@ const WebRequest = () => {
     bankAccount: "",
   });
   const [active, setActive] = useState(false);
+  const [isChange, setIsChange] = useState(false);
   const [check, setCheck] = useState(false);
   const [money, setMoney] = useState();
   const navigate = useNavigate();
@@ -64,7 +66,12 @@ const WebRequest = () => {
     const hasChanged = fields.every(
       (field, index) => field !== originalFields[index]
     );
+    const hasOneChanged = fields.some(
+      (field, index) => field !== originalFields[index]
+    );
+
     setActive(hasChanged);
+    setIsChange(hasOneChanged);
   }, [
     form.title,
     form.borrowMoney,
@@ -154,7 +161,7 @@ const WebRequest = () => {
   const handleSubmit = () => {
     console.log(form);
     axios
-      .post(`https://httptest.dhdhh.shop/api/v23/boards/${uid}`, {
+      .post(`https://moneyglove.site:8080/api/v23/boards/${uid}`, {
         title: form.title,
         borrowMoney: form.borrowMoney,
         payDate: form.payDate,
@@ -178,6 +185,15 @@ const WebRequest = () => {
     navigate("/dashboard");
   };
 
+  const handleBackClick = () => {
+    if (isChange) {
+      setModal2(true);
+    } else {
+      setModal2(false);
+      navigate("/dashboard");
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container>
@@ -187,7 +203,7 @@ const WebRequest = () => {
           <ContentContainer>
             <BackIcon
               src={process.env.PUBLIC_URL + "/img/Icon_back.svg"}
-              onClick={postDataAndToDashboard}
+              onClick={handleBackClick}
             ></BackIcon>
             <MainContainer>
               <TitleContainer>
@@ -426,6 +442,17 @@ const WebRequest = () => {
                   content1="해당 글은 작성 완료 후 수정이 불가능합니다."
                   content2="내용이 맞는지 확인해주세요."
                   buttonContent="작성 완료"
+                  close={true}
+                />
+              )}
+              <div id="modal"></div>
+              {modal2 && (
+                <Modal
+                  setModalShow={setModal2}
+                  setNextStep={navigateToDashboard}
+                  content1="뒤로 가면 작성된 내용이 사라집니다."
+                  content2="정말 뒤로 가시겠습니까?"
+                  buttonContent="뒤로 가기"
                   close={true}
                 />
               )}

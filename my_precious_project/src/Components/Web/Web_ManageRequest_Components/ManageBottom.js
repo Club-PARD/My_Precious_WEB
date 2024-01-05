@@ -13,7 +13,7 @@ const Container = styled.div`
   flex-direction: row;
   width: 54.625rem;
   padding-top: 3.31rem;
-  gap:0.2rem;
+  gap: 0.2rem;
 `;
 
 const ColumnDiv = styled.div`
@@ -61,7 +61,7 @@ const LeftNoDiv = styled.div`
   height: 19.9375rem;
   flex-shrink: 0;
   border-radius: 0.625rem;
-  background: #FAFAFA;
+  background: #fafafa;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
   color: var(--grey-Grey_3, #b3b3b3);
   font-family: Pretendard;
@@ -78,7 +78,7 @@ const RightNoDiv = styled.div`
   width: 19.625rem;
   height: 19.9375rem;
   border-radius: 0.625rem;
-  background: #FAFAFA;
+  background: #fafafa;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
   color: var(--grey-Grey_3, #b3b3b3);
@@ -107,13 +107,13 @@ function ManageBottom({ boardId, manageData }) {
     debtStatus: "",
     repaymentStatus: "",
     name: "",
-    gmailId: "", 
+    gmailId: "",
   });
 
   const getData = async () => {
     try {
       const response = await axios.get(
-        `http://13.209.230.190/api/v23/debts/boards/${boardId}`
+        `https://moneyglove.site:8080/api/v23/debts/boards/${boardId}`
       );
       const borrowData = response.data.data;
       if (borrowData) {
