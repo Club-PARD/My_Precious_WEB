@@ -6,6 +6,7 @@ import { useTheme } from "../../../contexts/ThemeContext.js"; // Context APi 적
 import Header from "../Layout_Components/Mypage_header.js";
 import LeftSide from "./LeftSide.js";
 import RightSide from "./RightSide.js";
+import Character from "../../../Assets/img/Character.png";
 
 function WebRequestDetail() {
   let boardId = useParams();
@@ -20,34 +21,65 @@ function WebRequestDetail() {
     <ThemeProvider theme={theme}>
       <Container>
         <Header backcolor={"#E5E5E5"} />
-        <Div>
-          <LeftSide
-            under100={under100}
-            setUnder100={setUnder100}
-            updateLeftSide={updateLeftSide}
-            boardId={boardId}
-          />
-          <RightSide
-            under100={under100}
-            updateLeftSide={updateLeftSide}
-            setUpdateLeftSide={setUpdateLeftSide}
-            boardId={boardId}
-          />
-        </Div>
+        <ImageCharacter />
+        <ContainerDiv>
+          <Div>
+            <LeftSide
+              under100={under100}
+              setUnder100={setUnder100}
+              updateLeftSide={updateLeftSide}
+              boardId={boardId}
+            />
+            <RightSide
+              under100={under100}
+              updateLeftSide={updateLeftSide}
+              setUpdateLeftSide={setUpdateLeftSide}
+              boardId={boardId}
+            />
+          </Div>
+        </ContainerDiv>
       </Container>
     </ThemeProvider>
   );
 }
 
+const ImageCharacter = styled.div`
+  position: absolute;
+  width: 4.43025rem;
+  height: 6.5625rem;
+  background-image: url(${Character});
+  background-repeat: no-repeat;
+  background-size: contain;
+  top: 8.5rem;
+  left: 26.7rem;
+  z-index: 1;
+  display: flex;
+  //justify-content: center;
+  //align-items: center;
+`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  //justify-content: center;
+  /* justify-content: center; */
+  align-items: center;
   margin: 0;
   padding: 0;
   height: 100vh;
   width: 100%;
+  background: #e5e5e5;
+  overflow: hidden;
+`;
+
+const ContainerDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  margin: 0;
+  padding: 0;
+  /* height: 100vh; */
+  width: 100%;
   background: #e5e5e5;
   overflow: hidden;
 `;
