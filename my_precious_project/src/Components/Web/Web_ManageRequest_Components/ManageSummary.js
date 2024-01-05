@@ -177,7 +177,7 @@ function ManageSummary({ manageData, boardId }) {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `https://httptest.dhdhh.shop/api/v23/debts/confirmedDebts/${boardId}`
+        `https://moneyglove.site:8080/api/v23/debts/confirmedDebts/${boardId}`
       );
       const borrowData = response.data.data;
       if (borrowData) {

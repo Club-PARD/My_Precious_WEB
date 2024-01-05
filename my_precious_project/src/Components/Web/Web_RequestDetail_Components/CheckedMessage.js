@@ -37,7 +37,7 @@ function CheckedMessage({ debtIdgnum }) {
 
   useEffect(() => {
     axios
-      .get(`https://httptest.dhdhh.shop/api/v23/debts/${debtId}`, debtId)
+      .get(`https://moneyglove.site:8080/api/v23/debts/${debtId}`, debtId)
       .then((response) => {
         const lendMoney = response.data.data.lendMoney;
         const message = response.data.data.message;
@@ -77,7 +77,7 @@ function CheckedMessage({ debtIdgnum }) {
 
     axios
       .patch(
-        `https://httptest.dhdhh.shop/api/v23/debts/check-confirmed-boxes/${debtId}`,
+        `https://moneyglove.site:8080/api/v23/debts/check-confirmed-boxes/${debtId}`,
         { repaymentStatus: debtId }
       )
       .then((response) => {

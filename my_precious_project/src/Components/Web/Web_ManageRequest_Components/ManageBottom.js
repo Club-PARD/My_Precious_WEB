@@ -113,7 +113,7 @@ function ManageBottom({ boardId, manageData }) {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `https://httptest.dhdhh.shop/api/v23/debts/boards/${boardId}`
+        `https://moneyglove.site:8080/api/v23/debts/boards/${boardId}`
       );
       const borrowData = response.data.data;
       if (borrowData) {

@@ -39,7 +39,7 @@ function SentToEmailModal({ props }) {
     };
 
     axios
-      .post(`https://httptest.dhdhh.shop/api/v23/mails`, data)
+      .post(`https://moneyglove.site:8080/api/v23/mails`, data)
       .then((response) => {
         console.log(response);
       })

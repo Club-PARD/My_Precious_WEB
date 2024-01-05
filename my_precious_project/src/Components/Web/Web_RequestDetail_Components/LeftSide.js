@@ -34,7 +34,7 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `https://httptest.dhdhh.shop/api/v23/boards/${boardId}`
+        `https://moneyglove.site:8080/api/v23/boards/${boardId}`
       );
       const borrowData = response.data.data;
       let transformedBorrowData = {
