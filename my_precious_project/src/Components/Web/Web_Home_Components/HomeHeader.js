@@ -32,7 +32,7 @@ const HomeHeader = () => {
                     <DashboardBtn>DASHBOARD</DashboardBtn>
                 </NavRightSideDiv>
             </Navigation>
-        </ThemeProvider>
+        </ThemeProvider> 
     );
 };
 
