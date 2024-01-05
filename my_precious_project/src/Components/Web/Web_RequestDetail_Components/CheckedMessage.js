@@ -124,15 +124,15 @@ function CheckedMessage({ debtIdgnum }) {
             갚은 것을 확인했어요
           </CheckBtn>
           {modalShow && (
-          <Modal
-            setModalShow={setModalShow}
-            setNextStep={CheckDebtStatusSubmit}
-            content1="채무기록이 저장되었습니다."
-            content2=""
-            buttonContent="확인"
-            close={false}
-          />
-        )}
+            <Modal
+              setModalShow={setModalShow}
+              setNextStep={CheckDebtStatusSubmit}
+              content1="채무기록이 저장되었습니다."
+              content2=""
+              buttonContent="확인"
+              close={false}
+            />
+          )}
         </Div>
       </Container>
     </ThemeProvider>
@@ -148,7 +148,7 @@ const Container = styled.div`
   height: 21.25rem;
   flex-shrink: 0;
   border-radius: 0.625rem;
-  background: #FAFAFA;
+  background: #fafafa;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
   margin-left: 1.25rem;
   align-items: center;
@@ -172,7 +172,7 @@ const HeaderDiv = styled.div`
 
 const Name = styled.div`
   display: flex;
-  color: var(--grey-Grey_7, #3E3E3E);
+  color: var(--grey-Grey_7, #3e3e3e);
   text-align: center;
   font-family: Pretendard;
   font-size: 1.75rem;
@@ -258,7 +258,7 @@ const Div = styled.div`
   align-items: center;
   justify-content: center;
   width: 23.5rem;
-  gap: 1.25rem
+  gap: 1.25rem;
 `;
 
 const CheckBtn = styled.button`

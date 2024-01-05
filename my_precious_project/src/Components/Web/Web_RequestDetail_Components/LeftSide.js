@@ -12,6 +12,9 @@ import { useParams } from "react-router-dom";
 
 function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
   const theme = useTheme();
+  console.log(boardId);
+  boardId = parseInt(boardId.board_id);
+  console.log(boardId);
 
   const [detailData, setDetailData] = useState({
     borrowMoney: "", //프로그레스바 전체(흰색부분)
@@ -33,9 +36,11 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
 
   const getData = async () => {
     try {
+      console.log("보드 아이디", boardId);
       const response = await axios.get(
         `https://moneyglove.site:8080/api/v23/boards/${boardId}`
       );
+      console.log(response.data);
       const borrowData = response.data.data;
       let transformedBorrowData = {
         id: borrowData.id,
@@ -163,7 +168,13 @@ function LeftSide({ under100, setUnder100, updateLeftSide, boardId }) {
                 </DisplayDataReasonText>
               </DisplayDataReasonDiv>
             </Line>
-            <Line style={{ marginTop: "3.19rem" }}>
+            <Line style={{ marginTop: "0.56rem", height: "4.375rem" }}>
+              <DarkGrayText>상환계획</DarkGrayText>
+              <DisplayDataPlanDiv>
+                <DisplayDataPlanText>{detailData.payWay}</DisplayDataPlanText>
+              </DisplayDataPlanDiv>
+            </Line>
+            <Line style={{ marginTop: "0.56rem" }}>
               <DarkGrayText style={{ height: "2.4375rem" }}>
                 필요 금액
               </DarkGrayText>
@@ -249,7 +260,7 @@ const Image = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   top: 7.75rem;
-  left: 31rem;
+  left: 34rem;
   z-index: 1;
   /* display: flex; */
   //justify-content: center;
@@ -382,7 +393,8 @@ const DisplayDataReasonText = styled(DisplayDataText)`
 `;
 
 const DisplayDataPlanDiv = styled(DisplayDataDiv)`
-  height: 5.3125rem;
+  width: 34.65356rem;
+  height: 4.375rem;
   //overflow-y: auto;
 `;
 
