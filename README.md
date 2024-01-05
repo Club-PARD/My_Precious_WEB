@@ -78,7 +78,7 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 <img src="./images/boardwrite.png">
   
 ### [letter]
-<img src="./images/lettter.png">
+<img src="./images/letter.png">
 
 ### [board]
 <img src="./images/board.png">
