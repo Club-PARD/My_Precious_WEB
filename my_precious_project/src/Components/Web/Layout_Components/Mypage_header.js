@@ -13,12 +13,16 @@ const Header = ({ backcolor }) => {
     navigate(`/dashboard/`);
   };
 
+  const navigateToTeamNotion =(url) =>{
+    window.open(url, "_brank", "noopener, noreferrer");
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Navigation bgcolor={backcolor}>
         <LogoImg src={MGLogo} alt="로고이미지"></LogoImg>
         <NavRightSideDiv>
-          <AboutBtn>ABOUT US</AboutBtn>
+          <AboutBtn onClick={()=>navigateToTeamNotion("https://dongwon0507.notion.site/2579c73b82614450ad676fe12f491ec9?pvs=4")}>ABOUT US</AboutBtn>
           <DashboardBtn onClick={navigateToDashboard}>DASHBOARD</DashboardBtn>
         </NavRightSideDiv>
       </Navigation>

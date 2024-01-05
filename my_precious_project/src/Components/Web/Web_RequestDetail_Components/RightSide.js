@@ -5,7 +5,11 @@ import { useTheme } from "../../../contexts/ThemeContext.js"; // Context API 적
 import WritingMessage from "./WritingMessage.js";
 import Character from "../../../Assets/img/Character.png";
 import CheckedMessage from "./CheckedMessage.js";
-import { useUserData } from "../../../contexts/userContext";
+import {
+  useUserData,
+  useLinkToState,
+  useLinkToGetboardid,
+} from "../../../contexts/userContext";
 import axios from "axios";
 import Clock from "../../../Assets/img/Clock.svg";
 import Paper from "../../../Assets/img/Paper.svg";
@@ -18,6 +22,10 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
   const uid = userData.uid;
   const [clickstate, setClickstate] = useState(false);
   const [modalShow, setModalShow] = useState(false);
+
+  //비로그인+근데 빌려주려고하는 상태
+  const [linkTo, setLinkto] = useLinkToState();
+  const [getboardid, setGetboardid] = useLinkToGetboardid();
 
   //돈을 빌려준 경우(안빌려줌-> 빌려줌-> 관리)
   const [debtIdgnum, SetDebtIdgnum] = useState("");
@@ -74,9 +82,12 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
       setClickstate(!clickstate);
     } else {
       // 만약 uid가 false라면, 로그인 페이지로 이동
+      setLinkto(!linkTo);
+      setGetzboardid(boardId);
       navigate("/Login");
     }
   };
+  console.log(uid);
 
   return (
     <ThemeProvider theme={theme}>
@@ -121,14 +132,7 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
                   </TextDiv>
                 </ImageColumnDiv>
               </ImageRowDiv>
-              {uid !== "" ? (
-                <OrangeBtn
-                  onClick={handleBurrowConfirmation}
-                  disabled={isButtonDisabled}
-                >
-                  나도 도울게요
-                </OrangeBtn>
-              ) : (
+              {!uid ? (
                 <>
                   <OrangeBtn
                     onClick={() => setModalShow(!modalShow)}
@@ -148,6 +152,13 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
                     />
                   )}
                 </>
+              ) : (
+                <OrangeBtn
+                  onClick={handleBurrowConfirmation}
+                  disabled={isButtonDisabled}
+                >
+                  나도 도울게요
+                </OrangeBtn>
               )}
             </GuideMessage>
           </>
