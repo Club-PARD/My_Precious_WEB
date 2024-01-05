@@ -20,6 +20,28 @@ export function useUserData() {
   return useRecoilState(userDataState);
 }
 
+// 링크를 통해 채권자 글읽기 페이지로 이동한 상황에서 로그인이 안되어있을 때 로그인 페이지로 이동함 -> 로그인이 끝난 경우 바로 해당 채권자 글읽기 페이지로 이동할 수 있도록 관리
+
+const LinkToRequestdetail = atom({
+	key: "LinkToRequestdetail",
+	default: false,
+});
+
+export function useLinkToState() {
+  return useRecoilState(LinkToRequestdetail);
+}
+
+const LinkToGetboardid= atom({
+	key: "LinkToGetboardid",
+	default: "",
+});
+
+export function useLinkToGetboardid() {
+  return useRecoilState(LinkToGetboardid);
+}
+////////////////////////
+
+
 export function UserProvider({ children }) {
   const [logInData, setLogInData] = useLogInData();
   const [userData, setUserData] = useUserData();

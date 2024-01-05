@@ -4,18 +4,22 @@ import { useTheme } from "../../../contexts/ThemeContext.js"; // Context APi 적
 import { useNavigate } from "react-router-dom";
 import LoginImage from "../../../Assets/img/LoginImage.png";
 import { handleGoogleLogin } from "../../../API/googleLogin.js";
-import { useLogInData, useUserData } from "../../../contexts/userContext";
+import { useLogInData, useUserData,useLinkToState,useLinkToGetboardid } from "../../../contexts/userContext";
 import axios from "axios";
 import BlueCharacter from "../../../Assets/img/BlueCharacter.svg";
 
 const Googlelogin = () => {
   const [logInData, setLogInData] = useLogInData();
   const [userData, setUserData] = useUserData();
+  //비로그인+근데 빌려주려고하는 상태
+  const [linkTo, setLinkto] = useLinkToState();
+  const [getboardid, setGetboardid] = useLinkToGetboardid();
+
   const theme = useTheme();
   const navigate = useNavigate();
 
   const googleLogin = () => {
-    handleGoogleLogin(setLogInData, setUserData, navigate);
+    handleGoogleLogin(setLogInData, setUserData, navigate,linkTo, getboardid);
   };
   const [total, setTotal] = useState(null);
 
