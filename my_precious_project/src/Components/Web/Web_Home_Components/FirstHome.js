@@ -68,7 +68,7 @@ const IntroDiv = styled.div`
     flex-direction: column;
     width: 50%;
     padding-left: 10.5rem;
-    padding-top: 15rem;
+    padding-top: 8rem;
     align-items: flex-start;
     margin-top: 13rem;
 `;

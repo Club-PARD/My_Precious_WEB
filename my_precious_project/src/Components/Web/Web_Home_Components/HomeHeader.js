@@ -37,7 +37,7 @@ const Navigation = styled.div`
     flex-shrink: 0;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
+    position: absolute;
     /* left: 0; */
     padding-top: 1.94rem;
     z-index: 1;

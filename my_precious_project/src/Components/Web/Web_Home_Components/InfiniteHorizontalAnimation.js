@@ -15,7 +15,7 @@ const InfiniteHorizontalAnimationContainer = styled.div`
     width: 100%;
     overflow: hidden;
     background: url(${MoveText}); /* 이미지를 배경으로 사용 */
-    background-size: 50% 100%;
+    background-size: 60% 100%;
     animation: ${moveAnimation} 10s linear infinite;
     padding-top: 20rem;
     position: relative;
