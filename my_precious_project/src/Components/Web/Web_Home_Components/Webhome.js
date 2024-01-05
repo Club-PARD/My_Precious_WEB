@@ -25,17 +25,6 @@ const WebHome = () => {
     return (
         <ThemeProvider theme={theme}>
             <Container>
-                <FirstHome/>
-                    <InfiniteHorizontalAnimation/>
-                    <TextFadeinAnimation fadeinTime={0.5}>
-                        <Div1>안녕하세요</Div1>
-                    </TextFadeinAnimation>
-                    <TextFadeinAnimation fadeinTime={1}>
-                        <Div1>반갑습니다</Div1>
-                    </TextFadeinAnimation>
-                    <TextFadeinAnimation fadeinTime={1.5}>
-                        <Div1>수고하십니다</Div1>
-                    </TextFadeinAnimation>
             </Container>
         </ThemeProvider>
     );
