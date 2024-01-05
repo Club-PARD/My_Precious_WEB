@@ -70,7 +70,7 @@ function CheckedMessage({ debtIdgnum }) {
 
   const CheckDebtStatusSubmit = (event) => {
     // 기본 양식 제출 동작 방지
-    event.preventDefault();
+    //event.preventDefault();
 
     setDetailData((detailData) => ({
       ...detailData,
@@ -123,6 +123,7 @@ function CheckedMessage({ debtIdgnum }) {
           <CheckBtn onClick={() => setModalShow(!modalShow)}>
             갚은 것을 확인했어요
           </CheckBtn>
+          <div id="modal"></div>
           {modalShow && (
             <Modal
               setModalShow={setModalShow}

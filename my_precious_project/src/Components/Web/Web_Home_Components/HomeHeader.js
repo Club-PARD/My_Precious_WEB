@@ -4,13 +4,18 @@ import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import MGLogo from '../../../Assets/img/MGLogo.svg';
 import { useNavigate } from 'react-router-dom';
+import { useUserData } from "../../../contexts/userContext";
 
 const HomeHeader = () => {
     const theme = useTheme();
     const navigate = useNavigate();
+    const [userData, setUserData] = useUserData();
+    const uid = userData.uid;
 
     const navigateToDashboard = () => {
+        if(uid){
         navigate(`/dashboard/`);
+        }
     };
 
     const navigateToTeamNotion =(url) =>{
@@ -29,7 +34,7 @@ const HomeHeader = () => {
             </LogoBtn>
                 <NavRightSideDiv>
                     <AboutBtn onClick={()=>navigateToTeamNotion("https://dongwon0507.notion.site/2579c73b82614450ad676fe12f491ec9?pvs=4")}>ABOUT US</AboutBtn>
-                    <DashboardBtn>DASHBOARD</DashboardBtn>
+                    <DashboardBtn onClick={navigateToDashboard}>DASHBOARD</DashboardBtn>
                 </NavRightSideDiv>
             </Navigation>
         </ThemeProvider> 
