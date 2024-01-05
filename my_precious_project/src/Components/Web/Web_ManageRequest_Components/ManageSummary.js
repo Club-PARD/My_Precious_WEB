@@ -177,11 +177,7 @@ function ManageSummary({ manageData, boardId }) {
   const getData = async () => {
     try {
       const response = await axios.get(
-<<<<<<< HEAD
         `https://moneyglove.site:8080/api/v23/debts/confirmedDebts/${boardId}`
-=======
-        `http://13.209.230.190/api/v23/debts/confirmedDebts/${boardId}`
->>>>>>> main
       );
       const borrowData = response.data.data;
       if (borrowData) {
