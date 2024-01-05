@@ -57,12 +57,13 @@ const WebRequest = () => {
       form.borrowMoney,
       form.payDate,
       form.situation,
+      form.payWay,
       form.bank,
       form.bankAccount,
       check,
     ];
-    const originalFields = ["", "", "", "", "은행 선택", "", false];
-
+    const originalFields = ["", "", "", "", "", "은행 선택", "", false];
+    console.log("디버깅", fields);
     const hasChanged = fields.every(
       (field, index) => field !== originalFields[index]
     );
@@ -77,6 +78,7 @@ const WebRequest = () => {
     form.borrowMoney,
     form.payDate,
     form.situation,
+    form.payWay,
     form.bank,
     form.bankAccount,
     check,
@@ -180,9 +182,10 @@ const WebRequest = () => {
       });
   };
 
-  const postDataAndToDashboard = () => {
-    handleSubmit();
+  const postDataAndToDashboard = async () => {
+    await handleSubmit();
     navigate("/dashboard");
+    // window.location.href = "/dashboard";
   };
 
   const handleBackClick = () => {
@@ -252,7 +255,7 @@ const WebRequest = () => {
                     type="text"
                     placeholder="어떤 방법으로 갚을 예정인지 상환 계획을 알려주면 좋아요. ex) 4월달에 알바비 들어와..)"
                     onChange={(e) =>
-                      setForm({ ...form, situation: e.target.value })
+                      setForm({ ...form, payWay: e.target.value })
                     }
                     onFocus={() => setIsInputFocused3(true)}
                     onBlur={() => setIsInputFocused3(false)}
@@ -333,7 +336,7 @@ const WebRequest = () => {
                 </div>
               </InputDayInfo>
               <InputBankInfo
-                className={isInputFocused6 && isInputFocused6 ? "focused" : ""}
+                className={isInputFocused6 && isInputFocused7 ? "focused" : ""}
               >
                 <div className="title">받을 계좌</div>
                 <div
