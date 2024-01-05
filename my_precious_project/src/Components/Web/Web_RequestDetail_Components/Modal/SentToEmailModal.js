@@ -53,9 +53,9 @@ function SentToEmailModal({ props }) {
   return (
     <div>
       {props.function === "재촉편지" ? (
-        <ChaseUpBtn onClick={openModal}>{props.function} 작성</ChaseUpBtn>
+        <ChaseUpBtn onClick={openModal}>{props.function} 작성하기</ChaseUpBtn>
       ) : (
-        <ThankUBtn onClick={openModal}>{props.function} 작성</ThankUBtn>
+        <ThankUBtn onClick={openModal}>{props.function} 작성하기</ThankUBtn>
       )}
       <Modal
         isOpen={modalIsOpen}
@@ -74,7 +74,7 @@ function SentToEmailModal({ props }) {
           </GuideText>
           <Form style={{ width: "36.8125rem", alignItems: "end" }}>
             <Input1
-              placeholder="제목을 작성하는 곳"
+              placeholder="제목을 작성해주세요."
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             ></Input1>
@@ -126,7 +126,7 @@ const customModalStyles = {
 
 const ChaseUpBtn = styled.button`
   display: flex;
-  width: 10.9375rem;
+  width: 12.4375rem;
   height: 2.5rem;
   flex-shrink: 0;
   border-radius: 0.375rem;

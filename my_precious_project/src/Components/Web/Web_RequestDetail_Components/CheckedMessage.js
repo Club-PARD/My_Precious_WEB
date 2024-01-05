@@ -7,6 +7,7 @@ import axios from "axios";
 import { useUserData } from "../../../contexts/userContext";
 import CheckBox from "../../../Assets/img/CheckBox.svg";
 import SentToEmailModal from "./Modal/SentToEmailModal.js";
+import Modal from "../Web_Login_Components/Modal/Modal.js";
 
 // 글읽기 페이지에서 채권자 입장(로그인 상태-> 빌려준 상태)
 function CheckedMessage({ debtIdgnum }) {
@@ -14,6 +15,7 @@ function CheckedMessage({ debtIdgnum }) {
   const [userData, setUserData] = useUserData();
   const uid = userData.uid;
   const debtId = debtIdgnum;
+  const [modalShow, setModalShow] = useState(false);
 
   const [detailData, setDetailData] = useState({
     lendMoney: "",
@@ -31,7 +33,7 @@ function CheckedMessage({ debtIdgnum }) {
     function: "재촉편지",
     subHeader: "과격한 재촉 편지는 법적 문제가 될 수 있으니 주의해주세요.",
     longplacehorder:
-      "기간내에 돈을 돌려받지 못했다면, 재촉편지를 작성해 볼 수 있습니다. 과격한 재촉은 오히려 상대방이 돈을 갚기에 반감을 살 수 있습니다. 상대방이 돈을 못 갚고 있는 상황에 대해 이해하려고 노력해보세요. 그리고 이후에 지금 돈을 돌려 받아야 하는 이유에 대해 설명하세요. 우정을 지키기 위해 따뜻한 말로 작성해주세요.",
+      "기간 내에 돈을 돌려받지 못했다면, 재촉편지를 작성해볼 수 있습니다.",
     sendToEmail: detailData.gamil,
   };
 
@@ -98,7 +100,6 @@ function CheckedMessage({ debtIdgnum }) {
         <ContentsDiv>
           <HeaderDiv>
             <Name>{detailData.name} 님</Name>
-            <BorrowMoney>{formattedNumber} 원</BorrowMoney>
           </HeaderDiv>
           <DetailDiv>
             <GrayText>응원메시지</GrayText>
@@ -118,10 +119,20 @@ function CheckedMessage({ debtIdgnum }) {
           </DetailDiv>
         </ContentsDiv>
         <Div>
-          <CheckBtn onClick={CheckDebtStatusSubmit}>
+          <SentToEmailModal props={Modal_Chaseup} />
+          <CheckBtn onClick={() => setModalShow(!modalShow)}>
             갚은 것을 확인했어요
           </CheckBtn>
-          <SentToEmailModal props={Modal_Chaseup} />
+          {modalShow && (
+          <Modal
+            setModalShow={setModalShow}
+            setNextStep={CheckDebtStatusSubmit}
+            content1="채무기록이 저장되었습니다."
+            content2=""
+            buttonContent="확인"
+            close={false}
+          />
+        )}
         </Div>
       </Container>
     </ThemeProvider>
@@ -133,13 +144,13 @@ const Container = styled.div`
   flex-direction: column;
   margin: 0;
   padding: 0;
-  width: 31.1875rem;
-  height: 22.25rem;
+  width: 29.25rem;
+  height: 21.25rem;
   flex-shrink: 0;
   border-radius: 0.625rem;
-  background: #fff;
-  box-shadow: 0px 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.25);
-  margin-left: 3.625rem;
+  background: #FAFAFA;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+  margin-left: 1.25rem;
   align-items: center;
 `;
 
@@ -148,25 +159,26 @@ const ContentsDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 26.435rem;
-  padding-top: 1.12rem;
 `;
 
 const HeaderDiv = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding-bottom: 2.2rem;
+  padding-top: 2.19rem;
+  padding-bottom: 2.5rem;
 `;
 
 const Name = styled.div`
   display: flex;
-  color: var(--grey-grey-6-secondary, #504f4f);
+  color: var(--grey-Grey_7, #3E3E3E);
+  text-align: center;
   font-family: Pretendard;
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   font-style: normal;
-  font-weight: 600;
-  line-height: 1.1875rem; /* 95% */
+  font-weight: 700;
+  line-height: 1.375rem; /* 78.571% */
 `;
 
 const BorrowMoney = styled.div`
@@ -241,16 +253,17 @@ const DisplayBorderText = styled.div`
 const Div = styled.div`
   display: flex;
   flex-direction: row;
-  width: 30rem;
   justify-content: space-between;
-  padding-top: 1.94rem;
+  padding-top: 1.63em;
   align-items: center;
+  justify-content: center;
   width: 23.5rem;
+  gap: 1.25rem
 `;
 
 const CheckBtn = styled.button`
   display: flex;
-  width: 10.9375rem;
+  width: 12.4375rem;
   height: 2.5rem;
   flex-shrink: 0;
   border-radius: 0.375rem;
