@@ -75,16 +75,13 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
       navigate("/Login");
     }
   };
+  console.log(uid);
 
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        {debtIdgnum === "" ? (
-                        <WritingMessage
-                        checkSendMessage={checkSendMessage}
-                        setCheckSendMessage={setCheckSendMessage}
-                        boardId={boardId}
-                      />
+        {debtIdgnum !== "" ? (
+          <CheckedMessage debtIdgnum={debtIdgnum} />
         ) : clickstate === false ? (
           <>
             <GuideMessage>
@@ -121,33 +118,32 @@ function RightSide({ under100, updateLeftSide, setUpdateLeftSide, boardId }) {
                       </TextDiv>
                     </ImageColumnDiv>
                 </ImageRowDiv> 
-                {uid !== "" ? (
+                {!uid ? (
+                  <>
                   <OrangeBtn 
-                    onClick={handleBurrowConfirmation}
+                    onClick={() => setModalShow(!modalShow)}
                     disabled={isButtonDisabled}
                   >
                     나도 도울게요
-                  </OrangeBtn> 
+                  </OrangeBtn>
+                  <div id= "modal"></div>
+                  {modalShow && (
+                    <Modal
+                      setModalShow={setModalShow}
+                      setNextStep={handleBurrowConfirmation}
+                      content1="로그인이 필요해요!"
+                      content2="확인을 누르면 로그인 페이지로 이동할게요."
+                      buttonContent="확인"
+                      close={true}
+                    />
+                  )}
+                </>
                 ) : (
-                  <>
                     <OrangeBtn 
-                      onClick={() => setModalShow(!modalShow)}
-                      disabled={isButtonDisabled}
-                    >
-                      나도 도울게요
-                    </OrangeBtn>
-                    <div id="modal"></div>
-                    {modalShow && (
-                      <Modal
-                        setModalShow={setModalShow}
-                        setNextStep={handleBurrowConfirmation}
-                        content1="로그인이 필요해요!"
-                        content2="확인을 누르면 로그인 페이지로 이동할게요."
-                        buttonContent="확인"
-                        close={true}
-                      />
-                    )}
-                  </>
+                      onClick={handleBurrowConfirmation}
+                      disabled={isButtonDisabled}>
+                     나도 도울게요
+                    </OrangeBtn> 
                 )}
             </GuideMessage>
             
