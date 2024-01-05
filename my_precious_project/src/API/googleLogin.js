@@ -16,7 +16,7 @@ export async function handleGoogleLogin(setLogInData, setUserData, navigate) {
 
     // axios를 이용한 POST 요청
     const response = await axios.post(
-      "https://httptest.dhdhh.shop/api/v23/users",
+      "https://moneyglove.site:8080/api/v23/users",
       userData
     );
     console.log(response.data);

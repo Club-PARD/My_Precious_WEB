@@ -28,42 +28,44 @@ const WebDashboard = () => {
     try {
       // 빌린 돈 데이터 가져오기
       const borrowResponse = await axios.get(
-        `https://httptest.dhdhh.shop/api/v23/boards/users/${uid}`
+        `https://moneyglove.site:8080/api/v23/boards/users/${uid}`
       );
       const borrowData = borrowResponse.data.data;
-      let transformeddBorrowData = [];
+
+      if (borrowData) {
+        const transformedBorrowData = borrowData.map((item) => {
+          const debts = item.debts.map((debt) => ({
+            lendMoney: debt.lendMoney,
+          }));
+
+          return {
+            id: item.id,
+            title: item.title,
+            borrowMoney: item.borrowMoney,
+            payDate: item.payDate,
+            situation: item.situation,
+            payWay: item.payWay,
+            bank: item.bank,
+            bankAccount: item.bankAccount,
+            user: {
+              name: item.user.name,
+              gmailId: item.user.gmailId,
+              uid: item.user.uid,
+            },
+            debts: debts,
+          };
+        });
+
+        setBorrowDataSet(transformedBorrowData);
+        console.log(transformedBorrowData);
+      }
 
       // 데이터를 BorrowDataSet 형식으로 변환
-      const transformedBorrowData = borrowData.map((item) => {
-        const debts = item.debts.map((debt) => ({
-          lendMoney: debt.lendMoney,
-        }));
-
-        return {
-          id: item.id,
-          title: item.title,
-          borrowMoney: item.borrowMoney,
-          payDate: item.payDate,
-          situation: item.situation,
-          payWay: item.payWay,
-          bank: item.bank,
-          bankAccount: item.bankAccount,
-          user: {
-            name: item.user.name,
-            gmailId: item.user.gmailId,
-            uid: item.user.uid,
-          },
-          debts: debts,
-        };
-      });
-
-      setBorrowDataSet(transformedBorrowData);
-      console.log(transformedBorrowData);
 
       // 받을 돈 데이터 가져오기
       // 받을 돈 데이터 가져오기
       const receiveResponse = await axios.get(
-        `https://httptest.dhdhh.shop/api/v23/debts/users/${uid}`
+        `https://moneyglove.site:8080/api/v23/debts/users/${uid}`
       );
       const receiveData = receiveResponse.data.data;
       let transformedReceiveData = [];
