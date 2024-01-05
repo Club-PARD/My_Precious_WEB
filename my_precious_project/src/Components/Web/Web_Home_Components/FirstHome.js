@@ -4,9 +4,16 @@ import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적
 import HomeTopImage from '../../../Assets/img/HomeTopImage.svg';
 import TextFadeinAnimation from './TextFadeinAnimation.js';
 import InfiniteHorizontalAnimation from './InfiniteHorizontalAnimation.js';
+import { useNavigate } from "react-router-dom";
 
+//Login/1
 const FirstHome = () => {
     const theme = useTheme();
+    const navigate = useNavigate();
+
+    const NavigateToLogin1 =(event) => {
+        navigate("/Login/1");
+    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -27,7 +34,7 @@ const FirstHome = () => {
                         </TextFadeinAnimation>
                         <TextFadeinAnimation fadeinTime={3.4}>
                             <ButtonDiv>
-                                <StartButton>시작하기</StartButton>
+                                <StartButton onClick={NavigateToLogin1}>시작하기</StartButton>
                             </ButtonDiv>
                         </TextFadeinAnimation>
                     </IntroDiv>
