@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import FirstHome from './FirstHome.js';
