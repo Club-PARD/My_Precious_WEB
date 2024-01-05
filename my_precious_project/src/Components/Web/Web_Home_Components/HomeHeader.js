@@ -17,16 +17,22 @@ const HomeHeader = () => {
         window.open(url, "_brank", "noopener, noreferrer");
     };
 
+    const navigateToOnboarding = () => {
+        navigate(`/`);
+      };
+
     return (
         <ThemeProvider theme={theme}>
             <Navigation>
+            <LogoBtn onClick={navigateToOnboarding}> 
                 <LogoImg src={MGLogo} alt="로고이미지"></LogoImg>
+            </LogoBtn>
                 <NavRightSideDiv>
                     <AboutBtn onClick={()=>navigateToTeamNotion("https://dongwon0507.notion.site/2579c73b82614450ad676fe12f491ec9?pvs=4")}>ABOUT US</AboutBtn>
-                    <DashboardBtn onClick={navigateToDashboard}>DASHBOARD</DashboardBtn>
+                    <DashboardBtn>DASHBOARD</DashboardBtn>
                 </NavRightSideDiv>
             </Navigation>
-        </ThemeProvider>
+        </ThemeProvider> 
     );
 };
 
@@ -54,6 +60,13 @@ const Navigation = styled.div`
         background-color: transparent;
     }
     background-color: transparent;
+`;
+
+const LogoBtn =styled.button`
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
 `;
 
 const LogoImg = styled.img`
