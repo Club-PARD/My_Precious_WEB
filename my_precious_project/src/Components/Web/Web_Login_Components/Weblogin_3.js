@@ -3,7 +3,11 @@ import styled, { ThemeProvider } from "styled-components";
 import { useTheme } from "../../../contexts/ThemeContext.js"; // Context APi 적용
 import DotButton from "./DotButton.js";
 import loginImage from "../../../Assets/img/LoginImage.png";
-import { useUserData, useLinkToState, useLinkToGetboardid } from "../../../contexts/userContext";
+import {
+  useUserData,
+  useLinkToState,
+  useLinkToGetboardid,
+} from "../../../contexts/userContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BlueCharacter2 from "../../../Assets/img/BlueCharacter2.svg";
@@ -15,12 +19,13 @@ const WebLogin_3 = () => {
   //비로그인+근데 빌려주려고하는 상태
   const [linkTo, setLinkto] = useLinkToState();
   const [getboardid, setGetboardid] = useLinkToGetboardid();
+  console.log(getboardid);
 
   const navigate = useNavigate();
 
   const navigateToDashboard = () => {
     //링크받고 들어왔는데 회원가입 안해서 회원가입하는 루트
-    if(linkTo){
+    if (linkTo) {
       navigate(`/request-detail/${getboardid}`);
     } else {
       navigate("/dashboard");
@@ -89,7 +94,7 @@ const InnerRow1 = styled.div`
 `;
 
 const InnerRow2 = styled.div`
-  color: var(--black_8, #1A1A1A);
+  color: var(--black_8, #1a1a1a);
   text-align: center;
   font-family: Pretendard;
   font-size: 1.75rem;
@@ -117,7 +122,7 @@ const ImageDiv = styled.div`
   height: 14.375rem;
   flex-shrink: 0;
   border-radius: 1.25rem;
-  border: 2px solid #FF3D00;
+  border: 2px solid #ff3d00;
   align-items: center;
   justify-content: center;
 `;
