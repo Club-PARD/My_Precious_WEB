@@ -5,6 +5,11 @@ import FirstHome from './FirstHome.js';
 import HomeHeader from './HomeHeader.js';
 import Onboarding from '../../../Assets/img/Onboarding.svg';
 
+const Div1 =styled.div`
+    color:red;
+    font-size: 30px;
+`;
+
 const WebHome = () => {
     const theme = useTheme();
 

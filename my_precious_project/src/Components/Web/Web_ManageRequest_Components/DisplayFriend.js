@@ -11,9 +11,9 @@ import SentToEmailModal from "../Web_RequestDetail_Components/Modal/SentToEmailM
 function DisplayFriend({ displayData, debtId }) {
   const theme = useTheme();
   const [userData, setUserData] = useUserData();
-  const [send, setSend] = useState(false);
+  const [send, setSend] = useState(displayData.debtStatus);
   const uid = userData.uid;
-  console.log(displayData.id);
+  console.log(displayData);
 
   //모달에 보낼 props값 - 감사편지
   const Modal_ThankU = {
@@ -35,16 +35,18 @@ function DisplayFriend({ displayData, debtId }) {
       )
       .then((response) => {
         console.log(response);
+        console.log("!!");
+        setSend(response.data.data.debtStatus);
       })
       .catch((error) => {
         console.error("데이터 전송 중 오류 발생: ", error);
       });
 
-    if (displayData.debtStatus === "PENDING") {
-      setSend(false);
-    } else {
-      setSend(true);
-    }
+    // if (displayData.debtStatus === "PENDING") {
+
+    // } else {
+    //   setSend(true);
+    // }
   };
   console.log(displayData);
 

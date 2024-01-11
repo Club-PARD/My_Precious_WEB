@@ -4,25 +4,40 @@ import styled, { ThemeProvider } from 'styled-components';
 import { useTheme } from '../../../contexts/ThemeContext.js'; // Context APi 적용
 import MGLogo from '../../../Assets/img/MGLogo.svg';
 import { useNavigate } from 'react-router-dom';
+import { useUserData } from "../../../contexts/userContext";
 
 const HomeHeader = () => {
     const theme = useTheme();
     const navigate = useNavigate();
+    const [userData, setUserData] = useUserData();
+    const uid = userData.uid;
 
     const navigateToDashboard = () => {
+        if(uid){
         navigate(`/dashboard/`);
+        }
     };
+
+    const navigateToTeamNotion =(url) =>{
+        window.open(url, "_brank", "noopener, noreferrer");
+    };
+
+    const navigateToOnboarding = () => {
+        navigate(`/`);
+      };
 
     return (
         <ThemeProvider theme={theme}>
             <Navigation>
+            <LogoBtn onClick={navigateToOnboarding}> 
                 <LogoImg src={MGLogo} alt="로고이미지"></LogoImg>
+            </LogoBtn>
                 <NavRightSideDiv>
-                    <AboutBtn>ABOUT US</AboutBtn>
+                    <AboutBtn onClick={()=>navigateToTeamNotion("https://dongwon0507.notion.site/2579c73b82614450ad676fe12f491ec9?pvs=4")}>ABOUT US</AboutBtn>
                     <DashboardBtn onClick={navigateToDashboard}>DASHBOARD</DashboardBtn>
                 </NavRightSideDiv>
             </Navigation>
-        </ThemeProvider>
+        </ThemeProvider> 
     );
 };
 
@@ -50,6 +65,13 @@ const Navigation = styled.div`
         background-color: transparent;
     }
     background-color: transparent;
+`;
+
+const LogoBtn =styled.button`
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
 `;
 
 const LogoImg = styled.img`

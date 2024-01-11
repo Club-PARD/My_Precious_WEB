@@ -109,7 +109,6 @@ function WebManageRequest() {
     totalLendmoney: 0,
     formattedDate: "",
   });
-  console.log(boardId);
 
   const getData = async () => {
     try {

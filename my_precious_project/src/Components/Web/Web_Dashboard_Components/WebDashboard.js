@@ -30,6 +30,7 @@ const WebDashboard = () => {
       const borrowResponse = await axios.get(
         `https://moneyglove.site:8080/api/v23/boards/users/${uid}`
       );
+
       const borrowData = borrowResponse.data.data;
 
       if (borrowData) {
@@ -79,7 +80,7 @@ const WebDashboard = () => {
             })) || [];
 
           return {
-            id: item.id,
+            id: item.board.id,
             lendMoney: item.lendMoney,
             message: item.message,
             bank: item.bank,

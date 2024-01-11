@@ -10,7 +10,8 @@ import Character from "../../../Assets/img/Character.png";
 
 function WebRequestDetail() {
   let boardId = useParams();
-  boardId = boardId.board_id;
+  // boardId = boardId.board_id;
+  console.log(boardId);
   const theme = useTheme();
   //모인 금액이 받길 원하는 금액을 넘지 않았을 경우
   const [under100, setUnder100] = useState(false);
@@ -50,8 +51,8 @@ const ImageCharacter = styled.div`
   background-image: url(${Character});
   background-repeat: no-repeat;
   background-size: contain;
-  top: 8.5rem;
-  left: 26.7rem;
+  top: 8rem;
+  left: 30rem;
   z-index: 1;
   display: flex;
   //justify-content: center;

@@ -16,13 +16,16 @@ const DetailsReceiveMoney = ({ ReceiveDataSet = [] }) => {
   return (
     <div>
       {ReceiveDataSet.map((data, index) => {
+        console.log("데이터 구조", data);
         const payDate = data.board.payDate.toString();
         const setYear = parseInt(payDate.slice(0, 4));
         const setMonth = parseInt(payDate.slice(4, 6));
         const setDay = parseInt(payDate.slice(6, 8));
 
         const setDateTime = new Date(setYear, setMonth - 1, setDay);
-        const board_id = data.board.id;
+        console.log(data.id);
+        const board_id = data.id;
+        console.log(board_id);
         setDateTime.setDate(setDateTime.getDate() + 1);
         const payDateTime = new Date();
         const differenceTime = payDateTime - setDateTime;

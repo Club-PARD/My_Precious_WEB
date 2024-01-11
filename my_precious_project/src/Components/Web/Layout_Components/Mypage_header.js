@@ -13,12 +13,22 @@ const Header = ({ backcolor }) => {
     navigate(`/dashboard/`);
   };
 
+  const navigateToTeamNotion =(url) =>{
+    window.open(url, "_brank", "noopener, noreferrer");
+  };
+
+  const navigateToOnboarding = () => {
+    navigate(`/`);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Navigation bgcolor={backcolor}>
+        <LogoBtn onClick={navigateToOnboarding}> 
         <LogoImg src={MGLogo} alt="로고이미지"></LogoImg>
+        </LogoBtn>
         <NavRightSideDiv>
-          <AboutBtn>ABOUT US</AboutBtn>
+          <AboutBtn onClick={()=>navigateToTeamNotion("https://dongwon0507.notion.site/2579c73b82614450ad676fe12f491ec9?pvs=4")}>ABOUT US</AboutBtn>
           <DashboardBtn onClick={navigateToDashboard}>DASHBOARD</DashboardBtn>
         </NavRightSideDiv>
       </Navigation>
@@ -55,6 +65,13 @@ const Navigation = styled.div`
 const LogoImg = styled.img`
     width: 135px;
     height: 46.5px;
+`;
+
+const LogoBtn =styled.button`
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
 `;
 
 const NavRightSideDiv = styled.div`
